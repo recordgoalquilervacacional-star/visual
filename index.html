@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The House of Fright · Record go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#cf2d30;
+    --red-dark:#9c140d;
+    --purple:#3a1a52;
+    --purple-deep:#150a24;
+    --gold:#e8b84b;
+    --ink:#12081f;
+    --cream:#f4ead9;
+    --green:#3ee089;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Roboto',sans-serif;
+    color:var(--cream);
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(226,35,26,0.10), transparent 45%),
+      radial-gradient(ellipse at 80% 30%, rgba(126,60,190,0.14), transparent 50%),
+      linear-gradient(180deg,#0c0614,#150a24 30%,#1c0f2e 70%,#0c0614);
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    min-height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:86px 20px 36px;
+    position:relative;
+  }
+  .brand-logo-wrap{
+    display:inline-flex;
+    align-items:center;
+    padding:15px 30px;
+    color: #ffffff;
+  }
+  .brand-logo{height:24px; display:block;}
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1.5px);
+    background-size:70px 70px;
+    opacity:0.06;
+    pointer-events:none;
+  }
+  .hero .bat{position:absolute; font-size:34px; opacity:.8; filter:drop-shadow(0 6px 8px rgba(0,0,0,.6));}
+  .hero .bat.b1{top:12%; left:8%; transform:rotate(-8deg);}
+  .hero .bat.b2{top:20%; right:10%; transform:rotate(10deg); font-size:26px;}
+  .hero .bat.b3{bottom:18%; left:14%; font-size:22px;}
+  .hero .pumpkin{position:absolute; font-size:46px; bottom:8%; right:9%; filter:drop-shadow(0 8px 10px rgba(0,0,0,.6));}
+
+  .brand-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(226,35,26,0.15);
+    border:1px solid rgba(226,35,26,0.5);
+    color:var(--red);
+    font-size:13px; font-weight:700; letter-spacing:.4px;
+    padding:6px 14px; border-radius:999px; margin-bottom:22px;
+  }
+  .brand-tag b{color:var(--cream);}
+
+  .hero h1{
+    font-family:'Roboto',sans-serif;
+    font-size:clamp(38px,7vw,74px);
+    font-weight:900;
+    margin:0 0 16px;
+    line-height:1.05;
+    color:var(--cream);
+    text-shadow:0 0 30px rgba(226,35,26,0.45), 0 6px 10px rgba(0,0,0,.6);
+  }
+  .hero h1 .highlight{color:var(--red);}
+  .hero p{
+    max-width:560px;
+    font-size:17px;
+    line-height:1.6;
+    color:#d9cbe8;
+    margin:0 0 34px;
+  }
+  .cta-btn{
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff;
+    border:none;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.3px;
+    padding:16px 34px;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 10px 0 #6e0f09, 0 20px 30px rgba(0,0,0,.55);
+    transition:transform .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-3px);}
+  .cta-btn:active{transform:translateY(3px); box-shadow:0 6px 0 #6e0f09, 0 10px 16px rgba(0,0,0,.5);}
+  .scroll-hint{margin-top:14px; font-size:13px; color:#9a8bb0; letter-spacing:.5px;}
+
+  /* ---------------- BOARD SECTION ---------------- */
+  .board-section{
+    padding:16px 16px 120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .board-heading{
+    text-align:center;
+    max-width:640px;
+    margin-bottom:8px;
+  }
+  .board-heading h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:900;
+    margin:0 0 10px;
+    color:var(--gold);
+    text-shadow:0 3px 6px rgba(0,0,0,.6);
+  }
+  .board-heading p{color:#cbb9dd; font-size:15px; line-height:1.6; margin:0 0 6px;}
+
+  .progress-row{
+    display:flex; align-items:center; gap:10px;
+    margin:18px 0 34px;
+  }
+  .progress-dot{
+    width:13px; height:13px; border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    border:2px solid rgba(255,255,255,0.25);
+    transition:all .4s ease;
+  }
+  .progress-dot.done{background:var(--green); border-color:var(--green); box-shadow:0 0 10px var(--green);}
+  .progress-dot.now{border-color:var(--gold); box-shadow:0 0 10px var(--gold);}
+
+  .scene3d{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+  .board-3d{
+    width:min(1150px,96vw);
+  }
+  .board-plate{
+    position:relative;
+    border-radius:26px;
+    padding:30px 26px 40px;
+    background:
+      radial-gradient(ellipse at 25% 0%, rgba(255,255,255,0.06), transparent 55%),
+      linear-gradient(155deg,#3a1a4d,#170a26 75%);
+    border:1px solid rgba(255,255,255,0.07);
+    box-shadow:
+      0 70px 100px rgba(0,0,0,.65),
+      0 20px 30px rgba(0,0,0,.5),
+      inset 0 2px 0 rgba(255,255,255,.08),
+      inset 0 -4px 0 rgba(0,0,0,.4);
+  }
+  .board-plate .prop{position:absolute; font-size:46px; filter:drop-shadow(0 8px 8px rgba(0,0,0,.55)); pointer-events:none;}
+  .prop.candle-l{top:-26px; left:-34px; font-size:56px;}
+  .prop.candle-r{bottom:-30px; right:-30px; font-size:60px;}
+  .prop.bat-l{top:120px; left:-40px; font-size:28px; transform:rotate(-10deg);}
+  .prop.pumpkin-r{top:-20px; right:-40px; font-size:40px;}
+
+  .track-wrap{
+    position:relative;
+    width:100%;
+    max-width:1150px;
+    margin:0 auto;
+  }
+  .track-layer{
+    position:absolute;
+    top:0; left:0;
+    width:1150px;
+    height:560px;
+    transform-origin:top left;
+  }
+  .road-svg{position:absolute; top:0; left:0; width:1150px; height:560px; overflow:visible;}
+
+  .node{
+    position:absolute;
+    width:118px;
+    transform:translate(-50%,-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    cursor:not-allowed;
+  }
+  .node .badge{
+    width:68px; height:68px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:28px;
+    background:linear-gradient(160deg,#4a2f66,#241236);
+    border:3px solid rgba(255,255,255,0.15);
+    box-shadow:0 10px 16px rgba(0,0,0,.5), inset 0 2px 3px rgba(255,255,255,.08);
+    margin-bottom:8px;
+    position:relative;
+    transition:all .35s ease;
+    overflow:hidden;
+  }
+  .node .badge img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    mix-blend-mode:multiply;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .node .num{
+    position:absolute; top:-8px; left:-8px;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--gold);
+    color:var(--gold); font-size:11px; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .node .name{
+    font-size:12.5px; font-weight:700; color:#e5dcf2;
+    text-shadow:0 2px 3px rgba(0,0,0,.6);
+    line-height:1.25;
+  }
+
+  .node.locked .badge{opacity:.5; filter:grayscale(.6);}
+  .node.locked .name{opacity:.45;}
+
+  .node.active{cursor:pointer;}
+  .node.active .badge{
+    border-color:var(--gold);
+    background: #fff;
+    box-shadow:0 0 0 0 rgba(232,184,75,.6), 0 10px 20px rgba(0,0,0,.5);
+    animation:pulseGlow 1.6s infinite;
+  }
+  .node.active .name{color:var(--gold);}
+  @keyframes pulseGlow{
+    0%{box-shadow:0 0 0 0 rgba(232,184,75,.55),0 10px 20px rgba(0,0,0,.5);}
+    70%{box-shadow:0 0 0 16px rgba(232,184,75,0),0 10px 20px rgba(0,0,0,.5);}
+    100%{box-shadow:0 0 0 0 rgba(232,184,75,0),0 10px 20px rgba(0,0,0,.5);}
+  }
+
+  .node.passed .badge{
+    background:linear-gradient(160deg,#1c5c40,#0e3324);
+    border-color:var(--green);
+  }
+  .node.passed .badge img{opacity:.35; filter:grayscale(1);}
+  .node.passed .badge::after{
+    content:"✓";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--green); font-size:26px; font-weight:900;
+    background:rgba(10,20,15,0.55); border-radius:50%;
+  }
+
+  .node.meta .badge{
+    width:76px; height:76px;
+    background:linear-gradient(160deg,#e8b84b,#a9781f);
+    border-color:#fff2cf;
+  }
+
+  .car{
+    position:absolute; top:0; left:0;
+    width:78px; height:44px;
+    offset-rotate:auto;
+    transition:offset-distance 1.7s cubic-bezier(.45,0,.2,1);
+    filter:drop-shadow(0 14px 10px rgba(0,0,0,.55));
+    z-index:5;
+  }
+
+  /* ---------------- MOBILE BOARD (vertical) ---------------- */
+  @media (max-width:720px){
+    .board-plate{padding:22px 16px 26px;}
+    .track-wrap{max-width:420px; height:auto !important;}
+    .prop.bat-l{display:none;}
+    .prop.candle-r{bottom:-16px; right:-16px; font-size:40px;}
+    .prop.pumpkin-r{top:-16px; right:-16px; font-size:30px;}
+    .track-layer{
+      position:static;
+      width:100%;
+      height:auto;
+      transform:none !important;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      gap:20px;
+      padding:4px 0;
+    }
+    .road-svg, .car{display:none;}
+    .node{
+      position:relative !important;
+      left:auto !important;
+      top:auto !important;
+      transform:none !important;
+      width:100%;
+      flex-direction:row;
+      align-items:center;
+      text-align:left;
+      gap:14px;
+      cursor:not-allowed;
+    }
+    .node.active{cursor:pointer;}
+    .node .badge{margin-bottom:0; flex:none;}
+    .node .name{font-size:13.5px;}
+    .node:not(:first-child)::before{
+      content:"";
+      position:absolute;
+      top:-20px; left:33px;
+      width:2px; height:20px;
+      background:repeating-linear-gradient(to bottom, rgba(255,255,255,.35) 0 4px, transparent 4px 8px);
+    }
+  }
+
+  /* ---------------- MODAL / MONSTER REVEAL ---------------- */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(6,3,12,0.85);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    width:100%; max-width:540px;
+    background:linear-gradient(165deg,#3a1a4d,#170a26);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:22px;
+    padding:28px 28px 24px;
+    box-shadow:0 40px 60px rgba(0,0,0,.7);
+    position:relative;
+    animation:pop .28s ease;
+    max-height:92vh;
+    overflow-y:auto;
+  }
+  @keyframes pop{from{transform:scale(.92); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .modal-close{
+    position:absolute; top:14px; right:16px;
+    background:none; border:none; color:#b7a6cc;
+    font-size:22px; cursor:pointer;
+  }
+  .monster-avatar-wrap{
+    width:130px; height:130px;
+    margin:0 auto 14px;
+    background:radial-gradient(circle, rgba(232,184,75,0.15), transparent 70%);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px dashed rgba(232,184,75,0.3);
+    position:relative;
+  }
+  .monster-avatar{
+    width:115px; height:115px;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+    animation:floatMonster 3s ease-in-out infinite;
+  }
+  @keyframes floatMonster{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-6px);}
+  }
+  .modal-eyebrow{text-align:center; color:var(--red); font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;}
+  .modal-card h3{margin:0 0 8px; font-size:22px; font-weight:900; color:var(--gold); line-height:1.25; text-align:center;}
+  .modal-flavor{font-size:13.5px; color:#c9bcdb; line-height:1.5; margin-bottom:14px; text-align:center;}
+  .modal-question{font-size:15px; font-weight:700; color:#f4ead9; margin-bottom:14px; border-top:1px solid rgba(255,255,255,0.08); padding-top:12px;}
+  .answers{display:flex; flex-direction:column; gap:10px; margin-bottom:6px;}
+  .answer-btn{
+    text-align:left;
+    background:rgba(255,255,255,0.04);
+    border:1.5px solid rgba(255,255,255,0.12);
+    color:#f0e8fa;
+    font-family:'Roboto',sans-serif;
+    font-size:13.5px;
+    line-height:1.4;
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .answer-btn:hover:not(:disabled){border-color:var(--gold); background:rgba(232,184,75,0.08);}
+  .answer-btn:disabled{cursor:default;}
+  .answer-btn.correct{border-color:var(--green); background:rgba(62,224,137,0.14); color:#c7f7de;}
+  .answer-btn.wrong{border-color:var(--red); background:rgba(226,35,26,0.14); color:#f3c6c2; opacity:.7;}
+  .answer-btn.shake{animation:shake .35s;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    75%{transform:translateX(6px);}
+  }
+  .feedback{
+    margin-top:14px; padding:12px 14px; border-radius:10px;
+    font-size:13.5px; line-height:1.5; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:rgba(62,224,137,0.1); border:1px solid rgba(62,224,137,0.4); color:#c7f7de;}
+  .feedback.bad{background:rgba(226,35,26,0.1); border:1px solid rgba(226,35,26,0.4); color:#f3c6c2;}
+  .continue-btn{
+    margin-top:14px; width:100%;
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff; border:none; font-weight:700; font-size:14px;
+    padding:12px; border-radius:10px; cursor:pointer; display:none;
+  }
+  .continue-btn.show{display:block;}
+
+  /* ---------------- FINAL / FORM ---------------- */
+  .final-section{
+    max-width:620px;
+    margin:0 auto;
+    padding:70px 20px 40px;
+    text-align:center;
+    display:none;
+  }
+  .final-section.reveal{display:block; animation:fadeUp .6s ease;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);}}
+  .final-section h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:900;
+    color:var(--gold); margin:0 0 6px;
+    text-shadow:0 3px 6px rgba(0,0,0,.6);
+  }
+  .final-section .tagline{color:var(--red); font-weight:700; font-size:14px; letter-spacing:.5px; margin-bottom:18px;}
+  .final-section p{color:#cbb9dd; font-size:15px; line-height:1.6; margin-bottom:24px;}
+
+  .banished-monsters-grid{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .banished-item{
+    width:56px; height:56px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:50%;
+    padding:4px;
+    position:relative;
+  }
+  .banished-item img{
+    width:100%; height:100%;
+    object-fit:contain;
+    filter:grayscale(1) opacity(0.5);
+  }
+  .banished-item::after{
+    content:"✕";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--red); font-size:22px; font-weight:900;
+  }
+
+  .signup-form{
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .signup-form input{
+    flex:1; min-width:220px;
+    background:rgba(255,255,255,0.06);
+    border:1.5px solid rgba(255,255,255,0.18);
+    border-radius:10px;
+    padding:14px 16px;
+    color:#fff; font-size:14px;
+    font-family:'Roboto',sans-serif;
+  }
+  .signup-form input::placeholder{color:#a292b8;}
+  .signup-form input:focus{outline:none; border-color:var(--gold);}
+  .signup-form button{
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff; border:none; font-weight:700; font-size:14px;
+    padding:14px 22px; border-radius:10px; cursor:pointer;
+    box-shadow:0 8px 0 #6e0f09;
+    font-family:'Roboto',sans-serif;
+  }
+  .signup-form button:active{transform:translateY(3px); box-shadow:0 4px 0 #6e0f09;}
+
+  .form-msg{margin-top:16px; font-size:14px; line-height:1.5; display:none; padding:12px 14px; border-radius:10px;}
+  .form-msg.show{display:block;}
+  .form-msg.bad{background:rgba(226,35,26,0.1); border:1px solid rgba(226,35,26,0.4); color:#f3c6c2;}
+  .success-block{display:none;}
+  .success-block.show{display:block;}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="bat b1">🦇</div>
+  <div class="bat b2">🦇</div>
+  <div class="bat b3">🦇</div>
+  <div class="pumpkin">🎃</div>
+  <div class="brand-logo-wrap">
+    <img class="brand-logo" src="https://www.recordrentacar.com/images/layouts/recordGoMobility.svg" alt="Record go">
+  </div>
+  <div class="brand-tag">👻 <b>Record go</b> · Halloween</div>
+  <h1>The House of <span class="highlight">Fright</span></h1>
+  <p>Five rooms. Five car rental monsters. Beat them all, hop in the car and enter the draw for a full trip.</p>
+  <button class="cta-btn" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})">Start the engine 🚗</button>
+  <div class="scroll-hint">Scroll down to enter the haunted house</div>
+</section>
+
+<!-- ================= BOARD ================= -->
+<section class="board-section" id="board">
+  <div class="board-heading">
+    <h2>Make it through the 5 cursed rooms</h2>
+    <p>Each room hides a car rental monster. Choose your answer wisely to banish it and keep moving forward.</p>
+  </div>
+
+  <div class="progress-row" id="progressRow"></div>
+
+  <div class="scene3d">
+    <div class="board-3d">
+      <div class="board-plate">
+        <div class="prop candle-l">🕯️</div>
+        <div class="prop candle-r">🕯️</div>
+        <div class="prop bat-l">🦇</div>
+        <div class="prop pumpkin-r">🎃</div>
+
+        <div class="track-wrap" id="trackWrap">
+          <div class="track-layer" id="trackLayer">
+            <svg class="road-svg" viewBox="0 0 1150 560">
+              <path id="roadPath" d="M60,480 C155,480 155,160 250,160 C345,160 345,480 440,480 C535,480 535,160 630,160 C725,160 725,480 820,480 C915,480 915,160 1010,160 C1050,160 1050,480 1090,480"
+                fill="none" stroke="#241236" stroke-width="26" stroke-linecap="round"/>
+              <path d="M60,480 C155,480 155,160 250,160 C345,160 345,480 440,480 C535,480 535,160 630,160 C725,160 725,480 820,480 C915,480 915,160 1010,160 C1050,160 1050,480 1090,480"
+                fill="none" stroke="#6a4a8a" stroke-width="3" stroke-dasharray="14 14" opacity="0.55"/>
+            </svg>
+
+            <!-- Player car -->
+            <svg class="car" id="car" viewBox="0 0 100 56" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="49" rx="38" ry="5" fill="#000" opacity="0.35"/>
+              <path d="M10,36 C10,24 20,22 28,20 L34,10 C36,7 40,5 45,5 L64,5 C69,5 73,7 75,11 L82,20 C90,22 96,26 96,36 L96,40 C96,43 93,45 90,45 L14,45 C11,45 8,43 8,40 Z" fill="url(#bodyGrad)" stroke="#7a0f0a" stroke-width="1.5"/>
+              <path d="M35,20 L39,11 C40,9 42,8 44,8 L62,8 C65,8 67,9 68,11 L73,20 Z" fill="#2b1636" opacity="0.9"/>
+              <path d="M38,19 L41,12 L52,12 L52,19 Z" fill="#8fd6ff" opacity="0.85"/>
+              <path d="M54,19 L54,12 L62,12 L66,19 Z" fill="#8fd6ff" opacity="0.85"/>
+              <circle cx="28" cy="46" r="10" fill="#161016"/>
+              <circle cx="28" cy="46" r="4.2" fill="#4a4a52"/>
+              <circle cx="76" cy="46" r="10" fill="#161016"/>
+              <circle cx="76" cy="46" r="4.2" fill="#4a4a52"/>
+              <rect x="8" y="27" width="7" height="4" rx="1.5" fill="#ffd76a"/>
+              <rect x="85" y="27" width="7" height="4" rx="1.5" fill="#ff5a4d"/>
+              <defs>
+                <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ff5b4f"/>
+                  <stop offset="55%" stop-color="#e2231a"/>
+                  <stop offset="100%" stop-color="#9c140d"/>
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- MONSTER NODES -->
+            <div class="node" id="node0" style="left:60px; top:480px;"><div class="badge">🚦</div><div class="name">Start</div></div>
+
+            <div class="node" id="node1" style="left:250px; top:160px;">
+              <div class="badge"><span class="num">1</span><img id="badgeImg1" alt="Endless Queue"></div>
+              <div class="name">Room 1<br>Endless Queue</div>
+            </div>
+
+            <div class="node" id="node2" style="left:440px; top:480px;">
+              <div class="badge"><span class="num">2</span><img id="badgeImg2" alt="Fine Print"></div>
+              <div class="name">Room 2<br>Fine Print</div>
+            </div>
+
+            <div class="node" id="node3" style="left:630px; top:160px;">
+              <div class="badge"><span class="num">3</span><img id="badgeImg3" alt="Poltergeist"></div>
+              <div class="name">Room 3<br>Poltergeist</div>
+            </div>
+
+            <div class="node" id="node4" style="left:820px; top:480px;">
+              <div class="badge"><span class="num">4</span><img id="badgeImg4" alt="Cursed Plan"></div>
+              <div class="name">Room 4<br>Cursed Plan</div>
+            </div>
+
+            <div class="node" id="node5" style="left:1010px; top:160px;">
+              <div class="badge"><span class="num">5</span><img id="badgeImg5" alt="The Relic"></div>
+              <div class="name">Room 5<br>The Relic</div>
+            </div>
+
+            <div class="node meta" id="node6" style="left:1090px; top:480px;"><div class="badge">🏆</div><div class="name">Giveaway</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL / FORM ================= -->
+<section class="final-section" id="finalSection">
+  <div id="closingBlock">
+    <h2>This is how you drive without drama.</h2>
+    <div class="tagline">Easy drive, easy go.</div>
+
+    <!-- Banished monsters -->
+    <div class="banished-monsters-grid" id="banishedGrid"></div>
+
+    <p>You've banished the five car rental monsters. At Record go, none of them have a place. Leave your email and enter the giveaway. Make the fright worth it!</p>
+
+    <form class="signup-form" id="signupForm" novalidate>
+      <input type="email" id="emailInput" placeholder="you@email.com" required>
+      <button type="submit" id="formSubmitBtn">I want to enter the giveaway</button>
+    </form>
+    <div class="form-msg" id="formMsg"></div>
+  </div>
+
+  <div class="success-block" id="successBlock">
+    <h2>Congratulations!</h2>
+    <p>You survived the five monsters of the House of Fright, with your entry into the full-trip giveaway in hand.</p>
+  </div>
+</section>
+
+<script>
+  // ---- Monster assets ----
+  const MONSTER_IMAGES = [
+    'assets/monsters/room-1-endless-queue.png',
+    'assets/monsters/room-2-fine-print.png',
+    'assets/monsters/room-3-poltergeist.png',
+    'assets/monsters/room-4-cursed-plan.png',
+    'assets/monsters/room-5-the-relic.png'
+  ];
+
+  for(let i = 1; i <= 5; i++){
+    const bImg = document.getElementById('badgeImg' + i);
+    if(bImg) bImg.src = MONSTER_IMAGES[i-1];
+  }
+
+  const banishedGrid = document.getElementById('banishedGrid');
+  MONSTER_IMAGES.forEach((src) => {
+    const item = document.createElement('div');
+    item.className = 'banished-item';
+    item.innerHTML = `<img src="${src}" alt="Banished monster">`;
+    banishedGrid.appendChild(item);
+  });
+
+  const rooms = [
+    {
+      numLabel:"Room 1", shortName:"Endless Queue",
+      title:"Room 1 · The Endless Queue Specter",
+      flavor:"It lives at counters where your turn never comes. It feeds on the patience of those queuing at midnight.",
+      question:"What banishes it?",
+      answers:[
+        {text:"The Easy Check-in pass and pick-up totems — you register before arriving and skip the counter entirely", correct:true},
+        {text:"A second guard doubling up counter staff during peak hours", correct:false},
+        {text:"A turn booked by phone in advance", correct:false}
+      ],
+      success:"The Specter fades away. With Easy Check-in you register your details before arriving, and with the totems you skip the counter. With Just go, pick-up is express too."
+    },
+    {
+      numLabel:"Room 2", shortName:"Fine Print",
+      title:"Room 2 · The Fine Print Goblin",
+      flavor:"It hides among the contract clauses. If you sign in a hurry, it sneaks in an excess where you least expect it.",
+      question:"What banishes it?",
+      answers:[
+        {text:"Just go with Total Confort and no excess — what you see when booking is what you pay", correct:true},
+        {text:"A one-page summary of the most important terms, before signing", correct:false},
+        {text:"A notary present at every contract signing", correct:false}
+      ],
+      success:"The Goblin has nowhere to hide. Just go includes Total Confort: no excess, no last-minute scares."
+    },
+    {
+      numLabel:"Room 3", shortName:"Poltergeist",
+      title:"Room 3 · The Fuel Tank Poltergeist",
+      flavor:"It haunts the fuel tanks. When you return the car, it makes eighths of fuel disappear that you'd swear you left behind.",
+      question:"What banishes it?",
+      answers:[
+        {text:"The full-to-full system — you don't pay for what you don't use", correct:true},
+        {text:"Paying for a full tank upfront at a fixed price", correct:false},
+        {text:"A consumption estimate checked by the customer at drop-off", correct:false}
+      ],
+      success:"The Poltergeist vanishes. With full-to-full you don't pay for what you don't use. Period."
+    },
+    {
+      numLabel:"Room 4", shortName:"Cursed Plan",
+      title:"Room 4 · The Curse of the Changing Plan",
+      flavor:"It kicks in the moment you book months ahead. As soon as plans change, it ties your money to a date that no longer works for you.",
+      question:"What banishes it?",
+      answers:[
+        {text:"Free cancellation up to 48h before — you decide, not fate", correct:true},
+        {text:"Cancellation insurance, at an extra cost", correct:false},
+        {text:"Unlimited date changes for a small fee", correct:false}
+      ],
+      success:"Curse broken. Free cancellation up to 48h before."
+    },
+    {
+      numLabel:"Room 5", shortName:"The Relic",
+      title:"Room 5 · The Relic on Wheels",
+      flavor:"A car so old it could be haunted: older than the booking itself, with a damp smell nothing gets rid of.",
+      question:"What banishes it?",
+      answers:[
+        {text:"A 100% renewed fleet — you leave with the keys to a car, not a legend", correct:true},
+        {text:"Booking well in advance to secure the highest category available", correct:false},
+        {text:"Choosing the exact car model when booking", correct:false}
+      ],
+      success:"The Relic disappears. 100% renewed fleet. You leave with the keys to a car, not a legend."
+    }
+  ];
+
+  const rejections = [
+    "That solution might exist... just not here. At Record go, you don't need it — there's something better.",
+    "So close! That option sounds fine, but it's not what awaits you here.",
+    "Cold. That alternative is reasonable, but it's not ours."
+  ];
+
+  const roadPath = document.getElementById('roadPath').getAttribute('d');
+  const car = document.getElementById('car');
+  car.style.offsetPath = `path('${roadPath}')`;
+  car.style.offsetDistance = '0%';
+
+  let completedRooms = 0;
+  let rejectCount = 0;
+  let openRoomIndex = null;
+
+  // Build progress dots
+  const progressRow = document.getElementById('progressRow');
+  rooms.forEach((r,i)=>{
+    const d = document.createElement('div');
+    d.className='progress-dot';
+    d.id='dot'+i;
+    progressRow.appendChild(d);
+  });
+
+  function updateBoard(){
+    const activeNodeIndex = completedRooms < 5 ? completedRooms + 1 : null;
+
+    for(let i = 1; i <= 5; i++){
+      const el = document.getElementById('node' + i);
+      el.classList.remove('locked', 'active', 'passed');
+
+      if(i <= completedRooms){
+        el.classList.add('passed');
+      } else if(i === activeNodeIndex){
+        el.classList.add('active');
+      } else {
+        el.classList.add('locked');
+      }
+    }
+
+    rooms.forEach((r,i)=>{
+      const dot = document.getElementById('dot'+i);
+      dot.classList.remove('done','now');
+      if(i < completedRooms) dot.classList.add('done');
+      else if(i === completedRooms && completedRooms < 5) dot.classList.add('now');
+    });
+  }
+
+  function moveCarTo(roomIndex){
+    const pct = (roomIndex / 5 * 100).toFixed(2);
+    car.style.offsetDistance = pct + '%';
+  }
+
+  document.querySelectorAll('.node').forEach(node=>{
+    node.addEventListener('click', ()=>{
+      if(!node.classList.contains('active')) return;
+      const idx = parseInt(node.id.replace('node',''));
+      openModal(idx - 1);
+    });
+  });
+
+  // ---- Modal ----
+  const overlay = document.createElement('div');
+  overlay.className='modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="monster-avatar-wrap">
+        <img class="monster-avatar" id="mAvatar" src="" alt="Monster">
+      </div>
+      <div class="modal-eyebrow">Record go · Halloween</div>
+      <h3 id="mTitle"></h3>
+      <div class="modal-flavor" id="mFlavor"></div>
+      <div class="modal-question" id="mQuestion"></div>
+      <div class="answers" id="mAnswers"></div>
+      <div class="feedback" id="mFeedback"></div>
+      <button class="continue-btn" id="mContinue">Continue</button>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const mAvatar=document.getElementById('mAvatar');
+  const mTitle=document.getElementById('mTitle');
+  const mFlavor=document.getElementById('mFlavor');
+  const mQuestion=document.getElementById('mQuestion');
+  const mAnswers=document.getElementById('mAnswers');
+  const mFeedback=document.getElementById('mFeedback');
+  const mContinue=document.getElementById('mContinue');
+
+  function openModal(roomIndex){
+    openRoomIndex = roomIndex;
+    const room = rooms[roomIndex];
+    mAvatar.src = MONSTER_IMAGES[roomIndex];
+    mTitle.textContent = room.title;
+    mFlavor.textContent = room.flavor;
+    mQuestion.textContent = room.question;
+    mFeedback.className='feedback';
+    mFeedback.textContent='';
+    mContinue.classList.remove('show');
+    mAnswers.innerHTML='';
+    room.answers.forEach(a=>{
+      const btn=document.createElement('button');
+      btn.className='answer-btn';
+      btn.textContent=a.text;
+      btn.addEventListener('click', ()=>handleAnswer(btn,a));
+      mAnswers.appendChild(btn);
+    });
+    overlay.classList.add('open');
+  }
+
+  function closeModal(){ overlay.classList.remove('open'); }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+
+  function handleAnswer(btn,a){
+    if(a.correct){
+      document.querySelectorAll('#mAnswers .answer-btn').forEach(b=>b.disabled=true);
+      btn.classList.add('correct');
+      mFeedback.className='feedback show ok';
+      mFeedback.textContent = rooms[openRoomIndex].success;
+      mContinue.classList.add('show');
+    } else {
+      btn.classList.add('wrong','shake');
+      btn.disabled = true;
+      setTimeout(()=>btn.classList.remove('shake'),350);
+      mFeedback.className='feedback show bad';
+      mFeedback.textContent = rejections[rejectCount % rejections.length];
+      rejectCount++;
+    }
+  }
+
+  mContinue.addEventListener('click', ()=>{
+    closeModal();
+    completedRooms = openRoomIndex + 1;
+    moveCarTo(completedRooms);
+    updateBoard();
+
+    if(completedRooms === 5){
+      setTimeout(()=>{
+        car.style.offsetDistance = '100%';
+        setTimeout(revealFinal, 1200);
+      }, 800);
+    }
+  });
+
+  function revealFinal(){
+    document.getElementById('board').style.display = 'none';
+    const finalSection = document.getElementById('finalSection');
+    finalSection.classList.add('reveal');
+    finalSection.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ---- Signup Form ----
+  const signupForm = document.getElementById('signupForm');
+  const formMsg = document.getElementById('formMsg');
+  signupForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      formMsg.className='form-msg show bad';
+      formMsg.textContent = "Something went wrong. Please try again — your email is safe.";
+      return;
+    }
+    document.getElementById('closingBlock').style.display='none';
+    document.getElementById('successBlock').classList.add('show');
+  });
+
+  // ---- Responsive Scaling ----
+  function scaleTrack(){
+    const wrap = document.getElementById('trackWrap');
+    const layer = document.getElementById('trackLayer');
+    const scale = wrap.clientWidth/1150;
+    layer.style.transform = `scale(${scale})`;
+    wrap.style.height = (560*scale)+'px';
+  }
+  window.addEventListener('resize', scaleTrack);
+  window.addEventListener('load', scaleTrack);
+  scaleTrack();
+
+  updateBoard();
+</script>
+</body>
+</html>
