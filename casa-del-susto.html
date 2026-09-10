@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Casa del Susto · Record go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#cf2d30;
+    --red-dark:#9c140d;
+    --purple:#3a1a52;
+    --purple-deep:#150a24;
+    --gold:#e8b84b;
+    --ink:#12081f;
+    --cream:#f4ead9;
+    --green:#3ee089;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Roboto',sans-serif;
+    color:var(--cream);
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(226,35,26,0.10), transparent 45%),
+      radial-gradient(ellipse at 80% 30%, rgba(126,60,190,0.14), transparent 50%),
+      linear-gradient(180deg,#0c0614,#150a24 30%,#1c0f2e 70%,#0c0614);
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    min-height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:86px 20px 36px;
+    position:relative;
+  }
+  .brand-logo-wrap{
+    display:inline-flex;
+    align-items:center;
+    padding:15px 30px;
+    color: #ffffff;
+  }
+  .brand-logo{height:24px; display:block;}
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1.5px);
+    background-size:70px 70px;
+    opacity:0.06;
+    pointer-events:none;
+  }
+  .hero .bat{position:absolute; font-size:34px; opacity:.8; filter:drop-shadow(0 6px 8px rgba(0,0,0,.6));}
+  .hero .bat.b1{top:12%; left:8%; transform:rotate(-8deg);}
+  .hero .bat.b2{top:20%; right:10%; transform:rotate(10deg); font-size:26px;}
+  .hero .bat.b3{bottom:18%; left:14%; font-size:22px;}
+  .hero .pumpkin{position:absolute; font-size:46px; bottom:8%; right:9%; filter:drop-shadow(0 8px 10px rgba(0,0,0,.6));}
+
+  .brand-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(226,35,26,0.15);
+    border:1px solid rgba(226,35,26,0.5);
+    color:var(--red);
+    font-size:13px; font-weight:700; letter-spacing:.4px;
+    padding:6px 14px; border-radius:999px; margin-bottom:22px;
+  }
+  .brand-tag b{color:var(--cream);}
+
+  .hero h1{
+    font-family:'Roboto',sans-serif;
+    font-size:clamp(38px,7vw,74px);
+    font-weight:900;
+    margin:0 0 16px;
+    line-height:1.05;
+    color:var(--cream);
+    text-shadow:0 0 30px rgba(226,35,26,0.45), 0 6px 10px rgba(0,0,0,.6);
+  }
+  .hero h1 .highlight{color:var(--red);}
+  .hero p{
+    max-width:560px;
+    font-size:17px;
+    line-height:1.6;
+    color:#d9cbe8;
+    margin:0 0 34px;
+  }
+  .cta-btn{
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff;
+    border:none;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:.3px;
+    padding:16px 34px;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 10px 0 #6e0f09, 0 20px 30px rgba(0,0,0,.55);
+    transition:transform .15s ease;
+  }
+  .cta-btn:hover{transform:translateY(-3px);}
+  .cta-btn:active{transform:translateY(3px); box-shadow:0 6px 0 #6e0f09, 0 10px 16px rgba(0,0,0,.5);}
+  .scroll-hint{margin-top:14px; font-size:13px; color:#9a8bb0; letter-spacing:.5px;}
+
+  /* ---------------- BOARD SECTION ---------------- */
+  .board-section{
+    padding:16px 16px 120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .board-heading{
+    text-align:center;
+    max-width:640px;
+    margin-bottom:8px;
+  }
+  .board-heading h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:900;
+    margin:0 0 10px;
+    color:var(--gold);
+    text-shadow:0 3px 6px rgba(0,0,0,.6);
+  }
+  .board-heading p{color:#cbb9dd; font-size:15px; line-height:1.6; margin:0 0 6px;}
+
+  .progress-row{
+    display:flex; align-items:center; gap:10px;
+    margin:18px 0 34px;
+  }
+  .progress-dot{
+    width:13px; height:13px; border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    border:2px solid rgba(255,255,255,0.25);
+    transition:all .4s ease;
+  }
+  .progress-dot.done{background:var(--green); border-color:var(--green); box-shadow:0 0 10px var(--green);}
+  .progress-dot.now{border-color:var(--gold); box-shadow:0 0 10px var(--gold);}
+
+  .scene3d{
+    width:100%;
+    display:flex;
+    justify-content:center;
+  }
+  .board-3d{
+    width:min(1150px,96vw);
+  }
+  .board-plate{
+    position:relative;
+    border-radius:26px;
+    padding:30px 26px 40px;
+    background:
+      radial-gradient(ellipse at 25% 0%, rgba(255,255,255,0.06), transparent 55%),
+      linear-gradient(155deg,#3a1a4d,#170a26 75%);
+    border:1px solid rgba(255,255,255,0.07);
+    box-shadow:
+      0 70px 100px rgba(0,0,0,.65),
+      0 20px 30px rgba(0,0,0,.5),
+      inset 0 2px 0 rgba(255,255,255,.08),
+      inset 0 -4px 0 rgba(0,0,0,.4);
+  }
+  .board-plate .prop{position:absolute; font-size:46px; filter:drop-shadow(0 8px 8px rgba(0,0,0,.55)); pointer-events:none;}
+  .prop.candle-l{top:-26px; left:-34px; font-size:56px;}
+  .prop.candle-r{bottom:-30px; right:-30px; font-size:60px;}
+  .prop.bat-l{top:120px; left:-40px; font-size:28px; transform:rotate(-10deg);}
+  .prop.pumpkin-r{top:-20px; right:-40px; font-size:40px;}
+
+  .track-wrap{
+    position:relative;
+    width:100%;
+    max-width:1150px;
+    margin:0 auto;
+  }
+  .track-layer{
+    position:absolute;
+    top:0; left:0;
+    width:1150px;
+    height:560px;
+    transform-origin:top left;
+  }
+  .road-svg{position:absolute; top:0; left:0; width:1150px; height:560px; overflow:visible;}
+
+  .node{
+    position:absolute;
+    width:118px;
+    transform:translate(-50%,-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    cursor:not-allowed;
+  }
+  .node .badge{
+    width:68px; height:68px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:28px;
+    background:linear-gradient(160deg,#4a2f66,#241236);
+    border:3px solid rgba(255,255,255,0.15);
+    box-shadow:0 10px 16px rgba(0,0,0,.5), inset 0 2px 3px rgba(255,255,255,.08);
+    margin-bottom:8px;
+    position:relative;
+    transition:all .35s ease;
+    overflow:hidden;
+  }
+  .node .badge img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    mix-blend-mode:multiply;
+    border-radius:50%;
+    pointer-events:none;
+  }
+  .node .num{
+    position:absolute; top:-8px; left:-8px;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--gold);
+    color:var(--gold); font-size:11px; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .node .name{
+    font-size:12.5px; font-weight:700; color:#e5dcf2;
+    text-shadow:0 2px 3px rgba(0,0,0,.6);
+    line-height:1.25;
+  }
+
+  .node.locked .badge{opacity:.5; filter:grayscale(.6);}
+  .node.locked .name{opacity:.45;}
+
+  .node.active{cursor:pointer;}
+  .node.active .badge{
+    border-color:var(--gold);
+    background: #fff;
+    box-shadow:0 0 0 0 rgba(232,184,75,.6), 0 10px 20px rgba(0,0,0,.5);
+    animation:pulseGlow 1.6s infinite;
+  }
+  .node.active .name{color:var(--gold);}
+  @keyframes pulseGlow{
+    0%{box-shadow:0 0 0 0 rgba(232,184,75,.55),0 10px 20px rgba(0,0,0,.5);}
+    70%{box-shadow:0 0 0 16px rgba(232,184,75,0),0 10px 20px rgba(0,0,0,.5);}
+    100%{box-shadow:0 0 0 0 rgba(232,184,75,0),0 10px 20px rgba(0,0,0,.5);}
+  }
+
+  .node.passed .badge{
+    background:linear-gradient(160deg,#1c5c40,#0e3324);
+    border-color:var(--green);
+  }
+  .node.passed .badge img{opacity:.35; filter:grayscale(1);}
+  .node.passed .badge::after{
+    content:"✓";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--green); font-size:26px; font-weight:900;
+    background:rgba(10,20,15,0.55); border-radius:50%;
+  }
+
+  .node.meta .badge{
+    width:76px; height:76px;
+    background:linear-gradient(160deg,#e8b84b,#a9781f);
+    border-color:#fff2cf;
+  }
+
+  .car{
+    position:absolute; top:0; left:0;
+    width:78px; height:44px;
+    offset-rotate:auto;
+    transition:offset-distance 1.7s cubic-bezier(.45,0,.2,1);
+    filter:drop-shadow(0 14px 10px rgba(0,0,0,.55));
+    z-index:5;
+  }
+
+  /* ---------------- MOBILE BOARD (vertical) ---------------- */
+  @media (max-width:720px){
+    .board-plate{padding:22px 16px 26px;}
+    .track-wrap{max-width:420px; height:auto !important;}
+    .prop.bat-l{display:none;}
+    .prop.candle-r{bottom:-16px; right:-16px; font-size:40px;}
+    .prop.pumpkin-r{top:-16px; right:-16px; font-size:30px;}
+    .track-layer{
+      position:static;
+      width:100%;
+      height:auto;
+      transform:none !important;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      gap:20px;
+      padding:4px 0;
+    }
+    .road-svg, .car{display:none;}
+    .node{
+      position:relative !important;
+      left:auto !important;
+      top:auto !important;
+      transform:none !important;
+      width:100%;
+      flex-direction:row;
+      align-items:center;
+      text-align:left;
+      gap:14px;
+      cursor:not-allowed;
+    }
+    .node.active{cursor:pointer;}
+    .node .badge{margin-bottom:0; flex:none;}
+    .node .name{font-size:13.5px;}
+    .node:not(:first-child)::before{
+      content:"";
+      position:absolute;
+      top:-20px; left:33px;
+      width:2px; height:20px;
+      background:repeating-linear-gradient(to bottom, rgba(255,255,255,.35) 0 4px, transparent 4px 8px);
+    }
+  }
+
+  /* ---------------- MODAL / MONSTER REVEAL ---------------- */
+  .modal-overlay{
+    position:fixed; inset:0;
+    background:rgba(6,3,12,0.85);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    width:100%; max-width:540px;
+    background:linear-gradient(165deg,#3a1a4d,#170a26);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:22px;
+    padding:28px 28px 24px;
+    box-shadow:0 40px 60px rgba(0,0,0,.7);
+    position:relative;
+    animation:pop .28s ease;
+    max-height:92vh;
+    overflow-y:auto;
+  }
+  @keyframes pop{from{transform:scale(.92); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .modal-close{
+    position:absolute; top:14px; right:16px;
+    background:none; border:none; color:#b7a6cc;
+    font-size:22px; cursor:pointer;
+  }
+  .monster-avatar-wrap{
+    width:130px; height:130px;
+    margin:0 auto 14px;
+    background:radial-gradient(circle, rgba(232,184,75,0.15), transparent 70%);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px dashed rgba(232,184,75,0.3);
+    position:relative;
+  }
+  .monster-avatar{
+    width:115px; height:115px;
+    object-fit:contain;
+    filter:drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+    animation:floatMonster 3s ease-in-out infinite;
+  }
+  @keyframes floatMonster{
+    0%,100%{transform:translateY(0px);}
+    50%{transform:translateY(-6px);}
+  }
+  .modal-eyebrow{text-align:center; color:var(--red); font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;}
+  .modal-card h3{margin:0 0 8px; font-size:22px; font-weight:900; color:var(--gold); line-height:1.25; text-align:center;}
+  .modal-flavor{font-size:13.5px; color:#c9bcdb; line-height:1.5; margin-bottom:14px; text-align:center;}
+  .modal-question{font-size:15px; font-weight:700; color:#f4ead9; margin-bottom:14px; border-top:1px solid rgba(255,255,255,0.08); padding-top:12px;}
+  .answers{display:flex; flex-direction:column; gap:10px; margin-bottom:6px;}
+  .answer-btn{
+    text-align:left;
+    background:rgba(255,255,255,0.04);
+    border:1.5px solid rgba(255,255,255,0.12);
+    color:#f0e8fa;
+    font-family:'Roboto',sans-serif;
+    font-size:13.5px;
+    line-height:1.4;
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .answer-btn:hover:not(:disabled){border-color:var(--gold); background:rgba(232,184,75,0.08);}
+  .answer-btn:disabled{cursor:default;}
+  .answer-btn.correct{border-color:var(--green); background:rgba(62,224,137,0.14); color:#c7f7de;}
+  .answer-btn.wrong{border-color:var(--red); background:rgba(226,35,26,0.14); color:#f3c6c2; opacity:.7;}
+  .answer-btn.shake{animation:shake .35s;}
+  @keyframes shake{
+    0%,100%{transform:translateX(0);}
+    25%{transform:translateX(-6px);}
+    75%{transform:translateX(6px);}
+  }
+  .feedback{
+    margin-top:14px; padding:12px 14px; border-radius:10px;
+    font-size:13.5px; line-height:1.5; display:none;
+  }
+  .feedback.show{display:block;}
+  .feedback.ok{background:rgba(62,224,137,0.1); border:1px solid rgba(62,224,137,0.4); color:#c7f7de;}
+  .feedback.bad{background:rgba(226,35,26,0.1); border:1px solid rgba(226,35,26,0.4); color:#f3c6c2;}
+  .continue-btn{
+    margin-top:14px; width:100%;
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff; border:none; font-weight:700; font-size:14px;
+    padding:12px; border-radius:10px; cursor:pointer; display:none;
+  }
+  .continue-btn.show{display:block;}
+
+  /* ---------------- FINAL / FORM ---------------- */
+  .final-section{
+    max-width:620px;
+    margin:0 auto;
+    padding:70px 20px 40px;
+    text-align:center;
+    display:none;
+  }
+  .final-section.reveal{display:block; animation:fadeUp .6s ease;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);}}
+  .final-section h2{
+    font-size:clamp(24px,4vw,34px);
+    font-weight:900;
+    color:var(--gold); margin:0 0 6px;
+    text-shadow:0 3px 6px rgba(0,0,0,.6);
+  }
+  .final-section .tagline{color:var(--red); font-weight:700; font-size:14px; letter-spacing:.5px; margin-bottom:18px;}
+  .final-section p{color:#cbb9dd; font-size:15px; line-height:1.6; margin-bottom:24px;}
+
+  .banished-monsters-grid{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .banished-item{
+    width:56px; height:56px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:50%;
+    padding:4px;
+    position:relative;
+  }
+  .banished-item img{
+    width:100%; height:100%;
+    object-fit:contain;
+    filter:grayscale(1) opacity(0.5);
+  }
+  .banished-item::after{
+    content:"✕";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--red); font-size:22px; font-weight:900;
+  }
+
+  .signup-form{
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .signup-form input{
+    flex:1; min-width:220px;
+    background:rgba(255,255,255,0.06);
+    border:1.5px solid rgba(255,255,255,0.18);
+    border-radius:10px;
+    padding:14px 16px;
+    color:#fff; font-size:14px;
+    font-family:'Roboto',sans-serif;
+  }
+  .signup-form input::placeholder{color:#a292b8;}
+  .signup-form input:focus{outline:none; border-color:var(--gold);}
+  .signup-form button{
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff; border:none; font-weight:700; font-size:14px;
+    padding:14px 22px; border-radius:10px; cursor:pointer;
+    box-shadow:0 8px 0 #6e0f09;
+    font-family:'Roboto',sans-serif;
+  }
+  .signup-form button:active{transform:translateY(3px); box-shadow:0 4px 0 #6e0f09;}
+
+  .form-msg{margin-top:16px; font-size:14px; line-height:1.5; display:none; padding:12px 14px; border-radius:10px;}
+  .form-msg.show{display:block;}
+  .form-msg.bad{background:rgba(226,35,26,0.1); border:1px solid rgba(226,35,26,0.4); color:#f3c6c2;}
+  .success-block{display:none;}
+  .success-block.show{display:block;}
+
+  /* ---------------- LANGUAGE SELECTOR ---------------- */
+  .lang-selector{
+    position:fixed;
+    top:14px; right:14px;
+    z-index:60;
+    font-size:13px;
+    user-select:none;
+  }
+  .lang-current{
+    display:flex; align-items:center; gap:7px;
+    background:rgba(21,10,36,0.75);
+    border:1px solid rgba(255,255,255,0.18);
+    color:#f0e8fa;
+    font-family:inherit; font-size:13px;
+    padding:7px 11px 7px 9px;
+    border-radius:999px;
+    cursor:pointer;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .lang-current:hover{border-color:var(--gold); background:rgba(232,184,75,0.1);}
+  .lang-selector .flag{
+    width:17px; height:17px;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:14px; line-height:1;
+    border-radius:3px;
+    overflow:hidden;
+    flex:none;
+  }
+  .lang-selector .flag svg{display:block; width:100%; height:100%;}
+  .lang-current .chev{
+    font-size:9px; opacity:.65; margin-left:1px;
+    transition:transform .2s ease;
+  }
+  .lang-selector.open .lang-current .chev{transform:rotate(180deg);}
+  .lang-menu{
+    position:absolute; top:calc(100% + 8px); right:0;
+    min-width:180px;
+    background:linear-gradient(165deg,#3a1a4d,#170a26);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:12px;
+    padding:6px;
+    box-shadow:0 20px 40px rgba(0,0,0,.55);
+    display:none;
+    flex-direction:column;
+    gap:1px;
+    max-height:75vh;
+    overflow-y:auto;
+  }
+  .lang-selector.open .lang-menu{display:flex;}
+  .lang-option{
+    display:flex; align-items:center; gap:9px;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    color:#e5dcf2;
+    font-size:13.5px;
+    background:none; border:none; text-align:left; width:100%;
+    font-family:inherit;
+  }
+  .lang-option:hover{background:rgba(232,184,75,0.1); color:var(--gold);}
+  .lang-option.active{background:rgba(62,224,137,0.12); color:#c7f7de;}
+</style>
+</head>
+<body>
+
+<!-- ================= LANGUAGE SELECTOR ================= -->
+<div class="lang-selector" id="langSelector">
+  <button type="button" class="lang-current" id="langCurrent" aria-haspopup="listbox" aria-expanded="false">
+    <span class="flag" id="langCurrentFlag">🇪🇸</span>
+    <span class="lang-label" id="langCurrentLabel">Español</span>
+    <span class="chev">▾</span>
+  </button>
+  <div class="lang-menu" id="langMenu" role="listbox">
+    <button type="button" class="lang-option active" data-lang="es" role="option" aria-selected="true">
+      <span class="flag">🇪🇸</span><span>Español</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="en" role="option" aria-selected="false">
+      <span class="flag">🇬🇧</span><span>English</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="de" role="option" aria-selected="false">
+      <span class="flag">🇩🇪</span><span>Deutsch</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="fr" role="option" aria-selected="false">
+      <span class="flag">🇫🇷</span><span>Français</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="ca" role="option" aria-selected="false">
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="12" fill="#FCDD09"/>
+          <rect y="0" width="18" height="1.2" fill="#DA121A"/>
+          <rect y="2.4" width="18" height="1.2" fill="#DA121A"/>
+          <rect y="4.8" width="18" height="1.2" fill="#DA121A"/>
+          <rect y="7.2" width="18" height="1.2" fill="#DA121A"/>
+          <rect y="9.6" width="18" height="1.2" fill="#DA121A"/>
+        </svg>
+      </span><span>Català</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="pt" role="option" aria-selected="false">
+      <span class="flag">🇵🇹</span><span>Português</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="el" role="option" aria-selected="false">
+      <span class="flag">🇬🇷</span><span>Ελληνικά</span>
+    </button>
+    <button type="button" class="lang-option" data-lang="it" role="option" aria-selected="false">
+      <span class="flag">🇮🇹</span><span>Italiano</span>
+    </button>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="bat b1">🦇</div>
+  <div class="bat b2">🦇</div>
+  <div class="bat b3">🦇</div>
+  <div class="pumpkin">🎃</div>
+  <div class="brand-logo-wrap">
+    <img class="brand-logo" src="https://www.recordrentacar.com/images/layouts/recordGoMobility.svg" alt="Record go">
+  </div>
+  <div class="brand-tag">👻 <b>Record go</b> · Halloween</div>
+  <h1><span id="heroTitleMain">La Casa del </span><span id="heroTitleHighlight" class="highlight">Susto</span></h1>
+  <p id="heroP">Cinco salas. Cinco monstruos del alquiler de coches. Supéralos todos, sube al coche y entra en el sorteo de un viaje completo.</p>
+  <button class="cta-btn" id="ctaBtn" onclick="document.getElementById('board').scrollIntoView({behavior:'smooth'})">Arranca el motor 🚗</button>
+  <div class="scroll-hint" id="scrollHint">Desliza para entrar a la casa embrujada</div>
+</section>
+
+<!-- ================= BOARD ================= -->
+<section class="board-section" id="board">
+  <div class="board-heading">
+    <h2 id="boardH2">Recorre las 5 salas malditas</h2>
+    <p id="boardP">Cada sala esconde un monstruo del alquiler. Elige bien tu respuesta para desterrarlo y seguir avanzando.</p>
+  </div>
+
+  <div class="progress-row" id="progressRow"></div>
+
+  <div class="scene3d">
+    <div class="board-3d">
+      <div class="board-plate">
+        <div class="prop candle-l">🕯️</div>
+        <div class="prop candle-r">🕯️</div>
+        <div class="prop bat-l">🦇</div>
+        <div class="prop pumpkin-r">🎃</div>
+
+        <div class="track-wrap" id="trackWrap">
+          <div class="track-layer" id="trackLayer">
+            <svg class="road-svg" viewBox="0 0 1150 560">
+              <path id="roadPath" d="M60,480 C155,480 155,160 250,160 C345,160 345,480 440,480 C535,480 535,160 630,160 C725,160 725,480 820,480 C915,480 915,160 1010,160 C1050,160 1050,480 1090,480"
+                fill="none" stroke="#241236" stroke-width="26" stroke-linecap="round"/>
+              <path d="M60,480 C155,480 155,160 250,160 C345,160 345,480 440,480 C535,480 535,160 630,160 C725,160 725,480 820,480 C915,480 915,160 1010,160 C1050,160 1050,480 1090,480"
+                fill="none" stroke="#6a4a8a" stroke-width="3" stroke-dasharray="14 14" opacity="0.55"/>
+            </svg>
+
+            <!-- Coche jugador -->
+            <svg class="car" id="car" viewBox="0 0 100 56" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="49" rx="38" ry="5" fill="#000" opacity="0.35"/>
+              <path d="M10,36 C10,24 20,22 28,20 L34,10 C36,7 40,5 45,5 L64,5 C69,5 73,7 75,11 L82,20 C90,22 96,26 96,36 L96,40 C96,43 93,45 90,45 L14,45 C11,45 8,43 8,40 Z" fill="url(#bodyGrad)" stroke="#7a0f0a" stroke-width="1.5"/>
+              <path d="M35,20 L39,11 C40,9 42,8 44,8 L62,8 C65,8 67,9 68,11 L73,20 Z" fill="#2b1636" opacity="0.9"/>
+              <path d="M38,19 L41,12 L52,12 L52,19 Z" fill="#8fd6ff" opacity="0.85"/>
+              <path d="M54,19 L54,12 L62,12 L66,19 Z" fill="#8fd6ff" opacity="0.85"/>
+              <circle cx="28" cy="46" r="10" fill="#161016"/>
+              <circle cx="28" cy="46" r="4.2" fill="#4a4a52"/>
+              <circle cx="76" cy="46" r="10" fill="#161016"/>
+              <circle cx="76" cy="46" r="4.2" fill="#4a4a52"/>
+              <rect x="8" y="27" width="7" height="4" rx="1.5" fill="#ffd76a"/>
+              <rect x="85" y="27" width="7" height="4" rx="1.5" fill="#ff5a4d"/>
+              <defs>
+                <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ff5b4f"/>
+                  <stop offset="55%" stop-color="#e2231a"/>
+                  <stop offset="100%" stop-color="#9c140d"/>
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- NODOS CON LOS MONSTRUOS -->
+            <div class="node" id="node0" style="left:60px; top:480px;"><div class="badge">🚦</div><div class="name" id="nodeName0">Salida</div></div>
+
+            <div class="node" id="node1" style="left:250px; top:160px;">
+              <div class="badge"><span class="num">1</span><img id="badgeImg1" alt="Cola Infinita"></div>
+              <div class="name" id="nodeName1">Sala 1<br>Cola Infinita</div>
+            </div>
+
+            <div class="node" id="node2" style="left:440px; top:480px;">
+              <div class="badge"><span class="num">2</span><img id="badgeImg2" alt="Letra Pequeña"></div>
+              <div class="name" id="nodeName2">Sala 2<br>Letra Pequeña</div>
+            </div>
+
+            <div class="node" id="node3" style="left:630px; top:160px;">
+              <div class="badge"><span class="num">3</span><img id="badgeImg3" alt="Poltergeist"></div>
+              <div class="name" id="nodeName3">Sala 3<br>Poltergeist</div>
+            </div>
+
+            <div class="node" id="node4" style="left:820px; top:480px;">
+              <div class="badge"><span class="num">4</span><img id="badgeImg4" alt="Plan Maldito"></div>
+              <div class="name" id="nodeName4">Sala 4<br>Plan Maldito</div>
+            </div>
+
+            <div class="node" id="node5" style="left:1010px; top:160px;">
+              <div class="badge"><span class="num">5</span><img id="badgeImg5" alt="La Reliquia"></div>
+              <div class="name" id="nodeName5">Sala 5<br>La Reliquia</div>
+            </div>
+
+            <div class="node meta" id="node6" style="left:1090px; top:480px;"><div class="badge">🏆</div><div class="name" id="nodeName6">Sorteo</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL / FORM ================= -->
+<section class="final-section" id="finalSection">
+  <div id="closingBlock">
+    <h2 id="finalH2">Así se conduce sin dramas.</h2>
+    <div class="tagline">Easy drive, easy go.</div>
+
+    <!-- Monstruos desterrados -->
+    <div class="banished-monsters-grid" id="banishedGrid"></div>
+
+    <p id="finalP">Has desterrado a los cinco monstruos del alquiler. En Record go, ninguno tiene sitio. Deja tu email y entra en el sorteo. ¡Haz que el susto merezca la pena!</p>
+
+    <form class="signup-form" id="signupForm" novalidate>
+      <input type="email" id="emailInput" placeholder="tu@email.com" required>
+      <button type="submit" id="formSubmitBtn">Quiero participar en el sorteo</button>
+    </form>
+    <div class="form-msg" id="formMsg"></div>
+  </div>
+
+  <div class="success-block" id="successBlock">
+    <h2 id="successH2">¡Enhorabuena!</h2>
+    <p id="successP">Sobreviviste a los cinco monstruos de La Casa del Susto, con tu participación para el sorteo de un viaje completo bajo el brazo.</p>
+  </div>
+</section>
+
+<script>
+  // ---- Configuración de Monstruos & Assets ----
+  // De momento las 5 salas comparten la misma imagen (El Espectro de la Cola Infinita).
+  // Sustituye cada entrada por el enlace directo del monstruo correspondiente cuando
+  // esté disponible.
+  const MONSTER_PLACEHOLDER = 'https://recordgo-my.sharepoint.com/:i:/r/personal/paula_lopez_recordrentacar_com/Documents/El-Espectro-de-la-Cola-Infinita.png?d=w1276a6c241494320b084e634681e69f8&csf=1&web=1&e=d4j6Th&download=1';
+  const MONSTER_IMAGES = [
+    MONSTER_PLACEHOLDER, // Sala 1: Espectro
+    MONSTER_PLACEHOLDER, // Sala 2: Duende
+    MONSTER_PLACEHOLDER, // Sala 3: Poltergeist
+    MONSTER_PLACEHOLDER, // Sala 4: Maldición
+    MONSTER_PLACEHOLDER  // Sala 5: Reliquia
+  ];
+
+  // Inyectar imágenes a los nodos
+  for(let i = 1; i <= 5; i++){
+    const bImg = document.getElementById('badgeImg' + i);
+    if(bImg) bImg.src = MONSTER_IMAGES[i-1];
+  }
+
+  // Galería de monstruos desterrados final
+  const banishedGrid = document.getElementById('banishedGrid');
+  MONSTER_IMAGES.forEach((src) => {
+    const item = document.createElement('div');
+    item.className = 'banished-item';
+    item.innerHTML = `<img src="${src}" alt="Monstruo desterrado">`;
+    banishedGrid.appendChild(item);
+  });
+
+  // ---- Language selector ----
+  const langSelector = document.getElementById('langSelector');
+  const langCurrent = document.getElementById('langCurrent');
+  const langMenu = document.getElementById('langMenu');
+  const langCurrentFlag = document.getElementById('langCurrentFlag');
+  const langCurrentLabel = document.getElementById('langCurrentLabel');
+
+  langCurrent.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    const willOpen = !langSelector.classList.contains('open');
+    langSelector.classList.toggle('open', willOpen);
+    langCurrent.setAttribute('aria-expanded', String(willOpen));
+  });
+
+  document.addEventListener('click', (e)=>{
+    if(!langSelector.contains(e.target)){
+      langSelector.classList.remove('open');
+      langCurrent.setAttribute('aria-expanded','false');
+    }
+  });
+
+  langMenu.querySelectorAll('.lang-option').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      langMenu.querySelectorAll('.lang-option').forEach(o=>{
+        o.classList.remove('active');
+        o.setAttribute('aria-selected','false');
+      });
+      opt.classList.add('active');
+      opt.setAttribute('aria-selected','true');
+      langCurrentFlag.innerHTML = opt.querySelector('.flag').innerHTML;
+      langCurrentLabel.textContent = opt.querySelector('span:last-child').textContent;
+      langSelector.classList.remove('open');
+      langCurrent.setAttribute('aria-expanded','false');
+      setLanguage(opt.dataset.lang);
+    });
+  });
+
+  const I18N = {
+    es: {
+      meta:{
+        titleMain:"La Casa del ", titleHighlight:"Susto",
+        heroP:"Cinco salas. Cinco monstruos del alquiler de coches. Supéralos todos, sube al coche y entra en el sorteo de un viaje completo.",
+        cta:"Arranca el motor 🚗",
+        scrollHint:"Desliza para entrar a la casa embrujada",
+        boardH2:"Recorre las 5 salas malditas",
+        boardP:"Cada sala esconde un monstruo del alquiler. Elige bien tu respuesta para desterrarlo y seguir avanzando.",
+        nodeSalida:"Salida", nodeSorteo:"Sorteo",
+        continueBtn:"Continuar",
+        finalH2:"Así se conduce sin dramas.",
+        finalP:"Has desterrado a los cinco monstruos del alquiler. En Record go, ninguno tiene sitio. Deja tu email y entra en el sorteo. ¡Haz que el susto merezca la pena!",
+        formPlaceholder:"tu@email.com",
+        formButton:"Quiero participar en el sorteo",
+        formError:"Ha habido un error. Vuelve a intentarlo — tu email está a salvo.",
+        successH2:"¡Enhorabuena!",
+        successP:"Sobreviviste a los cinco monstruos de La Casa del Susto, con tu participación para el sorteo de un viaje completo bajo el brazo."
+      },
+      rooms:[
+        {
+          numLabel:"Sala 1", shortName:"Cola Infinita",
+          title:"Sala 1 · El Espectro de la Cola Infinita",
+          flavor:"Habita en los mostradores donde el turno nunca llega. Se alimenta de la paciencia de quien hace cola a medianoche.",
+          question:"¿Con qué se destierra?",
+          answers:[
+            {text:"El pase Easy Check-in y los tótems de recogida — te registras antes de llegar y sales sin pisar el mostrador", correct:true},
+            {text:"Un segundo guardia doblando personal en el mostrador en las horas de más afluencia", correct:false},
+            {text:"Un turno reservado por teléfono con antelación", correct:false}
+          ],
+          success:"El Espectro se desvanece. Con Easy Check-in registras tus datos antes de llegar, y con los tótems te saltas el mostrador. Con Just go, además, la recogida es exprés."
+        },
+        {
+          numLabel:"Sala 2", shortName:"Letra Pequeña",
+          title:"Sala 2 · El Duende de la Letra Pequeña",
+          flavor:"Vive escondido entre las cláusulas del contrato. Si firmas rápido, aprovecha para esconder una franquicia donde no la esperas.",
+          question:"¿Con qué se destierra?",
+          answers:[
+            {text:"Just go con Total Confort sin franquicia — lo que ves al reservar es lo que pagas", correct:true},
+            {text:"Un resumen de una página con las condiciones más importantes, antes de firmar", correct:false},
+            {text:"Un notario presente en cada firma de contrato", correct:false}
+          ],
+          success:"El Duende no tiene donde esconderse. Just go incluye Total Confort: sin franquicia, sin sustos de última hora."
+        },
+        {
+          numLabel:"Sala 3", shortName:"Poltergeist",
+          title:"Sala 3 · El Poltergeist del Depósito",
+          flavor:"Ronda los depósitos de combustible. Cuando devuelves el coche, hace desaparecer octavos de gasolina que jurarías haber dejado.",
+          question:"¿Con qué se destierra?",
+          answers:[
+            {text:"El sistema lleno-lleno — no pagas lo que no gastas", correct:true},
+            {text:"Pagar el depósito lleno por adelantado, a precio fijo", correct:false},
+            {text:"Un cálculo del consumo revisado por el propio cliente al devolver", correct:false}
+          ],
+          success:"El Poltergeist se esfuma. Con el lleno-lleno no pagas lo que no gastas. Punto."
+        },
+        {
+          numLabel:"Sala 4", shortName:"Plan Maldito",
+          title:"Sala 4 · La Maldición del Plan que Cambia",
+          flavor:"Se activa en cuanto reservas con meses de antelación. En cuanto los planes cambian, ata tu dinero a una fecha que ya no te sirve.",
+          question:"¿Con qué se destierra?",
+          answers:[
+            {text:"Cancelación gratuita hasta 48h antes — decides tú, no el destino", correct:true},
+            {text:"Un seguro de cancelación, con coste adicional", correct:false},
+            {text:"Cambios de fecha ilimitados pagando una pequeña diferencia", correct:false}
+          ],
+          success:"Maldición rota. Cancelación gratis hasta 48h antes."
+        },
+        {
+          numLabel:"Sala 5", shortName:"La Reliquia",
+          title:"Sala 5 · La Reliquia con Ruedas",
+          flavor:"Un coche tan viejo que podría estar embrujado: más años que la reserva, y un olor a humedad que no se va con nada.",
+          question:"¿Con qué se destierra?",
+          answers:[
+            {text:"Flota renovada al 100% — sales con las llaves de un coche, no de una leyenda", correct:true},
+            {text:"Reservar con mucha antelación para asegurarte la categoría más alta disponible", correct:false},
+            {text:"Elegir el modelo exacto del coche al hacer la reserva", correct:false}
+          ],
+          success:"La Reliquia desaparece. Flota renovada al 100%. Sales con las llaves de un coche, no de una leyenda."
+        }
+      ],
+      rejections:[
+        "Esa solución existirá... pero no aquí. En Record go, no hace falta — hay algo mejor.",
+        "¡Casi! Esa opción suena bien, pero no es lo que te espera aquí.",
+        "Frío. Esa alternativa es razonable, pero no es la nuestra."
+      ]
+    },
+    en: {
+      meta:{
+        titleMain:"The House of ", titleHighlight:"Fright",
+        heroP:"Five rooms. Five car rental monsters. Beat them all, hop in the car and enter the draw for a full trip.",
+        cta:"Start the engine 🚗",
+        scrollHint:"Scroll down to enter the haunted house",
+        boardH2:"Make it through the 5 cursed rooms",
+        boardP:"Each room hides a car rental monster. Choose your answer wisely to banish it and keep moving forward.",
+        nodeSalida:"Start", nodeSorteo:"Giveaway",
+        continueBtn:"Continue",
+        finalH2:"This is how you drive without drama.",
+        finalP:"You've banished the five car rental monsters. At Record go, none of them have a place. Leave your email and enter the giveaway. Make the fright worth it!",
+        formPlaceholder:"you@email.com",
+        formButton:"I want to enter the giveaway",
+        formError:"Something went wrong. Please try again — your email is safe.",
+        successH2:"Congratulations!",
+        successP:"You survived the five monsters of the House of Fright, with your entry into the full-trip giveaway in hand."
+      },
+      rooms:[
+        {
+          numLabel:"Room 1", shortName:"Endless Queue",
+          title:"Room 1 · The Endless Queue Specter",
+          flavor:"It lives at counters where your turn never comes. It feeds on the patience of those queuing at midnight.",
+          question:"What banishes it?",
+          answers:[
+            {text:"The Easy Check-in pass and pick-up totems — you register before arriving and skip the counter entirely", correct:true},
+            {text:"A second guard doubling up counter staff during peak hours", correct:false},
+            {text:"A turn booked by phone in advance", correct:false}
+          ],
+          success:"The Specter fades away. With Easy Check-in you register your details before arriving, and with the totems you skip the counter. With Just go, pick-up is express too."
+        },
+        {
+          numLabel:"Room 2", shortName:"Fine Print",
+          title:"Room 2 · The Fine Print Goblin",
+          flavor:"It hides among the contract clauses. If you sign in a hurry, it sneaks in an excess where you least expect it.",
+          question:"What banishes it?",
+          answers:[
+            {text:"Just go with Total Confort and no excess — what you see when booking is what you pay", correct:true},
+            {text:"A one-page summary of the most important terms, before signing", correct:false},
+            {text:"A notary present at every contract signing", correct:false}
+          ],
+          success:"The Goblin has nowhere to hide. Just go includes Total Confort: no excess, no last-minute scares."
+        },
+        {
+          numLabel:"Room 3", shortName:"Poltergeist",
+          title:"Room 3 · The Fuel Tank Poltergeist",
+          flavor:"It haunts the fuel tanks. When you return the car, it makes eighths of fuel disappear that you'd swear you left behind.",
+          question:"What banishes it?",
+          answers:[
+            {text:"The full-to-full system — you don't pay for what you don't use", correct:true},
+            {text:"Paying for a full tank upfront at a fixed price", correct:false},
+            {text:"A consumption estimate checked by the customer at drop-off", correct:false}
+          ],
+          success:"The Poltergeist vanishes. With full-to-full you don't pay for what you don't use. Period."
+        },
+        {
+          numLabel:"Room 4", shortName:"Cursed Plan",
+          title:"Room 4 · The Curse of the Changing Plan",
+          flavor:"It kicks in the moment you book months ahead. As soon as plans change, it ties your money to a date that no longer works for you.",
+          question:"What banishes it?",
+          answers:[
+            {text:"Free cancellation up to 48h before — you decide, not fate", correct:true},
+            {text:"Cancellation insurance, at an extra cost", correct:false},
+            {text:"Unlimited date changes for a small fee", correct:false}
+          ],
+          success:"Curse broken. Free cancellation up to 48h before."
+        },
+        {
+          numLabel:"Room 5", shortName:"The Relic",
+          title:"Room 5 · The Relic on Wheels",
+          flavor:"A car so old it could be haunted: older than the booking itself, with a damp smell nothing gets rid of.",
+          question:"What banishes it?",
+          answers:[
+            {text:"A 100% renewed fleet — you leave with the keys to a car, not a legend", correct:true},
+            {text:"Booking well in advance to secure the highest category available", correct:false},
+            {text:"Choosing the exact car model when booking", correct:false}
+          ],
+          success:"The Relic disappears. 100% renewed fleet. You leave with the keys to a car, not a legend."
+        }
+      ],
+      rejections:[
+        "That solution might exist... just not here. At Record go, you don't need it — there's something better.",
+        "So close! That option sounds fine, but it's not what awaits you here.",
+        "Cold. That alternative is reasonable, but it's not ours."
+      ]
+    },
+    de: {
+      meta:{
+        titleMain:"Das Haus des ", titleHighlight:"Schreckens",
+        heroP:"Fünf Räume. Fünf Monster der Autovermietung. Besiege sie alle, steig ins Auto und nimm an der Verlosung einer kompletten Reise teil.",
+        cta:"Motor starten 🚗",
+        scrollHint:"Scrolle nach unten, um das Spukhaus zu betreten",
+        boardH2:"Durchquere die 5 verfluchten Räume",
+        boardP:"In jedem Raum verbirgt sich ein Monster der Autovermietung. Wähle deine Antwort weise, um es zu vertreiben und weiterzukommen.",
+        nodeSalida:"Start", nodeSorteo:"Verlosung",
+        continueBtn:"Weiter",
+        finalH2:"So fährt man ohne Drama.",
+        finalP:"Du hast die fünf Monster der Autovermietung vertrieben. Bei Record go hat keines von ihnen Platz. Hinterlasse deine E-Mail und nimm an der Verlosung teil. Mach den Schreck lohnenswert!",
+        formPlaceholder:"du@email.com",
+        formButton:"Ich möchte an der Verlosung teilnehmen",
+        formError:"Es gab einen Fehler. Versuch es noch einmal — deine E-Mail ist sicher.",
+        successH2:"Herzlichen Glückwunsch!",
+        successP:"Du hast die fünf Monster des Hauses des Schreckens überlebt und deine Teilnahme an der Verlosung einer kompletten Reise in der Tasche."
+      },
+      rooms:[
+        {
+          numLabel:"Raum 1", shortName:"Endlose Schlange",
+          title:"Raum 1 · Das Gespenst der endlosen Schlange",
+          flavor:"Es lebt an Schaltern, an denen man nie an die Reihe kommt. Es nährt sich von der Geduld derer, die um Mitternacht anstehen.",
+          question:"Womit vertreibt man es?",
+          answers:[
+            {text:"Der Easy-Check-in-Pass und die Abholtotems — du registrierst dich vor der Ankunft und gehst ganz am Schalter vorbei", correct:true},
+            {text:"Eine zweite Wache, die den Schalter in Stoßzeiten doppelt besetzt", correct:false},
+            {text:"Ein telefonisch vorab gebuchter Termin", correct:false}
+          ],
+          success:"Das Gespenst verschwindet. Mit Easy Check-in registrierst du deine Daten vor der Ankunft, und mit den Totems überspringst du den Schalter. Mit Just go ist auch die Abholung im Expresstempo."
+        },
+        {
+          numLabel:"Raum 2", shortName:"Kleingedrucktes",
+          title:"Raum 2 · Der Kobold des Kleingedruckten",
+          flavor:"Er versteckt sich zwischen den Vertragsklauseln. Wenn du schnell unterschreibst, schmuggelt er eine Selbstbeteiligung hinein, wo du sie am wenigsten erwartest.",
+          question:"Womit vertreibt man ihn?",
+          answers:[
+            {text:"Just go mit Total Confort ohne Selbstbeteiligung — was du bei der Buchung siehst, ist, was du zahlst", correct:true},
+            {text:"Eine einseitige Zusammenfassung der wichtigsten Bedingungen vor der Unterschrift", correct:false},
+            {text:"Ein Notar bei jeder Vertragsunterzeichnung", correct:false}
+          ],
+          success:"Der Kobold hat kein Versteck mehr. Just go beinhaltet Total Confort: keine Selbstbeteiligung, keine Überraschungen in letzter Minute."
+        },
+        {
+          numLabel:"Raum 3", shortName:"Poltergeist",
+          title:"Raum 3 · Der Poltergeist des Tanks",
+          flavor:"Er treibt sein Unwesen an den Tankanzeigen. Wenn du das Auto zurückgibst, lässt er Achtel an Benzin verschwinden, die du schwören würdest, dringelassen zu haben.",
+          question:"Womit vertreibt man ihn?",
+          answers:[
+            {text:"Das Voll-Voll-System — du zahlst nicht, was du nicht verbrauchst", correct:true},
+            {text:"Den vollen Tank im Voraus zum Festpreis bezahlen", correct:false},
+            {text:"Eine vom Kunden selbst geprüfte Verbrauchsschätzung bei der Rückgabe", correct:false}
+          ],
+          success:"Der Poltergeist verschwindet. Mit Voll-Voll zahlst du nicht, was du nicht verbrauchst. Punkt."
+        },
+        {
+          numLabel:"Raum 4", shortName:"Verfluchter Plan",
+          title:"Raum 4 · Der Fluch des sich ändernden Plans",
+          flavor:"Er aktiviert sich, sobald du Monate im Voraus buchst. Sobald sich die Pläne ändern, bindet er dein Geld an ein Datum, das dir nichts mehr nützt.",
+          question:"Womit vertreibt man ihn?",
+          answers:[
+            {text:"Kostenlose Stornierung bis 48 Std. vorher — du entscheidest, nicht das Schicksal", correct:true},
+            {text:"Eine Stornoversicherung mit Zusatzkosten", correct:false},
+            {text:"Unbegrenzte Datumsänderungen gegen einen kleinen Aufpreis", correct:false}
+          ],
+          success:"Fluch gebrochen. Kostenlose Stornierung bis 48 Std. vorher."
+        },
+        {
+          numLabel:"Raum 5", shortName:"Das Relikt",
+          title:"Raum 5 · Das Relikt auf Rädern",
+          flavor:"Ein Auto, so alt, dass es spuken könnte: älter als die Buchung selbst, mit einem Muffgeruch, den nichts vertreibt.",
+          question:"Womit vertreibt man es?",
+          answers:[
+            {text:"Eine zu 100 % erneuerte Flotte — du gehst mit dem Schlüssel eines Autos, nicht einer Legende", correct:true},
+            {text:"Weit im Voraus buchen, um sich die höchste verfügbare Kategorie zu sichern", correct:false},
+            {text:"Das genaue Automodell bei der Buchung auswählen", correct:false}
+          ],
+          success:"Das Relikt verschwindet. Zu 100 % erneuerte Flotte. Du gehst mit dem Schlüssel eines Autos, nicht einer Legende."
+        }
+      ],
+      rejections:[
+        "Diese Lösung mag es geben... aber nicht hier. Bei Record go brauchst du sie nicht — es gibt etwas Besseres.",
+        "Fast! Diese Option klingt gut, aber sie ist nicht das, was dich hier erwartet.",
+        "Kalt. Diese Alternative ist vernünftig, aber nicht unsere."
+      ]
+    },
+    fr: {
+      meta:{
+        titleMain:"La Maison de la ", titleHighlight:"Peur",
+        heroP:"Cinq salles. Cinq monstres de la location de voitures. Vainquez-les tous, montez en voiture et participez au tirage au sort d'un voyage complet.",
+        cta:"Démarre le moteur 🚗",
+        scrollHint:"Fais défiler pour entrer dans la maison hantée",
+        boardH2:"Traverse les 5 salles maudites",
+        boardP:"Chaque salle cache un monstre de la location. Choisis bien ta réponse pour le bannir et continuer d'avancer.",
+        nodeSalida:"Départ", nodeSorteo:"Tirage au sort",
+        continueBtn:"Continuer",
+        finalH2:"Voilà comment conduire sans drame.",
+        finalP:"Tu as banni les cinq monstres de la location de voitures. Chez Record go, aucun d'eux n'a sa place. Laisse ton email et participe au tirage au sort. Fais que la peur en vaille la peine !",
+        formPlaceholder:"toi@email.com",
+        formButton:"Je veux participer au tirage au sort",
+        formError:"Une erreur s'est produite. Réessaie — ton email est en sécurité.",
+        successH2:"Félicitations !",
+        successP:"Tu as survécu aux cinq monstres de la Maison de la Peur, avec ta participation au tirage au sort d'un voyage complet en poche."
+      },
+      rooms:[
+        {
+          numLabel:"Salle 1", shortName:"File Infinie",
+          title:"Salle 1 · Le Spectre de la File Infinie",
+          flavor:"Il hante les comptoirs où votre tour n'arrive jamais. Il se nourrit de la patience de ceux qui font la queue à minuit.",
+          question:"Avec quoi le bannir ?",
+          answers:[
+            {text:"Le pass Easy Check-in et les totems de retrait — tu t'enregistres avant d'arriver et tu sors sans passer par le comptoir", correct:true},
+            {text:"Un deuxième agent doublant le personnel au comptoir aux heures de pointe", correct:false},
+            {text:"Un créneau réservé par téléphone à l'avance", correct:false}
+          ],
+          success:"Le Spectre s'évanouit. Avec Easy Check-in tu enregistres tes données avant d'arriver, et avec les totems tu sautes le comptoir. Avec Just go, le retrait est aussi express."
+        },
+        {
+          numLabel:"Salle 2", shortName:"Petits Caractères",
+          title:"Salle 2 · Le Lutin des Petits Caractères",
+          flavor:"Il se cache parmi les clauses du contrat. Si tu signes trop vite, il en profite pour glisser une franchise là où tu ne l'attends pas.",
+          question:"Avec quoi le bannir ?",
+          answers:[
+            {text:"Just go avec Total Confort sans franchise — ce que tu vois à la réservation, c'est ce que tu paies", correct:true},
+            {text:"Un résumé d'une page avec les conditions les plus importantes, avant de signer", correct:false},
+            {text:"Un notaire présent à chaque signature de contrat", correct:false}
+          ],
+          success:"Le Lutin n'a nulle part où se cacher. Just go inclut Total Confort : sans franchise, sans surprise de dernière minute."
+        },
+        {
+          numLabel:"Salle 3", shortName:"Poltergeist",
+          title:"Salle 3 · Le Poltergeist du Réservoir",
+          flavor:"Il rôde autour des réservoirs d'essence. Quand tu rends la voiture, il fait disparaître des huitièmes d'essence que tu jurerais avoir laissés.",
+          question:"Avec quoi le bannir ?",
+          answers:[
+            {text:"Le système plein-plein — tu ne paies pas ce que tu ne consommes pas", correct:true},
+            {text:"Payer le plein d'avance, à prix fixe", correct:false},
+            {text:"Un calcul de la consommation vérifié par le client lui-même au retour", correct:false}
+          ],
+          success:"Le Poltergeist s'évapore. Avec le plein-plein, tu ne paies pas ce que tu ne consommes pas. Point final."
+        },
+        {
+          numLabel:"Salle 4", shortName:"Plan Maudit",
+          title:"Salle 4 · La Malédiction du Plan qui Change",
+          flavor:"Elle s'active dès que tu réserves des mois à l'avance. Dès que les plans changent, elle attache ton argent à une date qui ne te convient plus.",
+          question:"Avec quoi la bannir ?",
+          answers:[
+            {text:"Annulation gratuite jusqu'à 48h avant — c'est toi qui décides, pas le destin", correct:true},
+            {text:"Une assurance annulation, avec un coût supplémentaire", correct:false},
+            {text:"Changements de date illimités moyennant une petite différence", correct:false}
+          ],
+          success:"Malédiction brisée. Annulation gratuite jusqu'à 48h avant."
+        },
+        {
+          numLabel:"Salle 5", shortName:"La Relique",
+          title:"Salle 5 · La Relique à Roulettes",
+          flavor:"Une voiture si vieille qu'elle pourrait être hantée : plus âgée que la réservation elle-même, avec une odeur d'humidité qui ne part jamais.",
+          question:"Avec quoi la bannir ?",
+          answers:[
+            {text:"Une flotte renouvelée à 100 % — tu repars avec les clés d'une voiture, pas d'une légende", correct:true},
+            {text:"Réserver très à l'avance pour s'assurer la catégorie la plus élevée disponible", correct:false},
+            {text:"Choisir le modèle exact de la voiture lors de la réservation", correct:false}
+          ],
+          success:"La Relique disparaît. Flotte renouvelée à 100 %. Tu repars avec les clés d'une voiture, pas d'une légende."
+        }
+      ],
+      rejections:[
+        "Cette solution existe peut-être... mais pas ici. Chez Record go, tu n'en as pas besoin — il y a mieux.",
+        "Presque ! Cette option semble bien, mais ce n'est pas ce qui t'attend ici.",
+        "Froid. Cette alternative est raisonnable, mais ce n'est pas la nôtre."
+      ]
+    },
+    ca: {
+      meta:{
+        titleMain:"La Casa de l'", titleHighlight:"Espant",
+        heroP:"Cinc sales. Cinc monstres del lloguer de cotxes. Supera'ls tots, puja al cotxe i entra al sorteig d'un viatge complet.",
+        cta:"Arrenca el motor 🚗",
+        scrollHint:"Desplaça't per entrar a la casa encantada",
+        boardH2:"Recorre les 5 sales maleïdes",
+        boardP:"Cada sala amaga un monstre del lloguer. Tria bé la teva resposta per desterrar-lo i seguir avançant.",
+        nodeSalida:"Sortida", nodeSorteo:"Sorteig",
+        continueBtn:"Continuar",
+        finalH2:"Així es condueix sense drames.",
+        finalP:"Has desterrat els cinc monstres del lloguer. A Record go, cap no hi té lloc. Deixa el teu email i entra al sorteig. Fes que l'ensurt valgui la pena!",
+        formPlaceholder:"tu@email.com",
+        formButton:"Vull participar al sorteig",
+        formError:"Hi ha hagut un error. Torna-ho a provar — el teu email està a salvo.",
+        successH2:"Enhorabona!",
+        successP:"Has sobreviscut als cinc monstres de la Casa de l'Espant, amb la teva participació per al sorteig d'un viatge complet sota el braç."
+      },
+      rooms:[
+        {
+          numLabel:"Sala 1", shortName:"Cua Infinita",
+          title:"Sala 1 · L'Espectre de la Cua Infinita",
+          flavor:"Habita als taulells on el teu torn no arriba mai. S'alimenta de la paciència de qui fa cua a mitjanit.",
+          question:"Amb què es desterra?",
+          answers:[
+            {text:"El pass Easy Check-in i els tòtems de recollida — et registres abans d'arribar i surts sense trepitjar el taulell", correct:true},
+            {text:"Un segon guàrdia doblant personal al taulell a les hores de més afluència", correct:false},
+            {text:"Un torn reservat per telèfon amb antelació", correct:false}
+          ],
+          success:"L'Espectre es esvaeix. Amb Easy Check-in registres les teves dades abans d'arribar, i amb els tòtems t'estalvies el taulell. Amb Just go, a més, la recollida és exprés."
+        },
+        {
+          numLabel:"Sala 2", shortName:"Lletra Petita",
+          title:"Sala 2 · El Follet de la Lletra Petita",
+          flavor:"Viu amagat entre les clàusules del contracte. Si signes ràpid, aprofita per amagar una franquícia on no l'esperes.",
+          question:"Amb què es desterra?",
+          answers:[
+            {text:"Just go amb Total Confort sense franquícia — el que veus en reservar és el que pagues", correct:true},
+            {text:"Un resum d'una pàgina amb les condicions més importants, abans de signar", correct:false},
+            {text:"Un notari present a cada signatura de contracte", correct:false}
+          ],
+          success:"El Follet no té on amagar-se. Just go inclou Total Confort: sense franquícia, sense ensurts d'última hora."
+        },
+        {
+          numLabel:"Sala 3", shortName:"Poltergeist",
+          title:"Sala 3 · El Poltergeist del Dipòsit",
+          flavor:"Ronda els dipòsits de combustible. Quan tornes el cotxe, fa desaparèixer vuitens de benzina que juraries haver deixat.",
+          question:"Amb què es desterra?",
+          answers:[
+            {text:"El sistema ple-ple — no pagues el que no gastes", correct:true},
+            {text:"Pagar el dipòsit ple per endavant, a preu fix", correct:false},
+            {text:"Un càlcul del consum revisat pel mateix client en tornar el cotxe", correct:false}
+          ],
+          success:"El Poltergeist s'esvaeix. Amb el ple-ple no pagues el que no gastes. Punt."
+        },
+        {
+          numLabel:"Sala 4", shortName:"Pla Maleït",
+          title:"Sala 4 · La Maledicció del Pla que Canvia",
+          flavor:"S'activa tan bon punt reserves amb mesos d'antelació. Quan els plans canvien, lliga els teus diners a una data que ja no et serveix.",
+          question:"Amb què es desterra?",
+          answers:[
+            {text:"Cancel·lació gratuïta fins a 48h abans — decideixes tu, no el destí", correct:true},
+            {text:"Una assegurança de cancel·lació, amb cost addicional", correct:false},
+            {text:"Canvis de data il·limitats pagant una petita diferència", correct:false}
+          ],
+          success:"Maledicció trencada. Cancel·lació gratuïta fins a 48h abans."
+        },
+        {
+          numLabel:"Sala 5", shortName:"La Relíquia",
+          title:"Sala 5 · La Relíquia amb Rodes",
+          flavor:"Un cotxe tan vell que podria estar encantat: més anys que la reserva, i una olor d'humitat que no marxa amb res.",
+          question:"Amb què es desterra?",
+          answers:[
+            {text:"Flota renovada al 100% — surts amb les claus d'un cotxe, no d'una llegenda", correct:true},
+            {text:"Reservar amb molta antelació per assegurar-te la categoria més alta disponible", correct:false},
+            {text:"Triar el model exacte del cotxe en fer la reserva", correct:false}
+          ],
+          success:"La Relíquia desapareix. Flota renovada al 100%. Surts amb les claus d'un cotxe, no d'una llegenda."
+        }
+      ],
+      rejections:[
+        "Aquesta solució potser existeix... però no aquí. A Record go, no cal — hi ha alguna cosa millor.",
+        "Gairebé! Aquesta opció sona bé, però no és el que t'espera aquí.",
+        "Fred. Aquesta alternativa és raonable, però no és la nostra."
+      ]
+    },
+    pt: {
+      meta:{
+        titleMain:"A Casa do ", titleHighlight:"Susto",
+        heroP:"Cinco salas. Cinco monstros do aluguer de carros. Vence-os todos, entra no carro e participa no sorteio de uma viagem completa.",
+        cta:"Liga o motor 🚗",
+        scrollHint:"Desliza para entrar na casa assombrada",
+        boardH2:"Percorre as 5 salas amaldiçoadas",
+        boardP:"Cada sala esconde um monstro do aluguer. Escolhe bem a tua resposta para o desterrar e continuar a avançar.",
+        nodeSalida:"Partida", nodeSorteo:"Sorteio",
+        continueBtn:"Continuar",
+        finalH2:"É assim que se conduz sem dramas.",
+        finalP:"Desterraste os cinco monstros do aluguer. Na Record go, nenhum deles tem lugar. Deixa o teu email e entra no sorteio. Faz o susto valer a pena!",
+        formPlaceholder:"tu@email.com",
+        formButton:"Quero participar no sorteio",
+        formError:"Ocorreu um erro. Tenta novamente — o teu email está seguro.",
+        successH2:"Parabéns!",
+        successP:"Sobreviveste aos cinco monstros da Casa do Susto, com a tua participação no sorteio de uma viagem completa garantida."
+      },
+      rooms:[
+        {
+          numLabel:"Sala 1", shortName:"Fila Infinita",
+          title:"Sala 1 · O Espectro da Fila Infinita",
+          flavor:"Habita nos balcões onde a tua vez nunca chega. Alimenta-se da paciência de quem faz fila à meia-noite.",
+          question:"Com que se desterra?",
+          answers:[
+            {text:"O passe Easy Check-in e os totens de levantamento — registas-te antes de chegar e sais sem pisar o balcão", correct:true},
+            {text:"Um segundo funcionário a reforçar o balcão nas horas de maior afluência", correct:false},
+            {text:"Uma vez reservada por telefone com antecedência", correct:false}
+          ],
+          success:"O Espectro desvanece-se. Com o Easy Check-in registas os teus dados antes de chegar, e com os totens saltas o balcão. Com o Just go, o levantamento é ainda mais rápido."
+        },
+        {
+          numLabel:"Sala 2", shortName:"Letra Miúda",
+          title:"Sala 2 · O Duende da Letra Miúda",
+          flavor:"Vive escondido entre as cláusulas do contrato. Se assinas depressa, aproveita para esconder uma franquia onde menos esperas.",
+          question:"Com que se desterra?",
+          answers:[
+            {text:"Just go com Total Confort sem franquia — o que vês ao reservar é o que pagas", correct:true},
+            {text:"Um resumo de uma página com as condições mais importantes, antes de assinar", correct:false},
+            {text:"Um notário presente em cada assinatura de contrato", correct:false}
+          ],
+          success:"O Duende não tem onde se esconder. O Just go inclui Total Confort: sem franquia, sem sustos de última hora."
+        },
+        {
+          numLabel:"Sala 3", shortName:"Poltergeist",
+          title:"Sala 3 · O Poltergeist do Depósito",
+          flavor:"Ronda os depósitos de combustível. Quando devolves o carro, faz desaparecer oitavos de gasolina que jurarias ter deixado.",
+          question:"Com que se desterra?",
+          answers:[
+            {text:"O sistema cheio-cheio — não pagas o que não gastas", correct:true},
+            {text:"Pagar o depósito cheio antecipadamente, a preço fixo", correct:false},
+            {text:"Um cálculo do consumo revisto pelo próprio cliente na devolução", correct:false}
+          ],
+          success:"O Poltergeist desvanece-se. Com o cheio-cheio não pagas o que não gastas. Ponto final."
+        },
+        {
+          numLabel:"Sala 4", shortName:"Plano Amaldiçoado",
+          title:"Sala 4 · A Maldição do Plano que Muda",
+          flavor:"Ativa-se assim que reservas com meses de antecedência. Assim que os planos mudam, prende o teu dinheiro a uma data que já não te serve.",
+          question:"Com que se desterra?",
+          answers:[
+            {text:"Cancelamento gratuito até 48h antes — decides tu, não o destino", correct:true},
+            {text:"Um seguro de cancelamento, com custo adicional", correct:false},
+            {text:"Alterações de data ilimitadas pagando uma pequena diferença", correct:false}
+          ],
+          success:"Maldição quebrada. Cancelamento gratuito até 48h antes."
+        },
+        {
+          numLabel:"Sala 5", shortName:"A Relíquia",
+          title:"Sala 5 · A Relíquia com Rodas",
+          flavor:"Um carro tão velho que podia estar assombrado: mais anos do que a reserva, e um cheiro a humidade que nada tira.",
+          question:"Com que se desterra?",
+          answers:[
+            {text:"Frota renovada a 100% — sais com as chaves de um carro, não de uma lenda", correct:true},
+            {text:"Reservar com muita antecedência para garantir a categoria mais alta disponível", correct:false},
+            {text:"Escolher o modelo exato do carro ao reservar", correct:false}
+          ],
+          success:"A Relíquia desaparece. Frota renovada a 100%. Sais com as chaves de um carro, não de uma lenda."
+        }
+      ],
+      rejections:[
+        "Essa solução até pode existir... mas não aqui. Na Record go, não é preciso — há algo melhor.",
+        "Quase! Essa opção até soa bem, mas não é o que te espera aqui.",
+        "Frio. Essa alternativa é razoável, mas não é a nossa."
+      ]
+    },
+    el: {
+      meta:{
+        titleMain:"Το Σπίτι του ", titleHighlight:"Τρόμου",
+        heroP:"Πέντε δωμάτια. Πέντε τέρατα της ενοικίασης αυτοκινήτων. Νίκησέ τα όλα, μπες στο αυτοκίνητο και μπες στην κλήρωση για ένα ολοκληρωμένο ταξίδι.",
+        cta:"Βάλε μπρος τη μηχανή 🚗",
+        scrollHint:"Κύλισε προς τα κάτω για να μπεις στο στοιχειωμένο σπίτι",
+        boardH2:"Διάσχισε τα 5 καταραμένα δωμάτια",
+        boardP:"Κάθε δωμάτιο κρύβει ένα τέρας της ενοικίασης. Διάλεξε σωστά την απάντησή σου για να το εξορίσεις και να συνεχίσεις.",
+        nodeSalida:"Εκκίνηση", nodeSorteo:"Κλήρωση",
+        continueBtn:"Συνέχεια",
+        finalH2:"Έτσι οδηγείς χωρίς δράματα.",
+        finalP:"Εξόρισες τα πέντε τέρατα της ενοικίασης. Στη Record go, κανένα δεν έχει θέση. Άφησε το email σου και μπες στην κλήρωση. Κάνε τον τρόμο να αξίζει τον κόπο!",
+        formPlaceholder:"you@email.com",
+        formButton:"Θέλω να συμμετάσχω στην κλήρωση",
+        formError:"Παρουσιάστηκε σφάλμα. Δοκίμασε ξανά — το email σου είναι ασφαλές.",
+        successH2:"Συγχαρητήρια!",
+        successP:"Επέζησες από τα πέντε τέρατα του Σπιτιού του Τρόμου, με τη συμμετοχή σου στην κλήρωση ενός ολοκληρωμένου ταξιδιού στο χέρι."
+      },
+      rooms:[
+        {
+          numLabel:"Δωμάτιο 1", shortName:"Ατελείωτη Ουρά",
+          title:"Δωμάτιο 1 · Το Φάντασμα της Ατελείωτης Ουράς",
+          flavor:"Ζει στα ταμεία όπου η σειρά σου δεν έρχεται ποτέ. Τρέφεται από την υπομονή όσων περιμένουν στην ουρά τα μεσάνυχτα.",
+          question:"Με τι εξορίζεται;",
+          answers:[
+            {text:"Το πάσο Easy Check-in και τα totem παραλαβής — δηλώνεις τα στοιχεία σου πριν φτάσεις και φεύγεις χωρίς να περάσεις από το ταμείο", correct:true},
+            {text:"Ένας δεύτερος υπάλληλος που ενισχύει το ταμείο τις ώρες αιχμής", correct:false},
+            {text:"Μια σειρά κλεισμένη τηλεφωνικά εκ των προτέρων", correct:false}
+          ],
+          success:"Το Φάντασμα εξαφανίζεται. Με το Easy Check-in καταχωρείς τα στοιχεία σου πριν φτάσεις, και με τα totem προσπερνάς το ταμείο. Με το Just go, μάλιστα, η παραλαβή γίνεται εξπρές."
+        },
+        {
+          numLabel:"Δωμάτιο 2", shortName:"Ψιλά Γράμματα",
+          title:"Δωμάτιο 2 · Το Ξωτικό των Ψιλών Γραμμάτων",
+          flavor:"Κρύβεται ανάμεσα στους όρους του συμβολαίου. Αν υπογράψεις βιαστικά, εκμεταλλεύεται την ευκαιρία για να κρύψει μια απαλλαγή εκεί που δεν την περιμένεις.",
+          question:"Με τι εξορίζεται;",
+          answers:[
+            {text:"Το Just go με Total Confort χωρίς απαλλαγή — ό,τι βλέπεις κατά την κράτηση είναι αυτό που πληρώνεις", correct:true},
+            {text:"Μια περίληψη μίας σελίδας με τους πιο σημαντικούς όρους, πριν την υπογραφή", correct:false},
+            {text:"Ένας συμβολαιογράφος παρών σε κάθε υπογραφή συμβολαίου", correct:false}
+          ],
+          success:"Το Ξωτικό δεν έχει πού να κρυφτεί. Το Just go περιλαμβάνει Total Confort: χωρίς απαλλαγή, χωρίς εκπλήξεις της τελευταίας στιγμής."
+        },
+        {
+          numLabel:"Δωμάτιο 3", shortName:"Πολτεργκάιστ",
+          title:"Δωμάτιο 3 · Το Πολτεργκάιστ του Ρεζερβουάρ",
+          flavor:"Στοιχειώνει τα ρεζερβουάρ καυσίμου. Όταν επιστρέφεις το αυτοκίνητο, εξαφανίζει όγδοα βενζίνης που θα ορκιζόσουν ότι είχες αφήσει.",
+          question:"Με τι εξορίζεται;",
+          answers:[
+            {text:"Το σύστημα γεμάτο-γεμάτο — δεν πληρώνεις ό,τι δεν καταναλώνεις", correct:true},
+            {text:"Να πληρώσεις το γεμάτο ρεζερβουάρ εκ των προτέρων, σε σταθερή τιμή", correct:false},
+            {text:"Έναν υπολογισμό της κατανάλωσης που ελέγχει ο ίδιος ο πελάτης κατά την επιστροφή", correct:false}
+          ],
+          success:"Το Πολτεργκάιστ εξαφανίζεται. Με το γεμάτο-γεμάτο δεν πληρώνεις ό,τι δεν καταναλώνεις. Τελεία."
+        },
+        {
+          numLabel:"Δωμάτιο 4", shortName:"Καταραμένο Σχέδιο",
+          title:"Δωμάτιο 4 · Η Κατάρα του Σχεδίου που Αλλάζει",
+          flavor:"Ενεργοποιείται μόλις κάνεις κράτηση μήνες νωρίτερα. Μόλις τα σχέδια αλλάξουν, δεσμεύει τα χρήματά σου σε μια ημερομηνία που δεν σου χρησιμεύει πια.",
+          question:"Με τι εξορίζεται;",
+          answers:[
+            {text:"Δωρεάν ακύρωση έως 48 ώρες πριν — αποφασίζεις εσύ, όχι η μοίρα", correct:true},
+            {text:"Ασφάλεια ακύρωσης, με επιπλέον κόστος", correct:false},
+            {text:"Απεριόριστες αλλαγές ημερομηνίας πληρώνοντας μικρή διαφορά", correct:false}
+          ],
+          success:"Η κατάρα σπάει. Δωρεάν ακύρωση έως 48 ώρες πριν."
+        },
+        {
+          numLabel:"Δωμάτιο 5", shortName:"Το Κειμήλιο",
+          title:"Δωμάτιο 5 · Το Κειμήλιο με Ρόδες",
+          flavor:"Ένα αυτοκίνητο τόσο παλιό που θα μπορούσε να είναι στοιχειωμένο: μεγαλύτερο σε ηλικία από την ίδια την κράτηση, με μια μυρωδιά υγρασίας που δεν φεύγει με τίποτα.",
+          question:"Με τι εξορίζεται;",
+          answers:[
+            {text:"Στόλος ανανεωμένος κατά 100% — φεύγεις με τα κλειδιά ενός αυτοκινήτου, όχι ενός θρύλου", correct:true},
+            {text:"Κράτηση πολύ νωρίτερα για να εξασφαλίσεις τη διαθέσιμη ανώτερη κατηγορία", correct:false},
+            {text:"Επιλογή του ακριβούς μοντέλου αυτοκινήτου κατά την κράτηση", correct:false}
+          ],
+          success:"Το Κειμήλιο εξαφανίζεται. Στόλος ανανεωμένος κατά 100%. Φεύγεις με τα κλειδιά ενός αυτοκινήτου, όχι ενός θρύλου."
+        }
+      ],
+      rejections:[
+        "Αυτή η λύση μπορεί να υπάρχει... αλλά όχι εδώ. Στη Record go, δεν τη χρειάζεσαι — υπάρχει κάτι καλύτερο.",
+        "Πολύ κοντά! Αυτή η επιλογή ακούγεται καλή, αλλά δεν είναι αυτό που σε περιμένει εδώ.",
+        "Κρύο. Αυτή η εναλλακτική είναι λογική, αλλά δεν είναι η δική μας."
+      ]
+    },
+    it: {
+      meta:{
+        titleMain:"La Casa della ", titleHighlight:"Paura",
+        heroP:"Cinque stanze. Cinque mostri del noleggio auto. Superali tutti, sali in auto ed entra nell'estrazione di un viaggio completo.",
+        cta:"Accendi il motore 🚗",
+        scrollHint:"Scorri per entrare nella casa infestata",
+        boardH2:"Attraversa le 5 stanze maledette",
+        boardP:"Ogni stanza nasconde un mostro del noleggio. Scegli bene la tua risposta per bandirlo e continuare ad avanzare.",
+        nodeSalida:"Partenza", nodeSorteo:"Estrazione",
+        continueBtn:"Continua",
+        finalH2:"Così si guida senza drammi.",
+        finalP:"Hai bandito i cinque mostri del noleggio. Da Record go, nessuno di loro ha posto. Lascia la tua email ed entra nell'estrazione. Fai valere lo spavento!",
+        formPlaceholder:"tu@email.com",
+        formButton:"Voglio partecipare all'estrazione",
+        formError:"Si è verificato un errore. Riprova — la tua email è al sicuro.",
+        successH2:"Congratulazioni!",
+        successP:"Sei sopravvissuto ai cinque mostri della Casa della Paura, con la tua partecipazione all'estrazione di un viaggio completo in tasca."
+      },
+      rooms:[
+        {
+          numLabel:"Stanza 1", shortName:"Coda Infinita",
+          title:"Stanza 1 · Lo Spettro della Coda Infinita",
+          flavor:"Vive ai banchi dove il tuo turno non arriva mai. Si nutre della pazienza di chi fa la coda a mezzanotte.",
+          question:"Con cosa si bandisce?",
+          answers:[
+            {text:"Il pass Easy Check-in e i totem per il ritiro — ti registri prima di arrivare ed esci senza passare dal banco", correct:true},
+            {text:"Una seconda guardia che raddoppia il personale al banco nelle ore di punta", correct:false},
+            {text:"Un turno prenotato per telefono in anticipo", correct:false}
+          ],
+          success:"Lo Spettro svanisce. Con Easy Check-in registri i tuoi dati prima di arrivare, e con i totem salti il banco. Con Just go, inoltre, il ritiro è espresso."
+        },
+        {
+          numLabel:"Stanza 2", shortName:"Clausole Nascoste",
+          title:"Stanza 2 · Il Folletto delle Clausole Nascoste",
+          flavor:"Vive nascosto tra le clausole del contratto. Se firmi in fretta, ne approfitta per nascondere una franchigia dove meno te l'aspetti.",
+          question:"Con cosa si bandisce?",
+          answers:[
+            {text:"Just go con Total Confort senza franchigia — quello che vedi al momento della prenotazione è quello che paghi", correct:true},
+            {text:"Un riepilogo di una pagina con le condizioni più importanti, prima di firmare", correct:false},
+            {text:"Un notaio presente a ogni firma del contratto", correct:false}
+          ],
+          success:"Il Folletto non ha dove nascondersi. Just go include Total Confort: senza franchigia, senza sorprese dell'ultimo minuto."
+        },
+        {
+          numLabel:"Stanza 3", shortName:"Poltergeist",
+          title:"Stanza 3 · Il Poltergeist del Serbatoio",
+          flavor:"Si aggira intorno ai serbatoi di carburante. Quando restituisci l'auto, fa sparire ottavi di benzina che giureresti di aver lasciato.",
+          question:"Con cosa si bandisce?",
+          answers:[
+            {text:"Il sistema pieno-pieno — non paghi quello che non consumi", correct:true},
+            {text:"Pagare il pieno in anticipo, a prezzo fisso", correct:false},
+            {text:"Un calcolo del consumo verificato dallo stesso cliente al momento della riconsegna", correct:false}
+          ],
+          success:"Il Poltergeist svanisce. Con il pieno-pieno non paghi quello che non consumi. Punto."
+        },
+        {
+          numLabel:"Stanza 4", shortName:"Piano Maledetto",
+          title:"Stanza 4 · La Maledizione del Piano che Cambia",
+          flavor:"Si attiva non appena prenoti con mesi di anticipo. Non appena i piani cambiano, lega i tuoi soldi a una data che non ti serve più.",
+          question:"Con cosa si bandisce?",
+          answers:[
+            {text:"Cancellazione gratuita fino a 48h prima — decidi tu, non il destino", correct:true},
+            {text:"Un'assicurazione di cancellazione, con costo aggiuntivo", correct:false},
+            {text:"Cambi di data illimitati pagando una piccola differenza", correct:false}
+          ],
+          success:"Maledizione spezzata. Cancellazione gratuita fino a 48h prima."
+        },
+        {
+          numLabel:"Stanza 5", shortName:"La Reliquia",
+          title:"Stanza 5 · La Reliquia con le Ruote",
+          flavor:"Un'auto così vecchia che potrebbe essere infestata: più vecchia della prenotazione stessa, con un odore di umidità che niente toglie.",
+          question:"Con cosa si bandisce?",
+          answers:[
+            {text:"Flotta rinnovata al 100% — esci con le chiavi di un'auto, non di una leggenda", correct:true},
+            {text:"Prenotare con molto anticipo per assicurarsi la categoria più alta disponibile", correct:false},
+            {text:"Scegliere il modello esatto dell'auto al momento della prenotazione", correct:false}
+          ],
+          success:"La Reliquia scompare. Flotta rinnovata al 100%. Esci con le chiavi di un'auto, non di una leggenda."
+        }
+      ],
+      rejections:[
+        "Quella soluzione forse esiste... ma non qui. Da Record go non serve — c'è di meglio.",
+        "Quasi! Quell'opzione suona bene, ma non è ciò che ti aspetta qui.",
+        "Freddo. Quell'alternativa è ragionevole, ma non è la nostra."
+      ]
+    }
+  };
+
+  let currentLang = 'es';
+  let rooms = I18N[currentLang].rooms;
+  let rejections = I18N[currentLang].rejections;
+
+  const roadPath = document.getElementById('roadPath').getAttribute('d');
+  const car = document.getElementById('car');
+  car.style.offsetPath = `path('${roadPath}')`;
+  car.style.offsetDistance = '0%';
+
+  let completedRooms = 0;
+  let rejectCount = 0;
+  let openRoomIndex = null;
+
+  // Construir puntos de progreso
+  const progressRow = document.getElementById('progressRow');
+  rooms.forEach((r,i)=>{
+    const d = document.createElement('div');
+    d.className='progress-dot';
+    d.id='dot'+i;
+    progressRow.appendChild(d);
+  });
+
+  function updateBoard(){
+    const activeNodeIndex = completedRooms < 5 ? completedRooms + 1 : null;
+
+    for(let i = 1; i <= 5; i++){
+      const el = document.getElementById('node' + i);
+      el.classList.remove('locked', 'active', 'passed');
+
+      if(i <= completedRooms){
+        el.classList.add('passed');
+      } else if(i === activeNodeIndex){
+        el.classList.add('active');
+      } else {
+        el.classList.add('locked');
+      }
+    }
+
+    rooms.forEach((r,i)=>{
+      const dot = document.getElementById('dot'+i);
+      dot.classList.remove('done','now');
+      if(i < completedRooms) dot.classList.add('done');
+      else if(i === completedRooms && completedRooms < 5) dot.classList.add('now');
+    });
+  }
+
+  function moveCarTo(roomIndex){
+    const pct = (roomIndex / 5 * 100).toFixed(2);
+    car.style.offsetDistance = pct + '%';
+  }
+
+  document.querySelectorAll('.node').forEach(node=>{
+    node.addEventListener('click', ()=>{
+      if(!node.classList.contains('active')) return;
+      const idx = parseInt(node.id.replace('node',''));
+      openModal(idx - 1);
+    });
+  });
+
+  // ---- Modal ----
+  const overlay = document.createElement('div');
+  overlay.className='modal-overlay';
+  overlay.innerHTML = `
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="monster-avatar-wrap">
+        <img class="monster-avatar" id="mAvatar" src="" alt="Monstruo">
+      </div>
+      <div class="modal-eyebrow">Record go · Halloween</div>
+      <h3 id="mTitle"></h3>
+      <div class="modal-flavor" id="mFlavor"></div>
+      <div class="modal-question" id="mQuestion"></div>
+      <div class="answers" id="mAnswers"></div>
+      <div class="feedback" id="mFeedback"></div>
+      <button class="continue-btn" id="mContinue">Continuar</button>
+    </div>`;
+  document.body.appendChild(overlay);
+
+  const mAvatar=document.getElementById('mAvatar');
+  const mTitle=document.getElementById('mTitle');
+  const mFlavor=document.getElementById('mFlavor');
+  const mQuestion=document.getElementById('mQuestion');
+  const mAnswers=document.getElementById('mAnswers');
+  const mFeedback=document.getElementById('mFeedback');
+  const mContinue=document.getElementById('mContinue');
+
+  function setLanguage(lang){
+    if(!I18N[lang]) return;
+    currentLang = lang;
+    const t = I18N[lang];
+
+    document.documentElement.setAttribute('lang', lang);
+    document.title = (t.meta.titleMain + t.meta.titleHighlight + ' · Record go').replace(/\s+/g,' ').trim();
+
+    document.getElementById('heroTitleMain').textContent = t.meta.titleMain;
+    document.getElementById('heroTitleHighlight').textContent = t.meta.titleHighlight;
+    document.getElementById('heroP').textContent = t.meta.heroP;
+    document.getElementById('ctaBtn').textContent = t.meta.cta;
+    document.getElementById('scrollHint').textContent = t.meta.scrollHint;
+    document.getElementById('boardH2').textContent = t.meta.boardH2;
+    document.getElementById('boardP').textContent = t.meta.boardP;
+    document.getElementById('nodeName0').textContent = t.meta.nodeSalida;
+    document.getElementById('nodeName6').textContent = t.meta.nodeSorteo;
+    t.rooms.forEach((r,i)=>{
+      document.getElementById('nodeName'+(i+1)).innerHTML = r.numLabel + '<br>' + r.shortName;
+    });
+    mContinue.textContent = t.meta.continueBtn;
+    document.getElementById('finalH2').textContent = t.meta.finalH2;
+    document.getElementById('finalP').textContent = t.meta.finalP;
+    document.getElementById('emailInput').setAttribute('placeholder', t.meta.formPlaceholder);
+    document.getElementById('formSubmitBtn').textContent = t.meta.formButton;
+    document.getElementById('successH2').textContent = t.meta.successH2;
+    document.getElementById('successP').textContent = t.meta.successP;
+
+    rooms = t.rooms;
+    rejections = t.rejections;
+
+    if(overlay.classList.contains('open')) closeModal();
+  }
+
+  function openModal(roomIndex){
+    openRoomIndex = roomIndex;
+    const room = rooms[roomIndex];
+    mAvatar.src = MONSTER_IMAGES[roomIndex];
+    mTitle.textContent = room.title;
+    mFlavor.textContent = room.flavor;
+    mQuestion.textContent = room.question;
+    mFeedback.className='feedback';
+    mFeedback.textContent='';
+    mContinue.classList.remove('show');
+    mAnswers.innerHTML='';
+    room.answers.forEach(a=>{
+      const btn=document.createElement('button');
+      btn.className='answer-btn';
+      btn.textContent=a.text;
+      btn.addEventListener('click', ()=>handleAnswer(btn,a));
+      mAnswers.appendChild(btn);
+    });
+    overlay.classList.add('open');
+  }
+
+  function closeModal(){ overlay.classList.remove('open'); }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+
+  function handleAnswer(btn,a){
+    if(a.correct){
+      document.querySelectorAll('#mAnswers .answer-btn').forEach(b=>b.disabled=true);
+      btn.classList.add('correct');
+      mFeedback.className='feedback show ok';
+      mFeedback.textContent = rooms[openRoomIndex].success;
+      mContinue.classList.add('show');
+    } else {
+      btn.classList.add('wrong','shake');
+      btn.disabled = true;
+      setTimeout(()=>btn.classList.remove('shake'),350);
+      mFeedback.className='feedback show bad';
+      mFeedback.textContent = rejections[rejectCount % rejections.length];
+      rejectCount++;
+    }
+  }
+
+  mContinue.addEventListener('click', ()=>{
+    closeModal();
+    completedRooms = openRoomIndex + 1;
+    moveCarTo(completedRooms);
+    updateBoard();
+
+    if(completedRooms === 5){
+      setTimeout(()=>{
+        car.style.offsetDistance = '100%';
+        setTimeout(revealFinal, 1200);
+      }, 800);
+    }
+  });
+
+  function revealFinal(){
+    document.getElementById('board').style.display = 'none';
+    const finalSection = document.getElementById('finalSection');
+    finalSection.classList.add('reveal');
+    finalSection.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ---- Signup Form ----
+  const signupForm = document.getElementById('signupForm');
+  const formMsg = document.getElementById('formMsg');
+  signupForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = document.getElementById('emailInput').value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if(!valid){
+      formMsg.className='form-msg show bad';
+      formMsg.textContent = I18N[currentLang].meta.formError;
+      return;
+    }
+    document.getElementById('closingBlock').style.display='none';
+    document.getElementById('successBlock').classList.add('show');
+  });
+
+  // ---- Responsive Scaling ----
+  function scaleTrack(){
+    const wrap = document.getElementById('trackWrap');
+    const layer = document.getElementById('trackLayer');
+    const scale = wrap.clientWidth/1150;
+    layer.style.transform = `scale(${scale})`;
+    wrap.style.height = (560*scale)+'px';
+  }
+  window.addEventListener('resize', scaleTrack);
+  window.addEventListener('load', scaleTrack);
+  scaleTrack();
+
+  setLanguage('es');
+  updateBoard();
+</script>
+</body>
+</html>
