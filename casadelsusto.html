@@ -516,11 +516,13 @@
   /* ---------------- LEGAL / BASES LEGALES ACCORDION ---------------- */
   .legal-scroll-link{cursor:pointer;}
   .legal-section{
+    display:none;
     max-width:820px;
     margin:0 auto;
     padding:20px 20px 100px;
     scroll-margin-top:20px;
   }
+  .legal-section.reveal{display:block;}
   .legal-title{
     font-family:'Roboto',sans-serif;
     font-size:14px;
@@ -567,7 +569,7 @@
   }
   .legal-item.open .legal-item-body{padding:0 20px 20px;}
   .legal-item-body p{
-    color:#d9cbe8;
+    color:#ffffff;
     font-size:13px;
     line-height:1.65;
     margin:0 0 10px;
@@ -575,7 +577,7 @@
   .legal-item-body p:last-child{margin-bottom:0;}
   .legal-item-body ul{margin:0 0 10px; padding-left:18px;}
   .legal-item-body ul:last-child{margin-bottom:0;}
-  .legal-item-body li{color:#d9cbe8; font-size:13px; line-height:1.65; margin-bottom:6px;}
+  .legal-item-body li{color:#ffffff; font-size:13px; line-height:1.65; margin-bottom:6px;}
   .legal-item-body a{color:var(--gold); text-decoration:underline; word-break:break-word;}
   .legal-item-body a:hover{color:#fff;}
 
@@ -1933,6 +1935,7 @@
     document.getElementById('board').style.display = 'none';
     const finalSection = document.getElementById('finalSection');
     finalSection.classList.add('reveal');
+    document.getElementById('basesLegalesSection').classList.add('reveal');
     finalSection.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
