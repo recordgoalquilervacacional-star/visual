@@ -513,6 +513,72 @@
   .success-block{display:none;}
   .success-block.show{display:block;}
 
+  /* ---------------- LEGAL / BASES LEGALES ACCORDION ---------------- */
+  .legal-scroll-link{cursor:pointer;}
+  .legal-section{
+    max-width:820px;
+    margin:0 auto;
+    padding:20px 20px 100px;
+    scroll-margin-top:20px;
+  }
+  .legal-title{
+    font-family:'Roboto',sans-serif;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.3px;
+    color:var(--gold);
+    text-align:center;
+    margin:0 0 20px;
+    line-height:1.5;
+  }
+  .legal-accordion{
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;
+    overflow:hidden;
+    background:linear-gradient(165deg,#2f2b2c,#161414);
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+  }
+  .legal-item{border-bottom:1px solid rgba(255,255,255,0.08);}
+  .legal-item:last-child{border-bottom:none;}
+  .legal-item-header{
+    width:100%;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:14px;
+    background:none; border:none; cursor:pointer;
+    padding:18px 20px;
+    color:#fff;
+    font-family:'Roboto',sans-serif;
+    font-size:14px; font-weight:700;
+    text-align:left;
+  }
+  .legal-item-header:hover{background:rgba(255,255,255,0.03);}
+  .legal-chevron{
+    color:var(--red);
+    font-size:15px;
+    flex:none;
+    transition:transform .2s ease;
+  }
+  .legal-item.open .legal-chevron{transform:rotate(180deg);}
+  .legal-item-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+    padding:0 20px;
+  }
+  .legal-item.open .legal-item-body{padding:0 20px 20px;}
+  .legal-item-body p{
+    color:#d9cbe8;
+    font-size:13px;
+    line-height:1.65;
+    margin:0 0 10px;
+  }
+  .legal-item-body p:last-child{margin-bottom:0;}
+  .legal-item-body ul{margin:0 0 10px; padding-left:18px;}
+  .legal-item-body ul:last-child{margin-bottom:0;}
+  .legal-item-body li{color:#d9cbe8; font-size:13px; line-height:1.65; margin-bottom:6px;}
+  .legal-item-body a{color:var(--gold); text-decoration:underline; word-break:break-word;}
+  .legal-item-body a:hover{color:#fff;}
+
   /* ---------------- LANGUAGE SELECTOR ---------------- */
   .lang-selector{
     position:fixed;
@@ -747,7 +813,7 @@
 
       <label class="consent-row" for="termsCheckbox">
         <input type="checkbox" id="termsCheckbox" required>
-        <span id="termsLabel">He leído y acepto las <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">condiciones generales y la política de protección de datos</a> de Record go.<span class="required-mark">*</span></span>
+        <span id="termsLabel">He leído y acepto las <a href="#basesLegalesSection" class="legal-scroll-link">condiciones generales</a> y la <a href="https://www.recordrentacar.com/es/privacity/" target="_blank" rel="noopener">política de protección de datos</a> de Record go.<span class="required-mark">*</span></span>
       </label>
       <label class="consent-row" for="consentCheckbox">
         <input type="checkbox" id="consentCheckbox">
@@ -762,6 +828,122 @@
   <div class="success-block" id="successBlock">
     <h2 id="successH2">¡Enhorabuena!</h2>
     <p id="successP">Sobreviviste a los cinco monstruos de La Casa del Susto, con tu participación para el sorteo de un viaje completo bajo el brazo.</p>
+  </div>
+</section>
+
+<!-- ================= BASES LEGALES ================= -->
+<section class="legal-section" id="basesLegalesSection">
+  <p class="legal-title">* Bases legales de participación Sorteo 3 noches de hotel + alquiler de coche durante la estancia + iPhone</p>
+  <div class="legal-accordion" id="legalAccordion">
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>1. Compañía organizadora</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>RECORD GO ALQUILER VACACIONAL SA, con CIF número A-12584470 y domicilio social en Avenida Casalduch, 61 – 12005 Castellón de la Plana, empresa inscrita en el Registro Mercantil de la localidad de Castellón, inscripción 1.ª, hoja: CS 19086, folio 194, tomo 115, libro 679, sección 8ª, 14 de junio de 2002 (en adelante, "Record go").</p>
+        <p>Record go organiza con fines promocionales un sorteo (en adelante "el Sorteo") de ámbito europeo, a través de Internet, concretamente a través del perfil oficial de Instagram de Record go (@recordgo) y la web de Record go (https://www.recordrentacar.com/), exclusivo para usuarios residentes en Europa y mayores de edad, de acuerdo con lo dispuesto en el apartado correspondiente de estas Bases Legales.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>2. Duración</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>El plazo para poder participar en el sorteo comienza el día 18 de octubre de 2026 y finalizará el día 1 de noviembre de 2026 a las 23:59h (Madrid CET).</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>3. Participantes y requisitos de participación</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>Los participantes deberán cumplir los siguientes requisitos:</p>
+        <ul>
+          <li>Ser mayor de 21 años.</li>
+          <li>Ser una persona física con residencia legal en España o en un país de la Unión Europea.</li>
+          <li>Disponer de D.N.I., pasaporte o documento oficial equivalente en vigor.</li>
+          <li>Disponer de un carné de conducir válido con un año de antigüedad.</li>
+          <li>Tener un perfil real en Instagram (con datos identificativos reales de su titular).</li>
+          <li>Aceptar de forma total e íntegra las presentes Bases Legales de participación.</li>
+          <li>Seguir el perfil oficial de Instagram de Record go.</li>
+          <li>Realizar el juego propuesto en la landing del Sorteo.</li>
+          <li>Rellenar el formulario de participación de la landing del Sorteo.</li>
+        </ul>
+        <p>No podrá participar en el Sorteo el personal de ninguna de las empresas del grupo Record go y familiares de hasta primer grado de consanguineidad.</p>
+        <p>Si se evidenciase que cualquiera de los participantes no cumple con los requisitos exigidos en las Bases Legales, o los datos proporcionados para participar no fueran válidos, su participación se considerará nula y quedarán automáticamente excluidos del Sorteo, perdiendo todo derecho sobre los premios otorgados en virtud del mismo.</p>
+        <p>Si resulta ganadora alguna de las personas excluidas de participación, perderá su derecho a obtener el premio ganado y se procederá a entregar el mismo a la siguiente persona que reúna las condiciones de participación válidas de entre los suplentes designados.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>4. Mecánica del sorteo</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>El Sorteo consiste en seguir el perfil oficial de Instagram de Record go, acceder a la landing page habilitada para la promoción, completar correctamente el juego propuesto y, una vez finalizado este, cumplimentar el formulario de participación disponible en la página explicativa del Sorteo, que se mostrará al finalizar el juego.</p>
+        <p>No se permitirán comentarios u opiniones cuyo contenido se considere inadecuado, que sean ofensivos, injuriosos o discriminatorios o que pudieran vulnerar derechos de terceros. Tampoco se permitirán comentarios contra un particular que vulneren los principios de derecho al honor, a la intimidad personal y familiar y a la propia imagen o, en general, aquellos que contengan insultos, amenazas o menosprecios que tiendan a menoscabar la dignidad de las personas.</p>
+        <p>En el caso de que Record go sea conocedor de dichos comentarios y/o publicaciones en el post del sorteo, se procederá a la descalificación del usuario en el caso de que sea participante y se eliminará el comentario. Por razones de volumen y ante la posibilidad de que Record go no pueda filtrar o eliminar todos los comentarios ofensivos, no nos responsabilizaremos de los posibles daños ocasionados por los comentarios que hagan los participantes en el Sorteo, y que en cualquier momento pudieran herir la sensibilidad de otros participantes.</p>
+        <p>Se considerarán nulas aquellas participaciones que se hayan realizado con posterioridad a la fecha/hora de finalización del sorteo indicada, así como las que no cumplan con todos los requisitos de participación o incluyan datos que no sean verídicos.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>5. Condiciones del sorteo y premios</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <ul>
+          <li>Se elegirá 1 ganador/a y 1 suplente.</li>
+          <li>El ganador/a se publicará el 2 de noviembre de 2026 a través de la cuenta oficial de Instagram de Record go.</li>
+          <li>El premio consiste en hasta 3 noches de hotel, según disponibilidad, en Ipanema Beach en régimen de alojamiento y desayuno para dos personas, alquiler de coche gratis durante la estancia en Mallorca y un vale por valor de 200€ para gastar en vuelos con la compañía Ryanair.</li>
+          <li>La categoría de vehículo para el disfrute del premio será CDMR o CDAH, atendiendo a criterio de disponibilidad.</li>
+          <li>La fecha para hacer uso del premio podrá ser entre el 07/04/2027 y el 13/06/2027 o entre el 20/09/2027 y el 07/11/2027. La reserva del coche de alquiler deberá hacerse mediante email.</li>
+          <li>Se establece un plazo de SIETE (7) días naturales desde la fecha de publicación del ganador/a para que este reconozca y acepte el premio a través de Mensaje Directo en el perfil de Instagram de Record go. En caso de no hacerlo en el plazo establecido, el premio se concederá al/la suplente elegido/a.</li>
+          <li>Se establece un plazo de SIETE (7) días naturales desde la fecha de publicación del nombre del/la suplente (ganador/a) para que este reconozca y acepte el premio a través de Mensaje Directo en el perfil de Instagram de Record go. En caso de no hacerlo, Record go tendrá el derecho de no entregar el premio.</li>
+          <li>El conductor del vehículo debe ser mayor de 21 años y disponer de un año mínimo de carné en vigor.</li>
+          <li>El premio será aplicable a las tarifas de alquiler Just go y la Cobertura Total Confort Premium, sin incluir ningún otro extra, servicios adicionales y coberturas que se ofrecen a través de la web www.recordgo.com. El ganador recibirá el vehículo con el depósito de combustible lleno y deberá devolverlo en las mismas condiciones, teniendo en cuenta que en el momento de la recogida el ganador deberá disponer de un método de pago a su nombre aceptado por Record go para realizar el depósito del combustible, que se desbloqueará en el momento de la devolución del vehículo atendiendo a los Términos y Condiciones Generales de Record go.</li>
+          <li>El premio no es acumulable a otras promociones.</li>
+        </ul>
+        <p>La selección del/la ganador/a se realizará a través de la plataforma independiente AppSorteos, herramienta especializada en promociones digitales que garantiza la transparencia del sorteo y la aleatoriedad en la elección del ganador. Además, la herramienta proporciona un certificado de validez al hacer el sorteo.</p>
+        <p>El/la ganador/a se publicará a través de Instagram, mencionando al ganador en el post del sorteo y mediante historias. El ganador deberá contactar por mensaje directo en el perfil de Instagram de Record go y proporcionará los datos necesarios para poder disfrutar del premio.</p>
+        <p>Para más información sobre los Términos y Condiciones Generales, se puede leer aquí: <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">recordrentacar.com/es/recordgo-condiciones</a></p>
+        <p>En ningún caso el premiado podrá vender, revender, subastar o realizar en general cualquier tipo de acto que implique la comercialización del premio. Los participantes y el futuro ganador aceptan y entienden que su nombre de usuario y cualquier información que aparezca pública en su perfil pueda ser publicada en cualquier soporte interno y externo de Record go, incluyendo en su perfil de Instagram, otros perfiles en redes sociales de la empresa o en su página web.</p>
+        <p>Igualmente, el ganador se compromete a colaborar con Record go en las actividades publicitarias vinculadas al Sorteo sin remuneración alguna por este concepto y sin coste por su parte, autorizando la comunicación con la participación en el presente Sorteo.</p>
+        <p>El premio entregado no será transferible ni susceptible de cambios, alteraciones o compensaciones a petición de los participantes, no pudiendo ser canjeado por cualquier otro producto ni por dinero. Record go se reserva el derecho, si concurre justa causa y previa comunicación en legal forma, de efectuar cualquier cambio, suspender o ampliar este Sorteo.</p>
+        <p>Correrán a cuenta y cargo del ganador cualquier carga fiscal o tributaria que la aceptación del premio pudiera suponerle, así como cualquier otro gasto derivado del Sorteo que no esté expresamente asumido por Record go en las presentes Bases Legales.</p>
+        <p>Record go se reserva el derecho a cancelar, suspender y/o modificar el Sorteo, en todo o en parte, en caso de fraude, fallos técnicos o por cualquier otro factor más allá del control razonable de Record go que impida la integridad o el funcionamiento adecuado del Sorteo.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>6. Exoneración de responsabilidad</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>A título enunciativo, pero no limitativo, Record go no se responsabiliza de las posibles pérdidas, robos, retrasos o cualquier otra circunstancia imputable a terceros que puedan afectar al desarrollo del presente Sorteo, así como tampoco se responsabiliza del uso que haga el participante respecto del premio que obtenga de este Sorteo, no asumiendo responsabilidad alguna por ningún daño o perjuicio de cualquier tipo que pudieren sufrir los participantes, el/los ganador/es o terceros.</p>
+        <p>Record go no asumirá la responsabilidad en casos de fuerza mayor o caso fortuito que pudieran impedir la realización del Sorteo o el disfrute total o parcial del premio. En caso de que este Sorteo no pudiera realizarse, bien por fraudes detectados en la misma, errores técnicos, o cualquier otro motivo que no esté bajo el control de Record go y que afecte al normal desarrollo del Sorteo, Record go se reserva el derecho a cancelar, modificar, o suspender el mismo, incluyendo la página web de participación.</p>
+        <p>El Sorteo no está patrocinado, avalado, administrado ni asociado en modo alguno a Instagram, por lo que los participantes liberan a Instagram de toda responsabilidad por los eventuales daños que se deriven de la misma.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>7. Protección de datos personales</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>De conformidad con lo establecido en la normativa aplicable en materia de protección de datos, y concretamente en el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, relativo a la protección de las personas físicas en lo que respecta al tratamiento de datos personales y a la libre circulación de estos datos (RGPD), así como en la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), se informa que el responsable del tratamiento de sus datos facilitados para participar en el presente Sorteo es RECORD GO RENT A CAR SA, con CIF número A-12584470 y domicilio social en Avenida Casalduch, 61 – 12005 Castellón de la Plana.</p>
+        <p>La finalidad del tratamiento consiste en tramitar y gestionar la participación de los participantes en el Sorteo y para comunicar el premio al participante que resultase ganador. La base jurídica del tratamiento es el consentimiento del participante que voluntariamente desea participar en el Sorteo. Los datos no serán cedidos a terceras partes, sino únicamente a los encargados del tratamiento estrictamente necesarios para el buen funcionamiento del Sorteo.</p>
+        <p>Sus datos serán conservados durante el tiempo que dure el Sorteo y, en todo caso, por el tiempo que resulte necesario para poder cumplir con las obligaciones legales que del mismo se puedan derivar. Una vez transcurridos dichos plazos, sus datos serán suprimidos.</p>
+        <p>Los participantes garantizan que los datos personales facilitados son veraces y se hacen responsables de comunicar a RECORD RENT A CAR SA cualquier modificación de estos. RECORD RENT A CAR SA se reserva el derecho a excluir del Sorteo a todo participante que haya facilitado datos falsos. Se recomienda tener la máxima diligencia en materia de Protección de Datos mediante la utilización de herramientas de seguridad, no pudiéndose responsabilizar a RECORD RENT A CAR SA de sustracciones, modificaciones o pérdidas de datos ilícitas.</p>
+        <p>Los participantes tienen derecho a acceder a sus datos personales, así como a solicitar la rectificación de los datos inexactos o, en su caso, solicitar su supresión, solicitar la limitación del tratamiento de sus datos, oponerse al tratamiento de sus datos y solicitar su portabilidad. Los participantes pueden ejercer todos estos derechos en la siguiente dirección de email: <a href="mailto:privacy@recordrentacar.com">privacy@recordrentacar.com</a>, indicando el motivo de su petición, o bien por correo ordinario a la siguiente dirección: Avda. Casalduch nº 61, C.P. 12005, Castellón de la Plana, Castellón, España.</p>
+        <p>En todo caso, los participantes pueden poner una reclamación ante la autoridad de control competente, si así lo estiman oportuno.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>8. Legislación aplicable y jurisdicción</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>Record go se reserva el derecho de modificar o ampliar estas Bases Legales, en la medida que no perjudique o menoscabe los derechos de los participantes en el Sorteo.</p>
+        <p>Estas Bases Legales se regirán de conformidad con la ley española. Serán competentes para resolver cualquier reclamación o controversia que pudiera plantearse en relación con la validez, interpretación o cumplimiento de estas bases los Juzgados y Tribunales de Castellón.</p>
+      </div>
+    </div>
+
+    <div class="legal-item">
+      <button type="button" class="legal-item-header"><span>9. Aceptación de las bases legales</span><span class="legal-chevron">⌄</span></button>
+      <div class="legal-item-body">
+        <p>La participación en el Sorteo supone la aceptación expresa de las presentes Bases Legales, que podrán ser consultadas por cualquier interesado antes, durante y posteriormente a su participación.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -846,7 +1028,7 @@
         formInstagramPlaceholder:"Usuario de Instagram (opcional)",
         formButton:"Participar en el sorteo",
         formError:"Ha habido un error. Revisa tus datos e inténtalo de nuevo — tu información está a salvo.",
-        termsLabel:"He leído y acepto las <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condiciones generales y la política de protección de datos</a> de Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"He leído y acepto las <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condiciones generales</a> y la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protección de datos</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Debes aceptar las condiciones generales y la política de protección de datos para participar.",
         consentLabel:"Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.<span class=\"required-mark\">*</span>",
         successH2:"¡Enhorabuena!",
@@ -938,7 +1120,7 @@
         formInstagramPlaceholder:"Instagram username (optional)",
         formButton:"Enter the giveaway",
         formError:"Something went wrong. Please check your details and try again — your information is safe.",
-        termsLabel:"I have read and accept Record go's <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">general terms and conditions and privacy policy</a>.<span class=\"required-mark\">*</span>",
+        termsLabel:"I have read and accept Record go's <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">general terms and conditions</a> and <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.<span class=\"required-mark\">*</span>",
         termsError:"You must accept the general terms and conditions and privacy policy to enter.",
         consentLabel:"I agree to the use of my data to receive commercial communications with exclusive offers and news.<span class=\"required-mark\">*</span>",
         successH2:"Congratulations!",
@@ -1030,7 +1212,7 @@
         formInstagramPlaceholder:"Instagram-Nutzername (optional)",
         formButton:"An der Verlosung teilnehmen",
         formError:"Es gab einen Fehler. Überprüfe deine Angaben und versuch es noch einmal — deine Daten sind sicher.",
-        termsLabel:"Ich habe die <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.<span class=\"required-mark\">*</span>",
+        termsLabel:"Ich habe die <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">allgemeinen Geschäftsbedingungen</a> und die <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.<span class=\"required-mark\">*</span>",
         termsError:"Du musst die allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie akzeptieren, um teilzunehmen.",
         consentLabel:"Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.<span class=\"required-mark\">*</span>",
         successH2:"Herzlichen Glückwunsch!",
@@ -1122,7 +1304,7 @@
         formInstagramPlaceholder:"Nom d'utilisateur Instagram (facultatif)",
         formButton:"Participer au tirage au sort",
         formError:"Une erreur s'est produite. Vérifie tes informations et réessaie — tes données sont en sécurité.",
-        termsLabel:"J'ai lu et j'accepte les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">conditions générales et la politique de protection des données</a> de Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"J'ai lu et j'accepte les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">conditions générales</a> et la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politique de protection des données</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Tu dois accepter les conditions générales et la politique de protection des données pour participer.",
         consentLabel:"J'accepte l'utilisation de mes données pour l'envoi de communications commerciales avec des offres exclusives et des nouveautés.<span class=\"required-mark\">*</span>",
         successH2:"Félicitations !",
@@ -1214,7 +1396,7 @@
         formInstagramPlaceholder:"Usuari d'Instagram (opcional)",
         formButton:"Participar al sorteig",
         formError:"Hi ha hagut un error. Revisa les teves dades i torna-ho a provar — la teva informació està a salvo.",
-        termsLabel:"He llegit i accepto les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condicions generals i la política de protecció de dades</a> de Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"He llegit i accepto les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condicions generals</a> i la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protecció de dades</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Has d'acceptar les condicions generals i la política de protecció de dades per participar.",
         consentLabel:"Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.<span class=\"required-mark\">*</span>",
         successH2:"Enhorabona!",
@@ -1306,7 +1488,7 @@
         formInstagramPlaceholder:"Utilizador do Instagram (opcional)",
         formButton:"Participar no sorteio",
         formError:"Ocorreu um erro. Verifica os teus dados e tenta novamente — a tua informação está segura.",
-        termsLabel:"Li e aceito os <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termos gerais e a política de proteção de dados</a> da Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"Li e aceito os <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termos gerais</a> e a <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de proteção de dados</a> da Record go.<span class=\"required-mark\">*</span>",
         termsError:"Tens de aceitar os termos gerais e a política de proteção de dados para participar.",
         consentLabel:"Aceito o uso dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.<span class=\"required-mark\">*</span>",
         successH2:"Parabéns!",
@@ -1398,7 +1580,7 @@
         formInstagramPlaceholder:"Όνομα χρήστη Instagram (προαιρετικό)",
         formButton:"Συμμετοχή στην κλήρωση",
         formError:"Παρουσιάστηκε σφάλμα. Έλεγξε τα στοιχεία σου και δοκίμασε ξανά — τα δεδομένα σου είναι ασφαλή.",
-        termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">γενικούς όρους και την πολιτική προστασίας δεδομένων</a> της Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">γενικούς όρους</a> και την <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">πολιτική προστασίας δεδομένων</a> της Record go.<span class=\"required-mark\">*</span>",
         termsError:"Πρέπει να αποδεχτείς τους γενικούς όρους και την πολιτική προστασίας δεδομένων για να συμμετάσχεις.",
         consentLabel:"Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.<span class=\"required-mark\">*</span>",
         successH2:"Συγχαρητήρια!",
@@ -1490,7 +1672,7 @@
         formInstagramPlaceholder:"Nome utente Instagram (opzionale)",
         formButton:"Partecipa all'estrazione",
         formError:"Si è verificato un errore. Controlla i tuoi dati e riprova — le tue informazioni sono al sicuro.",
-        termsLabel:"Ho letto e accetto i <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termini generali e la politica sulla privacy</a> di Record go.<span class=\"required-mark\">*</span>",
+        termsLabel:"Ho letto e accetto i <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termini generali</a> e la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politica sulla privacy</a> di Record go.<span class=\"required-mark\">*</span>",
         termsError:"Devi accettare i termini generali e la politica sulla privacy per partecipare.",
         consentLabel:"Accetto l'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.<span class=\"required-mark\">*</span>",
         successH2:"Congratulazioni!",
@@ -1771,6 +1953,31 @@
     }
     document.getElementById('closingBlock').style.display='none';
     document.getElementById('successBlock').classList.add('show');
+  });
+
+  // ---- Legal accordion ----
+  document.querySelectorAll('.legal-item-header').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const item = btn.closest('.legal-item');
+      const body = item.querySelector('.legal-item-body');
+      const isOpen = item.classList.contains('open');
+      if(isOpen){
+        body.style.maxHeight = null;
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ---- Scroll to legal section from consent checkbox link ----
+  document.addEventListener('click', function(e){
+    const link = e.target.closest('a.legal-scroll-link');
+    if(!link) return;
+    e.preventDefault();
+    const target = document.getElementById('basesLegalesSection');
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
   });
 
   // ---- Responsive Scaling ----
