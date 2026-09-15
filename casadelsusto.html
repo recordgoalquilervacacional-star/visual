@@ -506,6 +506,23 @@
   .consent-row a{color:var(--gold); text-decoration:underline;}
   .consent-row a:hover{color:#fff;}
 
+  .terms-box{
+    width:100%;
+    border:1.5px solid rgba(255,255,255,0.18);
+    border-radius:10px;
+    padding:12px 14px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .terms-box .consent-row{width:100%;}
+  .required-mark{color:var(--red); font-weight:700; margin-left:3px;}
+  .terms-box.invalid{border-color:var(--red); background:rgba(226,35,26,0.08);}
+  .terms-error{
+    display:none; margin-top:8px; padding-top:8px;
+    border-top:1px solid rgba(226,35,26,0.3);
+    color:#ff8f88; font-size:12.5px; line-height:1.4;
+  }
+  .terms-error.show{display:block;}
+
   .form-msg{margin-top:16px; font-size:14px; line-height:1.5; display:none; padding:12px 14px; border-radius:10px;}
   .form-msg.show{display:block;}
   .form-msg.bad{background:rgba(226,35,26,0.1); border:1px solid rgba(226,35,26,0.4); color:#f3c6c2;}
@@ -744,10 +761,13 @@
         <input type="text" id="instagramInput" placeholder="Usuario de Instagram (opcional)">
       </div>
 
-      <label class="consent-row" for="termsCheckbox">
-        <input type="checkbox" id="termsCheckbox" required>
-        <span id="termsLabel">He leído y acepto las <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">condiciones generales y la política de protección de datos</a> de Record go.</span>
-      </label>
+      <div class="terms-box" id="termsBox">
+        <label class="consent-row" for="termsCheckbox">
+          <input type="checkbox" id="termsCheckbox" required>
+          <span id="termsLabel">He leído y acepto las <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">condiciones generales y la política de protección de datos</a> de Record go<span class="required-mark">*</span></span>
+        </label>
+        <div class="terms-error" id="termsErrorMsg"></div>
+      </div>
       <label class="consent-row" for="consentCheckbox">
         <input type="checkbox" id="consentCheckbox">
         <span id="consentLabel">Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.</span>
@@ -1756,16 +1776,43 @@
   // ---- Signup Form ----
   const signupForm = document.getElementById('signupForm');
   const formMsg = document.getElementById('formMsg');
+  const termsBox = document.getElementById('termsBox');
+  const termsErrorMsg = document.getElementById('termsErrorMsg');
+  const termsCheckbox = document.getElementById('termsCheckbox');
+
+  function clearTermsError(){
+    termsBox.classList.remove('invalid');
+    termsErrorMsg.classList.remove('show');
+    termsErrorMsg.textContent = '';
+  }
+  termsCheckbox.addEventListener('change', ()=>{
+    if(termsCheckbox.checked) clearTermsError();
+  });
+
   signupForm.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('nameInput').value.trim();
     const surname = document.getElementById('surnameInput').value.trim();
     const email = document.getElementById('emailInput').value.trim();
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const termsAccepted = document.getElementById('termsCheckbox').checked;
+    const termsAccepted = termsCheckbox.checked;
+
+    if(!termsAccepted){
+      termsBox.classList.add('invalid');
+      termsErrorMsg.classList.add('show');
+      termsErrorMsg.textContent = I18N[currentLang].meta.termsError;
+    } else {
+      clearTermsError();
+    }
+
     if(!name || !surname || !valid || !termsAccepted){
-      formMsg.className='form-msg show bad';
-      formMsg.textContent = !termsAccepted ? I18N[currentLang].meta.termsError : I18N[currentLang].meta.formError;
+      if(!termsAccepted && name && surname && valid){
+        formMsg.className='form-msg';
+        formMsg.textContent='';
+      } else {
+        formMsg.className='form-msg show bad';
+        formMsg.textContent = I18N[currentLang].meta.formError;
+      }
       return;
     }
     document.getElementById('closingBlock').style.display='none';
