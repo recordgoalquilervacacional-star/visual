@@ -624,7 +624,7 @@
 </div>
 
 <!-- ================= HERO ================= -->
-<section class="hero">
+<section class="hero" id="heroSection">
   <div class="bat b1">🦇</div>
   <div class="bat b2">🦇</div>
   <div class="bat b3">🦇</div>
@@ -1746,6 +1746,7 @@
   });
 
   function revealFinal(){
+    document.getElementById('heroSection').style.display = 'none';
     document.getElementById('board').style.display = 'none';
     const finalSection = document.getElementById('finalSection');
     finalSection.classList.add('reveal');
