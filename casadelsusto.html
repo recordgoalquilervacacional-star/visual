@@ -505,6 +505,7 @@
   }
   .consent-row a{color:var(--gold); text-decoration:underline;}
   .consent-row a:hover{color:#fff;}
+  .required-mark{color:var(--red); font-weight:700; margin-left:2px;}
 
   .form-msg{margin-top:16px; font-size:14px; line-height:1.5; display:none; padding:12px 14px; border-radius:10px;}
   .form-msg.show{display:block;}
@@ -746,11 +747,11 @@
 
       <label class="consent-row" for="termsCheckbox">
         <input type="checkbox" id="termsCheckbox" required>
-        <span id="termsLabel">He leído y acepto las <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">condiciones generales y la política de protección de datos</a> de Record go.</span>
+        <span id="termsLabel">He leído y acepto las <a href="https://www.recordrentacar.com/es/recordgo-condiciones/" target="_blank" rel="noopener">condiciones generales y la política de protección de datos</a> de Record go.<span class="required-mark">*</span></span>
       </label>
       <label class="consent-row" for="consentCheckbox">
         <input type="checkbox" id="consentCheckbox">
-        <span id="consentLabel">Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.</span>
+        <span id="consentLabel">Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.<span class="required-mark">*</span></span>
       </label>
 
       <button type="submit" id="formSubmitBtn">Participar en el sorteo</button>
@@ -845,9 +846,9 @@
         formInstagramPlaceholder:"Usuario de Instagram (opcional)",
         formButton:"Participar en el sorteo",
         formError:"Ha habido un error. Revisa tus datos e inténtalo de nuevo — tu información está a salvo.",
-        termsLabel:"He leído y acepto las <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condiciones generales y la política de protección de datos</a> de Record go.",
+        termsLabel:"He leído y acepto las <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condiciones generales y la política de protección de datos</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Debes aceptar las condiciones generales y la política de protección de datos para participar.",
-        consentLabel:"Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.",
+        consentLabel:"Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.<span class=\"required-mark\">*</span>",
         successH2:"¡Enhorabuena!",
         successP:"Sobreviviste a los cinco monstruos de La Casa del Susto, con tu participación para el sorteo de un viaje completo bajo el brazo."
       },
@@ -937,9 +938,9 @@
         formInstagramPlaceholder:"Instagram username (optional)",
         formButton:"Enter the giveaway",
         formError:"Something went wrong. Please check your details and try again — your information is safe.",
-        termsLabel:"I have read and accept Record go's <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">general terms and conditions and privacy policy</a>.",
+        termsLabel:"I have read and accept Record go's <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">general terms and conditions and privacy policy</a>.<span class=\"required-mark\">*</span>",
         termsError:"You must accept the general terms and conditions and privacy policy to enter.",
-        consentLabel:"I agree to the use of my data to receive commercial communications with exclusive offers and news.",
+        consentLabel:"I agree to the use of my data to receive commercial communications with exclusive offers and news.<span class=\"required-mark\">*</span>",
         successH2:"Congratulations!",
         successP:"You survived the five monsters of the House of Fright, with your entry into the full-trip giveaway in hand."
       },
@@ -1029,9 +1030,9 @@
         formInstagramPlaceholder:"Instagram-Nutzername (optional)",
         formButton:"An der Verlosung teilnehmen",
         formError:"Es gab einen Fehler. Überprüfe deine Angaben und versuch es noch einmal — deine Daten sind sicher.",
-        termsLabel:"Ich habe die <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.",
+        termsLabel:"Ich habe die <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.<span class=\"required-mark\">*</span>",
         termsError:"Du musst die allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie akzeptieren, um teilzunehmen.",
-        consentLabel:"Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.",
+        consentLabel:"Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.<span class=\"required-mark\">*</span>",
         successH2:"Herzlichen Glückwunsch!",
         successP:"Du hast die fünf Monster des Hauses des Schreckens überlebt und deine Teilnahme an der Verlosung einer kompletten Reise in der Tasche."
       },
@@ -1121,9 +1122,9 @@
         formInstagramPlaceholder:"Nom d'utilisateur Instagram (facultatif)",
         formButton:"Participer au tirage au sort",
         formError:"Une erreur s'est produite. Vérifie tes informations et réessaie — tes données sont en sécurité.",
-        termsLabel:"J'ai lu et j'accepte les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">conditions générales et la politique de protection des données</a> de Record go.",
+        termsLabel:"J'ai lu et j'accepte les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">conditions générales et la politique de protection des données</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Tu dois accepter les conditions générales et la politique de protection des données pour participer.",
-        consentLabel:"J'accepte l'utilisation de mes données pour l'envoi de communications commerciales avec des offres exclusives et des nouveautés.",
+        consentLabel:"J'accepte l'utilisation de mes données pour l'envoi de communications commerciales avec des offres exclusives et des nouveautés.<span class=\"required-mark\">*</span>",
         successH2:"Félicitations !",
         successP:"Tu as survécu aux cinq monstres de la Maison de la Peur, avec ta participation au tirage au sort d'un voyage complet en poche."
       },
@@ -1213,9 +1214,9 @@
         formInstagramPlaceholder:"Usuari d'Instagram (opcional)",
         formButton:"Participar al sorteig",
         formError:"Hi ha hagut un error. Revisa les teves dades i torna-ho a provar — la teva informació està a salvo.",
-        termsLabel:"He llegit i accepto les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condicions generals i la política de protecció de dades</a> de Record go.",
+        termsLabel:"He llegit i accepto les <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">condicions generals i la política de protecció de dades</a> de Record go.<span class=\"required-mark\">*</span>",
         termsError:"Has d'acceptar les condicions generals i la política de protecció de dades per participar.",
-        consentLabel:"Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.",
+        consentLabel:"Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.<span class=\"required-mark\">*</span>",
         successH2:"Enhorabona!",
         successP:"Has sobreviscut als cinc monstres de la Casa de l'Espant, amb la teva participació per al sorteig d'un viatge complet sota el braç."
       },
@@ -1305,9 +1306,9 @@
         formInstagramPlaceholder:"Utilizador do Instagram (opcional)",
         formButton:"Participar no sorteio",
         formError:"Ocorreu um erro. Verifica os teus dados e tenta novamente — a tua informação está segura.",
-        termsLabel:"Li e aceito os <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termos gerais e a política de proteção de dados</a> da Record go.",
+        termsLabel:"Li e aceito os <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termos gerais e a política de proteção de dados</a> da Record go.<span class=\"required-mark\">*</span>",
         termsError:"Tens de aceitar os termos gerais e a política de proteção de dados para participar.",
-        consentLabel:"Aceito o uso dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.",
+        consentLabel:"Aceito o uso dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.<span class=\"required-mark\">*</span>",
         successH2:"Parabéns!",
         successP:"Sobreviveste aos cinco monstros da Casa do Susto, com a tua participação no sorteio de uma viagem completa garantida."
       },
@@ -1397,9 +1398,9 @@
         formInstagramPlaceholder:"Όνομα χρήστη Instagram (προαιρετικό)",
         formButton:"Συμμετοχή στην κλήρωση",
         formError:"Παρουσιάστηκε σφάλμα. Έλεγξε τα στοιχεία σου και δοκίμασε ξανά — τα δεδομένα σου είναι ασφαλή.",
-        termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">γενικούς όρους και την πολιτική προστασίας δεδομένων</a> της Record go.",
+        termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">γενικούς όρους και την πολιτική προστασίας δεδομένων</a> της Record go.<span class=\"required-mark\">*</span>",
         termsError:"Πρέπει να αποδεχτείς τους γενικούς όρους και την πολιτική προστασίας δεδομένων για να συμμετάσχεις.",
-        consentLabel:"Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.",
+        consentLabel:"Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.<span class=\"required-mark\">*</span>",
         successH2:"Συγχαρητήρια!",
         successP:"Επέζησες από τα πέντε τέρατα του Σπιτιού του Τρόμου, με τη συμμετοχή σου στην κλήρωση ενός ολοκληρωμένου ταξιδιού στο χέρι."
       },
@@ -1489,9 +1490,9 @@
         formInstagramPlaceholder:"Nome utente Instagram (opzionale)",
         formButton:"Partecipa all'estrazione",
         formError:"Si è verificato un errore. Controlla i tuoi dati e riprova — le tue informazioni sono al sicuro.",
-        termsLabel:"Ho letto e accetto i <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termini generali e la politica sulla privacy</a> di Record go.",
+        termsLabel:"Ho letto e accetto i <a href=\"https://www.recordrentacar.com/es/recordgo-condiciones/\" target=\"_blank\" rel=\"noopener\">termini generali e la politica sulla privacy</a> di Record go.<span class=\"required-mark\">*</span>",
         termsError:"Devi accettare i termini generali e la politica sulla privacy per partecipare.",
-        consentLabel:"Accetto l'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.",
+        consentLabel:"Accetto l'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.<span class=\"required-mark\">*</span>",
         successH2:"Congratulazioni!",
         successP:"Sei sopravvissuto ai cinque mostri della Casa della Paura, con la tua partecipazione all'estrazione di un viaggio completo in tasca."
       },
@@ -1680,7 +1681,7 @@
     document.getElementById('instagramInput').setAttribute('placeholder', t.meta.formInstagramPlaceholder);
     document.getElementById('formSubmitBtn').textContent = t.meta.formButton;
     document.getElementById('termsLabel').innerHTML = t.meta.termsLabel;
-    document.getElementById('consentLabel').textContent = t.meta.consentLabel;
+    document.getElementById('consentLabel').innerHTML = t.meta.consentLabel;
     document.getElementById('successH2').textContent = t.meta.successH2;
     document.getElementById('successP').textContent = t.meta.successP;
 
