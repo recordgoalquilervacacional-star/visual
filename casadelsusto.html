@@ -34,7 +34,7 @@
 
   /* ---------------- HERO ---------------- */
   .hero{
-    min-height:auto;
+    min-height:100vh;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -42,6 +42,12 @@
     text-align:center;
     padding:86px 20px 36px;
     position:relative;
+    background-image:
+      linear-gradient(180deg, rgba(8,5,16,0.35) 0%, rgba(8,5,16,0.55) 35%, rgba(8,5,16,0.85) 70%, #000000 100%),
+      url('images/hero-bg.jpg');
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
   }
   .brand-logo-wrap{
     display:inline-flex;
