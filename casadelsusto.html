@@ -429,6 +429,39 @@
     padding:40px 32px 36px;
     box-shadow:0 20px 40px rgba(0,0,0,.4);
   }
+  .success-actions{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:26px;
+  }
+  .btn-solid, .btn-outline{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Roboto',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:10px;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .15s ease;
+  }
+  .btn-solid{
+    background:linear-gradient(160deg,#f0453b,var(--red-dark));
+    color:#fff;
+    border:none;
+    box-shadow:0 8px 0 #6e0f09;
+  }
+  .btn-solid:active{transform:translateY(3px); box-shadow:0 4px 0 #6e0f09;}
+  .btn-outline{
+    background:transparent;
+    color:#fff;
+    border:2px solid #fff;
+  }
+  .btn-outline:hover{background:rgba(255,255,255,0.1);}
   .final-section h2{
     font-size:clamp(24px,4vw,34px);
     font-weight:900;
@@ -821,6 +854,10 @@
   <div class="success-block final-card" id="successBlock">
     <h2 id="successH2">¡Sobreviviste a La Casa del Susto! 🦇👻</h2>
     <p id="successP">Has derrotado a los cinco monstruos y ya sales de la mansión con una participación bajo el brazo para el sorteo del viaje completo a Mallorca (vuelo + hotel + coche). ¡Tus vacaciones van a ser de miedo, pero del bueno! 🚗</p>
+    <div class="success-actions">
+      <a class="btn-solid" id="bookCarBtn" href="https://www.recordrentacar.com/" target="_blank" rel="noopener">🚗 Reserva tu coche</a>
+      <button type="button" class="btn-outline" id="restartBtn">🔄 Volver al juego</button>
+    </div>
   </div>
 </section>
 
@@ -915,7 +952,9 @@
         termsError:"Debes aceptar las condiciones generales y la política de protección de datos para participar.",
         consentLabel:"Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.<span class=\"required-mark\">*</span>",
         successH2:"¡Sobreviviste a La Casa del Susto! 🦇👻",
-        successP:"Has derrotado a los cinco monstruos y ya sales de la mansión con una participación bajo el brazo para el sorteo del viaje completo a Mallorca (vuelo + hotel + coche). ¡Tus vacaciones van a ser de miedo, pero del bueno! 🚗"
+        successP:"Has derrotado a los cinco monstruos y ya sales de la mansión con una participación bajo el brazo para el sorteo del viaje completo a Mallorca (vuelo + hotel + coche). ¡Tus vacaciones van a ser de miedo, pero del bueno! 🚗",
+        bookCarCta:"🚗 Reserva tu coche",
+        restartCta:"🔄 Volver al juego"
       },
       rooms:[
         {
@@ -1007,7 +1046,9 @@
         termsError:"You must accept the general terms and conditions and privacy policy to enter.",
         consentLabel:"I agree to the use of my data to receive commercial communications with exclusive offers and news.<span class=\"required-mark\">*</span>",
         successH2:"You survived The House of Scares! 🦇👻",
-        successP:"You've defeated the five monsters and you're leaving the mansion with an entry in hand for the full trip giveaway to Mallorca (flight + hotel + car). Your vacation is going to be spook-tacular! 🚗"
+        successP:"You've defeated the five monsters and you're leaving the mansion with an entry in hand for the full trip giveaway to Mallorca (flight + hotel + car). Your vacation is going to be spook-tacular! 🚗",
+        bookCarCta:"🚗 Book your car",
+        restartCta:"🔄 Back to the game"
       },
       rooms:[
         {
@@ -1099,7 +1140,9 @@
         termsError:"Du musst die allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie akzeptieren, um teilzunehmen.",
         consentLabel:"Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.<span class=\"required-mark\">*</span>",
         successH2:"Du hast Das Haus des Schreckens überlebt! 🦇👻",
-        successP:"Du hast die fünf Monster besiegt und verlässt die Villa mit einer Teilnahme an der Verlosung der kompletten Reise nach Mallorca (Flug + Hotel + Auto) in der Tasche. Dein Urlaub wird gruselig gut! 🚗"
+        successP:"Du hast die fünf Monster besiegt und verlässt die Villa mit einer Teilnahme an der Verlosung der kompletten Reise nach Mallorca (Flug + Hotel + Auto) in der Tasche. Dein Urlaub wird gruselig gut! 🚗",
+        bookCarCta:"🚗 Buche dein Auto",
+        restartCta:"🔄 Zurück zum Spiel"
       },
       rooms:[
         {
@@ -1191,7 +1234,9 @@
         termsError:"Tu dois accepter les conditions générales et la politique de protection des données pour participer.",
         consentLabel:"J'accepte l'utilisation de mes données pour l'envoi de communications commerciales avec des offres exclusives et des nouveautés.<span class=\"required-mark\">*</span>",
         successH2:"Tu as survécu à La Maison de la Peur ! 🦇👻",
-        successP:"Tu as vaincu les cinq monstres et tu quittes le manoir avec une participation en poche pour le tirage au sort du voyage complet à Majorque (vol + hôtel + voiture). Tes vacances vont faire fureur (dans le bon sens) ! 🚗"
+        successP:"Tu as vaincu les cinq monstres et tu quittes le manoir avec une participation en poche pour le tirage au sort du voyage complet à Majorque (vol + hôtel + voiture). Tes vacances vont faire fureur (dans le bon sens) ! 🚗",
+        bookCarCta:"🚗 Réserve ta voiture",
+        restartCta:"🔄 Retour au jeu"
       },
       rooms:[
         {
@@ -1283,7 +1328,9 @@
         termsError:"Has d'acceptar les condicions generals i la política de protecció de dades per participar.",
         consentLabel:"Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.<span class=\"required-mark\">*</span>",
         successH2:"Has sobreviscut a La Casa de l'Espant! 🦇👻",
-        successP:"Has vençut els cinc monstres i ja surts de la mansió amb una participació sota el braç per al sorteig del viatge complet a Mallorca (vol + hotel + cotxe). Les teves vacances seran de por, però de la bona! 🚗"
+        successP:"Has vençut els cinc monstres i ja surts de la mansió amb una participació sota el braç per al sorteig del viatge complet a Mallorca (vol + hotel + cotxe). Les teves vacances seran de por, però de la bona! 🚗",
+        bookCarCta:"🚗 Reserva el teu cotxe",
+        restartCta:"🔄 Torna al joc"
       },
       rooms:[
         {
@@ -1375,7 +1422,9 @@
         termsError:"Tens de aceitar os termos gerais e a política de proteção de dados para participar.",
         consentLabel:"Aceito o uso dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.<span class=\"required-mark\">*</span>",
         successH2:"Sobreviveste à Casa do Susto! 🦇👻",
-        successP:"Derrotaste os cinco monstros e já sais da mansão com uma participação debaixo do braço para o sorteio da viagem completa a Maiorca (voo + hotel + carro). As tuas férias vão ser de arrepiar, mas das boas! 🚗"
+        successP:"Derrotaste os cinco monstros e já sais da mansão com uma participação debaixo do braço para o sorteio da viagem completa a Maiorca (voo + hotel + carro). As tuas férias vão ser de arrepiar, mas das boas! 🚗",
+        bookCarCta:"🚗 Reserva o teu carro",
+        restartCta:"🔄 Voltar ao jogo"
       },
       rooms:[
         {
@@ -1467,7 +1516,9 @@
         termsError:"Πρέπει να αποδεχτείς τους γενικούς όρους και την πολιτική προστασίας δεδομένων για να συμμετάσχεις.",
         consentLabel:"Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.<span class=\"required-mark\">*</span>",
         successH2:"Επέζησες από το Σπίτι του Τρόμου! 🦇👻",
-        successP:"Νίκησες τα πέντε τέρατα και βγαίνεις από το αρχοντικό με μια συμμετοχή στην τσέπη για την κλήρωση του ολοκληρωμένου ταξιδιού στη Μαγιόρκα (πτήση + ξενοδοχείο + αυτοκίνητο). Οι διακοπές σου θα είναι τρομερές, αλλά με την καλή έννοια! 🚗"
+        successP:"Νίκησες τα πέντε τέρατα και βγαίνεις από το αρχοντικό με μια συμμετοχή στην τσέπη για την κλήρωση του ολοκληρωμένου ταξιδιού στη Μαγιόρκα (πτήση + ξενοδοχείο + αυτοκίνητο). Οι διακοπές σου θα είναι τρομερές, αλλά με την καλή έννοια! 🚗",
+        bookCarCta:"🚗 Κλείσε το αυτοκίνητό σου",
+        restartCta:"🔄 Επιστροφή στο παιχνίδι"
       },
       rooms:[
         {
@@ -1559,7 +1610,9 @@
         termsError:"Devi accettare i termini generali e la politica sulla privacy per partecipare.",
         consentLabel:"Accetto l'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.<span class=\"required-mark\">*</span>",
         successH2:"Sei sopravvissuto a La Casa della Paura! 🦇👻",
-        successP:"Hai sconfitto i cinque mostri ed esci dalla villa con una partecipazione in tasca per l'estrazione del viaggio completo a Maiorca (volo + hotel + auto). Le tue vacanze saranno da paura, ma quella bella! 🚗"
+        successP:"Hai sconfitto i cinque mostri ed esci dalla villa con una partecipazione in tasca per l'estrazione del viaggio completo a Maiorca (volo + hotel + auto). Le tue vacanze saranno da paura, ma quella bella! 🚗",
+        bookCarCta:"🚗 Prenota la tua auto",
+        restartCta:"🔄 Torna al gioco"
       },
       rooms:[
         {
@@ -2080,6 +2133,8 @@
     document.getElementById('consentLabel').innerHTML = t.meta.consentLabel;
     document.getElementById('successH2').textContent = t.meta.successH2;
     document.getElementById('successP').textContent = t.meta.successP;
+    document.getElementById('bookCarBtn').textContent = t.meta.bookCarCta;
+    document.getElementById('restartBtn').textContent = t.meta.restartCta;
     renderLegal(lang);
 
     rooms = t.rooms;
@@ -2171,6 +2226,8 @@
     document.getElementById('successBlock').classList.add('show');
     document.getElementById('basesLegalesSection').classList.remove('reveal');
   });
+
+  document.getElementById('restartBtn').addEventListener('click', () => location.reload());
 
   // ---- Legal accordion ----
   function renderLegal(lang){
