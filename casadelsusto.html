@@ -2156,7 +2156,8 @@
     mFeedback.textContent='';
     mContinue.classList.remove('show');
     mAnswers.innerHTML='';
-    room.answers.forEach(a=>{
+    const shuffledAnswers = room.answers.slice().sort(()=>Math.random()-0.5);
+    shuffledAnswers.forEach(a=>{
       const btn=document.createElement('button');
       btn.className='answer-btn';
       btn.textContent=a.text;
