@@ -64,12 +64,6 @@
     opacity:0.06;
     pointer-events:none;
   }
-  .hero .bat{position:absolute; font-size:34px; opacity:.8; filter:drop-shadow(0 6px 8px rgba(0,0,0,.6));}
-  .hero .bat.b1{top:26px; left:8%; transform:rotate(-8deg);}
-  .hero .bat.b2{top:34px; right:10%; transform:rotate(10deg); font-size:26px;}
-  .hero .bat.b3{bottom:14px; left:14%; font-size:22px;}
-  .hero .pumpkin{position:absolute; font-size:46px; bottom:10px; right:9%; filter:drop-shadow(0 8px 10px rgba(0,0,0,.6));}
-
   .brand-tag{
     display:inline-flex; align-items:center; gap:8px;
     background:rgba(226,35,26,0.15);
@@ -167,8 +161,8 @@
     border-radius:26px;
     padding:30px 26px 40px;
     background:
-      radial-gradient(ellipse at 25% 0%, #4D4243, transparent 55%),
-      linear-gradient(155deg,#2F2B2C,#141414 75%);
+      radial-gradient(ellipse at 25% 0%, rgba(255,255,255,0.06), transparent 55%),
+      rgba(0,0,0,0.78);
     border:1px solid rgba(255,255,255,0.07);
     box-shadow:
       0 70px 100px rgba(0,0,0,.65),
@@ -176,12 +170,6 @@
       inset 0 2px 0 rgba(255,255,255,.08),
       inset 0 -4px 0 rgba(0,0,0,.4);
   }
-  .board-plate .prop{position:absolute; font-size:46px; filter:drop-shadow(0 8px 8px rgba(0,0,0,.55)); pointer-events:none;}
-  .prop.candle-l{top:-26px; left:-34px; font-size:56px;}
-  .prop.candle-r{bottom:-30px; right:-30px; font-size:60px;}
-  .prop.bat-l{top:120px; left:-40px; font-size:28px; transform:rotate(-10deg);}
-  .prop.pumpkin-r{top:-20px; right:-40px; font-size:40px;}
-
   .track-wrap{
     position:relative;
     width:100%;
@@ -291,9 +279,6 @@
   @media (max-width:720px){
     .board-plate{padding:22px 16px 26px;}
     .track-wrap{max-width:420px; height:auto !important;}
-    .prop.bat-l{display:none;}
-    .prop.candle-r{bottom:-16px; right:-16px; font-size:40px;}
-    .prop.pumpkin-r{top:-16px; right:-16px; font-size:30px;}
     .track-layer{
       position:static;
       width:100%;
@@ -700,10 +685,6 @@
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="heroSection">
-  <div class="bat b1">🦇</div>
-  <div class="bat b2">🦇</div>
-  <div class="bat b3">🦇</div>
-  <div class="pumpkin">🎃</div>
   <div class="brand-logo-wrap">
     <img class="brand-logo" src="https://www.recordrentacar.com/images/layouts/recordGoMobility.svg" alt="Record go">
   </div>
@@ -726,11 +707,6 @@
   <div class="scene3d">
     <div class="board-3d">
       <div class="board-plate">
-        <div class="prop candle-l">🕯️</div>
-        <div class="prop candle-r">🕯️</div>
-        <div class="prop bat-l">🦇</div>
-        <div class="prop pumpkin-r">🎃</div>
-
         <div class="track-wrap" id="trackWrap">
           <div class="track-layer" id="trackLayer">
             <svg class="road-svg" viewBox="0 0 1150 560">
