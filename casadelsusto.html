@@ -499,6 +499,14 @@
     color:var(--red); font-size:22px; font-weight:900;
   }
 
+  .eligibility-note{
+    font-size:12.5px;
+    font-style:italic;
+    color:rgba(255,255,255,0.65);
+    text-align:left;
+    margin:0 0 14px;
+    line-height:1.4;
+  }
   .signup-form{
     display:flex; flex-direction:column; gap:14px; align-items:center;
   }
@@ -827,6 +835,8 @@
 
     <p id="finalP">Has desterrado a los cinco monstruos del alquiler. En Record go, ninguno tiene sitio. Deja tu email y entra en el sorteo de un viaje a Mallorca (hotel, coche y vuelo). ¡Haz que el susto merezca la pena!</p>
 
+    <p class="eligibility-note" id="eligibilityNote">*Solo válido para personas físicas con residencia legal en España o en un país de la Unión Europea.</p>
+
     <form class="signup-form" id="signupForm" novalidate>
       <div class="form-row">
         <input type="text" id="nameInput" placeholder="Nombre" required>
@@ -946,6 +956,7 @@
         formSurnamePlaceholder:"Apellidos",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Usuario de Instagram",
+        eligibilityNote:"*Solo válido para personas físicas con residencia legal en España o en un país de la Unión Europea.",
         formButton:"Participar en el sorteo",
         formError:"Ha habido un error. Revisa tus datos e inténtalo de nuevo — tu información está a salvo.",
         termsLabel:"He leído y acepto las <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condiciones generales</a> y la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protección de datos</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -1040,6 +1051,7 @@
         formSurnamePlaceholder:"Last name",
         formPlaceholder:"you@email.com",
         formInstagramPlaceholder:"Instagram username",
+        eligibilityNote:"*Only valid for natural persons legally resident in Spain or in a European Union country.",
         formButton:"Enter the giveaway",
         formError:"Something went wrong. Please check your details and try again — your information is safe.",
         termsLabel:"I have read and accept Record go's <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">general terms and conditions</a> and <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.<span class=\"required-mark\">*</span>",
@@ -1134,6 +1146,7 @@
         formSurnamePlaceholder:"Nachname",
         formPlaceholder:"du@email.com",
         formInstagramPlaceholder:"Instagram-Nutzername",
+        eligibilityNote:"*Nur gültig für natürliche Personen mit rechtmäßigem Wohnsitz in Spanien oder einem Land der Europäischen Union.",
         formButton:"An der Verlosung teilnehmen",
         formError:"Es gab einen Fehler. Überprüfe deine Angaben und versuch es noch einmal — deine Daten sind sicher.",
         termsLabel:"Ich habe die <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">allgemeinen Geschäftsbedingungen</a> und die <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.<span class=\"required-mark\">*</span>",
@@ -1228,6 +1241,7 @@
         formSurnamePlaceholder:"Nom",
         formPlaceholder:"toi@email.com",
         formInstagramPlaceholder:"Nom d'utilisateur Instagram",
+        eligibilityNote:"*Valable uniquement pour les personnes physiques résidant légalement en Espagne ou dans un pays de l'Union européenne.",
         formButton:"Participer au tirage au sort",
         formError:"Une erreur s'est produite. Vérifie tes informations et réessaie — tes données sont en sécurité.",
         termsLabel:"J'ai lu et j'accepte les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">conditions générales</a> et la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politique de protection des données</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -1322,6 +1336,7 @@
         formSurnamePlaceholder:"Cognoms",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Usuari d'Instagram",
+        eligibilityNote:"*Només vàlid per a persones físiques amb residència legal a Espanya o en un país de la Unió Europea.",
         formButton:"Participar al sorteig",
         formError:"Hi ha hagut un error. Revisa les teves dades i torna-ho a provar — la teva informació està a salvo.",
         termsLabel:"He llegit i accepto les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condicions generals</a> i la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protecció de dades</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -1416,6 +1431,7 @@
         formSurnamePlaceholder:"Apelido",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Utilizador do Instagram",
+        eligibilityNote:"*Apenas válido para pessoas físicas com residência legal em Espanha ou num país da União Europeia.",
         formButton:"Participar no sorteio",
         formError:"Ocorreu um erro. Verifica os teus dados e tenta novamente — a tua informação está segura.",
         termsLabel:"Li e aceito os <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termos gerais</a> e a <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de proteção de dados</a> da Record go.<span class=\"required-mark\">*</span>",
@@ -1510,6 +1526,7 @@
         formSurnamePlaceholder:"Επώνυμο",
         formPlaceholder:"you@email.com",
         formInstagramPlaceholder:"Όνομα χρήστη Instagram",
+        eligibilityNote:"*Ισχύει μόνο για φυσικά πρόσωπα με νόμιμη κατοικία στην Ισπανία ή σε χώρα της Ευρωπαϊκής Ένωσης.",
         formButton:"Συμμετοχή στην κλήρωση",
         formError:"Παρουσιάστηκε σφάλμα. Έλεγξε τα στοιχεία σου και δοκίμασε ξανά — τα δεδομένα σου είναι ασφαλή.",
         termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">γενικούς όρους</a> και την <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">πολιτική προστασίας δεδομένων</a> της Record go.<span class=\"required-mark\">*</span>",
@@ -1604,6 +1621,7 @@
         formSurnamePlaceholder:"Cognome",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Nome utente Instagram",
+        eligibilityNote:"*Valido solo per persone fisiche con residenza legale in Spagna o in un paese dell'Unione Europea.",
         formButton:"Partecipa all'estrazione",
         formError:"Si è verificato un errore. Controlla i tuoi dati e riprova — le tue informazioni sono al sicuro.",
         termsLabel:"Ho letto e accetto i <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termini generali</a> e la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politica sulla privacy</a> di Record go.<span class=\"required-mark\">*</span>",
@@ -2130,6 +2148,7 @@
     document.getElementById('surnameInput').setAttribute('placeholder', t.meta.formSurnamePlaceholder);
     document.getElementById('emailInput').setAttribute('placeholder', t.meta.formPlaceholder);
     document.getElementById('instagramInput').setAttribute('placeholder', t.meta.formInstagramPlaceholder);
+    document.getElementById('eligibilityNote').textContent = t.meta.eligibilityNote;
     document.getElementById('formSubmitBtn').textContent = t.meta.formButton;
     document.getElementById('termsLabel').innerHTML = t.meta.termsLabel;
     document.getElementById('consentLabel').innerHTML = t.meta.consentLabel;
