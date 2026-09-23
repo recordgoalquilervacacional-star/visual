@@ -436,7 +436,7 @@
     flex-wrap:wrap;
     margin-top:26px;
   }
-  .btn-solid, .btn-outline{
+  .btn-solid{
     display:inline-flex;
     align-items:center;
     gap:8px;
@@ -448,20 +448,12 @@
     cursor:pointer;
     text-decoration:none;
     transition:transform .15s ease;
-  }
-  .btn-solid{
     background:linear-gradient(160deg,#f0453b,var(--red-dark));
     color:#fff;
     border:none;
     box-shadow:0 8px 0 #6e0f09;
   }
   .btn-solid:active{transform:translateY(3px); box-shadow:0 4px 0 #6e0f09;}
-  .btn-outline{
-    background:transparent;
-    color:#fff;
-    border:2px solid #fff;
-  }
-  .btn-outline:hover{background:rgba(255,255,255,0.1);}
   .final-section h2{
     font-size:clamp(24px,4vw,34px);
     font-weight:900;
@@ -692,22 +684,52 @@
 <!-- ================= LANGUAGE SELECTOR ================= -->
 <div class="lang-selector" id="langSelector">
   <button type="button" class="lang-current" id="langCurrent" aria-haspopup="listbox" aria-expanded="false">
-    <span class="flag" id="langCurrentFlag">🇪🇸</span>
+    <span class="flag" id="langCurrentFlag">
+      <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+        <rect width="18" height="12" fill="#AA151B"/>
+        <rect y="3" width="18" height="6" fill="#F1BF00"/>
+      </svg>
+    </span>
     <span class="lang-label" id="langCurrentLabel">Español</span>
     <span class="chev">▾</span>
   </button>
   <div class="lang-menu" id="langMenu" role="listbox">
     <button type="button" class="lang-option active" data-lang="es" role="option" aria-selected="true">
-      <span class="flag">🇪🇸</span><span>Español</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="12" fill="#AA151B"/>
+          <rect y="3" width="18" height="6" fill="#F1BF00"/>
+        </svg>
+      </span><span>Español</span>
     </button>
     <button type="button" class="lang-option" data-lang="en" role="option" aria-selected="false">
-      <span class="flag">🇬🇧</span><span>English</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="12" fill="#00247D"/>
+          <path d="M0,0 L18,12 M18,0 L0,12" stroke="#FFFFFF" stroke-width="2.4"/>
+          <path d="M0,0 L18,12 M18,0 L0,12" stroke="#CF142B" stroke-width="1.2"/>
+          <path d="M9,0 V12 M0,6 H18" stroke="#FFFFFF" stroke-width="4"/>
+          <path d="M9,0 V12 M0,6 H18" stroke="#CF142B" stroke-width="2.4"/>
+        </svg>
+      </span><span>English</span>
     </button>
     <button type="button" class="lang-option" data-lang="de" role="option" aria-selected="false">
-      <span class="flag">🇩🇪</span><span>Deutsch</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="4" fill="#000000"/>
+          <rect y="4" width="18" height="4" fill="#DD0000"/>
+          <rect y="8" width="18" height="4" fill="#FFCE00"/>
+        </svg>
+      </span><span>Deutsch</span>
     </button>
     <button type="button" class="lang-option" data-lang="fr" role="option" aria-selected="false">
-      <span class="flag">🇫🇷</span><span>Français</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="6" height="12" fill="#0055A4"/>
+          <rect x="6" width="6" height="12" fill="#FFFFFF"/>
+          <rect x="12" width="6" height="12" fill="#EF4135"/>
+        </svg>
+      </span><span>Français</span>
     </button>
     <button type="button" class="lang-option" data-lang="ca" role="option" aria-selected="false">
       <span class="flag">
@@ -722,13 +744,39 @@
       </span><span>Català</span>
     </button>
     <button type="button" class="lang-option" data-lang="pt" role="option" aria-selected="false">
-      <span class="flag">🇵🇹</span><span>Português</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="12" fill="#FF0000"/>
+          <rect width="7.2" height="12" fill="#046A38"/>
+          <circle cx="7.2" cy="6" r="2.6" fill="#FFCC00"/>
+        </svg>
+      </span><span>Português</span>
     </button>
     <button type="button" class="lang-option" data-lang="el" role="option" aria-selected="false">
-      <span class="flag">🇬🇷</span><span>Ελληνικά</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="18" height="12" fill="#0D5EAF"/>
+          <g fill="#FFFFFF">
+            <rect y="0" width="18" height="1.33"/>
+            <rect y="2.67" width="18" height="1.33"/>
+            <rect y="5.33" width="18" height="1.33"/>
+            <rect y="8" width="18" height="1.33"/>
+            <rect y="10.67" width="18" height="1.33"/>
+          </g>
+          <rect width="7.2" height="6.86" fill="#0D5EAF"/>
+          <rect x="2.9" width="1.4" height="6.86" fill="#FFFFFF"/>
+          <rect y="2.73" width="7.2" height="1.4" fill="#FFFFFF"/>
+        </svg>
+      </span><span>Ελληνικά</span>
     </button>
     <button type="button" class="lang-option" data-lang="it" role="option" aria-selected="false">
-      <span class="flag">🇮🇹</span><span>Italiano</span>
+      <span class="flag">
+        <svg viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
+          <rect width="6" height="12" fill="#008C45"/>
+          <rect x="6" width="6" height="12" fill="#F4F5F0"/>
+          <rect x="12" width="6" height="12" fill="#CD212A"/>
+        </svg>
+      </span><span>Italiano</span>
     </button>
   </div>
 </div>
@@ -865,8 +913,7 @@
     <h2 id="successH2">¡Sobreviviste a La Casa del Susto! 🦇👻</h2>
     <p id="successP">Has derrotado a los cinco monstruos y ya sales de la mansión con una participación bajo el brazo para el sorteo del viaje completo a Mallorca (vuelo + hotel + coche). ¡Tus vacaciones van a ser de miedo, pero del bueno! 🚗</p>
     <div class="success-actions">
-      <a class="btn-solid" id="bookCarBtn" href="https://www.recordrentacar.com" target="_blank" rel="noopener">🚗 Reserva tu coche</a>
-      <button type="button" class="btn-outline" id="restartBtn">🔄 Volver al juego</button>
+      <a class="btn-solid" id="bookCarBtn" href="https://www.recordrentacar.com" target="_blank" rel="noopener">Visita nuestra web</a>
     </div>
   </div>
 </section>
@@ -956,7 +1003,7 @@
         formSurnamePlaceholder:"Apellidos",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Usuario de Instagram",
-        eligibilityNote:"*Solo válido para personas físicas con residencia legal en España o en un país de la Unión Europea.",
+        eligibilityNote:"*Solo válido para personas físicas con residencia legal en España, en un país de la Unión Europea o en el Reino Unido.",
         formButton:"Participar en el sorteo",
         formError:"Ha habido un error. Revisa tus datos e inténtalo de nuevo — tu información está a salvo.",
         termsLabel:"He leído y acepto las <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condiciones generales</a> y la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protección de datos</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -964,8 +1011,7 @@
         consentLabel:"Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.<span class=\"required-mark\">*</span>",
         successH2:"¡Sobreviviste a La Casa del Susto! 🦇👻",
         successP:"Has derrotado a los cinco monstruos y ya sales de la mansión con una participación bajo el brazo para el sorteo del viaje completo a Mallorca (vuelo + hotel + coche). ¡Tus vacaciones van a ser de miedo, pero del bueno! 🚗",
-        bookCarCta:"🚗 Reserva tu coche",
-        restartCta:"🔄 Volver al juego"
+        bookCarCta:"Visita nuestra web"
       },
       rooms:[
         {
@@ -1051,7 +1097,7 @@
         formSurnamePlaceholder:"Last name",
         formPlaceholder:"you@email.com",
         formInstagramPlaceholder:"Instagram username",
-        eligibilityNote:"*Only valid for natural persons legally resident in Spain or in a European Union country.",
+        eligibilityNote:"*Only valid for natural persons legally resident in Spain, in a European Union country or in the United Kingdom.",
         formButton:"Enter the giveaway",
         formError:"Something went wrong. Please check your details and try again — your information is safe.",
         termsLabel:"I have read and accept Record go's <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">general terms and conditions</a> and <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">privacy policy</a>.<span class=\"required-mark\">*</span>",
@@ -1059,8 +1105,7 @@
         consentLabel:"I agree to the use of my data to receive commercial communications with exclusive offers and news.<span class=\"required-mark\">*</span>",
         successH2:"You survived The House of Scares! 🦇👻",
         successP:"You've defeated the five monsters and you're leaving the mansion with an entry in hand for the full trip giveaway to Mallorca (flight + hotel + car). Your vacation is going to be spook-tacular! 🚗",
-        bookCarCta:"🚗 Book your car",
-        restartCta:"🔄 Back to the game"
+        bookCarCta:"Visit our website"
       },
       rooms:[
         {
@@ -1146,7 +1191,7 @@
         formSurnamePlaceholder:"Nachname",
         formPlaceholder:"du@email.com",
         formInstagramPlaceholder:"Instagram-Nutzername",
-        eligibilityNote:"*Nur gültig für natürliche Personen mit rechtmäßigem Wohnsitz in Spanien oder einem Land der Europäischen Union.",
+        eligibilityNote:"*Nur gültig für natürliche Personen mit rechtmäßigem Wohnsitz in Spanien, einem Land der Europäischen Union oder im Vereinigten Königreich.",
         formButton:"An der Verlosung teilnehmen",
         formError:"Es gab einen Fehler. Überprüfe deine Angaben und versuch es noch einmal — deine Daten sind sicher.",
         termsLabel:"Ich habe die <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">allgemeinen Geschäftsbedingungen</a> und die <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">Datenschutzrichtlinie</a> von Record go gelesen und akzeptiere sie.<span class=\"required-mark\">*</span>",
@@ -1154,8 +1199,7 @@
         consentLabel:"Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.<span class=\"required-mark\">*</span>",
         successH2:"Du hast Das Haus des Schreckens überlebt! 🦇👻",
         successP:"Du hast die fünf Monster besiegt und verlässt die Villa mit einer Teilnahme an der Verlosung der kompletten Reise nach Mallorca (Flug + Hotel + Auto) in der Tasche. Dein Urlaub wird gruselig gut! 🚗",
-        bookCarCta:"🚗 Buche dein Auto",
-        restartCta:"🔄 Zurück zum Spiel"
+        bookCarCta:"Besuche unsere Website"
       },
       rooms:[
         {
@@ -1241,7 +1285,7 @@
         formSurnamePlaceholder:"Nom",
         formPlaceholder:"toi@email.com",
         formInstagramPlaceholder:"Nom d'utilisateur Instagram",
-        eligibilityNote:"*Valable uniquement pour les personnes physiques résidant légalement en Espagne ou dans un pays de l'Union européenne.",
+        eligibilityNote:"*Valable uniquement pour les personnes physiques résidant légalement en Espagne, dans un pays de l'Union européenne ou au Royaume-Uni.",
         formButton:"Participer au tirage au sort",
         formError:"Une erreur s'est produite. Vérifie tes informations et réessaie — tes données sont en sécurité.",
         termsLabel:"J'ai lu et j'accepte les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">conditions générales</a> et la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politique de protection des données</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -1249,8 +1293,7 @@
         consentLabel:"J'accepte l'utilisation de mes données pour l'envoi de communications commerciales avec des offres exclusives et des nouveautés.<span class=\"required-mark\">*</span>",
         successH2:"Tu as survécu à La Maison de la Peur ! 🦇👻",
         successP:"Tu as vaincu les cinq monstres et tu quittes le manoir avec une participation en poche pour le tirage au sort du voyage complet à Majorque (vol + hôtel + voiture). Tes vacances vont faire fureur (dans le bon sens) ! 🚗",
-        bookCarCta:"🚗 Réserve ta voiture",
-        restartCta:"🔄 Retour au jeu"
+        bookCarCta:"Visite notre site web"
       },
       rooms:[
         {
@@ -1336,7 +1379,7 @@
         formSurnamePlaceholder:"Cognoms",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Usuari d'Instagram",
-        eligibilityNote:"*Només vàlid per a persones físiques amb residència legal a Espanya o en un país de la Unió Europea.",
+        eligibilityNote:"*Només vàlid per a persones físiques amb residència legal a Espanya, en un país de la Unió Europea o al Regne Unit.",
         formButton:"Participar al sorteig",
         formError:"Hi ha hagut un error. Revisa les teves dades i torna-ho a provar — la teva informació està a salvo.",
         termsLabel:"He llegit i accepto les <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">condicions generals</a> i la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de protecció de dades</a> de Record go.<span class=\"required-mark\">*</span>",
@@ -1344,8 +1387,7 @@
         consentLabel:"Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.<span class=\"required-mark\">*</span>",
         successH2:"Has sobreviscut a La Casa de l'Espant! 🦇👻",
         successP:"Has vençut els cinc monstres i ja surts de la mansió amb una participació sota el braç per al sorteig del viatge complet a Mallorca (vol + hotel + cotxe). Les teves vacances seran de por, però de la bona! 🚗",
-        bookCarCta:"🚗 Reserva el teu cotxe",
-        restartCta:"🔄 Torna al joc"
+        bookCarCta:"Visita la nostra web"
       },
       rooms:[
         {
@@ -1431,7 +1473,7 @@
         formSurnamePlaceholder:"Apelido",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Utilizador do Instagram",
-        eligibilityNote:"*Apenas válido para pessoas físicas com residência legal em Espanha ou num país da União Europeia.",
+        eligibilityNote:"*Apenas válido para pessoas físicas com residência legal em Espanha, num país da União Europeia ou no Reino Unido.",
         formButton:"Participar no sorteio",
         formError:"Ocorreu um erro. Verifica os teus dados e tenta novamente — a tua informação está segura.",
         termsLabel:"Li e aceito os <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termos gerais</a> e a <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">política de proteção de dados</a> da Record go.<span class=\"required-mark\">*</span>",
@@ -1439,8 +1481,7 @@
         consentLabel:"Aceito o uso dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.<span class=\"required-mark\">*</span>",
         successH2:"Sobreviveste à Casa do Susto! 🦇👻",
         successP:"Derrotaste os cinco monstros e já sais da mansão com uma participação debaixo do braço para o sorteio da viagem completa a Maiorca (voo + hotel + carro). As tuas férias vão ser de arrepiar, mas das boas! 🚗",
-        bookCarCta:"🚗 Reserva o teu carro",
-        restartCta:"🔄 Voltar ao jogo"
+        bookCarCta:"Visita o nosso site"
       },
       rooms:[
         {
@@ -1526,7 +1567,7 @@
         formSurnamePlaceholder:"Επώνυμο",
         formPlaceholder:"you@email.com",
         formInstagramPlaceholder:"Όνομα χρήστη Instagram",
-        eligibilityNote:"*Ισχύει μόνο για φυσικά πρόσωπα με νόμιμη κατοικία στην Ισπανία ή σε χώρα της Ευρωπαϊκής Ένωσης.",
+        eligibilityNote:"*Ισχύει μόνο για φυσικά πρόσωπα με νόμιμη κατοικία στην Ισπανία, σε χώρα της Ευρωπαϊκής Ένωσης ή στο Ηνωμένο Βασίλειο.",
         formButton:"Συμμετοχή στην κλήρωση",
         formError:"Παρουσιάστηκε σφάλμα. Έλεγξε τα στοιχεία σου και δοκίμασε ξανά — τα δεδομένα σου είναι ασφαλή.",
         termsLabel:"Έχω διαβάσει και αποδέχομαι τους <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">γενικούς όρους</a> και την <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">πολιτική προστασίας δεδομένων</a> της Record go.<span class=\"required-mark\">*</span>",
@@ -1534,8 +1575,7 @@
         consentLabel:"Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.<span class=\"required-mark\">*</span>",
         successH2:"Επέζησες από το Σπίτι του Τρόμου! 🦇👻",
         successP:"Νίκησες τα πέντε τέρατα και βγαίνεις από το αρχοντικό με μια συμμετοχή στην τσέπη για την κλήρωση του ολοκληρωμένου ταξιδιού στη Μαγιόρκα (πτήση + ξενοδοχείο + αυτοκίνητο). Οι διακοπές σου θα είναι τρομερές, αλλά με την καλή έννοια! 🚗",
-        bookCarCta:"🚗 Κλείσε το αυτοκίνητό σου",
-        restartCta:"🔄 Επιστροφή στο παιχνίδι"
+        bookCarCta:"Επισκέψου την ιστοσελίδα μας"
       },
       rooms:[
         {
@@ -1621,7 +1661,7 @@
         formSurnamePlaceholder:"Cognome",
         formPlaceholder:"tu@email.com",
         formInstagramPlaceholder:"Nome utente Instagram",
-        eligibilityNote:"*Valido solo per persone fisiche con residenza legale in Spagna o in un paese dell'Unione Europea.",
+        eligibilityNote:"*Valido solo per persone fisiche con residenza legale in Spagna, in un paese dell'Unione Europea o nel Regno Unito.",
         formButton:"Partecipa all'estrazione",
         formError:"Si è verificato un errore. Controlla i tuoi dati e riprova — le tue informazioni sono al sicuro.",
         termsLabel:"Ho letto e accetto i <a href=\"#basesLegalesSection\" class=\"legal-scroll-link\">termini generali</a> e la <a href=\"https://www.recordrentacar.com/es/privacity/\" target=\"_blank\" rel=\"noopener\">politica sulla privacy</a> di Record go.<span class=\"required-mark\">*</span>",
@@ -1629,8 +1669,7 @@
         consentLabel:"Accetto l'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.<span class=\"required-mark\">*</span>",
         successH2:"Sei sopravvissuto a La Casa della Paura! 🦇👻",
         successP:"Hai sconfitto i cinque mostri ed esci dalla villa con una partecipazione in tasca per l'estrazione del viaggio completo a Maiorca (volo + hotel + auto). Le tue vacanze saranno da paura, ma quella bella! 🚗",
-        bookCarCta:"🚗 Prenota la tua auto",
-        restartCta:"🔄 Torna al gioco"
+        bookCarCta:"Visita il nostro sito web"
       },
       rooms:[
         {
@@ -1704,7 +1743,7 @@
 
   const LEGAL_I18N = {
   "es": {
-    "title": "* Bases legales de participación Sorteo 3 noches de hotel + alquiler de coche durante la estancia + iPhone",
+    "title": "* Bases legales de participación Sorteo 3 noches de hotel + alquiler de coche durante la estancia",
     "items": [
       {
         "h": "1. Compañía organizadora",
@@ -1745,7 +1784,7 @@
     ]
   },
   "en": {
-    "title": "* Legal terms for the 3-nights hotel + car rental during the stay + iPhone giveaway",
+    "title": "* Legal terms for the 3-nights hotel + car rental during the stay giveaway",
     "items": [
       {
         "h": "1. Organizing company",
@@ -1786,7 +1825,7 @@
     ]
   },
   "de": {
-    "title": "* Rechtliche Grundlagen der Teilnahme an der Verlosung 3 Hotelnächte + Mietwagen während des Aufenthalts + iPhone",
+    "title": "* Rechtliche Grundlagen der Teilnahme an der Verlosung 3 Hotelnächte + Mietwagen während des Aufenthalts",
     "items": [
       {
         "h": "1. Veranstalter",
@@ -1827,7 +1866,7 @@
     ]
   },
   "fr": {
-    "title": "* Bases légales de participation au tirage au sort 3 nuits d'hôtel + location de voiture pendant le séjour + iPhone",
+    "title": "* Bases légales de participation au tirage au sort 3 nuits d'hôtel + location de voiture pendant le séjour",
     "items": [
       {
         "h": "1. Société organisatrice",
@@ -1868,7 +1907,7 @@
     ]
   },
   "ca": {
-    "title": "* Bases legals de participació Sorteig 3 nits d'hotel + lloguer de cotxe durant l'estada + iPhone",
+    "title": "* Bases legals de participació Sorteig 3 nits d'hotel + lloguer de cotxe durant l'estada",
     "items": [
       {
         "h": "1. Companyia organitzadora",
@@ -1909,7 +1948,7 @@
     ]
   },
   "pt": {
-    "title": "* Bases legais de participação Sorteio 3 noites de hotel + aluguer de carro durante a estadia + iPhone",
+    "title": "* Bases legais de participação Sorteio 3 noites de hotel + aluguer de carro durante a estadia",
     "items": [
       {
         "h": "1. Empresa organizadora",
@@ -1950,7 +1989,7 @@
     ]
   },
   "el": {
-    "title": "* Όροι συμμετοχής στην κλήρωση 3 διανυκτερεύσεων σε ξενοδοχείο + ενοικίαση αυτοκινήτου κατά τη διαμονή + iPhone",
+    "title": "* Όροι συμμετοχής στην κλήρωση 3 διανυκτερεύσεων σε ξενοδοχείο + ενοικίαση αυτοκινήτου κατά τη διαμονή",
     "items": [
       {
         "h": "1. Διοργανώτρια εταιρεία",
@@ -1991,7 +2030,7 @@
     ]
   },
   "it": {
-    "title": "* Basi legali di partecipazione all'estrazione 3 notti in hotel + noleggio auto durante il soggiorno + iPhone",
+    "title": "* Basi legali di partecipazione all'estrazione 3 notti in hotel + noleggio auto durante il soggiorno",
     "items": [
       {
         "h": "1. Società organizzatrice",
@@ -2155,7 +2194,6 @@
     document.getElementById('successH2').textContent = t.meta.successH2;
     document.getElementById('successP').textContent = t.meta.successP;
     document.getElementById('bookCarBtn').textContent = t.meta.bookCarCta;
-    document.getElementById('restartBtn').textContent = t.meta.restartCta;
     renderLegal(lang);
 
     rooms = t.rooms;
@@ -2248,11 +2286,6 @@
     document.getElementById('closingBlock').style.display='none';
     document.getElementById('successBlock').classList.add('show');
     document.getElementById('basesLegalesSection').classList.remove('reveal');
-  });
-
-  document.getElementById('restartBtn').addEventListener('click', () => {
-    window.scrollTo(0, 0);
-    location.reload();
   });
 
   // ---- Legal accordion ----
