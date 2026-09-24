@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Check-in · Record Go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #d3222a;
+    --red-dark: #b51b22;
+    --red-soft: #fdf1f1;
+    --text: #222;
+    --muted: #8a8a8a;
+    --border: #cfcfcf;
+    --line: #dcdcdc;
+    --page-bg: #f3f3f3;
+    --readonly: #f1f1f1;
+    --green: #1e7b3a;
+    --green-soft: #e8f5ec;
+    --amber: #9a5b00;
+    --amber-soft: #fff4df;
+    --blue: #1a56b0;
+    --blue-soft: #e9f0fd;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: "Roboto", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 1350px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    padding: 24px 90px 64px;
+    box-shadow: 0 0 12px rgba(0,0,0,.06);
+  }
+  .container { max-width: 1170px; margin: 0 auto; }
+
+  h1 { font-size: 32px; font-weight: 700; margin: 0 0 22px; line-height: 1.2; }
+  h1 .accent { color: var(--red); }
+  .divider { border: 0; border-top: 1px solid var(--line); margin: 0 0 34px; }
+  h2 { font-size: 22px; font-weight: 500; margin: 0; }
+  h3 { font-size: 21px; font-weight: 500; margin: 34px 0 26px; }
+  h3:first-of-type { margin-top: 26px; }
+
+  /* ---------- Cabecera de conductor ---------- */
+  .driver-head {
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .driver-head h2 { font-size: 24px; font-weight: 700; }
+  .driver-head .spacer { flex: 1; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 999px;
+    background: #efefef; color: #555; white-space: nowrap;
+  }
+  .badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .badge.pending { background: var(--amber-soft); color: var(--amber); }
+  .badge.sent { background: var(--blue-soft); color: var(--blue); }
+  .badge.ok { background: var(--green-soft); color: var(--green); }
+
+  /* ---------- Campos (estilo captura) ---------- */
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px 22px; }
+  .col-2 { grid-column: 1 / -1; }
+  .field {
+    position: relative; height: 46px; border: 1px solid var(--border); border-radius: 24px;
+    display: flex; align-items: center; gap: 10px; padding: 0 16px; background: #fff;
+    transition: border-color .15s;
+  }
+  .field:focus-within { border-color: #9a9a9a; }
+  .field label {
+    position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+    font-size: 17px; font-weight: 500; color: #b9b9b9; padding: 0 4px; background: #fff;
+    pointer-events: none; transition: all .15s; white-space: nowrap; line-height: 14px;
+  }
+  .field:focus-within label,
+  .field:has(input:not(:placeholder-shown)) label,
+  .field.is-select label,
+  .field.is-date label {
+    top: -1px; font-size: 12.5px; font-weight: 400; color: var(--muted);
+  }
+  .field input, .field select {
+    border: 0; outline: 0; background: transparent; width: 100%; min-width: 0;
+    font: inherit; font-size: 17px; font-weight: 500; color: var(--text); padding: 0;
+  }
+  .field input::placeholder { color: transparent; }
+  .field select { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 26px; }
+  .field .chev { position: absolute; right: 22px; pointer-events: none; }
+  .field .flag { flex: none; display: flex; }
+  .field.readonly { background: var(--readonly); border-color: var(--readonly); }
+  .field.readonly label { background: linear-gradient(#fff 50%, var(--readonly) 50%); }
+  .field.invalid { border-color: var(--red); }
+  .phone-row { display: flex; gap: 22px; }
+  .phone-row .prefix { flex: 0 0 176px; }
+  .phone-row .phone { flex: 1; }
+
+  /* ---------- Botones ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 46px; padding: 0 28px; border-radius: 24px; border: 2px solid var(--red);
+    font: inherit; font-size: 17px; font-weight: 500; cursor: pointer; white-space: nowrap;
+    transition: background .15s, color .15s;
+  }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
+  .btn-outline { background: #fff; color: var(--red); }
+  .btn-outline:hover { background: var(--red-soft); }
+  .btn-ghost { background: #fff; color: #555; border-color: var(--border); }
+  .btn-link {
+    background: none; border: 0; padding: 0; font: inherit; font-size: 15px; font-weight: 500;
+    color: var(--red); cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
+  }
+  .btn-link.muted { color: #777; }
+
+  /* ---------- Caja de verificación Neocheck ---------- */
+  .verify-box {
+    margin-top: 34px; display: flex; align-items: center; gap: 18px;
+    border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px; background: #fafafa;
+  }
+  .verify-box .v-icon {
+    flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--red-soft);
+    display: grid; place-items: center; color: var(--red);
+  }
+  .verify-box .v-text { flex: 1; min-width: 0; }
+  .verify-box strong { font-size: 17px; font-weight: 500; display: block; margin-bottom: 3px; }
+  .verify-box p { margin: 0; font-size: 14.5px; color: #666; line-height: 1.4; }
+  .verify-box.done { background: var(--green-soft); border-color: #bfe3c9; }
+  .verify-box.done .v-icon { background: #fff; color: var(--green); }
+  .verify-box.waiting { background: var(--blue-soft); border-color: #cbdaf6; }
+  .verify-box.waiting .v-icon { background: #fff; color: var(--blue); }
+  .powered { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* ---------- Conductores adicionales ---------- */
+  .section-sep { border: 0; border-top: 1px solid var(--line); margin: 46px 0 34px; }
+  .add-box {
+    border: 1.5px dashed #cfcfcf; border-radius: 18px; padding: 22px 24px;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .add-box .a-text { flex: 1; min-width: 240px; }
+  .add-box strong { font-size: 17px; font-weight: 500; display: block; margin-bottom: 4px; }
+  .add-box p { margin: 0; color: #666; font-size: 14.5px; }
+
+  .driver-card { border: 1px solid var(--line); border-radius: 22px; padding: 26px 28px 30px; margin-bottom: 24px; }
+  .driver-card .hint { margin: 18px 0 14px; font-size: 16px; color: #444; }
+  .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .choice-opt {
+    position: relative; display: flex; gap: 14px; align-items: flex-start; cursor: pointer;
+    border: 1.5px solid var(--border); border-radius: 16px; padding: 16px 18px; background: #fff;
+    transition: border-color .15s, background .15s;
+  }
+  .choice-opt:hover { border-color: #aaa; }
+  .choice-opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice-opt .c-icon { flex: none; color: #777; margin-top: 1px; }
+  .choice-opt strong { display: block; font-size: 16.5px; font-weight: 500; margin-bottom: 3px; }
+  .choice-opt span { font-size: 14px; color: #666; line-height: 1.4; }
+  .choice-opt:has(input:checked) { border-color: var(--red); background: var(--red-soft); }
+  .choice-opt:has(input:checked) .c-icon { color: var(--red); }
+  .choice-opt:has(input:disabled) { cursor: default; opacity: .55; }
+  .choice-opt:has(input:checked:disabled) { opacity: 1; }
+  .panel { margin-top: 30px; }
+  .panel[hidden] { display: none; }
+  .panel h4 { font-size: 18px; font-weight: 500; margin: 32px 0 24px; }
+  .panel h4:first-child { margin-top: 0; }
+  .note { font-size: 13.5px; color: #777; margin: 12px 0 0; line-height: 1.45; }
+  .error { color: var(--red); font-size: 14.5px; margin: 14px 0 0; }
+  .error:empty { display: none; }
+  .actions-row { margin-top: 28px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .sent-box .links { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 8px; }
+
+  .check {
+    display: flex; gap: 12px; align-items: flex-start; font-size: 17px; color: #333;
+    cursor: pointer; line-height: 1.35;
+  }
+  .check input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--red); flex: none; }
+  .check.small { font-size: 14.5px; color: #555; margin-top: 28px; }
+
+  .footer { margin-top: 44px; }
+  .footer .next-wrap { text-align: center; margin-top: 36px; }
+  .footer .btn-primary { min-width: 164px; }
+
+  /* ---------- Modal ---------- */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(20,20,20,.5); display: none;
+    align-items: center; justify-content: center; padding: 16px; z-index: 50;
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: #fff; border-radius: 22px; width: 100%; max-width: 480px; max-height: calc(100vh - 32px);
+    overflow: auto; padding: 28px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  .modal .close {
+    position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border: 0; border-radius: 50%;
+    background: #f2f2f2; cursor: pointer; font-size: 20px; line-height: 1; color: #555;
+  }
+  .modal h5 { font-size: 21px; font-weight: 700; margin: 0 0 8px; padding-right: 30px; }
+  .modal p { color: #555; font-size: 15px; line-height: 1.45; margin: 0 0 18px; }
+  .modal .brand { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .steps { list-style: none; margin: 0 0 22px; padding: 0; }
+  .steps li {
+    display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 15.5px;
+  }
+  .steps li:last-child { border-bottom: 0; }
+  .steps .dot {
+    width: 26px; height: 26px; flex: none; border-radius: 50%; border: 2px solid #d5d5d5; color: #999;
+    display: grid; place-items: center; font-size: 13px; font-weight: 700;
+  }
+  .steps li.running .dot { border-color: var(--red); border-top-color: transparent; animation: spin .8s linear infinite; }
+  .steps li.done .dot { background: var(--green); border-color: var(--green); color: #fff; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .modal .stack { display: grid; gap: 12px; }
+  .modal .stack .btn { width: 100%; }
+  .success-icon {
+    width: 64px; height: 64px; border-radius: 50%; background: var(--green-soft); color: var(--green);
+    display: grid; place-items: center; margin: 4px auto 16px;
+  }
+  .center { text-align: center; }
+  .qr { display: block; margin: 0 auto 16px; width: 180px; height: 180px; }
+  .copy-row {
+    display: flex; gap: 8px; align-items: center; background: #f4f4f4; border-radius: 12px; padding: 8px 8px 8px 14px;
+    font-size: 13.5px; color: #555; margin-bottom: 16px;
+  }
+  .copy-row code { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .copy-row .btn { height: 34px; padding: 0 14px; font-size: 14px; border-width: 1.5px; }
+  .summary { list-style: none; padding: 0; margin: 0 0 18px; }
+  .summary li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 15.5px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0;
+    background: #222; color: #fff; padding: 12px 20px; border-radius: 12px; font-size: 15px;
+    transition: all .25s; z-index: 60; pointer-events: none; max-width: calc(100% - 32px);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .page { padding: 20px 16px 48px; }
+    h1 { font-size: 25px; }
+    .grid, .choice { grid-template-columns: 1fr; gap: 26px; }
+    .choice { gap: 12px; }
+    .driver-card { padding: 20px 16px 24px; }
+    .verify-box { flex-wrap: wrap; }
+    .verify-box .btn { width: 100%; white-space: normal; height: auto; min-height: 46px; padding: 10px 20px; line-height: 1.25; }
+    .phone-row { gap: 12px; }
+    .phone-row .prefix { flex-basis: 130px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="container">
+    <h1>Por favor, completa tus datos para realizar el <span class="accent">check-in</span></h1>
+    <hr class="divider">
+
+    <!-- ================= CONDUCTOR PRINCIPAL ================= -->
+    <section id="main-driver">
+      <div class="driver-head">
+        <h2>Conductor principal</h2>
+        <span class="badge pending" id="main-badge">Pendiente de verificar</span>
+      </div>
+
+      <h3>Datos personales</h3>
+      <div class="grid">
+        <div class="field col-2"><input id="m-name" placeholder=" " value="María García Pérez"><label for="m-name">Nombre Completo</label></div>
+        <div class="field is-select" data-country>
+          <span class="flag"></span>
+          <select id="m-nat"></select><label for="m-nat">Nacionalidad</label>
+          <svg class="chev" width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="#d3222a" stroke-width="1.8"/></svg>
+        </div>
+        <div class="field"><input id="m-doc" placeholder=" " value="12345678Z"><label for="m-doc">Documento de identidad</label></div>
+        <div class="field is-date"><input id="m-birth" type="date" value="1996-08-31"><label for="m-birth">Fecha de nacimiento</label></div>
+      </div>
+
+      <h3>Dirección</h3>
+      <div class="grid">
+        <div class="field"><input id="m-addr" placeholder=" " value="Calle Mayor 12"><label for="m-addr">Dirección</label></div>
+        <div class="field"><input id="m-addr2" placeholder=" "><label for="m-addr2">Complemento de dirección (opcional)</label></div>
+        <div class="field"><input id="m-city" placeholder=" " value="Vila-real"><label for="m-city">Ciudad</label></div>
+        <div class="field"><input id="m-prov" placeholder=" " value="Castellón"><label for="m-prov">Provincia</label></div>
+        <div class="field"><input id="m-zip" placeholder=" " value="12540"><label for="m-zip">Código postal</label></div>
+        <div class="field is-select" data-country>
+          <span class="flag"></span>
+          <select id="m-country"></select><label for="m-country">País</label>
+          <svg class="chev" width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="#d3222a" stroke-width="1.8"/></svg>
+        </div>
+      </div>
+
+      <h3>Por si necesitamos contactar contigo</h3>
+      <div class="grid">
+        <div class="phone-row">
+          <div class="field is-select prefix" data-prefix>
+            <span class="flag"></span>
+            <select id="m-prefix"></select><label for="m-prefix">Prefijo</label>
+            <svg class="chev" width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="#d3222a" stroke-width="1.8"/></svg>
+          </div>
+          <div class="field phone"><input id="m-phone" type="tel" placeholder=" " value="600000000"><label for="m-phone">Teléfono</label></div>
+        </div>
+        <div></div>
+        <div class="field readonly"><input id="m-email" placeholder=" " value="maria.garcia@example.com" readonly><label for="m-email">Correo electrónico</label></div>
+      </div>
+
+      <!-- Verificación Neocheck conductor principal -->
+      <div class="verify-box" id="main-verify"></div>
+    </section>
+
+    <!-- ================= CONDUCTORES ADICIONALES ================= -->
+    <hr class="section-sep">
+    <section>
+      <div class="driver-head" style="margin-bottom:22px">
+        <h2>Conductores adicionales</h2>
+      </div>
+      <div id="drivers"></div>
+      <div class="add-box" id="add-box">
+        <div class="v-icon" style="width:48px;height:48px;border-radius:50%;background:var(--red-soft);color:var(--red);display:grid;place-items:center;flex:none">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M2 21c0-4 3.6-7 8-7s8 3 8 7"/><path d="M19 5v6M16 8h6"/></svg>
+        </div>
+        <div class="a-text">
+          <strong id="add-title">¿Va a conducir alguien más?</strong>
+          <p>Añade un conductor adicional. Puedes rellenar sus datos ahora o enviarle un email para que lo haga él.</p>
+        </div>
+        <button class="btn btn-outline" id="add-driver">+ Añadir conductor adicional</button>
+      </div>
+    </section>
+
+    <!-- ================= PIE ================= -->
+    <div class="footer">
+      <label class="check"><input type="checkbox"> Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.</label>
+      <p class="error center" id="next-error"></p>
+      <div class="next-wrap"><button class="btn btn-primary" id="next">Siguiente</button></div>
+    </div>
+  </div>
+</main>
+
+<div class="overlay" id="overlay"><div class="modal" id="modal" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- Datos auxiliares ---------------- */
+const COUNTRIES = [
+  ["ES", "España", "+34"], ["FR", "Francia", "+33"], ["PT", "Portugal", "+351"],
+  ["IT", "Italia", "+39"], ["DE", "Alemania", "+49"], ["NL", "Países Bajos", "+31"], ["GB", "Reino Unido", "+44"]
+];
+function flag(cc) {
+  const s = (inner) => `<svg width="20" height="14" viewBox="0 0 18 12" style="border-radius:2px;box-shadow:0 0 0 .5px rgba(0,0,0,.15)">${inner}</svg>`;
+  const h = (a, b, c) => `<rect width="18" height="4" fill="${a}"/><rect y="4" width="18" height="4" fill="${b}"/><rect y="8" width="18" height="4" fill="${c}"/>`;
+  const v = (a, b, c) => `<rect width="6" height="12" fill="${a}"/><rect x="6" width="6" height="12" fill="${b}"/><rect x="12" width="6" height="12" fill="${c}"/>`;
+  switch (cc) {
+    case "ES": return s(`<rect width="18" height="12" fill="#c60b1e"/><rect y="3" width="18" height="6" fill="#ffc400"/>`);
+    case "FR": return s(v("#0055a4", "#fff", "#ef4135"));
+    case "IT": return s(v("#009246", "#fff", "#ce2b37"));
+    case "DE": return s(h("#000", "#dd0000", "#ffce00"));
+    case "NL": return s(h("#ae1c28", "#fff", "#21468b"));
+    case "PT": return s(`<rect width="18" height="12" fill="#f00"/><rect width="7" height="12" fill="#060"/>`);
+    case "GB": return s(`<rect width="18" height="12" fill="#012169"/><path d="M0 0l18 12M18 0L0 12" stroke="#fff" stroke-width="2.4"/><path d="M9 0v12M0 6h18" stroke="#fff" stroke-width="3.6"/><path d="M9 0v12M0 6h18" stroke="#c8102e" stroke-width="2"/>`);
+  }
+  return "";
+}
+function initSelects(root) {
+  root.querySelectorAll("[data-country] select").forEach(sel => {
+    if (!sel.options.length) sel.innerHTML = COUNTRIES.map(([cc, n]) => `<option value="${cc}">${n}</option>`).join("");
+  });
+  root.querySelectorAll("[data-prefix] select").forEach(sel => {
+    if (!sel.options.length) sel.innerHTML = COUNTRIES.map(([cc, , p]) => `<option value="${cc}">${p}</option>`).join("");
+  });
+  root.querySelectorAll("[data-country], [data-prefix]").forEach(f => {
+    const sel = f.querySelector("select"), fl = f.querySelector(".flag");
+    const upd = () => fl.innerHTML = flag(sel.value);
+    sel.addEventListener("change", upd); upd();
+  });
+}
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const now = () => new Date().toLocaleString("es-ES", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+const firstName = (n) => (n || "").trim().split(/\s+/)[0] || "el conductor adicional";
+
+const ICON = {
+  id: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><circle cx="8" cy="11" r="2.2"/><path d="M4.8 16c.6-1.5 1.8-2.3 3.2-2.3s2.6.8 3.2 2.3M14 10h5M14 13.5h3.5"/></svg>`,
+  check: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+  mail: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>`,
+  edit: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></svg>`,
+  phone: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>`
+};
+const CHEV = `<svg class="chev" width="16" height="10" viewBox="0 0 16 10"><path d="M1 1l7 7 7-7" fill="none" stroke="#d3222a" stroke-width="1.8"/></svg>`;
+
+/* ---------------- Toast y modal ---------------- */
+const toastEl = document.getElementById("toast");
+let toastT;
+function toast(msg) {
+  toastEl.textContent = msg; toastEl.classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove("show"), 2600);
+}
+const overlay = document.getElementById("overlay"), modal = document.getElementById("modal");
+function openModal(html) {
+  modal.innerHTML = `<button class="close" aria-label="Cerrar">×</button>` + html;
+  modal.querySelector(".close").onclick = closeModal;
+  overlay.classList.add("open");
+}
+function closeModal() { overlay.classList.remove("open"); modal.innerHTML = ""; }
+overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+/* Simulación del flujo de Neocheck */
+function openNeocheck(name, onDone) {
+  openModal(`
+    <div class="brand">Neocheck · Verificación de identidad</div>
+    <h5>Verificar documentos de ${esc(name)}</h5>
+    <p>Necesitarás el documento de identidad y el carnet de conducir a mano. El selfie debe hacerlo <strong>${esc(firstName(name))}</strong>.</p>
+    <ul class="steps">
+      <li><span class="dot">1</span>Documento de identidad (anverso y reverso)</li>
+      <li><span class="dot">2</span>Carnet de conducir</li>
+      <li><span class="dot">3</span>Selfie con prueba de vida</li>
+    </ul>
+    <div class="stack"><button class="btn btn-primary" id="nc-start">Iniciar verificación</button></div>`);
+  modal.querySelector("#nc-start").onclick = (e) => {
+    e.target.disabled = true; e.target.textContent = "Verificando…";
+    const items = [...modal.querySelectorAll(".steps li")];
+    let i = 0;
+    const step = () => {
+      if (!overlay.classList.contains("open")) return;
+      if (i > 0) { items[i - 1].className = "done"; items[i - 1].querySelector(".dot").innerHTML = "✓"; }
+      if (i === items.length) {
+        setTimeout(() => {
+          openModal(`<div class="center"><div class="success-icon">${ICON.check}</div>
+            <h5 style="padding:0">Identidad verificada</h5>
+            <p>Los documentos de ${esc(name)} se han verificado correctamente.</p></div>
+            <div class="stack"><button class="btn btn-primary" id="nc-ok">Continuar</button></div>`);
+          modal.querySelector("#nc-ok").onclick = closeModal;
+          onDone();
+        }, 350);
+        return;
+      }
+      items[i].className = "running"; items[i].querySelector(".dot").innerHTML = "";
+      i++; setTimeout(step, 900);
+    };
+    step();
+  };
+}
+
+/* QR simulado (solo decorativo) */
+function fakeQR(seed) {
+  const n = 25, c = 7.2; let r = seed;
+  const rnd = () => (r = (r * 9301 + 49297) % 233280) / 233280;
+  let out = `<svg class="qr" viewBox="0 0 ${n * c} ${n * c}"><rect width="100%" height="100%" fill="#fff"/>`;
+  const finder = (x, y) => out += `<rect x="${x*c}" y="${y*c}" width="${7*c}" height="${7*c}" fill="#222"/><rect x="${(x+1)*c}" y="${(y+1)*c}" width="${5*c}" height="${5*c}" fill="#fff"/><rect x="${(x+2)*c}" y="${(y+2)*c}" width="${3*c}" height="${3*c}" fill="#222"/>`;
+  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+    const inF = (x < 8 && y < 8) || (x > n - 9 && y < 8) || (x < 8 && y > n - 9);
+    if (!inF && rnd() > .52) out += `<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}" fill="#222"/>`;
+  }
+  finder(0, 0); finder(n - 7, 0); finder(0, n - 7);
+  return out + `</svg>`;
+}
+
+/* ---------------- Conductor principal ---------------- */
+const main = { verified: false };
+function renderMain() {
+  const box = document.getElementById("main-verify"), badge = document.getElementById("main-badge");
+  if (main.verified) {
+    box.className = "verify-box done";
+    box.innerHTML = `<div class="v-icon">${ICON.check}</div><div class="v-text"><strong>Documentos verificados</strong><p>Tu identidad y tu carnet de conducir se han verificado correctamente (${main.at}).</p></div>`;
+    badge.className = "badge ok"; badge.textContent = "Verificado";
+  } else {
+    box.className = "verify-box";
+    box.innerHTML = `<div class="v-icon">${ICON.id}</div>
+      <div class="v-text"><strong>Verificación de documentos</strong>
+      <p>Escanea tu documento de identidad y tu carnet de conducir y hazte un selfie. Tarda menos de 2 minutos.</p>
+      <div class="powered">Verificación segura con Neocheck</div></div>
+      <button class="btn btn-outline" id="verify-main">Verificar mis documentos</button>`;
+    box.querySelector("#verify-main").onclick = () =>
+      openNeocheck(document.getElementById("m-name").value || "el conductor principal", () => {
+        main.verified = true; main.at = now(); renderMain();
+        document.getElementById("next-error").textContent = "";
+      });
+  }
+}
+
+/* ---------------- Conductores adicionales ---------------- */
+const drivers = [];
+let seq = 0;
+const STATUS = {
+  empty:    ["", "Sin datos"],
+  data:     ["pending", "Pendiente de verificar"],
+  mobile:   ["sent", "Verificando en su móvil"],
+  sent:     ["sent", "Invitación enviada"],
+  verified: ["ok", "Verificado"]
+};
+
+function addDriver() {
+  const d = { id: ++seq, mode: null, status: "empty", name: "", email: "" };
+  drivers.push(d);
+  const el = document.createElement("section");
+  el.className = "driver-card"; el.dataset.id = d.id;
+  el.innerHTML = driverTemplate(d);
+  document.getElementById("drivers").appendChild(el);
+  initSelects(el);
+  bindDriver(d, el);
+  refresh();
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function driverTemplate(d) {
+  const f = (id, label, extra = "", cls = "") =>
+    `<div class="field ${cls}"><input id="${id}-${d.id}" placeholder=" " ${extra}><label for="${id}-${d.id}">${label}</label></div>`;
+  const sel = (id, label, kind, cls = "") =>
+    `<div class="field is-select ${cls}" data-${kind}><span class="flag"></span><select id="${id}-${d.id}"></select><label for="${id}-${d.id}">${label}</label>${CHEV}</div>`;
+  return `
+    <div class="driver-head">
+      <h2 style="font-size:21px;font-weight:500">Conductor adicional <span class="num"></span></h2>
+      <span class="badge" data-badge></span>
+      <span class="spacer"></span>
+      <button class="btn-link muted" data-remove>Eliminar</button>
+    </div>
+    <p class="hint">¿Cómo quieres añadir sus datos?</p>
+    <div class="choice">
+      <label class="choice-opt"><input type="radio" name="mode-${d.id}" value="fill">
+        <span class="c-icon">${ICON.edit}</span>
+        <div><strong>Rellenar ahora</strong><span>Introduce tú sus datos y verificad sus documentos con Neocheck.</span></div></label>
+      <label class="choice-opt"><input type="radio" name="mode-${d.id}" value="email">
+        <span class="c-icon">${ICON.mail}</span>
+        <div><strong>Enviarle un email</strong><span>Recibirá un enlace para completar sus datos y verificarse él mismo.</span></div></label>
+    </div>
+
+    <!-- Opción A: rellenar ahora -->
+    <div class="panel" data-panel="fill" hidden>
+      <h4>Datos personales</h4>
+      <div class="grid">
+        ${f("a-name", "Nombre Completo", "", "col-2")}
+        ${sel("a-nat", "Nacionalidad", "country")}
+        ${f("a-doc", "Documento de identidad")}
+        <div class="field is-date"><input id="a-birth-${d.id}" type="date"><label for="a-birth-${d.id}">Fecha de nacimiento</label></div>
+      </div>
+      <h4>Carnet de conducir</h4>
+      <div class="grid">
+        ${sel("a-lic-country", "País de expedición", "country")}
+        <div class="field is-date"><input id="a-lic-date-${d.id}" type="date"><label for="a-lic-date-${d.id}">Fecha de expedición</label></div>
+      </div>
+      <h4>Contacto</h4>
+      <div class="grid">
+        ${f("a-email", "Correo electrónico (opcional)", 'type="email"')}
+      </div>
+      <p class="note">Si indicas su email, le enviaremos una copia del contrato.</p>
+      <label class="check small"><input type="checkbox" data-consent> Confirmo que tengo el consentimiento de esta persona para facilitar sus datos personales a Record Go para la gestión de esta reserva.</label>
+      <div class="verify-box" data-verify-fill></div>
+      <p class="error" data-error-fill></p>
+    </div>
+
+    <!-- Opción B: enviar email -->
+    <div class="panel" data-panel="email" hidden>
+      <div data-email-form>
+        <div class="grid">
+          ${f("b-name", "Nombre Completo")}
+          ${f("b-email", "Correo electrónico", 'type="email"')}
+          <div class="phone-row">
+            ${sel("b-prefix", "Prefijo", "prefix", "prefix")}
+            ${f("b-phone", "Teléfono (opcional)", 'type="tel"', "phone")}
+          </div>
+        </div>
+        <p class="note">Le enviaremos un enlace seguro y personal para completar sus datos y verificar sus documentos. Caduca en la fecha de recogida. Si indicas su teléfono, también se lo enviaremos por SMS.</p>
+        <p class="error" data-error-email></p>
+        <div class="actions-row"><button class="btn btn-primary" data-send>Enviar invitación</button></div>
+      </div>
+      <div class="verify-box waiting sent-box" data-sent hidden></div>
+    </div>
+  `;
+}
+
+function bindDriver(d, el) {
+  const $ = (s) => el.querySelector(s);
+  el.querySelectorAll(`input[name="mode-${d.id}"]`).forEach(r => r.addEventListener("change", () => {
+    d.mode = r.value; renderDriver(d);
+  }));
+  $("[data-remove]").onclick = () => {
+    if (d.status !== "empty" && !confirm("¿Eliminar este conductor adicional?")) return;
+    drivers.splice(drivers.indexOf(d), 1); el.remove(); refresh();
+  };
+  $(`#a-name-${d.id}`).addEventListener("input", e => { d.name = e.target.value; renderDriver(d); });
+  el.querySelectorAll('[data-panel="fill"] input').forEach(i => i.addEventListener("input", () => {
+    i.closest(".field")?.classList.remove("invalid");
+    if (d.status !== "verified" && d.status !== "mobile") { d.status = fillComplete(d, false) ? "data" : "empty"; renderDriver(d); }
+  }));
+  $("[data-send]").onclick = () => sendInvite(d);
+}
+
+function fillComplete(d, mark) {
+  const el = card(d), ids = ["a-name", "a-doc", "a-birth", "a-lic-date"];
+  let ok = true;
+  ids.forEach(id => {
+    const inp = el.querySelector(`#${id}-${d.id}`);
+    if (!inp.value.trim()) { ok = false; if (mark) inp.closest(".field").classList.add("invalid"); }
+  });
+  return ok;
+}
+const card = (d) => document.querySelector(`.driver-card[data-id="${d.id}"]`);
+
+function renderDriver(d) {
+  const el = card(d); if (!el) return;
+  const $ = (s) => el.querySelector(s);
+  const [cls, txt] = STATUS[d.status];
+  const badge = $("[data-badge]"); badge.className = "badge " + cls; badge.textContent = txt;
+  el.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== d.mode);
+  const locked = ["sent", "mobile", "verified"].includes(d.status);
+  el.querySelectorAll(`input[name="mode-${d.id}"]`).forEach(r => r.disabled = locked);
+
+  if (d.mode === "fill") {
+    el.querySelectorAll('[data-panel="fill"] input, [data-panel="fill"] select').forEach(i => i.disabled = d.status === "verified" || d.status === "mobile");
+    const box = $("[data-verify-fill]"), nm = firstName(d.name);
+    if (d.status === "verified") {
+      box.className = "verify-box done";
+      box.innerHTML = `<div class="v-icon">${ICON.check}</div><div class="v-text"><strong>Documentos verificados</strong><p>La identidad y el carnet de ${esc(d.name)} se han verificado correctamente (${d.at}).</p></div>`;
+    } else if (d.status === "mobile") {
+      box.className = "verify-box waiting";
+      box.innerHTML = `<div class="v-icon">${ICON.phone}</div><div class="v-text"><strong>Esperando a que ${esc(nm)} se verifique desde su móvil</strong>
+        <p>Este estado se actualizará automáticamente cuando termine.</p>
+        <div class="sent-box"><div class="links"><button class="btn-link" data-qr>Ver QR de nuevo</button><button class="btn-link muted" data-here>Verificar aquí</button><button class="btn-link muted" data-sim>(Demo) Simular que lo completa</button></div></div></div>`;
+      box.querySelector("[data-qr]").onclick = () => showQR(d);
+      box.querySelector("[data-here]").onclick = () => openNeocheck(d.name, () => verified(d));
+      box.querySelector("[data-sim]").onclick = () => { verified(d); toast(`${nm} ha completado su verificación`); };
+    } else {
+      box.className = "verify-box";
+      box.innerHTML = `<div class="v-icon">${ICON.id}</div>
+        <div class="v-text"><strong>Verificación de documentos${d.name ? " de " + esc(nm) : ""}</strong>
+        <p>Escaneo de su documento de identidad y carnet de conducir, y selfie de ${d.name ? esc(nm) : "la persona"}.</p>
+        <div class="powered">Verificación segura con Neocheck</div></div>
+        <button class="btn btn-outline" data-verify>Verificar documentos del conductor adicional</button>`;
+      box.querySelector("[data-verify]").onclick = () => startFillVerify(d);
+    }
+  }
+
+  if (d.mode === "email") {
+    const form = $("[data-email-form]"), sent = $("[data-sent]");
+    form.hidden = d.status === "sent" || d.status === "verified";
+    sent.hidden = !form.hidden;
+    if (d.status === "sent") {
+      sent.className = "verify-box waiting sent-box";
+      sent.innerHTML = `<div class="v-icon">${ICON.mail}</div><div class="v-text">
+        <strong>Invitación enviada a ${esc(d.email)}</strong>
+        <p>${esc(firstName(d.name))} recibirá un enlace para completar sus datos y verificar sus documentos. Enviada el ${d.sentAt}.</p>
+        <div class="links"><button class="btn-link" data-resend>Reenviar</button><button class="btn-link" data-change>Cambiar email</button><button class="btn-link" data-self>Prefiero rellenarlo yo</button><button class="btn-link muted" data-sim>(Demo) Simular que lo completa</button></div></div>`;
+      sent.querySelector("[data-resend]").onclick = () => { d.sentAt = now(); renderDriver(d); toast(`Invitación reenviada a ${d.email}`); };
+      sent.querySelector("[data-change]").onclick = () => { d.status = "empty"; renderDriver(d); refresh(); card(d).querySelector(`#b-email-${d.id}`).focus(); };
+      sent.querySelector("[data-self]").onclick = () => {
+        d.status = "empty"; d.mode = "fill";
+        card(d).querySelector(`#a-name-${d.id}`).value = d.name;
+        card(d).querySelector(`input[value="fill"]`).checked = true;
+        renderDriver(d); refresh();
+      };
+      sent.querySelector("[data-sim]").onclick = () => { verified(d); toast(`${firstName(d.name)} ha completado su check-in`); };
+    } else if (d.status === "verified") {
+      sent.className = "verify-box done";
+      sent.innerHTML = `<div class="v-icon">${ICON.check}</div><div class="v-text"><strong>${esc(d.name)} ha completado su check-in</strong><p>Sus datos y documentos se han verificado correctamente (${d.at}).</p></div>`;
+    }
+  }
+  const num = el.querySelector(".num"); num.textContent = drivers.length > 1 ? drivers.indexOf(d) + 1 : "";
+}
+
+function startFillVerify(d) {
+  const err = card(d).querySelector("[data-error-fill]");
+  err.textContent = "";
+  if (!fillComplete(d, true)) { err.textContent = "Completa los datos obligatorios del conductor adicional antes de verificar sus documentos."; return; }
+  if (!card(d).querySelector("[data-consent]").checked) { err.textContent = "Debes confirmar que tienes el consentimiento de esta persona."; return; }
+  const nm = firstName(d.name);
+  openModal(`
+    <h5>¿Está ${esc(nm)} contigo ahora mismo?</h5>
+    <p>La verificación incluye un selfie con prueba de vida, así que debe hacerla ${esc(nm)} en persona.</p>
+    <div class="stack">
+      <button class="btn btn-primary" data-yes>Sí, verificar en este dispositivo</button>
+      <button class="btn btn-outline" data-no>No, que lo haga desde su móvil</button>
+    </div>`);
+  modal.querySelector("[data-yes]").onclick = () => openNeocheck(d.name, () => verified(d));
+  modal.querySelector("[data-no]").onclick = () => { d.status = "mobile"; renderDriver(d); refresh(); showQR(d); };
+}
+
+function showQR(d) {
+  const nm = firstName(d.name), link = `https://checkin.recordgo.com/v/${(d.id * 7919).toString(36)}x${Date.now().toString(36).slice(-5)}`;
+  openModal(`
+    <h5>Verificación desde su móvil</h5>
+    <p>Pide a ${esc(nm)} que escanee este código o envíale el enlace. Solo tendrá que escanear sus documentos y hacerse el selfie.</p>
+    ${fakeQR(d.id * 97 + 13)}
+    <div class="copy-row"><code>${link}</code><button class="btn btn-outline" data-copy>Copiar</button></div>
+    <div class="stack"><button class="btn btn-ghost" data-close>Hecho</button></div>`);
+  modal.querySelector("[data-copy]").onclick = () => { navigator.clipboard?.writeText(link).catch(() => {}); toast("Enlace copiado"); };
+  modal.querySelector("[data-close]").onclick = closeModal;
+}
+
+function sendInvite(d) {
+  const el = card(d), err = el.querySelector("[data-error-email]");
+  const nameI = el.querySelector(`#b-name-${d.id}`), mailI = el.querySelector(`#b-email-${d.id}`);
+  err.textContent = "";
+  [nameI, mailI].forEach(i => i.closest(".field").classList.remove("invalid"));
+  const name = nameI.value.trim(), mail = mailI.value.trim().toLowerCase();
+  if (!name) { nameI.closest(".field").classList.add("invalid"); err.textContent = "Indica el nombre del conductor adicional."; return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { mailI.closest(".field").classList.add("invalid"); err.textContent = "Introduce un correo electrónico válido."; return; }
+  if (mail === document.getElementById("m-email").value.trim().toLowerCase()) {
+    mailI.closest(".field").classList.add("invalid"); err.textContent = "El email debe ser distinto al del conductor principal."; return;
+  }
+  d.name = name; d.email = mail; d.status = "sent"; d.sentAt = now();
+  renderDriver(d); refresh(); toast(`Invitación enviada a ${mail}`);
+}
+
+function verified(d) { d.status = "verified"; d.at = now(); renderDriver(d); refresh(); }
+
+function refresh() {
+  drivers.forEach(renderDriver);
+  document.getElementById("add-title").textContent = drivers.length ? "¿Otro conductor más?" : "¿Va a conducir alguien más?";
+  document.getElementById("add-driver").textContent = drivers.length ? "+ Añadir otro conductor" : "+ Añadir conductor adicional";
+}
+
+/* ---------------- Siguiente ---------------- */
+document.getElementById("next").onclick = () => {
+  const err = document.getElementById("next-error");
+  if (!main.verified) {
+    err.textContent = "Verifica los documentos del conductor principal para continuar.";
+    document.getElementById("main-verify").scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  err.textContent = "";
+  const rows = [`<li><span>${esc(document.getElementById("m-name").value)} <small style="color:#888">(principal)</small></span><span class="badge ok">Verificado</span></li>`]
+    .concat(drivers.map(d => {
+      const [cls, txt] = STATUS[d.status];
+      return `<li><span>${esc(d.name || "Conductor adicional")}</span><span class="badge ${cls}">${txt}</span></li>`;
+    }));
+  const pending = drivers.some(d => d.status !== "verified");
+  openModal(`
+    <h5>Resumen de conductores</h5>
+    <ul class="summary">${rows.join("")}</ul>
+    ${pending ? `<p>Los conductores adicionales pendientes podrán completar su verificación hasta el momento de la recogida. Les enviaremos un recordatorio.</p>` : `<p>Todos los conductores están verificados.</p>`}
+    <div class="stack"><button class="btn btn-primary" data-go>Continuar</button><button class="btn btn-ghost" data-back>Volver</button></div>`);
+  modal.querySelector("[data-go]").onclick = () => { closeModal(); toast("Check-in completado"); };
+  modal.querySelector("[data-back]").onclick = closeModal;
+};
+
+document.getElementById("add-driver").onclick = addDriver;
+initSelects(document);
+renderMain();
+</script>
+</body>
+</html>
