@@ -479,16 +479,16 @@
     .map .car { cursor: grab; }
     .map.is-dragging .car { cursor: grabbing; }
 
+    /* Botón de pausa sobre la esquina del plano */
     .map-controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-top: 14px;
-      padding: 0 4px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.6);
+      position: absolute;
+      right: 26px;
+      bottom: 26px;
+      z-index: 2;
     }
+
+    .map-controls .icon-btn { background: rgba(0, 0, 0, 0.55); border-color: rgba(255, 255, 255, 0.3); }
+    .map-controls .icon-btn:hover { background: rgba(0, 0, 0, 0.75); }
 
     .icon-btn {
       display: inline-flex;
@@ -512,15 +512,42 @@
     .icon-btn[aria-pressed="true"] .i-play { display: block; }
     .icon-btn[aria-pressed="true"] .i-pause { display: none; }
 
-    .link-btn {
-      margin-top: 24px;
-      background: none;
-      border: 0;
-      color: var(--muted);
-      font: inherit;
-      text-decoration: underline;
-      cursor: pointer;
+    .registered {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      text-align: left;
     }
+
+    .registered-icon { width: 28px; height: 28px; flex: none; }
+
+    .destino .registered p {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+    }
+
+    .btn-web {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      margin-top: 20px;
+      padding: 0 32px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      background: #CF2D30;
+      border-radius: 999px;
+      transition: background-color .15s ease;
+    }
+
+    .btn-web:hover { background: #B4252A; }
+    .btn-web:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
     .fade-in { animation: fade .4s ease both; }
     @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -541,6 +568,7 @@
       .hs-link { min-height: 32px; margin-top: 8px; padding: 0 14px; font-size: 13px; }
       .hs-dot { left: -10px; top: -10px; width: 20px; height: 20px; }
       .map { border-radius: 6px; }
+      .map-controls { right: 16px; bottom: 16px; }
     }
 
     .lang-code { display: none; font-size: 14px; font-weight: 600; text-transform: uppercase; }
@@ -810,7 +838,6 @@
         </div>
 
         <div class="map-controls">
-          <span data-i18n="dragHint">Arrastra el coche por la carretera</span>
           <button class="icon-btn" id="map-toggle" type="button" aria-pressed="false" aria-label="Pausar animación">
             <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="8.5" y="1" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
             <svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11a.8.8 0 0 0 1.2.7l9-5.5a.8.8 0 0 0 0-1.4l-9-5.5A.8.8 0 0 0 3 1.5z" fill="currentColor"/></svg>
@@ -818,7 +845,11 @@
         </div>
       </div>
 
-      <button class="link-btn" type="button" id="volver" data-i18n="change">Cambiar destino</button>
+      <div class="registered" role="status">
+        <svg class="registered-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#CF2D30"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p data-i18n="registered">Tu participación ha sido registrada. ¡Suerte!</p>
+      </div>
+      <a class="btn-web" href="https://www.recordrentacar.com/es/" target="_blank" rel="noopener" data-i18n="visitWeb">Visitar web Record Go</a>
     </div>
   </section>
 
@@ -848,8 +879,9 @@
         cta: 'Seguir mi hilo rojo',
         legal: 'Al continuar aceptas las bases legales del sorteo y la política de privacidad de Record Go.',
         countries: { es: 'España', pt: 'Portugal', gr: 'Grecia', it: 'Italia' },
-        leadsTo: 'Tu hilo rojo te lleva a', change: 'Cambiar destino', langLabel: 'Idioma',
-        readStory: 'Ver historia', dragHint: 'Arrastra el coche por la carretera', pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
+        leadsTo: 'Tu hilo rojo te lleva a', langLabel: 'Idioma',
+        registered: 'Tu participación ha sido registrada. ¡Suerte!', visitWeb: 'Visitar web Record Go',
+        readStory: 'Ver historia', pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
       },
       en: {
         titleA: 'Your', titleB: 'red thread', titleC: 'has a destination',
@@ -863,8 +895,9 @@
         cta: 'Follow my red thread',
         legal: "By continuing you accept the official rules of the draw and Record Go's privacy policy.",
         countries: { es: 'Spain', pt: 'Portugal', gr: 'Greece', it: 'Italy' },
-        leadsTo: 'Your red thread takes you to', change: 'Change destination', langLabel: 'Language',
-        readStory: 'Read the story', dragHint: 'Drag the car along the road', pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
+        leadsTo: 'Your red thread takes you to', langLabel: 'Language',
+        registered: 'Your entry has been registered. Good luck!', visitWeb: 'Visit the Record Go website',
+        readStory: 'Read the story', pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
       },
       de: {
         titleA: 'Dein', titleB: 'roter Faden', titleC: 'hat ein Ziel',
@@ -878,8 +911,9 @@
         cta: 'Meinem roten Faden folgen',
         legal: 'Mit dem Fortfahren akzeptierst du die Teilnahmebedingungen der Verlosung und die Datenschutzrichtlinie von Record Go.',
         countries: { es: 'Spanien', pt: 'Portugal', gr: 'Griechenland', it: 'Italien' },
-        leadsTo: 'Dein roter Faden führt dich nach', change: 'Ziel ändern', langLabel: 'Sprache',
-        readStory: 'Geschichte lesen', dragHint: 'Zieh das Auto über die Straße', pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
+        leadsTo: 'Dein roter Faden führt dich nach', langLabel: 'Sprache',
+        registered: 'Deine Teilnahme wurde registriert. Viel Glück!', visitWeb: 'Website von Record Go besuchen',
+        readStory: 'Geschichte lesen', pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
       },
       fr: {
         titleA: 'Ton', titleB: 'fil rouge', titleC: 'a une destination',
@@ -893,8 +927,9 @@
         cta: 'Suivre mon fil rouge',
         legal: 'En continuant, tu acceptes le règlement du tirage au sort et la politique de confidentialité de Record Go.',
         countries: { es: 'Espagne', pt: 'Portugal', gr: 'Grèce', it: 'Italie' },
-        leadsTo: "Ton fil rouge t'emmène à", change: 'Changer de destination', langLabel: 'Langue',
-        readStory: 'Lire l\'histoire', dragHint: 'Fais glisser la voiture sur la route', pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
+        leadsTo: "Ton fil rouge t'emmène à", langLabel: 'Langue',
+        registered: 'Ta participation a bien été enregistrée. Bonne chance !', visitWeb: 'Visiter le site de Record Go',
+        readStory: 'Lire l\'histoire', pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
       },
       ca: {
         titleA: 'El teu', titleB: 'fil vermell', titleC: 'té una destinació',
@@ -908,8 +943,9 @@
         cta: 'Seguir el meu fil vermell',
         legal: 'En continuar acceptes les bases legals del sorteig i la política de privacitat de Record Go.',
         countries: { es: 'Espanya', pt: 'Portugal', gr: 'Grècia', it: 'Itàlia' },
-        leadsTo: 'El teu fil vermell et porta a', change: 'Canviar destinació', langLabel: 'Idioma',
-        readStory: 'Veure la història', dragHint: 'Arrossega el cotxe per la carretera', pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
+        leadsTo: 'El teu fil vermell et porta a', langLabel: 'Idioma',
+        registered: 'La teva participació ha quedat registrada. Molta sort!', visitWeb: 'Visitar el web de Record Go',
+        readStory: 'Veure la història', pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
       },
       it: {
         titleA: 'Il tuo', titleB: 'filo rosso', titleC: 'ha una destinazione',
@@ -923,8 +959,9 @@
         cta: 'Segui il mio filo rosso',
         legal: "Continuando accetti il regolamento dell'estrazione e l'informativa sulla privacy di Record Go.",
         countries: { es: 'Spagna', pt: 'Portogallo', gr: 'Grecia', it: 'Italia' },
-        leadsTo: 'Il tuo filo rosso ti porta a', change: 'Cambia destinazione', langLabel: 'Lingua',
-        readStory: 'Leggi la storia', dragHint: 'Trascina l\'auto lungo la strada', pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
+        leadsTo: 'Il tuo filo rosso ti porta a', langLabel: 'Lingua',
+        registered: 'La tua partecipazione è stata registrata. In bocca al lupo!', visitWeb: 'Visita il sito di Record Go',
+        readStory: 'Leggi la storia', pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
       },
       pt: {
         titleA: 'O teu', titleB: 'fio vermelho', titleC: 'tem um destino',
@@ -938,8 +975,9 @@
         cta: 'Seguir o meu fio vermelho',
         legal: 'Ao continuar aceitas o regulamento do sorteio e a política de privacidade da Record Go.',
         countries: { es: 'Espanha', pt: 'Portugal', gr: 'Grécia', it: 'Itália' },
-        leadsTo: 'O teu fio vermelho leva-te a', change: 'Mudar destino', langLabel: 'Idioma',
-        readStory: 'Ver história', dragHint: 'Arrasta o carro pela estrada', pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
+        leadsTo: 'O teu fio vermelho leva-te a', langLabel: 'Idioma',
+        registered: 'A tua participação foi registada. Boa sorte!', visitWeb: 'Visitar o site da Record Go',
+        readStory: 'Ver história', pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
       },
       el: {
         titleA: 'Η', titleB: 'κόκκινη κλωστή', titleC: 'σου έχει προορισμό',
@@ -953,8 +991,9 @@
         cta: 'Ακολούθησε την κόκκινη κλωστή μου',
         legal: 'Συνεχίζοντας αποδέχεσαι τους όρους της κλήρωσης και την πολιτική απορρήτου της Record Go.',
         countries: { es: 'Ισπανία', pt: 'Πορτογαλία', gr: 'Ελλάδα', it: 'Ιταλία' },
-        leadsTo: 'Η κόκκινη κλωστή σου σε οδηγεί', change: 'Αλλαγή προορισμού', langLabel: 'Γλώσσα',
-        readStory: 'Δες την ιστορία', dragHint: 'Σύρε το αυτοκίνητο στον δρόμο', pause: 'Παύση κίνησης', play: 'Συνέχιση κίνησης', mapOf: 'Χάρτης:'
+        leadsTo: 'Η κόκκινη κλωστή σου σε οδηγεί', langLabel: 'Γλώσσα',
+        registered: 'Η συμμετοχή σου καταχωρήθηκε. Καλή τύχη!', visitWeb: 'Επισκέψου το site της Record Go',
+        readStory: 'Δες την ιστορία', pause: 'Παύση κίνησης', play: 'Συνέχιση κίνησης', mapOf: 'Χάρτης:'
       }
     };
 
@@ -1551,7 +1590,6 @@
         destino.focus();
       }
 
-      document.getElementById('volver').addEventListener('click', function () { history.back(); });
       window.addEventListener('popstate', function () { if (!location.hash) backToForm(); });
     })();
   </script>
