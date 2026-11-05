@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu hilo rojo · Record Go</title>
+  <meta name="description" content="Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #2F2B2C;
+      --panel: #2F2B2C;
+      --text: #FFFFFF;
+      --muted: rgba(255, 255, 255, 0.72);
+      --line: rgba(255, 255, 255, 0.16);
+      --field: rgba(255, 255, 255, 0.06);
+      --red: #D7262E;
+      --red-hover: #B91F26;
+      --error: #FF8A8F;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fondo: gris oscuro + foto al 50% */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url("img/fondo-navidad.jpg") center / cover no-repeat;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .screen {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    .screen[hidden] { display: none; }
+
+    .intro {
+      max-width: 640px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin: 0 0 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(36px, 7vw, 60px);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    /* Hilo rojo bajo el título */
+    .thread {
+      display: block;
+      width: min(320px, 70%);
+      height: 28px;
+      margin: 16px auto 0;
+      overflow: visible;
+    }
+
+    .thread path {
+      fill: none;
+      stroke: var(--red);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 420;
+      stroke-dashoffset: 420;
+      animation: draw 1.6s cubic-bezier(.6, 0, .2, 1) .3s forwards;
+    }
+
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    .subtitle {
+      margin: 16px auto 0;
+      max-width: 520px;
+      font-size: 18px;
+      color: var(--muted);
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Bloque del formulario */
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    }
+
+    .field + .field { margin-top: 20px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .control {
+      position: relative;
+    }
+
+    .prefix {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    input, select {
+      width: 100%;
+      height: 48px;
+      padding: 0 16px;
+      font: inherit;
+      color: var(--text);
+      background: var(--field);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input.has-prefix { padding-left: 34px; }
+
+    input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+    input:focus, select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(215, 38, 46, 0.3);
+    }
+
+    select {
+      padding-right: 44px;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    select:invalid { color: rgba(255, 255, 255, 0.5); }
+    select option, select optgroup { color: #1d1a1b; background: #fff; }
+
+    .field.is-invalid input,
+    .field.is-invalid select { border-color: var(--error); }
+
+    .error {
+      display: none;
+      margin: 8px 0 0;
+      font-size: 13px;
+      color: var(--error);
+    }
+
+    .field.is-invalid .error { display: block; }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      height: 52px;
+      margin-top: 28px;
+      font: inherit;
+      font-weight: 600;
+      color: #fff;
+      background: var(--red);
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color .15s ease;
+    }
+
+    .btn:hover { background: var(--red-hover); }
+    .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+    .legal {
+      margin: 16px 0 0;
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.5);
+      text-align: center;
+    }
+
+    /* Pantalla 2 (provisional) */
+    .destino h2 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .destino p { color: var(--muted); text-align: center; margin: 12px 0 0; }
+
+    .link-btn {
+      margin-top: 24px;
+      background: none;
+      border: 0;
+      color: var(--muted);
+      font: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .fade-in { animation: fade .4s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    @media (max-width: 480px) {
+      .screen { padding: 32px 16px; }
+      .card { padding: 24px 20px; }
+      .subtitle { font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .thread path { animation: none; stroke-dashoffset: 0; }
+      .fade-in { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <!-- PANTALLA 1 · Formulario -->
+  <main class="screen" id="screen-form">
+    <header class="intro">
+      <p class="eyebrow">Record Go · Navidad</p>
+      <h1>Tu <em>hilo rojo</em> tiene un destino</h1>
+      <svg class="thread" viewBox="0 0 320 28" aria-hidden="true">
+        <path d="M2 18 C 50 2, 80 30, 130 14 S 200 2, 230 16 S 290 26, 318 8" />
+      </svg>
+      <p class="subtitle">Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.</p>
+    </header>
+
+    <form class="card" id="form" novalidate>
+      <div class="field" data-field="email">
+        <label for="email">Email</label>
+        <div class="control">
+          <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nombre@correo.com" required>
+        </div>
+        <p class="error" id="email-error">Introduce un email válido para poder avisarte si ganas.</p>
+      </div>
+
+      <div class="field" data-field="instagram">
+        <label for="instagram">Usuario de Instagram</label>
+        <div class="control">
+          <span class="prefix" aria-hidden="true">@</span>
+          <input class="has-prefix" id="instagram" name="instagram" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="tuusuario" required>
+        </div>
+        <p class="error" id="instagram-error">Añade tu usuario de Instagram para que podamos encontrar tu comentario.</p>
+      </div>
+
+      <div class="field" data-field="destino">
+        <label for="destino">Destino</label>
+        <div class="control">
+          <select id="destino" name="destino" required>
+            <option value="" disabled selected>Elige tu destino</option>
+            <optgroup label="España">
+              <option value="alicante">Alicante</option>
+              <option value="barcelona">Barcelona</option>
+              <option value="bilbao">Bilbao</option>
+              <option value="castellon">Castellón</option>
+              <option value="ibiza">Ibiza</option>
+              <option value="madrid">Madrid</option>
+              <option value="malaga">Málaga</option>
+              <option value="palma">Palma</option>
+              <option value="sevilla">Sevilla</option>
+              <option value="valencia">Valencia</option>
+              <option value="fuerteventura">Fuerteventura</option>
+              <option value="gran-canaria">Gran Canaria</option>
+              <option value="lanzarote">Lanzarote</option>
+              <option value="tenerife">Tenerife</option>
+            </optgroup>
+            <optgroup label="Portugal">
+              <option value="lisboa">Lisboa</option>
+              <option value="oporto">Oporto</option>
+              <option value="faro">Faro</option>
+            </optgroup>
+            <optgroup label="Grecia">
+              <option value="atenas">Atenas</option>
+              <option value="rodas">Rodas</option>
+              <option value="salonica">Salónica</option>
+              <option value="zakynthos">Zakynthos</option>
+            </optgroup>
+            <optgroup label="Italia">
+              <option value="bari">Bari</option>
+              <option value="bolonia">Bolonia</option>
+              <option value="cagliari">Cagliari</option>
+              <option value="catania">Catania</option>
+              <option value="olbia">Olbia</option>
+              <option value="palermo">Palermo</option>
+              <option value="roma">Roma</option>
+              <option value="milan">Milán</option>
+              <option value="venecia">Venecia</option>
+            </optgroup>
+          </select>
+        </div>
+        <p class="error" id="destino-error">Elige un destino para seguir tu hilo rojo.</p>
+      </div>
+
+      <button class="btn" type="submit">Seguir mi hilo rojo</button>
+      <p class="legal">Al continuar aceptas las bases legales del sorteo y la política de privacidad de Record Go.</p>
+    </form>
+  </main>
+
+  <!-- PANTALLA 2 · Destino (provisional, se desarrollará en el siguiente paso) -->
+  <section class="screen destino" id="screen-destino" hidden aria-live="polite">
+    <div class="fade-in">
+      <p class="eyebrow" style="display:block;text-align:center">Tu hilo rojo te lleva a</p>
+      <h2 id="destino-nombre"></h2>
+      <p>Aquí irá el mapa 3D navideño, los posts del destino y el botón para participar en el sorteo.</p>
+      <div style="text-align:center"><button class="link-btn" type="button" id="volver">Cambiar destino</button></div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('form');
+      var email = document.getElementById('email');
+      var ig = document.getElementById('instagram');
+      var destino = document.getElementById('destino');
+      var screenForm = document.getElementById('screen-form');
+      var screenDestino = document.getElementById('screen-destino');
+
+      var rules = {
+        email: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()); },
+        instagram: function () { return /^@?[A-Za-z0-9._]{1,30}$/.test(ig.value.trim()); },
+        destino: function () { return destino.value !== ''; }
+      };
+      var inputs = { email: email, instagram: ig, destino: destino };
+
+      function setState(name, ok) {
+        var field = form.querySelector('[data-field="' + name + '"]');
+        field.classList.toggle('is-invalid', !ok);
+        inputs[name].setAttribute('aria-invalid', ok ? 'false' : 'true');
+        if (!ok) inputs[name].setAttribute('aria-describedby', name + '-error');
+        else inputs[name].removeAttribute('aria-describedby');
+      }
+
+      // Validar al salir del campo y limpiar el error en cuanto se corrige
+      Object.keys(inputs).forEach(function (name) {
+        var el = inputs[name];
+        el.addEventListener('blur', function () { if (el.value) setState(name, rules[name]()); });
+        el.addEventListener('input', function () {
+          if (el.closest('.field').classList.contains('is-invalid') && rules[name]()) setState(name, true);
+        });
+      });
+
+      function validateAll() {
+        var firstBad = null;
+        Object.keys(rules).forEach(function (name) {
+          var ok = rules[name]();
+          setState(name, ok);
+          if (!ok && !firstBad) firstBad = inputs[name];
+        });
+        if (firstBad) firstBad.focus();
+        return !firstBad;
+      }
+
+      function goToDestino() {
+        var data = {
+          email: email.value.trim(),
+          instagram: ig.value.trim().replace(/^@/, ''),
+          destino: destino.value,
+          destinoNombre: destino.options[destino.selectedIndex].text
+        };
+        // TODO: enviar `data` al backend / CRM del sorteo
+        window.hiloRojo = data;
+        document.getElementById('destino-nombre').textContent = data.destinoNombre;
+        screenForm.hidden = true;
+        screenDestino.hidden = false;
+        window.scrollTo(0, 0);
+        history.pushState({ destino: data.destino }, '', '#' + data.destino);
+      }
+
+      // Al seleccionar destino: si el resto de datos está bien, pasa directamente a la siguiente pantalla
+      destino.addEventListener('change', function () {
+        setState('destino', true);
+        if (rules.email() && rules.instagram()) goToDestino();
+        else validateAll();
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (validateAll()) goToDestino();
+      });
+
+      function backToForm() {
+        screenDestino.hidden = true;
+        screenForm.hidden = false;
+        destino.focus();
+      }
+
+      document.getElementById('volver').addEventListener('click', function () { history.back(); });
+      window.addEventListener('popstate', function () { if (!location.hash) backToForm(); });
+    })();
+  </script>
+</body>
+</html>
