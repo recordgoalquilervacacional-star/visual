@@ -391,6 +391,91 @@
       -webkit-user-select: none;
     }
 
+    .map-stage { position: relative; }
+
+    /* Puntos de interés sobre el plano */
+    .hotspots { position: absolute; inset: 0; pointer-events: none; overflow: hidden; border-radius: 8px; }
+
+    .hotspot { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+    .hotspot[hidden] { display: none; }
+
+    .hs-dot {
+      position: absolute;
+      left: -12px;
+      top: -12px;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    .hs-dot::after {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid var(--red);
+      animation: pulse 1.8s ease-out infinite;
+    }
+
+    @keyframes pulse { from { transform: scale(1); opacity: .9; } to { transform: scale(2.2); opacity: 0; } }
+
+    .hs-dot:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+    .hs-card {
+      position: absolute;
+      right: 22px;
+      bottom: 4px;
+      width: 190px;
+      padding: 18px 16px 16px;
+      text-align: center;
+      color: #1d1a1b;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      pointer-events: auto;
+      transform-origin: 100% 100%;
+      transition: opacity .2s ease, transform .2s ease, visibility 0s;
+    }
+
+    .hotspot:not(.is-open) .hs-card {
+      opacity: 0;
+      transform: scale(.92);
+      visibility: hidden;
+      transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+    }
+
+    /* Si no cabe arriba o a la izquierda, la tarjeta se abre hacia abajo o a la derecha */
+    .hotspot.below .hs-card { bottom: auto; top: 4px; transform-origin: 100% 0; }
+    .hotspot.right .hs-card { right: auto; left: 22px; transform-origin: 0 100%; }
+    .hotspot.below.right .hs-card { transform-origin: 0 0; }
+
+    .hs-card h3 { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.3; }
+
+    .hs-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      margin-top: 12px;
+      padding: 0 22px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      background: var(--red);
+      border-radius: 999px;
+      transition: background-color .15s ease;
+    }
+
+    .hs-link:hover { background: var(--red-hover); }
+    .hs-link:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
     .map .car { cursor: grab; }
     .map.is-dragging .car { cursor: grabbing; }
 
@@ -451,6 +536,10 @@
       .card { padding: 24px 20px; }
       .subtitle { font-size: 16px; }
       .map-frame { margin-top: 24px; padding: 8px; border-radius: 14px; }
+      .hs-card { width: 150px; padding: 12px 10px 12px; border-radius: 12px; right: 18px; }
+      .hs-card h3 { font-size: 13px; }
+      .hs-link { min-height: 32px; margin-top: 8px; padding: 0 14px; font-size: 13px; }
+      .hs-dot { left: -10px; top: -10px; width: 20px; height: 20px; }
       .map { border-radius: 6px; }
     }
 
@@ -460,6 +549,7 @@
       .thread .reveal { animation: none; stroke-dashoffset: 0; }
       .fade-in { animation: none; }
       .lang-list, .lang-list.is-open { transition: none; }
+      .hs-dot::after { animation: none; }
     }
   </style>
 </head>
@@ -629,42 +719,68 @@
       <h2><em id="destino-nombre"></em></h2>
 
       <div class="map-frame">
+        <div class="map-stage">
         <svg class="map" id="map" viewBox="0 0 1600 1000" role="img" aria-labelledby="map-title">
           <title id="map-title">Plano</title>
           <defs>
-            <!-- Coche Record Go visto desde arriba, mirando a la derecha (+x). 100 x 50 unidades -->
-            <symbol id="car-shape" viewBox="-50 -25 100 50" overflow="visible">
-              <ellipse cx="0" cy="4" rx="52" ry="27" fill="rgba(0,0,0,.35)"/>
-              <!-- ruedas -->
-              <g fill="#2b2526">
-                <rect x="-36" y="-26" width="15" height="7" rx="2.5"/><rect x="21" y="-26" width="15" height="7" rx="2.5"/>
-                <rect x="-36" y="19" width="15" height="7" rx="2.5"/><rect x="21" y="19" width="15" height="7" rx="2.5"/>
+            <!-- Coche Record Go en 3D (vista de tres cuartos), mirando a la derecha (+x).
+                 El punto (0,0) es el centro del coche sobre la carretera. -->
+            <symbol id="car-shape" viewBox="-60 -55 125 75" overflow="visible">
+              <g transform="translate(-3 -11)">
+                <!-- sombra -->
+                <ellipse cx="3" cy="11" rx="60" ry="11" fill="url(#car-shadow)"/>
+                <!-- ruedas del lado lejano -->
+                <ellipse cx="-23" cy="5" rx="8" ry="9" fill="#1d191a"/>
+                <ellipse cx="37" cy="5" rx="8" ry="9" fill="#1d191a"/>
+                <!-- frontal -->
+                <path d="M47 -14 L55 -22 Q57 -21 57 -16 L57 -4 Q57 0 54 2 L47 8 Z" fill="#ddd5d5"/>
+                <path d="M49 -9 L55 -15 L55 -11 L49 -5 Z" fill="#FFE7A3"/>
+                <path d="M48 1 L56 -6 L56 -3 L48 4 Z" fill="#2f2b2c"/>
+                <!-- capó y maletero (superficie de arriba) -->
+                <path d="M26 -15 L40 -15 Q46 -15 47 -14 L55 -22 Q53 -23 48 -23 L33 -23 Z" fill="#fdfbfb"/>
+                <path d="M-44 -15 L-26 -15 L-19 -23 L-36 -23 Q-42 -23 -44 -15 Z" fill="#fdfbfb"/>
+                <!-- lateral -->
+                <path d="M-50 -2 Q-50 -14 -44 -15 L40 -15 Q47 -15 47 -8 L47 4 Q47 8 43 8 L-46 8 Q-50 8 -50 4 Z" fill="url(#car-side)"/>
+                <rect x="-50" y="-6" width="97" height="5" fill="#D7262E"/>
+                <rect x="-50" y="-13" width="3.5" height="5" rx="1" fill="#B91F26"/>
+                <!-- cabina: ventanillas, parabrisas y techo -->
+                <path d="M-26 -15 L-18 -31 L12 -31 L26 -15 Z" fill="#f4efef"/>
+                <path d="M-22.5 -16.5 L-16.5 -29 L-3 -29 L-3 -16.5 Z" fill="url(#glass)"/>
+                <path d="M0 -16.5 L0 -29 L10.5 -29 L21.5 -16.5 Z" fill="url(#glass)"/>
+                <path d="M12 -31 L26 -15 L33 -23 L19 -39 Z" fill="#4a4144"/>
+                <path d="M15 -31 L26 -18 L28 -20 L17 -33 Z" fill="rgba(255,255,255,.25)"/>
+                <path d="M-18 -31 L12 -31 L19 -39 L-11 -39 Z" fill="#ffffff"/>
+                <path d="M-15.5 -34 L14.5 -34 L16 -36 L-14 -36 Z" fill="#D7262E"/>
+                <!-- ruedas del lado cercano -->
+                <path d="M-42 8 A12 12 0 0 1 -18 8 Z" fill="#2a2425"/>
+                <path d="M18 8 A12 12 0 0 1 42 8 Z" fill="#2a2425"/>
+                <g>
+                  <ellipse cx="-30" cy="8" rx="9.5" ry="10" fill="#262122"/>
+                  <ellipse cx="-30" cy="8" rx="5" ry="5.5" fill="#c4bdbd"/>
+                  <circle cx="-30" cy="8" r="1.8" fill="#8c8586"/>
+                  <ellipse cx="30" cy="8" rx="9.5" ry="10" fill="#262122"/>
+                  <ellipse cx="30" cy="8" rx="5" ry="5.5" fill="#c4bdbd"/>
+                  <circle cx="30" cy="8" r="1.8" fill="#8c8586"/>
+                </g>
+                <!-- textura de punto y costuras -->
+                <path d="M-50 -2 Q-50 -14 -44 -15 L40 -15 Q47 -15 47 -8 L47 4 Q47 8 43 8 L-46 8 Q-50 8 -50 4 Z" fill="url(#knit)"/>
+                <path d="M-18 -31 L12 -31 L19 -39 L-11 -39 Z M26 -15 L40 -15 L47 -14 L55 -22 L48 -23 L33 -23 Z" fill="url(#knit)"/>
+                <path d="M-47 -12.5 L44 -12.5" stroke="rgba(47,43,44,.35)" stroke-width="1" stroke-dasharray="3 2.4" fill="none"/>
+                <path d="M-2 -15 L-2 6 M-26 -15 L-26 6" stroke="rgba(47,43,44,.35)" stroke-width="1" stroke-dasharray="2.6 2.2" fill="none"/>
               </g>
-              <!-- carrocería -->
-              <rect x="-47" y="-21" width="94" height="42" rx="15" fill="url(#plush)"/>
-              <!-- retrovisores -->
-              <ellipse cx="11" cy="-23" rx="4" ry="2.6" fill="#e9e3e3"/><ellipse cx="11" cy="23" rx="4" ry="2.6" fill="#e9e3e3"/>
-              <!-- lunas -->
-              <path d="M13 -16 h10 a7 7 0 0 1 7 7 v18 a7 7 0 0 1 -7 7 h-10 z" fill="#3a3335"/>
-              <path d="M-34 -15 h9 v30 h-9 a5 5 0 0 1 -5 -5 v-20 a5 5 0 0 1 5 -5z" fill="#3a3335"/>
-              <!-- techo -->
-              <rect x="-24" y="-16" width="36" height="32" rx="6" fill="#f6f2f2"/>
-              <!-- franja Record Go -->
-              <rect x="-47" y="-3.5" width="94" height="7" fill="#D7262E"/>
-              <!-- faros y pilotos -->
-              <rect x="41" y="-17" width="6" height="8" rx="2.5" fill="#FFE7A3"/>
-              <rect x="41" y="9" width="6" height="8" rx="2.5" fill="#FFE7A3"/>
-              <rect x="-48" y="-17" width="4" height="8" rx="1.5" fill="#B91F26"/>
-              <rect x="-48" y="9" width="4" height="8" rx="1.5" fill="#B91F26"/>
-              <!-- textura de punto y costuras -->
-              <rect x="-47" y="-21" width="94" height="42" rx="15" fill="url(#knit)"/>
-              <rect x="-43.5" y="-17.5" width="87" height="35" rx="12" fill="none" stroke="rgba(47,43,44,.4)" stroke-width="1.1" stroke-dasharray="3 2.4"/>
-              <rect x="-21.5" y="-13.5" width="31" height="27" rx="4.5" fill="none" stroke="rgba(47,43,44,.3)" stroke-width="1" stroke-dasharray="2.6 2.2"/>
             </symbol>
-            <radialGradient id="plush" cx=".45" cy=".4" r=".7">
+            <linearGradient id="car-side" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stop-color="#ffffff"/>
-              <stop offset=".75" stop-color="#efeaea"/>
-              <stop offset="1" stop-color="#cfc8c8"/>
+              <stop offset=".6" stop-color="#f1ecec"/>
+              <stop offset="1" stop-color="#cdc5c5"/>
+            </linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5a5154"/>
+              <stop offset="1" stop-color="#2f2a2b"/>
+            </linearGradient>
+            <radialGradient id="car-shadow">
+              <stop offset="0" stop-color="#000" stop-opacity=".45"/>
+              <stop offset="1" stop-color="#000" stop-opacity="0"/>
             </radialGradient>
             <linearGradient id="headlight" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#FFE7A3" stop-opacity=".5"/>
@@ -684,12 +800,14 @@
             <path class="w-ply-light"/>
           </g>
           <g id="car" class="car">
-            <path d="M46 -16 L150 -48 Q160 0 150 48 L46 16 Z" fill="url(#headlight)"/>
-            <use href="#car-shape" x="-50" y="-25" width="100" height="50" filter="url(#wool-knit)"/>
+            <path d="M52 -24 L160 -46 Q170 -12 160 22 L52 -6 Z" fill="url(#headlight)"/>
+            <use href="#car-shape" x="-60" y="-55" width="125" height="75" filter="url(#wool-knit)"/>
           </g>
           <g id="map-front" pointer-events="none"></g>
           <g id="snow" pointer-events="none"></g>
         </svg>
+        <div class="hotspots" id="hotspots"></div>
+        </div>
 
         <div class="map-controls">
           <span data-i18n="dragHint">Arrastra el coche por la carretera</span>
@@ -731,7 +849,7 @@
         legal: 'Al continuar aceptas las bases legales del sorteo y la política de privacidad de Record Go.',
         countries: { es: 'España', pt: 'Portugal', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Tu hilo rojo te lleva a', change: 'Cambiar destino', langLabel: 'Idioma',
-        dragHint: 'Arrastra el coche por la carretera', pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
+        readStory: 'Ver historia', dragHint: 'Arrastra el coche por la carretera', pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
       },
       en: {
         titleA: 'Your', titleB: 'red thread', titleC: 'has a destination',
@@ -746,7 +864,7 @@
         legal: "By continuing you accept the official rules of the draw and Record Go's privacy policy.",
         countries: { es: 'Spain', pt: 'Portugal', gr: 'Greece', it: 'Italy' },
         leadsTo: 'Your red thread takes you to', change: 'Change destination', langLabel: 'Language',
-        dragHint: 'Drag the car along the road', pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
+        readStory: 'Read the story', dragHint: 'Drag the car along the road', pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
       },
       de: {
         titleA: 'Dein', titleB: 'roter Faden', titleC: 'hat ein Ziel',
@@ -761,7 +879,7 @@
         legal: 'Mit dem Fortfahren akzeptierst du die Teilnahmebedingungen der Verlosung und die Datenschutzrichtlinie von Record Go.',
         countries: { es: 'Spanien', pt: 'Portugal', gr: 'Griechenland', it: 'Italien' },
         leadsTo: 'Dein roter Faden führt dich nach', change: 'Ziel ändern', langLabel: 'Sprache',
-        dragHint: 'Zieh das Auto über die Straße', pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
+        readStory: 'Geschichte lesen', dragHint: 'Zieh das Auto über die Straße', pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
       },
       fr: {
         titleA: 'Ton', titleB: 'fil rouge', titleC: 'a une destination',
@@ -776,7 +894,7 @@
         legal: 'En continuant, tu acceptes le règlement du tirage au sort et la politique de confidentialité de Record Go.',
         countries: { es: 'Espagne', pt: 'Portugal', gr: 'Grèce', it: 'Italie' },
         leadsTo: "Ton fil rouge t'emmène à", change: 'Changer de destination', langLabel: 'Langue',
-        dragHint: 'Fais glisser la voiture sur la route', pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
+        readStory: 'Lire l\'histoire', dragHint: 'Fais glisser la voiture sur la route', pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
       },
       ca: {
         titleA: 'El teu', titleB: 'fil vermell', titleC: 'té una destinació',
@@ -791,7 +909,7 @@
         legal: 'En continuar acceptes les bases legals del sorteig i la política de privacitat de Record Go.',
         countries: { es: 'Espanya', pt: 'Portugal', gr: 'Grècia', it: 'Itàlia' },
         leadsTo: 'El teu fil vermell et porta a', change: 'Canviar destinació', langLabel: 'Idioma',
-        dragHint: 'Arrossega el cotxe per la carretera', pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
+        readStory: 'Veure la història', dragHint: 'Arrossega el cotxe per la carretera', pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
       },
       it: {
         titleA: 'Il tuo', titleB: 'filo rosso', titleC: 'ha una destinazione',
@@ -806,7 +924,7 @@
         legal: "Continuando accetti il regolamento dell'estrazione e l'informativa sulla privacy di Record Go.",
         countries: { es: 'Spagna', pt: 'Portogallo', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Il tuo filo rosso ti porta a', change: 'Cambia destinazione', langLabel: 'Lingua',
-        dragHint: 'Trascina l\'auto lungo la strada', pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
+        readStory: 'Leggi la storia', dragHint: 'Trascina l\'auto lungo la strada', pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
       },
       pt: {
         titleA: 'O teu', titleB: 'fio vermelho', titleC: 'tem um destino',
@@ -821,7 +939,7 @@
         legal: 'Ao continuar aceitas o regulamento do sorteio e a política de privacidade da Record Go.',
         countries: { es: 'Espanha', pt: 'Portugal', gr: 'Grécia', it: 'Itália' },
         leadsTo: 'O teu fio vermelho leva-te a', change: 'Mudar destino', langLabel: 'Idioma',
-        dragHint: 'Arrasta o carro pela estrada', pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
+        readStory: 'Ver história', dragHint: 'Arrasta o carro pela estrada', pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
       },
       el: {
         titleA: 'Η', titleB: 'κόκκινη κλωστή', titleC: 'σου έχει προορισμό',
@@ -836,7 +954,7 @@
         legal: 'Συνεχίζοντας αποδέχεσαι τους όρους της κλήρωσης και την πολιτική απορρήτου της Record Go.',
         countries: { es: 'Ισπανία', pt: 'Πορτογαλία', gr: 'Ελλάδα', it: 'Ιταλία' },
         leadsTo: 'Η κόκκινη κλωστή σου σε οδηγεί', change: 'Αλλαγή προορισμού', langLabel: 'Γλώσσα',
-        dragHint: 'Σύρε το αυτοκίνητο στον δρόμο', pause: 'Παύση κίνησης', play: 'Συνέχιση κίνησης', mapOf: 'Χάρτης:'
+        readStory: 'Δες την ιστορία', dragHint: 'Σύρε το αυτοκίνητο στον δρόμο', pause: 'Παύση κίνησης', play: 'Συνέχιση κίνησης', mapOf: 'Χάρτης:'
       }
     };
 
@@ -983,6 +1101,19 @@
         carScale: 0.85,   // tamaño del coche (ancho de la carretera ~45 px)
         thread: 10,       // grosor del hilo
         wave: 6,          // cuánto ondula el hilo
+        // Puntos de interés: posición en la foto, texto por idioma y enlace al blog
+        hotspots: [
+          {
+            x: 1150, y: 360,
+            url: 'https://www.recordrentacar.com/blog/historia-sagrada-familia-de-barcelona/',
+            title: {
+              es: 'Historia de la Sagrada Familia', en: 'History of the Sagrada Família',
+              de: 'Geschichte der Sagrada Família', fr: 'Histoire de la Sagrada Família',
+              ca: 'Història de la Sagrada Família', it: 'Storia della Sagrada Família',
+              pt: 'História da Sagrada Família', el: 'Η ιστορία της Σαγράδα Φαμίλια'
+            }
+          }
+        ],
         // Elementos que quedan por delante del coche (el coche pasa por detrás)
         front: [
           '1518,812 1545,790 1570,765 1610,746 1660,738 1738,742 1742,1000 1518,1000', // Hotel W
@@ -1004,6 +1135,8 @@
       var thread = document.getElementById('thread');
       var threadD = document.getElementById('thread-d');
       var front = document.getElementById('map-front');
+      var hsLayer = document.getElementById('hotspots');
+      var spots = [];
       var layers = {};
       thread.querySelectorAll('use, path').forEach(function (u) { layers[u.getAttribute('class')] = u; });
       var car = document.getElementById('car');
@@ -1036,6 +1169,12 @@
       function relabel() {
         toggle.setAttribute('aria-label', paused ? t().play : t().pause);
         if (destName) titleEl.textContent = t().mapOf + ' ' + destName;
+        var lang = document.documentElement.lang;
+        spots.forEach(function (sp) {
+          sp.h3.textContent = sp.cfg.title[lang] || sp.cfg.title.es;
+          sp.link.textContent = t().readStory;
+          sp.dot.setAttribute('aria-label', sp.h3.textContent);
+        });
       }
 
       /* Plano provisional mientras no está la foto */
@@ -1071,6 +1210,10 @@
         wave = cfg.wave || 9 * k;
         styleThread();
         s = 0; dir = 1; trail = []; odo = 0; cam = null;
+        if (reduce) {
+          // Sin animación: coche a mitad de camino con el hilo ya desplegado
+          for (s = 0; s < L * 0.5; s += 4 * k) placeCar();
+        }
         makeSnow();
       }
 
@@ -1097,12 +1240,57 @@
         make('image', { href: cfg.img, width: W, height: H, 'clip-path': 'url(#front-clip)' }, front);
       }
 
+      /* Puntos de interés: punto rojo + tarjeta con enlace */
+      function drawHotspots(cfg) {
+        hsLayer.innerHTML = '';
+        spots = [];
+        (cfg.hotspots || []).forEach(function (h, i) {
+          var el = document.createElement('div');
+          el.className = 'hotspot is-open';
+          var id = 'hs-card-' + i;
+          el.innerHTML =
+            '<div class="hs-card" id="' + id + '"><h3></h3>' +
+            '<a class="hs-link" target="_blank" rel="noopener"></a></div>' +
+            '<button class="hs-dot" type="button" aria-expanded="true" aria-controls="' + id + '"></button>';
+          var sp = { cfg: h, el: el, h3: el.querySelector('h3'), link: el.querySelector('a'), dot: el.querySelector('button') };
+          sp.link.href = h.url;
+          sp.dot.addEventListener('click', function () {
+            var open = !el.classList.contains('is-open');
+            el.classList.toggle('is-open', open);
+            sp.dot.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          hsLayer.appendChild(el);
+          spots.push(sp);
+        });
+        relabel();
+      }
+
+      /* Coloca los puntos sobre la foto (siguen al plano también con zoom en móvil) */
+      function placeHotspots() {
+        if (!spots.length) return;
+        var ctm = svg.getScreenCTM();
+        var box = hsLayer.getBoundingClientRect();
+        if (!ctm) return;
+        spots.forEach(function (sp) {
+          var pt = svg.createSVGPoint();
+          pt.x = sp.cfg.x; pt.y = sp.cfg.y;
+          var q = pt.matrixTransform(ctm);
+          var x = q.x - box.left, y = q.y - box.top;
+          sp.el.hidden = x < 0 || y < 0 || x > box.width || y > box.height;
+          sp.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+          var card = sp.el.firstChild;
+          sp.el.classList.toggle('below', y < card.offsetHeight + 12);
+          sp.el.classList.toggle('right', x < card.offsetWidth + 30);
+        });
+      }
+
       function load(key) {
         var cfg = DESTINOS[key] || {};
         var roadD = cfg.road || ROAD_DEMO;
         if (!cfg.img || !cfg.road) {
           W = 1600; H = 1000;
           front.innerHTML = '';
+          drawHotspots({});
           drawPlaceholder(roadD);
           setupRoad(roadD, cfg);
           return;
@@ -1113,11 +1301,13 @@
           base.innerHTML = '';
           make('image', { href: cfg.img, width: W, height: H }, base);
           drawFront(cfg);
+          drawHotspots(cfg);
           setupRoad(roadD, cfg);
         };
         img.onerror = function () {
           W = 1600; H = 1000;
           front.innerHTML = '';
+          drawHotspots({});
           drawPlaceholder(ROAD_DEMO);
           setupRoad(ROAD_DEMO, {});
         };
@@ -1128,9 +1318,10 @@
 
       function placeCar() {
         var p = at(s);
-        var a = at(s - 2 * dir), b = at(s + 2 * dir);
+        var a = at(s - 2), b = at(s + 2);
         var deg = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-        car.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ') rotate(' + deg + ') scale(' + carK + ')');
+        var bump = (!paused && !dragging) ? Math.sin(phase * 7) * 0.5 * carK : 0;
+        car.setAttribute('transform', 'translate(' + p.x + ' ' + (p.y + bump).toFixed(2) + ') rotate(' + deg.toFixed(2) + ') scale(' + (dir > 0 ? carK : -carK) + ' ' + carK + ')');
         var lastP = trail[trail.length - 1];
         if (!lastP || Math.hypot(p.x - lastP.x, p.y - lastP.y) > 4 * k) {
           if (lastP) odo += Math.hypot(p.x - lastP.x, p.y - lastP.y);
@@ -1200,6 +1391,7 @@
           placeCar();
           drawThread();
           camera();
+          placeHotspots();
           if (!paused) tickSnow(dt, now);
         }
         raf = requestAnimationFrame(frame);
@@ -1265,14 +1457,7 @@
         destName = name;
         load(key);
         relabel();
-        if (reduce) {
-          // Sin animación: coche a mitad de camino con el hilo ya desplegado
-          var target = L * 0.5;
-          for (s = 0; s < target; s += 4 * k) placeCar();
-          setPaused(true);
-        } else {
-          setPaused(false);
-        }
+        setPaused(reduce);
         cancelAnimationFrame(raf);
         last = 0;
         raf = requestAnimationFrame(frame);
