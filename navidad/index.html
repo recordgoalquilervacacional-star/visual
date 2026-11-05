@@ -204,15 +204,31 @@
       overflow: visible;
     }
 
-    .thread path {
+    .thread .reveal {
       fill: none;
-      stroke: var(--red);
-      stroke-width: 2.5;
+      stroke: #fff;
+      stroke-width: 16;
       stroke-linecap: round;
       stroke-dasharray: 420;
       stroke-dashoffset: 420;
       animation: draw 1.6s cubic-bezier(.6, 0, .2, 1) .3s forwards;
     }
+
+    /* Hilo de lana: capas de la misma línea (sombra, pelusa, hebra, torsión y brillo) */
+    .wool use, .wool path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .wool .w-shadow { stroke: rgba(0, 0, 0, 0.28); }
+    .wool .w-fuzz { stroke: rgba(240, 96, 103, 0.28); }
+    .wool .w-base { stroke: #8C161D; }
+    .wool .w-core { stroke: #D7262E; }
+    .wool .w-ply { stroke: #9A1920; }
+    .wool .w-ply-light { stroke: #F4676E; }
+
+    .thread .w-shadow { stroke-width: 5; transform: translateY(1.5px); }
+    .thread .w-fuzz { stroke-width: 7.5; stroke-dasharray: .7 1.6; }
+    .thread .w-base { stroke-width: 4.6; }
+    .thread .w-core { stroke-width: 3.4; }
+    .thread .w-ply { stroke-width: 1.1; }
+    .thread .w-ply-light { stroke-width: .8; }
 
     @keyframes draw { to { stroke-dashoffset: 0; } }
 
@@ -441,7 +457,7 @@
     .lang-code { display: none; font-size: 14px; font-weight: 600; text-transform: uppercase; }
 
     @media (prefers-reduced-motion: reduce) {
-      .thread path { animation: none; stroke-dashoffset: 0; }
+      .thread .reveal { animation: none; stroke-dashoffset: 0; }
       .fade-in { animation: none; }
       .lang-list, .lang-list.is-open { transition: none; }
     }
@@ -453,6 +469,23 @@
   <!-- Banderas (se reutilizan con <use>) -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
+      <!-- Lana: bordes con pelusa -->
+      <filter id="wool-fuzz" x="-5%" y="-30%" width="110%" height="160%">
+        <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="4" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <!-- Lana para el coche: pelusa en el borde + grano de fibra -->
+      <filter id="wool-knit" x="-15%" y="-25%" width="130%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+        <feColorMatrix in="n" type="matrix" values=".25 .25 .25 0 .66  .25 .25 .25 0 .66  .25 .25 .25 0 .66  0 0 0 0 1" result="g"/>
+        <feBlend in="d" in2="g" mode="multiply" result="m"/>
+        <feComposite in="m" in2="d" operator="in"/>
+      </filter>
+      <!-- Punto de media -->
+      <pattern id="knit" width="5" height="4" patternUnits="userSpaceOnUse">
+        <path d="M0 0 L2.5 3.2 L5 0" fill="none" stroke="rgba(0,0,0,.24)" stroke-width="1"/>
+      </pattern>
       <symbol id="flag-es" viewBox="0 0 24 16"><rect width="24" height="16" fill="#AA151B"/><rect y="4" width="24" height="8" fill="#F1BF00"/></symbol>
       <symbol id="flag-en" viewBox="0 0 60 40">
         <clipPath id="uk-clip"><rect width="60" height="40"/></clipPath>
@@ -500,7 +533,20 @@
     <div class="intro">
       <h1><span data-i18n="titleA">Tu</span> <em data-i18n="titleB">hilo rojo</em> <span data-i18n="titleC">tiene un destino</span></h1>
       <svg class="thread" viewBox="0 0 320 28" aria-hidden="true">
-        <path d="M2 18 C 50 2, 80 30, 130 14 S 200 2, 230 16 S 290 26, 318 8" />
+        <defs>
+          <path id="title-thread" d="M2 18 C 50 2, 80 30, 130 14 S 200 2, 230 16 S 290 26, 318 8"/>
+          <mask id="title-reveal" maskUnits="userSpaceOnUse" x="-20" y="-20" width="360" height="68">
+            <path class="reveal" d="M2 18 C 50 2, 80 30, 130 14 S 200 2, 230 16 S 290 26, 318 8"/>
+          </mask>
+        </defs>
+        <g class="wool" mask="url(#title-reveal)" filter="url(#wool-fuzz)">
+          <use href="#title-thread" class="w-shadow"/>
+          <use href="#title-thread" class="w-fuzz"/>
+          <use href="#title-thread" class="w-base"/>
+          <use href="#title-thread" class="w-core"/>
+          <path class="w-ply" id="title-ply"/>
+          <path class="w-ply-light" id="title-ply-light"/>
+        </g>
       </svg>
       <p class="subtitle" data-i18n="subtitle">Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.</p>
     </div>
@@ -588,35 +634,60 @@
           <defs>
             <!-- Coche Record Go visto desde arriba, mirando a la derecha (+x). 100 x 50 unidades -->
             <symbol id="car-shape" viewBox="-50 -25 100 50" overflow="visible">
-              <ellipse cx="0" cy="3" rx="50" ry="24" fill="rgba(0,0,0,.35)"/>
-              <rect x="-46" y="-22" width="92" height="44" rx="14" fill="#fff"/>
-              <rect x="-46" y="-4" width="92" height="8" fill="#D7262E"/>
-              <path d="M14 -18 h12 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-12 z" fill="#2F2B2C"/>
-              <path d="M-30 -17 h10 v34 h-10 a5 5 0 0 1 -5 -5 v-24 a5 5 0 0 1 5 -5z" fill="#2F2B2C"/>
-              <rect x="-18" y="-17" width="30" height="34" rx="4" fill="#f3f1f1"/>
-              <rect x="-18" y="-4" width="30" height="8" fill="#D7262E"/>
-              <rect x="40" y="-18" width="6" height="8" rx="2" fill="#FFE7A3"/>
-              <rect x="40" y="10" width="6" height="8" rx="2" fill="#FFE7A3"/>
-              <rect x="-47" y="-18" width="4" height="8" rx="1.5" fill="#B91F26"/>
-              <rect x="-47" y="10" width="4" height="8" rx="1.5" fill="#B91F26"/>
+              <ellipse cx="0" cy="4" rx="52" ry="27" fill="rgba(0,0,0,.35)"/>
+              <!-- ruedas -->
+              <g fill="#2b2526">
+                <rect x="-36" y="-26" width="15" height="7" rx="2.5"/><rect x="21" y="-26" width="15" height="7" rx="2.5"/>
+                <rect x="-36" y="19" width="15" height="7" rx="2.5"/><rect x="21" y="19" width="15" height="7" rx="2.5"/>
+              </g>
+              <!-- carrocería -->
+              <rect x="-47" y="-21" width="94" height="42" rx="15" fill="url(#plush)"/>
+              <!-- retrovisores -->
+              <ellipse cx="11" cy="-23" rx="4" ry="2.6" fill="#e9e3e3"/><ellipse cx="11" cy="23" rx="4" ry="2.6" fill="#e9e3e3"/>
+              <!-- lunas -->
+              <path d="M13 -16 h10 a7 7 0 0 1 7 7 v18 a7 7 0 0 1 -7 7 h-10 z" fill="#3a3335"/>
+              <path d="M-34 -15 h9 v30 h-9 a5 5 0 0 1 -5 -5 v-20 a5 5 0 0 1 5 -5z" fill="#3a3335"/>
+              <!-- techo -->
+              <rect x="-24" y="-16" width="36" height="32" rx="6" fill="#f6f2f2"/>
+              <!-- franja Record Go -->
+              <rect x="-47" y="-3.5" width="94" height="7" fill="#D7262E"/>
+              <!-- faros y pilotos -->
+              <rect x="41" y="-17" width="6" height="8" rx="2.5" fill="#FFE7A3"/>
+              <rect x="41" y="9" width="6" height="8" rx="2.5" fill="#FFE7A3"/>
+              <rect x="-48" y="-17" width="4" height="8" rx="1.5" fill="#B91F26"/>
+              <rect x="-48" y="9" width="4" height="8" rx="1.5" fill="#B91F26"/>
+              <!-- textura de punto y costuras -->
+              <rect x="-47" y="-21" width="94" height="42" rx="15" fill="url(#knit)"/>
+              <rect x="-43.5" y="-17.5" width="87" height="35" rx="12" fill="none" stroke="rgba(47,43,44,.4)" stroke-width="1.1" stroke-dasharray="3 2.4"/>
+              <rect x="-21.5" y="-13.5" width="31" height="27" rx="4.5" fill="none" stroke="rgba(47,43,44,.3)" stroke-width="1" stroke-dasharray="2.6 2.2"/>
             </symbol>
-            <radialGradient id="headlight" cx="0" cy="0.5" r="1">
-              <stop offset="0" stop-color="#FFE7A3" stop-opacity=".55"/>
-              <stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/>
+            <radialGradient id="plush" cx=".45" cy=".4" r=".7">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset=".75" stop-color="#efeaea"/>
+              <stop offset="1" stop-color="#cfc8c8"/>
             </radialGradient>
-            <filter id="thread-glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="3" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
+            <linearGradient id="headlight" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#FFE7A3" stop-opacity=".5"/>
+              <stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/>
+            </linearGradient>
+            <path id="thread-d"/>
           </defs>
 
           <g id="map-base"></g>
           <path id="road" fill="none" stroke="none"/>
-          <path id="thread" fill="none" stroke="#D7262E" stroke-linecap="round" stroke-linejoin="round" filter="url(#thread-glow)"/>
-          <g id="car" class="car">
-            <path d="M48 -20 L170 -60 L170 60 L48 20 Z" fill="url(#headlight)"/>
-            <use href="#car-shape" x="-50" y="-25" width="100" height="50"/>
+          <g id="thread" class="wool">
+            <use href="#thread-d" class="w-shadow"/>
+            <use href="#thread-d" class="w-fuzz"/>
+            <use href="#thread-d" class="w-base"/>
+            <use href="#thread-d" class="w-core"/>
+            <path class="w-ply"/>
+            <path class="w-ply-light"/>
           </g>
+          <g id="car" class="car">
+            <path d="M46 -16 L150 -48 Q160 0 150 48 L46 16 Z" fill="url(#headlight)"/>
+            <use href="#car-shape" x="-50" y="-25" width="100" height="50" filter="url(#wool-knit)"/>
+          </g>
+          <g id="map-front" pointer-events="none"></g>
           <g id="snow" pointer-events="none"></g>
         </svg>
 
@@ -769,6 +840,40 @@
       }
     };
 
+    /* ---------- Lana: hebras diagonales a lo largo de una línea ----------
+       pts: puntos de la línea; w: grosor; start: dónde cae la primera hebra.
+       Devuelve dos trazados: hebras oscuras y hebras claras intercaladas. */
+    function woolPly(pts, w, start, parity) {
+      var gap = w * 0.62, dark = '', light = '';
+      var acc = 0, next = start, n = parity || 0;
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i];
+        var seg = Math.hypot(b.x - a.x, b.y - a.y);
+        if (!seg) continue;
+        var tx = (b.x - a.x) / seg, ty = (b.y - a.y) / seg, nx = -ty, ny = tx;
+        while (next <= acc + seg) {
+          var f = (next - acc) / seg;
+          var x = a.x + (b.x - a.x) * f, y = a.y + (b.y - a.y) * f;
+          var h = w * 0.36, sk = w * 0.3;
+          var line = 'M' + (x - nx * h - tx * sk).toFixed(1) + ' ' + (y - ny * h - ty * sk).toFixed(1) +
+                     'L' + (x + nx * h + tx * sk).toFixed(1) + ' ' + (y + ny * h + ty * sk).toFixed(1);
+          if (Math.abs(n) % 2) light += line; else dark += line;
+          next += gap; n--;
+        }
+        acc += seg;
+      }
+      return { dark: dark, light: light };
+    }
+
+    (function titleThread() {
+      var path = document.getElementById('title-thread');
+      var L = path.getTotalLength(), pts = [];
+      for (var d = 0; d <= L; d += 2) pts.push(path.getPointAtLength(d));
+      var ply = woolPly(pts, 4.6, 1);
+      document.getElementById('title-ply').setAttribute('d', ply.dark);
+      document.getElementById('title-ply-light').setAttribute('d', ply.light);
+    })();
+
     /* ---------- Selector de idioma ---------- */
     (function () {
       var wrap = document.getElementById('lang');
@@ -871,7 +976,21 @@
        Cada destino tiene su foto y el trazado de su carretera (path SVG en
        píxeles de la foto). Si falta la foto, se dibuja un plano provisional. */
     var DESTINOS = {
-      barcelona: { img: 'img/destinos/barcelona.jpg', road: null }
+      barcelona: {
+        img: 'img/destinos/barcelona.jpg',
+        // Carretera del paseo marítimo, de Montjuïc al Hotel W (píxeles de la foto 2000 x 1116)
+        road: 'M 215 787 C 229 790 269 801 300 806 C 331 811 367 816 400 819 C 433 822 467 823 500 824 C 533 825 567 824 600 824 C 633 824 667 823 700 821 C 733 819 767 816 800 814 C 833 812 867 808 900 806 C 933 804 967 800 1000 802 C 1033 804 1067 813 1100 820 C 1133 827 1167 837 1200 845 C 1233 853 1267 860 1300 866 C 1333 872 1367 876 1400 881 C 1433 886 1463 890 1500 893 C 1537 896 1581 900 1620 902 C 1659 904 1692 905 1733 907 C 1774 909 1828 910 1867 912 C 1906 914 1949 916 1965 917',
+        carScale: 0.85,   // tamaño del coche (ancho de la carretera ~45 px)
+        thread: 10,       // grosor del hilo
+        wave: 6,          // cuánto ondula el hilo
+        // Elementos que quedan por delante del coche (el coche pasa por detrás)
+        front: [
+          '1518,812 1545,790 1570,765 1610,746 1660,738 1738,742 1742,1000 1518,1000', // Hotel W
+          '912,735 952,735 955,860 910,860',                                         // Columna de Colón
+          '1160,822 1185,820 1190,836 1200,846 1198,895 1155,895 1155,846 1160,836', // figura naranja
+          '1215,842 1240,838 1250,858 1252,908 1203,908 1205,858'                    // figura rosa
+        ]
+      }
     };
 
     // Carretera de ejemplo para el plano provisional (plano de 1600 x 1000)
@@ -883,6 +1002,10 @@
       var base = document.getElementById('map-base');
       var road = document.getElementById('road');
       var thread = document.getElementById('thread');
+      var threadD = document.getElementById('thread-d');
+      var front = document.getElementById('map-front');
+      var layers = {};
+      thread.querySelectorAll('use, path').forEach(function (u) { layers[u.getAttribute('class')] = u; });
       var car = document.getElementById('car');
       var snow = document.getElementById('snow');
       var toggle = document.getElementById('map-toggle');
@@ -896,6 +1019,10 @@
       var paused = false, dragging = false;
       var phase = 0, last = 0, raf = null, flakes = [];
       var destName = '';
+      var carK = 1, tw = 6, wave = 9, odo = 0;
+      // En móvil el plano se ve con zoom y la cámara sigue al coche
+      var mobile = window.matchMedia('(max-width: 640px)');
+      var cam = null;
 
       function make(tag, attrs, parent) {
         var n = document.createElementNS(NS, tag);
@@ -926,7 +1053,8 @@
         label.textContent = 'Plano provisional · foto de ' + destName + ' pendiente';
       }
 
-      function setupRoad(roadD) {
+      function setupRoad(roadD, cfg) {
+        cfg = cfg || {};
         svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
         k = W / 1600;
         road.setAttribute('d', roadD);
@@ -938,9 +1066,35 @@
         }
         speed = L / 14;           // recorre la carretera en ~14 s
         trailMax = L * 0.45;      // largo del hilo
-        thread.setAttribute('stroke-width', 6 * k);
-        s = 0; dir = 1; trail = [];
+        carK = cfg.carScale || 1.25 * k;
+        tw = cfg.thread || 7 * k;
+        wave = cfg.wave || 9 * k;
+        styleThread();
+        s = 0; dir = 1; trail = []; odo = 0; cam = null;
         makeSnow();
+      }
+
+      /* Grosor y patrón de cada capa del hilo de lana */
+      function styleThread() {
+        function st(name, props) { for (var p in props) layers[name].style[p] = props[p]; }
+        st('w-shadow', { strokeWidth: tw * 1.05, transform: 'translate(0,' + tw * 0.45 + 'px)' });
+        st('w-fuzz', { strokeWidth: tw * 1.7, strokeDasharray: tw * 0.16 + ' ' + tw * 0.34 });
+        st('w-base', { strokeWidth: tw });
+        st('w-core', { strokeWidth: tw * 0.74 });
+        st('w-ply', { strokeWidth: tw * 0.22 });
+        st('w-ply-light', { strokeWidth: tw * 0.16 });
+      }
+
+      /* Recorta trozos de la foto y los pone encima para que el coche pase por detrás */
+      function drawFront(cfg) {
+        front.innerHTML = '';
+        if (!cfg.front || !cfg.front.length) return;
+        var defs = svg.querySelector('defs');
+        var old = document.getElementById('front-clip');
+        if (old) old.remove();
+        var clip = make('clipPath', { id: 'front-clip' }, defs);
+        cfg.front.forEach(function (pts) { make('polygon', { points: pts }, clip); });
+        make('image', { href: cfg.img, width: W, height: H, 'clip-path': 'url(#front-clip)' }, front);
       }
 
       function load(key) {
@@ -948,8 +1102,9 @@
         var roadD = cfg.road || ROAD_DEMO;
         if (!cfg.img || !cfg.road) {
           W = 1600; H = 1000;
+          front.innerHTML = '';
           drawPlaceholder(roadD);
-          setupRoad(roadD);
+          setupRoad(roadD, cfg);
           return;
         }
         var img = new Image();
@@ -957,12 +1112,14 @@
           W = img.naturalWidth; H = img.naturalHeight;
           base.innerHTML = '';
           make('image', { href: cfg.img, width: W, height: H }, base);
-          setupRoad(roadD);
+          drawFront(cfg);
+          setupRoad(roadD, cfg);
         };
         img.onerror = function () {
           W = 1600; H = 1000;
+          front.innerHTML = '';
           drawPlaceholder(ROAD_DEMO);
-          setupRoad(ROAD_DEMO);
+          setupRoad(ROAD_DEMO, {});
         };
         img.src = cfg.img;
       }
@@ -973,9 +1130,10 @@
         var p = at(s);
         var a = at(s - 2 * dir), b = at(s + 2 * dir);
         var deg = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-        car.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ') rotate(' + deg + ') scale(' + (1.25 * k) + ')');
+        car.setAttribute('transform', 'translate(' + p.x + ' ' + p.y + ') rotate(' + deg + ') scale(' + carK + ')');
         var lastP = trail[trail.length - 1];
         if (!lastP || Math.hypot(p.x - lastP.x, p.y - lastP.y) > 4 * k) {
+          if (lastP) odo += Math.hypot(p.x - lastP.x, p.y - lastP.y);
           trail.push({ x: p.x, y: p.y });
           var total = 0;
           for (var i = trail.length - 1; i > 0; i--) {
@@ -987,19 +1145,26 @@
 
       /* El hilo sigue el recorrido del coche y ondula, más cuanto más lejos del coche */
       function drawThread() {
-        if (trail.length < 2) { thread.setAttribute('d', ''); return; }
-        var d = '', dist = 0;
+        if (trail.length < 2) { threadD.setAttribute('d', ''); layers['w-ply'].setAttribute('d', ''); layers['w-ply-light'].setAttribute('d', ''); return; }
+        var d = '', dist = 0, pts = [];
         for (var i = trail.length - 1; i >= 0; i--) {
           var p = trail[i];
           var q = trail[Math.max(0, i - 1)], r = trail[Math.min(trail.length - 1, i + 1)];
           var dx = r.x - q.x, dy = r.y - q.y, len = Math.hypot(dx, dy) || 1;
           if (i < trail.length - 1) dist += Math.hypot(p.x - trail[i + 1].x, p.y - trail[i + 1].y);
-          var amp = Math.min(dist / (180 * k), 1) * 9 * k;
+          var amp = Math.min(dist / (180 * k), 1) * wave;
           var off = amp * Math.sin(dist / (34 * k) - phase);
           var x = p.x - dy / len * off, y = p.y + dx / len * off;
           d += (d ? ' L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+          pts.push({ x: x, y: y });
         }
-        thread.setAttribute('d', d);
+        threadD.setAttribute('d', d);
+        // Las hebras quedan fijas sobre el hilo aunque el coche avance
+        var gap = tw * 0.62;
+        var ply = woolPly(pts, tw, odo % gap, Math.floor(odo / gap));
+        layers['w-ply'].setAttribute('d', ply.dark);
+        layers['w-ply-light'].setAttribute('d', ply.light);
+        layers['w-fuzz'].style.strokeDashoffset = (-odo).toFixed(1);
       }
 
       function makeSnow() {
@@ -1034,9 +1199,24 @@
           if (!paused) phase += dt * 5;
           placeCar();
           drawThread();
+          camera();
           if (!paused) tickSnow(dt, now);
         }
         raf = requestAnimationFrame(frame);
+      }
+
+      function camera() {
+        if (!mobile.matches) {
+          if (cam) { cam = null; svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); }
+          return;
+        }
+        var vw = Math.min(W, 1000 * k), vh = Math.min(H, vw);
+        var p = at(s);
+        var tx = Math.max(0, Math.min(W - vw, p.x - vw / 2));
+        var ty = Math.max(0, Math.min(H - vh, p.y - vh * 0.55));
+        if (!cam) cam = { x: tx, y: ty };
+        else if (!dragging) { cam.x += (tx - cam.x) * 0.08; cam.y += (ty - cam.y) * 0.08; }
+        svg.setAttribute('viewBox', cam.x.toFixed(1) + ' ' + cam.y.toFixed(1) + ' ' + vw + ' ' + vh);
       }
 
       /* Arrastrar el coche: se engancha al punto más cercano de la carretera */
