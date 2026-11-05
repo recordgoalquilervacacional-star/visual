@@ -1570,12 +1570,8 @@
         history.pushState({ destino: data.destino }, '', location.search + '#' + data.destino);
       }
 
-      // Al seleccionar destino: si el resto de datos está bien, pasa directamente a la siguiente pantalla
-      destino.addEventListener('change', function () {
-        setState('destino', true);
-        if (rules.email() && rules.instagram()) goToDestino();
-        else validateAll();
-      });
+      // Al seleccionar destino solo se quita el error; se pasa de pantalla con el botón
+      destino.addEventListener('change', function () { setState('destino', true); });
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
