@@ -819,7 +819,6 @@
 
           <g id="map-base"></g>
           <path id="road" fill="none" stroke="none"/>
-          <g id="peds-back" pointer-events="none"></g>
           <g id="thread" class="wool">
             <use href="#thread-d" class="w-shadow"/>
             <use href="#thread-d" class="w-fuzz"/>
@@ -832,7 +831,6 @@
             <path d="M52 -24 L160 -46 Q170 -12 160 22 L52 -6 Z" fill="url(#headlight)"/>
             <use href="#car-shape" x="-60" y="-55" width="125" height="75" filter="url(#wool-knit)"/>
           </g>
-          <g id="peds-front" pointer-events="none"></g>
           <g id="map-front" pointer-events="none"></g>
           <g id="snow" pointer-events="none"></g>
         </svg>
@@ -1155,15 +1153,6 @@
             }
           }
         ],
-        // Personajes paseando por las aceras: recorrido (pies, en píxeles de la foto),
-        // si van por delante del coche, punto de salida (0-1) y sentido
-        walkerScale: 0.9,
-        walkers: [
-          { path: [[300, 862], [600, 865], [858, 857]], front: true, start: 0.15, dir: 1 },
-          { path: [[310, 870], [600, 873], [850, 866]], front: true, start: 0.75, dir: -1 },
-          { path: [[1000, 758], [1120, 783], [1205, 792]], front: false, start: 0.4, dir: 1 },
-          { path: [[1267, 911], [1355, 918], [1465, 929]], front: true, start: 0.6, dir: -1 }
-        ],
         // Elementos que quedan por delante del coche (el coche pasa por detrás)
         front: [
           '1518,812 1545,790 1570,765 1610,746 1660,738 1738,742 1742,1000 1518,1000', // Hotel W
@@ -1186,9 +1175,6 @@
       var threadD = document.getElementById('thread-d');
       var front = document.getElementById('map-front');
       var hsLayer = document.getElementById('hotspots');
-      var pedsBack = document.getElementById('peds-back');
-      var pedsFront = document.getElementById('peds-front');
-      var walkers = [];
       var spots = [];
       var layers = {};
       thread.querySelectorAll('use, path').forEach(function (u) { layers[u.getAttribute('class')] = u; });
@@ -1318,96 +1304,6 @@
         relabel();
       }
 
-      /* ---------- Personajes de lana paseando ----------
-         Figura de unas 50 unidades de alto, mirando a la derecha, con los pies en (0,0). */
-      var OUTFITS = [
-        { coat: '#2E6B4A', hat: '#D7262E', pom: '#ffffff', scarf: '#F2C14E', legs: '#3A3F5C', skin: '#F1C6A3', hair: '#6B4228' },
-        { coat: '#C8352F', hat: '#ffffff', pom: '#D7262E', scarf: '#2E6B4A', legs: '#2F2B2C', skin: '#E2AE8A', hair: '#2B1D16' },
-        { coat: '#3D5A99', hat: '#F2C14E', pom: '#ffffff', scarf: '#D7262E', legs: '#5A4632', skin: '#C98E6B', hair: '#1E1512' },
-        { coat: '#B5651D', hat: '#2E6B4A', pom: '#F2C14E', scarf: '#ffffff', legs: '#3A3F5C', skin: '#F6D2B8', hair: '#C9973F' }
-      ];
-
-      function makeWalker(o, parent) {
-        var g = make('g', {}, parent);
-        var body = make('g', { filter: 'url(#wool-fuzz)' }, g);
-        var BODY = 'M-12 -14 L-11.5 -30 Q-11 -38 0 -38 Q11 -38 11.5 -30 L12 -14 Q0 -10.5 -12 -14 Z';
-        make('ellipse', { cx: 0, cy: 0, rx: 13, ry: 3.2, fill: 'rgba(0,0,0,.3)' }, body);
-        var legB = make('g', {}, body), legF = make('g', {}, body);
-        [[legB, -3.5], [legF, 3.5]].forEach(function (l, i) {
-          make('rect', { x: l[1] - 3.2, y: -16, width: 6.4, height: 15, rx: 2.8, fill: o.legs, opacity: i ? 1 : 0.85 }, l[0]);
-          make('ellipse', { cx: l[1] + 1.5, cy: -1.5, rx: 4.8, ry: 2.6, fill: '#2a2425' }, l[0]);
-          l[0].dataset.hip = l[1];
-        });
-        var armB = make('rect', { x: -2.8, y: -35, width: 5.6, height: 15, rx: 2.8, fill: o.coat, opacity: 0.8 }, body);
-        make('path', { d: BODY, fill: o.coat }, body);
-        make('path', { d: BODY, fill: 'url(#knit)' }, body);
-        make('path', { d: 'M1.5 -36 L1.5 -13', stroke: 'rgba(0,0,0,.18)', 'stroke-width': 1, 'stroke-dasharray': '2 2' }, body);
-        make('rect', { x: -9.5, y: -40, width: 19, height: 5.5, rx: 2.7, fill: o.scarf }, body);
-        make('rect', { x: -7.5, y: -37, width: 4.4, height: 12, rx: 2, fill: o.scarf }, body);
-        var armF = make('rect', { x: -2.8, y: -35, width: 5.6, height: 15, rx: 2.8, fill: o.coat }, body);
-        make('circle', { cx: 0, cy: -48, r: 9.5, fill: o.skin }, body);
-        make('path', { d: 'M-9.5 -48 Q-9.5 -56 0 -56 Q5 -56 8 -52 L-4 -50.5 Q-8 -49 -9.5 -44 Z', fill: o.hair }, body);
-        make('circle', { cx: 5, cy: -48.5, r: 1.2, fill: '#2a2425' }, body);
-        make('circle', { cx: 6.6, cy: -44.8, r: 1.8, fill: 'rgba(215,38,46,.35)' }, body);
-        make('path', { d: 'M-10.2 -51 Q-9.6 -63 0 -63 Q9.6 -63 10.2 -51 Z', fill: o.hat }, body);
-        make('path', { d: 'M-10.2 -51 Q-9.6 -63 0 -63 Q9.6 -63 10.2 -51 Z', fill: 'url(#knit)' }, body);
-        make('rect', { x: -10.8, y: -53.5, width: 21.6, height: 4.4, rx: 2.2, fill: o.pom }, body);
-        make('circle', { cx: 0, cy: -65, r: 3.8, fill: o.pom }, body);
-        return { g: g, body: body, legB: legB, legF: legF, armB: armB, armF: armF };
-      }
-
-      function drawWalkers(cfg) {
-        pedsBack.innerHTML = '';
-        pedsFront.innerHTML = '';
-        walkers = [];
-        (cfg.walkers || []).forEach(function (w, i) {
-          var pts = w.path.map(function (p) { return { x: p[0], y: p[1] }; });
-          var segs = [], len = 0;
-          for (var j = 1; j < pts.length; j++) {
-            var l = Math.hypot(pts[j].x - pts[j - 1].x, pts[j].y - pts[j - 1].y);
-            segs.push({ a: pts[j - 1], b: pts[j], l: l, from: len });
-            len += l;
-          }
-          var fig = makeWalker(OUTFITS[i % OUTFITS.length], w.front ? pedsFront : pedsBack);
-          walkers.push({
-            fig: fig, segs: segs, len: len,
-            s: len * (w.start || 0), dir: w.dir || 1,
-            speed: (16 + (i * 7) % 12) * k, stride: 0, wait: 0,
-            scale: cfg.walkerScale || k
-          });
-        });
-        walkers.forEach(function (w) { placeWalker(w); });
-      }
-
-      function placeWalker(w) {
-        var seg = w.segs[w.segs.length - 1];
-        for (var i = 0; i < w.segs.length; i++) {
-          if (w.s <= w.segs[i].from + w.segs[i].l) { seg = w.segs[i]; break; }
-        }
-        var f = seg.l ? (w.s - seg.from) / seg.l : 0;
-        var x = seg.a.x + (seg.b.x - seg.a.x) * f, y = seg.a.y + (seg.b.y - seg.a.y) * f;
-        var swing = Math.sin(w.stride) * 24, bob = Math.abs(Math.cos(w.stride)) * 1.2;
-        if (w.wait > 0) { swing = 0; bob = 0; }
-        w.fig.g.setAttribute('transform', 'translate(' + x.toFixed(1) + ' ' + y.toFixed(1) + ') scale(' + (w.dir * w.scale) + ' ' + w.scale + ')');
-        w.fig.body.setAttribute('transform', 'translate(0 ' + (-bob).toFixed(2) + ')');
-        w.fig.legF.setAttribute('transform', 'rotate(' + swing.toFixed(1) + ' 3.5 -15)');
-        w.fig.legB.setAttribute('transform', 'rotate(' + (-swing).toFixed(1) + ' -3.5 -15)');
-        w.fig.armF.setAttribute('transform', 'rotate(' + (-swing * 0.8).toFixed(1) + ' 0 -34)');
-        w.fig.armB.setAttribute('transform', 'rotate(' + (swing * 0.8).toFixed(1) + ' 0 -34)');
-      }
-
-      function tickWalkers(dt) {
-        walkers.forEach(function (w) {
-          if (w.wait > 0) { w.wait -= dt; placeWalker(w); return; }
-          w.s += w.dir * w.speed * dt;
-          w.stride += w.speed * dt / (7 * w.scale);
-          // Al llegar al final se paran un momento y se dan la vuelta
-          if (w.s >= w.len) { w.s = w.len; w.dir = -1; w.wait = 1 + Math.random() * 1.5; }
-          if (w.s <= 0) { w.s = 0; w.dir = 1; w.wait = 1 + Math.random() * 1.5; }
-          placeWalker(w);
-        });
-      }
-
       /* Coloca los puntos sobre la foto (siguen al plano también con zoom en móvil) */
       function placeHotspots() {
         if (!spots.length) return;
@@ -1434,7 +1330,6 @@
           W = 1600; H = 1000;
           front.innerHTML = '';
           drawHotspots({});
-          drawWalkers({});
           drawPlaceholder(roadD);
           setupRoad(roadD, cfg);
           return;
@@ -1447,13 +1342,11 @@
           drawFront(cfg);
           drawHotspots(cfg);
           setupRoad(roadD, cfg);
-          drawWalkers(cfg);
         };
         img.onerror = function () {
           W = 1600; H = 1000;
           front.innerHTML = '';
           drawHotspots({});
-          drawWalkers({});
           drawPlaceholder(ROAD_DEMO);
           setupRoad(ROAD_DEMO, {});
         };
@@ -1538,7 +1431,7 @@
           drawThread();
           camera();
           placeHotspots();
-          if (!paused) { tickSnow(dt, now); tickWalkers(dt); }
+          if (!paused) tickSnow(dt, now);
         }
         raf = requestAnimationFrame(frame);
       }
