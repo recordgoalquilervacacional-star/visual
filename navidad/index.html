@@ -182,6 +182,9 @@
       text-align: center;
     }
 
+    /* Antetítulo */
+    .kicker { font-size: 15px; color: #fff; letter-spacing: 0.1em; }
+
     h1 {
       margin: 0;
       font-weight: 800;
@@ -384,14 +387,14 @@
     /* ---------- Bases legales ---------- */
     .bases {
       width: 100%;
-      max-width: 880px;
-      margin-top: 56px;
+      max-width: 600px;
+      margin-top: 48px;
       scroll-margin-top: 24px;
     }
 
     .bases h2 {
-      margin: 0 0 20px;
-      font-size: 20px;
+      margin: 0 0 14px;
+      font-size: 15px;
       font-weight: 700;
       line-height: 1.3;
       color: #fff;
@@ -401,7 +404,7 @@
     .accordion {
       background: rgba(47, 43, 44, 0.92);
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 14px;
       overflow: hidden;
       box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
     }
@@ -413,8 +416,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 24px 32px;
-      font-size: 17px;
+      padding: 14px 20px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       list-style: none;
@@ -426,16 +429,16 @@
 
     .accordion .chev {
       flex: none;
-      width: 12px;
-      height: 8px;
+      width: 10px;
+      height: 7px;
       transition: transform .2s ease;
     }
 
     .accordion details[open] .chev { transform: rotate(180deg); }
 
     .accordion .panel {
-      padding: 0 32px 24px;
-      font-size: 14px;
+      padding: 0 20px 16px;
+      font-size: 12px;
       line-height: 1.6;
       color: var(--muted);
     }
@@ -655,11 +658,10 @@
       .screen { padding: 104px 16px 32px; }
       .card { padding: 24px 20px; }
       .subtitle { font-size: 16px; }
-      .bases { margin-top: 40px; }
-      .bases h2 { font-size: 17px; }
-      .accordion { border-radius: 16px; }
-      .accordion summary { padding: 18px 20px; font-size: 15px; }
-      .accordion .panel { padding: 0 20px 18px; }
+      .bases { margin-top: 36px; }
+      .bases h2 { font-size: 14px; }
+      .accordion summary { padding: 13px 16px; }
+      .accordion .panel { padding: 0 16px 14px; }
       .map-frame { margin-top: 24px; padding: 8px; border-radius: 14px; }
       .hs-card { width: 150px; padding: 12px 10px 12px; border-radius: 12px; right: 18px; }
       .hs-card h3 { font-size: 13px; }
@@ -747,6 +749,7 @@
   <!-- PANTALLA 1 · Formulario -->
   <main class="screen" id="screen-form">
     <div class="intro">
+      <p class="eyebrow kicker" data-i18n="kicker">¿A quién te lleva tu hilo rojo?</p>
       <h1><span data-i18n="titleA">Tu</span> <em data-i18n="titleB">hilo rojo</em> <span data-i18n="titleC">tiene un destino</span></h1>
       <svg class="thread" viewBox="0 0 320 28" aria-hidden="true">
         <defs>
@@ -987,6 +990,7 @@
 
     var I18N = {
       es: {
+        kicker: "¿A quién te lleva tu hilo rojo?",
         titleA: 'Tu', titleB: 'hilo rojo', titleC: 'tiene un destino',
         subtitle: 'Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.',
         emailLabel: 'Email', emailPh: 'nombre@correo.com',
@@ -1008,6 +1012,7 @@
         readStory: 'Ver historia', pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
       },
       en: {
+        kicker: "Who does your red thread lead you to?",
         titleA: 'Your', titleB: 'red thread', titleC: 'has a destination',
         subtitle: "Choose the destination you'd travel to with your red thread and enter the draw for a Christmas getaway.",
         emailLabel: 'Email', emailPh: 'name@email.com',
@@ -1029,6 +1034,7 @@
         readStory: 'Read the story', pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
       },
       de: {
+        kicker: "Zu wem führt dich dein roter Faden?",
         titleA: 'Dein', titleB: 'roter Faden', titleC: 'hat ein Ziel',
         subtitle: 'Wähle das Reiseziel, zu dem du mit deinem roten Faden reisen würdest, und nimm an der Verlosung eines Weihnachtsausflugs teil.',
         emailLabel: 'E-Mail', emailPh: 'name@email.de',
@@ -1050,6 +1056,7 @@
         readStory: 'Geschichte lesen', pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
       },
       fr: {
+        kicker: "Vers qui te mène ton fil rouge ?",
         titleA: 'Ton', titleB: 'fil rouge', titleC: 'a une destination',
         subtitle: "Choisis la destination où tu irais avec ton fil rouge et participe au tirage au sort d'une escapade de Noël.",
         emailLabel: 'E-mail', emailPh: 'nom@email.com',
@@ -1071,6 +1078,7 @@
         readStory: 'Lire l\'histoire', pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
       },
       ca: {
+        kicker: "A qui et porta el teu fil vermell?",
         titleA: 'El teu', titleB: 'fil vermell', titleC: 'té una destinació',
         subtitle: "Selecciona la destinació on aniries amb el teu fil vermell i participa en el sorteig d'una escapada nadalenca.",
         emailLabel: 'Correu electrònic', emailPh: 'nom@correu.com',
@@ -1092,6 +1100,7 @@
         readStory: 'Veure la història', pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
       },
       it: {
+        kicker: "Da chi ti porta il tuo filo rosso?",
         titleA: 'Il tuo', titleB: 'filo rosso', titleC: 'ha una destinazione',
         subtitle: "Scegli la destinazione in cui andresti con il tuo filo rosso e partecipa all'estrazione di una fuga natalizia.",
         emailLabel: 'Email', emailPh: 'nome@email.com',
@@ -1113,6 +1122,7 @@
         readStory: 'Leggi la storia', pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
       },
       pt: {
+        kicker: "Até quem te leva o teu fio vermelho?",
         titleA: 'O teu', titleB: 'fio vermelho', titleC: 'tem um destino',
         subtitle: 'Escolhe o destino para onde irias com o teu fio vermelho e participa no sorteio de uma escapadinha de Natal.',
         emailLabel: 'Email', emailPh: 'nome@email.com',
@@ -1134,6 +1144,7 @@
         readStory: 'Ver história', pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
       },
       el: {
+        kicker: "Σε ποιον σε οδηγεί η κόκκινη κλωστή σου;",
         titleA: 'Η', titleB: 'κόκκινη κλωστή', titleC: 'σου έχει προορισμό',
         subtitle: 'Επίλεξε τον προορισμό όπου θα πήγαινες με την κόκκινη κλωστή σου και πάρε μέρος στην κλήρωση για μια χριστουγεννιάτικη απόδραση.',
         emailLabel: 'Email', emailPh: 'name@email.com',
