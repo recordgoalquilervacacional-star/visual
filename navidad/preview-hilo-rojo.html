@@ -20,6 +20,7 @@
       --red-hover: #B91F26;
       --error: #FF8A8F;
       --gold: #F2B84B;
+      --page: 800px;   /* mismo ancho para todos los bloques */
     }
 
     * { box-sizing: border-box; }
@@ -166,7 +167,7 @@
     .screen[hidden] { display: none; }
 
     .intro {
-      max-width: 720px;
+      max-width: var(--page);
       text-align: center;
       margin-bottom: 28px;
     }
@@ -238,7 +239,7 @@
 
     .subtitle {
       margin: 16px auto 0;
-      max-width: 540px;
+      max-width: none;
       font-size: 14px;
       line-height: 1.6;
       color: var(--muted);
@@ -248,7 +249,7 @@
     /* Premios y pasos */
     .promo {
       width: 100%;
-      max-width: 640px;
+      max-width: var(--page);
       margin: 0 auto 32px;
       text-align: center;
     }
@@ -314,7 +315,7 @@
     /* Bloque del formulario */
     .card {
       width: 100%;
-      max-width: 440px;
+      max-width: var(--page);
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 16px;
@@ -322,7 +323,9 @@
       box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
     }
 
-    .field + .field { margin-top: 20px; }
+    .field + .field, .field-row + .field { margin-top: 20px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .field-row .field { margin-top: 0; }
 
     label {
       display: block;
@@ -454,7 +457,7 @@
     /* ---------- Bases legales ---------- */
     .bases {
       width: 100%;
-      max-width: 600px;
+      max-width: var(--page);
       margin-top: 48px;
       scroll-margin-top: 24px;
     }
@@ -515,7 +518,7 @@
 
     .destino-inner {
       width: 100%;
-      max-width: 1040px;
+      max-width: var(--page);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -725,6 +728,7 @@
       .screen { padding: 104px 16px 32px; }
       .card { padding: 24px 20px; }
       .subtitle { font-size: 13px; }
+      .field-row { grid-template-columns: 1fr; }
       .promo-lead { font-size: 18px; }
       .promo-sub { font-size: 14px; }
       .steps { grid-template-columns: 1fr; }
@@ -854,6 +858,7 @@
     </section>
 
     <form class="card" id="form" novalidate>
+      <div class="field-row">
       <div class="field" data-field="email">
         <label for="email" data-i18n="emailLabel">Email</label>
         <div class="control">
@@ -869,6 +874,8 @@
           <input class="has-prefix" id="instagram" name="instagram" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="tuusuario" data-i18n-ph="igPh" required>
         </div>
         <p class="error" id="instagram-error" data-i18n="igError">Añade tu usuario de Instagram para que podamos encontrar tu comentario.</p>
+      </div>
+
       </div>
 
       <div class="field" data-field="destino">
