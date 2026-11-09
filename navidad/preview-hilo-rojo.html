@@ -19,6 +19,7 @@
       --red: #D7262E;
       --red-hover: #B91F26;
       --error: #FF8A8F;
+      --gold: #F2B84B;
     }
 
     * { box-sizing: border-box; }
@@ -339,12 +340,104 @@
     .btn:hover { background: var(--red-hover); }
     .btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
-    .legal {
-      margin: 16px 0 0;
-      font-size: 12px;
+    /* Casillas de aceptación */
+    .checks { margin-top: 24px; }
+    .check + .check { margin-top: 14px; }
+
+    .check label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 0;
+      font-size: 13px;
+      font-weight: 400;
       line-height: 1.5;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+    }
+
+    .check input {
+      flex: none;
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .check input:checked {
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23D7262E' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+    }
+
+    .check input:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; box-shadow: none; }
+
+    .check a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    .check a:hover { color: #fff; }
+    .req { color: var(--red); margin-left: 2px; }
+
+    .check.is-invalid input { border-color: var(--error); box-shadow: 0 0 0 2px var(--error); }
+    .check.is-invalid .error { display: block; margin-left: 34px; }
+
+    /* ---------- Bases legales ---------- */
+    .bases {
+      width: 100%;
+      max-width: 880px;
+      margin-top: 56px;
+      scroll-margin-top: 24px;
+    }
+
+    .bases h2 {
+      margin: 0 0 20px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #fff;
       text-align: center;
+    }
+
+    .accordion {
+      background: rgba(47, 43, 44, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+    }
+
+    .accordion details + details { border-top: 1px solid var(--line); }
+
+    .accordion summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 32px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .accordion summary::-webkit-details-marker { display: none; }
+    .accordion summary:hover { background: rgba(255, 255, 255, 0.03); }
+    .accordion summary:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+
+    .accordion .chev {
+      flex: none;
+      width: 12px;
+      height: 8px;
+      transition: transform .2s ease;
+    }
+
+    .accordion details[open] .chev { transform: rotate(180deg); }
+
+    .accordion .panel {
+      padding: 0 32px 24px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
     }
 
     /* ---------- Pantalla 2 · Destino ---------- */
@@ -562,6 +655,11 @@
       .screen { padding: 104px 16px 32px; }
       .card { padding: 24px 20px; }
       .subtitle { font-size: 16px; }
+      .bases { margin-top: 40px; }
+      .bases h2 { font-size: 17px; }
+      .accordion { border-radius: 16px; }
+      .accordion summary { padding: 18px 20px; font-size: 15px; }
+      .accordion .panel { padding: 0 20px 18px; }
       .map-frame { margin-top: 24px; padding: 8px; border-radius: 14px; }
       .hs-card { width: 150px; padding: 12px 10px 12px; border-radius: 12px; right: 18px; }
       .hs-card h3 { font-size: 13px; }
@@ -735,9 +833,30 @@
         <p class="error" id="destino-error" data-i18n="destError">Elige un destino para seguir tu hilo rojo.</p>
       </div>
 
+      <div class="checks">
+        <div class="check" data-field="terms">
+          <label>
+            <input type="checkbox" id="terms" name="terms" required>
+            <span><span id="terms-text">He leído y acepto las <a href="#bases-legales" data-link="cg">condiciones generales</a> y la <a href="https://www.recordrentacar.com/es/privacity/" target="_blank" rel="noopener" data-link="pp">política de protección de datos</a> de Record go.</span><span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <p class="error" id="terms-error" data-i18n="termsError">Para participar tienes que aceptar las condiciones generales y la política de protección de datos.</p>
+        </div>
+        <div class="check">
+          <label>
+            <input type="checkbox" id="marketing" name="marketing">
+            <span data-i18n="marketing">Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.</span>
+          </label>
+        </div>
+      </div>
+
       <button class="btn" type="submit" data-i18n="cta">Seguir mi hilo rojo</button>
-      <p class="legal" data-i18n="legal">Al continuar aceptas las bases legales del sorteo y la política de privacidad de Record go.</p>
     </form>
+
+    <!-- Bases legales (las "condiciones generales" de la casilla llevan aquí) -->
+    <section class="bases" id="bases-legales" aria-labelledby="bases-title">
+      <h2 id="bases-title" data-i18n="basesTitle">* Bases legales de participación · Sorteo de una escapada navideña</h2>
+      <div class="accordion" id="bases-list"></div>
+    </section>
   </main>
 
   <!-- PANTALLA 2 · Destino: plano con el coche y el hilo rojo -->
@@ -877,7 +996,12 @@
         destLabel: 'Destino', destPh: 'Elige tu destino',
         destError: 'Elige un destino para seguir tu hilo rojo.',
         cta: 'Seguir mi hilo rojo',
-        legal: 'Al continuar aceptas las bases legales del sorteo y la política de privacidad de Record go.',
+        terms: "He leído y acepto las {cg} y la {pp} de Record go.", cg: "condiciones generales", pp: "política de protección de datos",
+        privacyUrl: "https://www.recordrentacar.com/es/privacity/",
+        marketing: "Acepto el uso de mis datos para el envío de comunicaciones comerciales con ofertas exclusivas y novedades.",
+        termsError: "Para participar tienes que aceptar las condiciones generales y la política de protección de datos.",
+        basesTitle: "* Bases legales de participación · Sorteo de una escapada navideña",
+        bases: ["Compañía organizadora", "Duración", "Participantes y requisitos de participación", "Mecánica del sorteo", "Condiciones del sorteo y premios", "Exoneración de responsabilidad", "Protección de datos personales", "Legislación aplicable y jurisdicción", "Aceptación de las bases legales"],
         countries: { es: 'España', pt: 'Portugal', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Tu hilo rojo te lleva a', langLabel: 'Idioma',
         registered: 'Tu participación ha sido registrada. ¡Suerte!', visitWeb: 'Visitar web Record go',
@@ -893,7 +1017,12 @@
         destLabel: 'Destination', destPh: 'Choose your destination',
         destError: 'Choose a destination to follow your red thread.',
         cta: 'Follow my red thread',
-        legal: "By continuing you accept the official rules of the draw and Record go's privacy policy.",
+        terms: "I have read and accept Record go's {cg} and {pp}.", cg: "terms and conditions", pp: "data protection policy",
+        privacyUrl: "https://www.recordrentacar.com/en/privacity/",
+        marketing: "I agree to the use of my data to receive marketing communications with exclusive offers and news.",
+        termsError: "To take part, please accept the terms and conditions and the data protection policy.",
+        basesTitle: "* Official rules · Christmas getaway draw",
+        bases: ["Organising company", "Duration", "Participants and entry requirements", "How the draw works", "Draw conditions and prizes", "Disclaimer of liability", "Personal data protection", "Applicable law and jurisdiction", "Acceptance of the official rules"],
         countries: { es: 'Spain', pt: 'Portugal', gr: 'Greece', it: 'Italy' },
         leadsTo: 'Your red thread takes you to', langLabel: 'Language',
         registered: 'Your entry has been registered. Good luck!', visitWeb: 'Visit the Record go website',
@@ -909,7 +1038,12 @@
         destLabel: 'Reiseziel', destPh: 'Wähle dein Reiseziel',
         destError: 'Wähle ein Reiseziel, um deinem roten Faden zu folgen.',
         cta: 'Meinem roten Faden folgen',
-        legal: 'Mit dem Fortfahren akzeptierst du die Teilnahmebedingungen der Verlosung und die Datenschutzrichtlinie von Record go.',
+        terms: "Ich habe die {cg} und die {pp} von Record go gelesen und akzeptiere sie.", cg: "Allgemeinen Geschäftsbedingungen", pp: "Datenschutzrichtlinie",
+        privacyUrl: "https://www.recordrentacar.com/de/privacity/",
+        marketing: "Ich stimme der Nutzung meiner Daten für den Versand von Werbemitteilungen mit exklusiven Angeboten und Neuigkeiten zu.",
+        termsError: "Um teilzunehmen, musst du die Allgemeinen Geschäftsbedingungen und die Datenschutzrichtlinie akzeptieren.",
+        basesTitle: "* Teilnahmebedingungen · Verlosung eines Weihnachtsausflugs",
+        bases: ["Veranstaltendes Unternehmen", "Dauer", "Teilnehmende und Teilnahmevoraussetzungen", "Ablauf der Verlosung", "Bedingungen der Verlosung und Preise", "Haftungsausschluss", "Schutz personenbezogener Daten", "Anwendbares Recht und Gerichtsstand", "Annahme der Teilnahmebedingungen"],
         countries: { es: 'Spanien', pt: 'Portugal', gr: 'Griechenland', it: 'Italien' },
         leadsTo: 'Dein roter Faden führt dich nach', langLabel: 'Sprache',
         registered: 'Deine Teilnahme wurde registriert. Viel Glück!', visitWeb: 'Website von Record go besuchen',
@@ -925,7 +1059,12 @@
         destLabel: 'Destination', destPh: 'Choisis ta destination',
         destError: 'Choisis une destination pour suivre ton fil rouge.',
         cta: 'Suivre mon fil rouge',
-        legal: 'En continuant, tu acceptes le règlement du tirage au sort et la politique de confidentialité de Record go.',
+        terms: "J'ai lu et j'accepte les {cg} et la {pp} de Record go.", cg: "conditions générales", pp: "politique de protection des données",
+        privacyUrl: "https://www.recordrentacar.com/fr/privacity/",
+        marketing: "J'accepte l'utilisation de mes données pour recevoir des communications commerciales avec des offres exclusives et des nouveautés.",
+        termsError: "Pour participer, tu dois accepter les conditions générales et la politique de protection des données.",
+        basesTitle: "* Règlement de participation · Tirage au sort d'une escapade de Noël",
+        bases: ["Société organisatrice", "Durée", "Participants et conditions de participation", "Déroulement du tirage au sort", "Conditions du tirage au sort et lots", "Exonération de responsabilité", "Protection des données personnelles", "Législation applicable et juridiction", "Acceptation du règlement"],
         countries: { es: 'Espagne', pt: 'Portugal', gr: 'Grèce', it: 'Italie' },
         leadsTo: "Ton fil rouge t'emmène à", langLabel: 'Langue',
         registered: 'Ta participation a bien été enregistrée. Bonne chance !', visitWeb: 'Visiter le site de Record go',
@@ -941,7 +1080,12 @@
         destLabel: 'Destinació', destPh: 'Tria la teva destinació',
         destError: 'Tria una destinació per seguir el teu fil vermell.',
         cta: 'Seguir el meu fil vermell',
-        legal: 'En continuar acceptes les bases legals del sorteig i la política de privacitat de Record go.',
+        terms: "He llegit i accepto les {cg} i la {pp} de Record go.", cg: "condicions generals", pp: "política de protecció de dades",
+        privacyUrl: "https://www.recordrentacar.com/ca/privacity/",
+        marketing: "Accepto l'ús de les meves dades per a l'enviament de comunicacions comercials amb ofertes exclusives i novetats.",
+        termsError: "Per participar has d'acceptar les condicions generals i la política de protecció de dades.",
+        basesTitle: "* Bases legals de participació · Sorteig d'una escapada nadalenca",
+        bases: ["Companyia organitzadora", "Durada", "Participants i requisits de participació", "Mecànica del sorteig", "Condicions del sorteig i premis", "Exoneració de responsabilitat", "Protecció de dades personals", "Legislació aplicable i jurisdicció", "Acceptació de les bases legals"],
         countries: { es: 'Espanya', pt: 'Portugal', gr: 'Grècia', it: 'Itàlia' },
         leadsTo: 'El teu fil vermell et porta a', langLabel: 'Idioma',
         registered: 'La teva participació ha quedat registrada. Molta sort!', visitWeb: 'Visitar el web de Record go',
@@ -957,7 +1101,12 @@
         destLabel: 'Destinazione', destPh: 'Scegli la tua destinazione',
         destError: 'Scegli una destinazione per seguire il tuo filo rosso.',
         cta: 'Segui il mio filo rosso',
-        legal: "Continuando accetti il regolamento dell'estrazione e l'informativa sulla privacy di Record go.",
+        terms: "Ho letto e accetto le {cg} e l'{pp} di Record go.", cg: "condizioni generali", pp: "informativa sulla protezione dei dati",
+        privacyUrl: "https://www.recordrentacar.com/it/privacity/",
+        marketing: "Acconsento all'uso dei miei dati per l'invio di comunicazioni commerciali con offerte esclusive e novità.",
+        termsError: "Per partecipare devi accettare le condizioni generali e l'informativa sulla protezione dei dati.",
+        basesTitle: "* Regolamento di partecipazione · Estrazione di una fuga natalizia",
+        bases: ["Società organizzatrice", "Durata", "Partecipanti e requisiti di partecipazione", "Meccanica dell'estrazione", "Condizioni dell'estrazione e premi", "Esonero di responsabilità", "Protezione dei dati personali", "Legge applicabile e foro competente", "Accettazione del regolamento"],
         countries: { es: 'Spagna', pt: 'Portogallo', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Il tuo filo rosso ti porta a', langLabel: 'Lingua',
         registered: 'La tua partecipazione è stata registrata. In bocca al lupo!', visitWeb: 'Visita il sito di Record go',
@@ -973,7 +1122,12 @@
         destLabel: 'Destino', destPh: 'Escolhe o teu destino',
         destError: 'Escolhe um destino para seguir o teu fio vermelho.',
         cta: 'Seguir o meu fio vermelho',
-        legal: 'Ao continuar aceitas o regulamento do sorteio e a política de privacidade da Record go.',
+        terms: "Li e aceito as {cg} e a {pp} da Record go.", cg: "condições gerais", pp: "política de proteção de dados",
+        privacyUrl: "https://www.recordrentacar.com/pt/privacity/",
+        marketing: "Aceito a utilização dos meus dados para o envio de comunicações comerciais com ofertas exclusivas e novidades.",
+        termsError: "Para participares, tens de aceitar as condições gerais e a política de proteção de dados.",
+        basesTitle: "* Regulamento de participação · Sorteio de uma escapadinha de Natal",
+        bases: ["Empresa organizadora", "Duração", "Participantes e requisitos de participação", "Mecânica do sorteio", "Condições do sorteio e prémios", "Exoneração de responsabilidade", "Proteção de dados pessoais", "Legislação aplicável e jurisdição", "Aceitação do regulamento"],
         countries: { es: 'Espanha', pt: 'Portugal', gr: 'Grécia', it: 'Itália' },
         leadsTo: 'O teu fio vermelho leva-te a', langLabel: 'Idioma',
         registered: 'A tua participação foi registada. Boa sorte!', visitWeb: 'Visitar o site da Record go',
@@ -989,7 +1143,12 @@
         destLabel: 'Προορισμός', destPh: 'Επίλεξε προορισμό',
         destError: 'Επίλεξε προορισμό για να ακολουθήσεις την κόκκινη κλωστή σου.',
         cta: 'Ακολούθησε την κόκκινη κλωστή μου',
-        legal: 'Συνεχίζοντας αποδέχεσαι τους όρους της κλήρωσης και την πολιτική απορρήτου της Record go.',
+        terms: "Έχω διαβάσει και αποδέχομαι τους {cg} και την {pp} της Record go.", cg: "γενικούς όρους", pp: "πολιτική προστασίας δεδομένων",
+        privacyUrl: "https://www.recordrentacar.com/el/privacity/",
+        marketing: "Αποδέχομαι τη χρήση των δεδομένων μου για την αποστολή εμπορικών επικοινωνιών με αποκλειστικές προσφορές και νέα.",
+        termsError: "Για να συμμετάσχεις, πρέπει να αποδεχτείς τους γενικούς όρους και την πολιτική προστασίας δεδομένων.",
+        basesTitle: "* Όροι συμμετοχής · Κλήρωση για μια χριστουγεννιάτικη απόδραση",
+        bases: ["Διοργανώτρια εταιρεία", "Διάρκεια", "Συμμετέχοντες και προϋποθέσεις συμμετοχής", "Διαδικασία της κλήρωσης", "Όροι της κλήρωσης και δώρα", "Απαλλαγή ευθύνης", "Προστασία προσωπικών δεδομένων", "Εφαρμοστέο δίκαιο και δικαιοδοσία", "Αποδοχή των όρων"],
         countries: { es: 'Ισπανία', pt: 'Πορτογαλία', gr: 'Ελλάδα', it: 'Ιταλία' },
         leadsTo: 'Η κόκκινη κλωστή σου σε οδηγεί', langLabel: 'Γλώσσα',
         registered: 'Η συμμετοχή σου καταχωρήθηκε. Καλή τύχη!', visitWeb: 'Επισκέψου το site της Record go',
@@ -1101,6 +1260,34 @@
         document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
           el.placeholder = t[el.dataset.i18nPh];
         });
+        // Casilla con enlaces: el texto lleva {cg} (condiciones generales) y {pp} (política de datos)
+        var termsText = document.getElementById('terms-text');
+        var linkCg = termsText.querySelector('[data-link="cg"]');
+        var linkPp = termsText.querySelector('[data-link="pp"]');
+        linkCg.textContent = t.cg;
+        linkPp.textContent = t.pp;
+        linkPp.href = t.privacyUrl;
+        termsText.textContent = '';
+        t.terms.split(/(\{cg\}|\{pp\})/).forEach(function (part) {
+          if (part === '{cg}') termsText.appendChild(linkCg);
+          else if (part === '{pp}') termsText.appendChild(linkPp);
+          else if (part) termsText.appendChild(document.createTextNode(part));
+        });
+
+        // Bases legales: un desplegable por apartado
+        var list = document.getElementById('bases-list');
+        if (!list.children.length) {
+          t.bases.forEach(function (_, i) {
+            var d = document.createElement('details');
+            d.innerHTML = '<summary><span></span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1.5 1.5l4.5 4.5 4.5-4.5" fill="none" stroke="#D7262E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>' +
+              '<div class="panel"><p>Texto pendiente.</p></div>';
+            list.appendChild(d);
+          });
+        }
+        Array.prototype.forEach.call(list.children, function (d, i) {
+          d.querySelector('summary span').textContent = (i + 1) + '. ' + t.bases[i];
+        });
+
         document.querySelectorAll('[data-i18n-label]').forEach(function (el) {
           el.label = t.countries[el.dataset.i18nLabel];
         });
@@ -1513,15 +1700,18 @@
       var email = document.getElementById('email');
       var ig = document.getElementById('instagram');
       var destino = document.getElementById('destino');
+      var terms = document.getElementById('terms');
+      var marketing = document.getElementById('marketing');
       var screenForm = document.getElementById('screen-form');
       var screenDestino = document.getElementById('screen-destino');
 
       var rules = {
         email: function () { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()); },
         instagram: function () { return /^@?[A-Za-z0-9._]{1,30}$/.test(ig.value.trim()); },
-        destino: function () { return destino.value !== ''; }
+        destino: function () { return destino.value !== ''; },
+        terms: function () { return terms.checked; }
       };
-      var inputs = { email: email, instagram: ig, destino: destino };
+      var inputs = { email: email, instagram: ig, destino: destino, terms: terms };
 
       function setState(name, ok) {
         var field = form.querySelector('[data-field="' + name + '"]');
@@ -1534,9 +1724,13 @@
       // Validar al salir del campo y limpiar el error en cuanto se corrige
       Object.keys(inputs).forEach(function (name) {
         var el = inputs[name];
+        if (el.type === 'checkbox') {
+          el.addEventListener('change', function () { if (el.checked) setState(name, true); });
+          return;
+        }
         el.addEventListener('blur', function () { if (el.value) setState(name, rules[name]()); });
         el.addEventListener('input', function () {
-          if (el.closest('.field').classList.contains('is-invalid') && rules[name]()) setState(name, true);
+          if (el.closest('[data-field]').classList.contains('is-invalid') && rules[name]()) setState(name, true);
         });
       });
 
@@ -1557,7 +1751,9 @@
           instagram: ig.value.trim().replace(/^@/, ''),
           destino: destino.value,
           destinoNombre: destino.options[destino.selectedIndex].text,
-          idioma: document.documentElement.lang
+          idioma: document.documentElement.lang,
+          aceptaCondiciones: terms.checked,
+          aceptaComunicaciones: marketing.checked
         };
         // TODO: enviar `data` al backend / CRM del sorteo
         window.hiloRojo = data;
@@ -1569,6 +1765,15 @@
         window.scrollTo(0, 0);
         history.pushState({ destino: data.destino }, '', location.search + '#' + data.destino);
       }
+
+      // "Condiciones generales" baja hasta las bases legales y abre el primer apartado
+      document.querySelector('[data-link="cg"]').addEventListener('click', function (e) {
+        e.preventDefault();
+        var bases = document.getElementById('bases-legales');
+        var first = bases.querySelector('details');
+        if (first) first.open = true;
+        bases.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      });
 
       // Al seleccionar destino solo se quita el error; se pasa de pantalla con el botón
       destino.addEventListener('change', function () { setState('destino', true); });
