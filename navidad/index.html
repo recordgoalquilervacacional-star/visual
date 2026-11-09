@@ -404,6 +404,13 @@
     .field.is-invalid input,
     .field.is-invalid select { border-color: var(--error); }
 
+    .hint {
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
     .error {
       display: none;
       margin: 8px 0 0;
@@ -896,18 +903,19 @@
         <label for="instagram" data-i18n="igLabel">Usuario de Instagram</label>
         <div class="control">
           <span class="prefix" aria-hidden="true">@</span>
-          <input class="has-prefix" id="instagram" name="instagram" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="tuusuario" data-i18n-ph="igPh" required>
+          <input class="has-prefix" id="instagram" aria-describedby="instagram-hint" name="instagram" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="tuusuario" data-i18n-ph="igPh" required>
         </div>
+        <p class="hint" id="instagram-hint" data-i18n="igHint">El mismo usuario con el que has comentado en el post del sorteo.</p>
         <p class="error" id="instagram-error" data-i18n="igError">Añade tu usuario de Instagram para que podamos encontrar tu comentario.</p>
       </div>
 
       </div>
 
       <div class="field" data-field="destino">
-        <label for="destino" data-i18n="destLabel">Destino</label>
+        <label for="destino" data-i18n="destLabel">Elige tu destino</label>
         <div class="control">
-          <select id="destino" name="destino" required>
-            <option value="" disabled selected data-i18n="destPh">Elige tu destino</option>
+          <select id="destino" aria-describedby="destino-hint" name="destino" required>
+            <option value="" disabled selected id="destino-ph">Elige el destino que representa vuestro encuentro.</option>
             <optgroup label="España" data-i18n-label="es">
               <option value="alicante">Alicante</option>
               <option value="barcelona">Barcelona</option>
@@ -948,6 +956,7 @@
             </optgroup>
           </select>
         </div>
+        <p class="hint" id="destino-hint">El premio podrás utilizarlo para viajar a cualquier lugar.</p>
         <p class="error" id="destino-error" data-i18n="destError">Elige un destino para seguir tu hilo rojo.</p>
       </div>
 
@@ -1117,7 +1126,9 @@
         emailError: 'Introduce un email válido para poder avisarte si ganas.',
         igLabel: 'Usuario de Instagram', igPh: 'tuusuario',
         igError: 'Añade tu usuario de Instagram para que podamos encontrar tu comentario.',
-        destLabel: 'Destino', destPh: 'Elige tu destino',
+        destLabel: "Elige tu destino", destPh: "Elige el destino que representa vuestro encuentro.",
+        destPhShort: "Elige un destino",
+        destHint: "El premio podrás utilizarlo para viajar a cualquier lugar.", igHint: "El mismo usuario con el que has comentado en el post del sorteo.",
         destError: 'Elige un destino para seguir tu hilo rojo.',
         cta: 'Seguir mi hilo rojo',
         terms: "He leído y acepto las {cg} y la {pp} de Record go.", cg: "condiciones generales", pp: "política de protección de datos",
@@ -1144,7 +1155,9 @@
         emailError: 'Enter a valid email so we can let you know if you win.',
         igLabel: 'Instagram username', igPh: 'yourusername',
         igError: 'Add your Instagram username so we can find your comment.',
-        destLabel: 'Destination', destPh: 'Choose your destination',
+        destLabel: "Choose your destination", destPh: "Choose the destination that represents your meeting.",
+        destPhShort: "Choose a destination",
+        destHint: "You can use the prize to travel anywhere.", igHint: "The same username you used to comment on the giveaway post.",
         destError: 'Choose a destination to follow your red thread.',
         cta: 'Follow my red thread',
         terms: "I have read and accept Record go's {cg} and {pp}.", cg: "terms and conditions", pp: "data protection policy",
@@ -1171,7 +1184,9 @@
         emailError: 'Gib eine gültige E-Mail-Adresse ein, damit wir dich benachrichtigen können, falls du gewinnst.',
         igLabel: 'Instagram-Benutzername', igPh: 'deinname',
         igError: 'Gib deinen Instagram-Benutzernamen ein, damit wir deinen Kommentar finden.',
-        destLabel: 'Reiseziel', destPh: 'Wähle dein Reiseziel',
+        destLabel: "Wähle dein Reiseziel", destPh: "Wähle das Reiseziel, das für eure Begegnung steht.",
+        destPhShort: "Wähle ein Reiseziel",
+        destHint: "Den Preis kannst du für eine Reise an jeden beliebigen Ort nutzen.", igHint: "Derselbe Benutzername, mit dem du unter dem Gewinnspiel-Post kommentiert hast.",
         destError: 'Wähle ein Reiseziel, um deinem roten Faden zu folgen.',
         cta: 'Meinem roten Faden folgen',
         terms: "Ich habe die {cg} und die {pp} von Record go gelesen und akzeptiere sie.", cg: "Allgemeinen Geschäftsbedingungen", pp: "Datenschutzrichtlinie",
@@ -1198,7 +1213,9 @@
         emailError: "Saisis un e-mail valide pour qu'on puisse te prévenir si tu gagnes.",
         igLabel: "Nom d'utilisateur Instagram", igPh: 'tonpseudo',
         igError: "Ajoute ton nom d'utilisateur Instagram pour qu'on retrouve ton commentaire.",
-        destLabel: 'Destination', destPh: 'Choisis ta destination',
+        destLabel: "Choisis ta destination", destPh: "Choisis la destination qui représente votre rencontre.",
+        destPhShort: "Choisis une destination",
+        destHint: "Tu pourras utiliser le prix pour voyager où tu veux.", igHint: "Le même nom d'utilisateur que celui avec lequel tu as commenté la publication du concours.",
         destError: 'Choisis une destination pour suivre ton fil rouge.',
         cta: 'Suivre mon fil rouge',
         terms: "J'ai lu et j'accepte les {cg} et la {pp} de Record go.", cg: "conditions générales", pp: "politique de protection des données",
@@ -1225,7 +1242,9 @@
         emailError: 'Introdueix un correu vàlid perquè et puguem avisar si guanyes.',
         igLabel: "Usuari d'Instagram", igPh: 'elteuusuari',
         igError: "Afegeix el teu usuari d'Instagram perquè puguem trobar el teu comentari.",
-        destLabel: 'Destinació', destPh: 'Tria la teva destinació',
+        destLabel: "Tria la teva destinació", destPh: "Tria la destinació que representa la vostra trobada.",
+        destPhShort: "Tria una destinació",
+        destHint: "Podràs fer servir el premi per viatjar a qualsevol lloc.", igHint: "El mateix usuari amb què has comentat la publicació del sorteig.",
         destError: 'Tria una destinació per seguir el teu fil vermell.',
         cta: 'Seguir el meu fil vermell',
         terms: "He llegit i accepto les {cg} i la {pp} de Record go.", cg: "condicions generals", pp: "política de protecció de dades",
@@ -1252,7 +1271,9 @@
         emailError: "Inserisci un'email valida per poterti avvisare se vinci.",
         igLabel: 'Nome utente Instagram', igPh: 'tuonome',
         igError: 'Aggiungi il tuo nome utente Instagram così troviamo il tuo commento.',
-        destLabel: 'Destinazione', destPh: 'Scegli la tua destinazione',
+        destLabel: "Scegli la tua destinazione", destPh: "Scegli la destinazione che rappresenta il vostro incontro.",
+        destPhShort: "Scegli una destinazione",
+        destHint: "Potrai usare il premio per viaggiare ovunque.", igHint: "Lo stesso nome utente con cui hai commentato il post del concorso.",
         destError: 'Scegli una destinazione per seguire il tuo filo rosso.',
         cta: 'Segui il mio filo rosso',
         terms: "Ho letto e accetto le {cg} e l'{pp} di Record go.", cg: "condizioni generali", pp: "informativa sulla protezione dei dati",
@@ -1279,7 +1300,9 @@
         emailError: 'Introduz um email válido para te podermos avisar se ganhares.',
         igLabel: 'Utilizador do Instagram', igPh: 'oteuutilizador',
         igError: 'Adiciona o teu utilizador do Instagram para encontrarmos o teu comentário.',
-        destLabel: 'Destino', destPh: 'Escolhe o teu destino',
+        destLabel: "Escolhe o teu destino", destPh: "Escolhe o destino que representa o vosso encontro.",
+        destPhShort: "Escolhe um destino",
+        destHint: "Podes usar o prémio para viajar para qualquer lugar.", igHint: "O mesmo utilizador com que comentaste a publicação do passatempo.",
         destError: 'Escolhe um destino para seguir o teu fio vermelho.',
         cta: 'Seguir o meu fio vermelho',
         terms: "Li e aceito as {cg} e a {pp} da Record go.", cg: "condições gerais", pp: "política de proteção de dados",
@@ -1306,7 +1329,9 @@
         emailError: 'Γράψε ένα έγκυρο email για να σε ενημερώσουμε αν κερδίσεις.',
         igLabel: 'Όνομα χρήστη Instagram', igPh: 'username',
         igError: 'Πρόσθεσε το όνομα χρήστη σου στο Instagram για να βρούμε το σχόλιό σου.',
-        destLabel: 'Προορισμός', destPh: 'Επίλεξε προορισμό',
+        destLabel: "Επίλεξε τον προορισμό σου", destPh: "Επίλεξε τον προορισμό που αντιπροσωπεύει τη συνάντησή σας.",
+        destPhShort: "Επίλεξε προορισμό",
+        destHint: "Μπορείς να χρησιμοποιήσεις το δώρο για να ταξιδέψεις οπουδήποτε.", igHint: "Το ίδιο όνομα χρήστη με το οποίο σχολίασες την ανάρτηση του διαγωνισμού.",
         destError: 'Επίλεξε προορισμό για να ακολουθήσεις την κόκκινη κλωστή σου.',
         cta: 'Ακολούθησε την κόκκινη κλωστή μου',
         terms: "Έχω διαβάσει και αποδέχομαι τους {cg} και την {pp} της Record go.", cg: "γενικούς όρους", pp: "πολιτική προστασίας δεδομένων",
@@ -1413,6 +1438,23 @@
         if (!wrap.contains(e.target)) close(false);
       });
 
+      /* Destino: en móvil la frase larga no cabe en el desplegable, así que
+         el desplegable dice "Elige un destino" y la frase pasa a la ayuda */
+      var narrow = window.matchMedia('(max-width: 640px)');
+      function destTexts() {
+        var t = I18N[current];
+        var ph = document.getElementById('destino-ph');
+        var hint = document.getElementById('destino-hint');
+        if (narrow.matches) {
+          ph.textContent = t.destPhShort;
+          hint.textContent = t.destPh + ' ' + t.destHint;
+        } else {
+          ph.textContent = t.destPh;
+          hint.textContent = t.destHint;
+        }
+      }
+      if (narrow.addEventListener) narrow.addEventListener('change', destTexts);
+
       function choose(code) {
         var t = I18N[code];
         if (!t) return;
@@ -1426,6 +1468,8 @@
         document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
           el.placeholder = t[el.dataset.i18nPh];
         });
+        destTexts();
+
         // Paso 1: @recordgo enlaza al perfil de Instagram
         var step1 = document.getElementById('step1');
         var igLink = step1.querySelector('a');
@@ -1892,7 +1936,9 @@
         var field = form.querySelector('[data-field="' + name + '"]');
         field.classList.toggle('is-invalid', !ok);
         inputs[name].setAttribute('aria-invalid', ok ? 'false' : 'true');
-        if (!ok) inputs[name].setAttribute('aria-describedby', name + '-error');
+        var hint = document.getElementById(name + '-hint') ? name + '-hint' : '';
+        var desc = ok ? hint : (hint ? hint + ' ' : '') + name + '-error';
+        if (desc) inputs[name].setAttribute('aria-describedby', desc);
         else inputs[name].removeAttribute('aria-describedby');
       }
 
