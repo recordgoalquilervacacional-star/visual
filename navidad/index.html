@@ -262,6 +262,17 @@
       text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
     }
 
+    /* Recuadro del premio: mismo estilo que el formulario */
+    .prize-box {
+      padding: 24px 32px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+    }
+
+    .prize-box .promo-lead { text-shadow: none; }
+
     .promo-sub {
       margin: 0;
       font-size: 15px;
@@ -731,6 +742,7 @@
       .field-row { grid-template-columns: 1fr; }
       .promo-lead { font-size: 18px; }
       .promo-sub { font-size: 14px; }
+      .prize-box { padding: 20px; }
       .steps { grid-template-columns: 1fr; }
       .bases { margin-top: 36px; }
       .bases h2 { font-size: 14px; }
@@ -846,8 +858,10 @@
 
     <!-- Premios y cómo participar -->
     <section class="promo" aria-labelledby="promo-lead">
-      <p class="promo-lead" id="promo-lead" data-i18n="lead">¡Gana un viaje para ver a quien tú quieras!</p>
-      <p class="promo-sub" data-i18n="prizes">Incluye 200 € en vuelos + 5 días de alquiler de coche con Record go.</p>
+      <div class="prize-box">
+        <p class="promo-lead" id="promo-lead" data-i18n="lead">¡Gana un viaje para ver a quien tú quieras!</p>
+        <p class="promo-sub" data-i18n="prizes">Incluye 200 € en vuelos + 5 días de alquiler de coche con Record go.</p>
+      </div>
 
       <h2 class="steps-title" data-i18n="howTitle">Cómo participar</h2>
       <ol class="steps">
