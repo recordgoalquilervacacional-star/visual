@@ -404,12 +404,64 @@
     .field.is-invalid input,
     .field.is-invalid select { border-color: var(--error); }
 
-    .hint {
-      margin: 6px 0 0;
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: rgba(255, 255, 255, 0.6);
+    /* Etiqueta con icono de información y su pequeño pop-up */
+    .label-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
     }
+
+    .label-row label { margin: 0; }
+
+    .info-btn {
+      display: inline-grid;
+      place-items: center;
+      width: 21px;
+      height: 21px;
+      padding: 0;
+      color: rgba(255, 255, 255, 0.7);
+      background: none;
+      border: 0;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .info-btn svg { width: 16px; height: 16px; }
+    .info-btn:hover, .info-btn[aria-expanded="true"] { color: #fff; }
+    .info-btn:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+
+    .hint {
+      position: absolute;
+      left: 0;
+      top: calc(100% + 8px);
+      z-index: 5;
+      width: max-content;
+      max-width: min(300px, 100%);
+      margin: 0;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #1d1a1b;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+    }
+
+    .hint::before {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: var(--arrow, 20px);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      transform: rotate(45deg);
+    }
+
+    .hint[hidden] { display: none; }
 
     .error {
       display: none;
@@ -900,19 +952,26 @@
       </div>
 
       <div class="field" data-field="instagram">
-        <label for="instagram" data-i18n="igLabel">Usuario de Instagram</label>
+        <div class="label-row">
+          <label for="instagram" data-i18n="igLabel">Usuario de Instagram</label>
+          <button class="info-btn" type="button" aria-expanded="false" aria-controls="instagram-hint" data-i18n-aria="moreInfo" aria-label="Más información"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="4.9" r="1" fill="currentColor"/><path d="M8 7.3v4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+          <p class="hint" id="instagram-hint" hidden data-i18n="igHint">El mismo usuario con el que has comentado en el post del sorteo.</p>
+        </div>
         <div class="control">
           <span class="prefix" aria-hidden="true">@</span>
           <input class="has-prefix" id="instagram" aria-describedby="instagram-hint" name="instagram" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder="tuusuario" data-i18n-ph="igPh" required>
         </div>
-        <p class="hint" id="instagram-hint" data-i18n="igHint">El mismo usuario con el que has comentado en el post del sorteo.</p>
         <p class="error" id="instagram-error" data-i18n="igError">Añade tu usuario de Instagram para que podamos encontrar tu comentario.</p>
       </div>
 
       </div>
 
       <div class="field" data-field="destino">
-        <label for="destino" data-i18n="destLabel">Elige tu destino</label>
+        <div class="label-row">
+          <label for="destino" data-i18n="destLabel">Elige tu destino</label>
+          <button class="info-btn" type="button" aria-expanded="false" aria-controls="destino-hint" data-i18n-aria="moreInfo" aria-label="Más información"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="4.9" r="1" fill="currentColor"/><path d="M8 7.3v4.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+          <p class="hint" id="destino-hint" hidden>Elige el destino que representa vuestro encuentro. El premio podrás utilizarlo para viajar a cualquier lugar.</p>
+        </div>
         <div class="control">
           <select id="destino" aria-describedby="destino-hint" name="destino" required>
             <option value="" disabled selected id="destino-ph">Elige el destino que representa vuestro encuentro.</option>
@@ -956,7 +1015,6 @@
             </optgroup>
           </select>
         </div>
-        <p class="hint" id="destino-hint">El premio podrás utilizarlo para viajar a cualquier lugar.</p>
         <p class="error" id="destino-error" data-i18n="destError">Elige un destino para seguir tu hilo rojo.</p>
       </div>
 
@@ -1128,6 +1186,7 @@
         igError: 'Añade tu usuario de Instagram para que podamos encontrar tu comentario.',
         destLabel: "Elige tu destino", destPh: "Elige el destino que representa vuestro encuentro.",
         destPhShort: "Elige un destino",
+        moreInfo: "Más información",
         destHint: "El premio podrás utilizarlo para viajar a cualquier lugar.", igHint: "El mismo usuario con el que has comentado en el post del sorteo.",
         destError: 'Elige un destino para seguir tu hilo rojo.',
         cta: 'Seguir mi hilo rojo',
@@ -1157,6 +1216,7 @@
         igError: 'Add your Instagram username so we can find your comment.',
         destLabel: "Choose your destination", destPh: "Choose the destination that represents your meeting.",
         destPhShort: "Choose a destination",
+        moreInfo: "More information",
         destHint: "You can use the prize to travel anywhere.", igHint: "The same username you used to comment on the giveaway post.",
         destError: 'Choose a destination to follow your red thread.',
         cta: 'Follow my red thread',
@@ -1186,6 +1246,7 @@
         igError: 'Gib deinen Instagram-Benutzernamen ein, damit wir deinen Kommentar finden.',
         destLabel: "Wähle dein Reiseziel", destPh: "Wähle das Reiseziel, das für eure Begegnung steht.",
         destPhShort: "Wähle ein Reiseziel",
+        moreInfo: "Mehr Informationen",
         destHint: "Den Preis kannst du für eine Reise an jeden beliebigen Ort nutzen.", igHint: "Derselbe Benutzername, mit dem du unter dem Gewinnspiel-Post kommentiert hast.",
         destError: 'Wähle ein Reiseziel, um deinem roten Faden zu folgen.',
         cta: 'Meinem roten Faden folgen',
@@ -1215,6 +1276,7 @@
         igError: "Ajoute ton nom d'utilisateur Instagram pour qu'on retrouve ton commentaire.",
         destLabel: "Choisis ta destination", destPh: "Choisis la destination qui représente votre rencontre.",
         destPhShort: "Choisis une destination",
+        moreInfo: "Plus d'informations",
         destHint: "Tu pourras utiliser le prix pour voyager où tu veux.", igHint: "Le même nom d'utilisateur que celui avec lequel tu as commenté la publication du concours.",
         destError: 'Choisis une destination pour suivre ton fil rouge.',
         cta: 'Suivre mon fil rouge',
@@ -1244,6 +1306,7 @@
         igError: "Afegeix el teu usuari d'Instagram perquè puguem trobar el teu comentari.",
         destLabel: "Tria la teva destinació", destPh: "Tria la destinació que representa la vostra trobada.",
         destPhShort: "Tria una destinació",
+        moreInfo: "Més informació",
         destHint: "Podràs fer servir el premi per viatjar a qualsevol lloc.", igHint: "El mateix usuari amb què has comentat la publicació del sorteig.",
         destError: 'Tria una destinació per seguir el teu fil vermell.',
         cta: 'Seguir el meu fil vermell',
@@ -1273,6 +1336,7 @@
         igError: 'Aggiungi il tuo nome utente Instagram così troviamo il tuo commento.',
         destLabel: "Scegli la tua destinazione", destPh: "Scegli la destinazione che rappresenta il vostro incontro.",
         destPhShort: "Scegli una destinazione",
+        moreInfo: "Maggiori informazioni",
         destHint: "Potrai usare il premio per viaggiare ovunque.", igHint: "Lo stesso nome utente con cui hai commentato il post del concorso.",
         destError: 'Scegli una destinazione per seguire il tuo filo rosso.',
         cta: 'Segui il mio filo rosso',
@@ -1302,6 +1366,7 @@
         igError: 'Adiciona o teu utilizador do Instagram para encontrarmos o teu comentário.',
         destLabel: "Escolhe o teu destino", destPh: "Escolhe o destino que representa o vosso encontro.",
         destPhShort: "Escolhe um destino",
+        moreInfo: "Mais informações",
         destHint: "Podes usar o prémio para viajar para qualquer lugar.", igHint: "O mesmo utilizador com que comentaste a publicação do passatempo.",
         destError: 'Escolhe um destino para seguir o teu fio vermelho.',
         cta: 'Seguir o meu fio vermelho',
@@ -1331,6 +1396,7 @@
         igError: 'Πρόσθεσε το όνομα χρήστη σου στο Instagram για να βρούμε το σχόλιό σου.',
         destLabel: "Επίλεξε τον προορισμό σου", destPh: "Επίλεξε τον προορισμό που αντιπροσωπεύει τη συνάντησή σας.",
         destPhShort: "Επίλεξε προορισμό",
+        moreInfo: "Περισσότερες πληροφορίες",
         destHint: "Μπορείς να χρησιμοποιήσεις το δώρο για να ταξιδέψεις οπουδήποτε.", igHint: "Το ίδιο όνομα χρήστη με το οποίο σχολίασες την ανάρτηση του διαγωνισμού.",
         destError: 'Επίλεξε προορισμό για να ακολουθήσεις την κόκκινη κλωστή σου.',
         cta: 'Ακολούθησε την κόκκινη κλωστή μου',
@@ -1445,13 +1511,11 @@
         var t = I18N[current];
         var ph = document.getElementById('destino-ph');
         var hint = document.getElementById('destino-hint');
-        if (narrow.matches) {
-          ph.textContent = t.destPhShort;
-          hint.textContent = t.destPh + ' ' + t.destHint;
-        } else {
-          ph.textContent = t.destPh;
-          hint.textContent = t.destHint;
-        }
+        ph.textContent = narrow.matches ? t.destPhShort : t.destPh;
+        hint.textContent = t.destPh + ' ' + t.destHint;
+        document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+          el.setAttribute('aria-label', t[el.dataset.i18nAria]);
+        });
       }
       if (narrow.addEventListener) narrow.addEventListener('change', destTexts);
 
@@ -2013,6 +2077,38 @@
       }
 
       window.addEventListener('popstate', function () { if (!location.hash) backToForm(); });
+    })();
+
+    /* ---------- Pop-ups de información del formulario ---------- */
+    (function () {
+      var buttons = document.querySelectorAll('.info-btn');
+      function close(btn, focus) {
+        btn.setAttribute('aria-expanded', 'false');
+        document.getElementById(btn.getAttribute('aria-controls')).hidden = true;
+        if (focus) btn.focus();
+      }
+      function closeAll(except) {
+        buttons.forEach(function (b) { if (b !== except && b.getAttribute('aria-expanded') === 'true') close(b); });
+      }
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var pop = document.getElementById(btn.getAttribute('aria-controls'));
+          var open = btn.getAttribute('aria-expanded') !== 'true';
+          closeAll(btn);
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          pop.hidden = !open;
+          // la flecha del pop-up apunta al icono
+          pop.style.setProperty('--arrow', (btn.offsetLeft + btn.offsetWidth / 2 - 5) + 'px');
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.info-btn') && !e.target.closest('.hint')) closeAll();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        buttons.forEach(function (b) { if (b.getAttribute('aria-expanded') === 'true') close(b, true); });
+      });
     })();
 
     /* ---------- Nieve suave en el fondo ---------- */
