@@ -168,7 +168,7 @@
     .intro {
       max-width: 720px;
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .eyebrow {
@@ -239,10 +239,105 @@
     .subtitle {
       margin: 16px auto 0;
       max-width: 540px;
-      font-size: 18px;
+      font-size: 15px;
+      line-height: 1.6;
       color: var(--muted);
       text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
     }
+
+    /* Premios y pasos */
+    .promo {
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto 32px;
+      text-align: center;
+    }
+
+    .promo-lead {
+      margin: 0 0 16px;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.3;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .prizes {
+      display: flex;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .prizes li {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.4;
+      text-align: left;
+      background: rgba(47, 43, 44, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .prize-icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(215, 38, 46, 0.16);
+    }
+
+    .prize-icon svg { width: 22px; height: 22px; }
+
+    .steps-title {
+      margin: 28px 0 14px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.45;
+      text-align: left;
+      color: rgba(255, 255, 255, 0.88);
+      counter-increment: step;
+    }
+
+    .steps li::before {
+      content: counter(step);
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    .steps a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
     /* Bloque del formulario */
     .card {
@@ -657,7 +752,10 @@
       .lang-btn .lang-code { display: inline; }
       .screen { padding: 104px 16px 32px; }
       .card { padding: 24px 20px; }
-      .subtitle { font-size: 16px; }
+      .subtitle { font-size: 14px; }
+      .promo-lead { font-size: 18px; }
+      .prizes { flex-direction: column; }
+      .steps { grid-template-columns: 1fr; }
       .bases { margin-top: 36px; }
       .bases h2 { font-size: 14px; }
       .accordion summary { padding: 13px 16px; }
@@ -767,8 +865,30 @@
           <path class="w-ply-light" id="title-ply-light"/>
         </g>
       </svg>
-      <p class="subtitle" data-i18n="subtitle">Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.</p>
+      <p class="subtitle" data-i18n="subtitle">La leyenda cuenta que un hilo rojo invisible une a las personas que están destinadas a encontrarse, estén donde estén. En estas Fiestas queremos ayudarte a seguir el tuyo y poner rumbo a ese encuentro.</p>
     </div>
+
+    <!-- Premios y cómo participar -->
+    <section class="promo" aria-labelledby="promo-lead">
+      <p class="promo-lead" id="promo-lead" data-i18n="lead">¡Participa y gana un viaje para ir a ver a quien tú quieras!</p>
+      <ul class="prizes">
+        <li>
+          <span class="prize-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#FF6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
+          <span data-i18n="prize1">Un alquiler de coche de Record go de hasta 5 días</span>
+        </li>
+        <li>
+          <span class="prize-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#FF6B70" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+          <span data-i18n="prize2">Una tarjeta regalo de 200 € para vuelos.</span>
+        </li>
+      </ul>
+
+      <h2 class="steps-title" data-i18n="howTitle">Cómo participar</h2>
+      <ol class="steps">
+        <li><span id="step1">Sigue a <a href="https://www.instagram.com/recordgo/" target="_blank" rel="noopener">@recordgo</a> en Instagram.</span></li>
+        <li><span data-i18n="step2">Comenta en nuestro post del sorteo a quién te lleva tu hilo rojo.</span></li>
+        <li><span data-i18n="step3">Cuéntanos aquí dónde te espera y completa tu participación.</span></li>
+      </ol>
+    </section>
 
     <form class="card" id="form" novalidate>
       <div class="field" data-field="email">
@@ -992,7 +1112,12 @@
       es: {
         kicker: "¿A quién te lleva tu hilo rojo?",
         titleA: 'Tu', titleB: 'hilo rojo', titleC: 'tiene un destino',
-        subtitle: 'Selecciona el destino al que irías con tu hilo rojo y entra en el sorteo de una escapada navideña.',
+        subtitle: "La leyenda cuenta que un hilo rojo invisible une a las personas que están destinadas a encontrarse, estén donde estén. En estas Fiestas queremos ayudarte a seguir el tuyo y poner rumbo a ese encuentro.",
+        lead: "¡Participa y gana un viaje para ir a ver a quien tú quieras!",
+        prize1: "Un alquiler de coche de Record go de hasta 5 días", prize2: "Una tarjeta regalo de 200 € para vuelos.",
+        howTitle: "Cómo participar", step1: "Sigue a @recordgo en Instagram.",
+        step2: "Comenta en nuestro post del sorteo a quién te lleva tu hilo rojo.",
+        step3: "Cuéntanos aquí dónde te espera y completa tu participación.",
         emailLabel: 'Email', emailPh: 'nombre@correo.com',
         emailError: 'Introduce un email válido para poder avisarte si ganas.',
         igLabel: 'Usuario de Instagram', igPh: 'tuusuario',
@@ -1014,7 +1139,12 @@
       en: {
         kicker: "Who does your red thread lead you to?",
         titleA: 'Your', titleB: 'red thread', titleC: 'has a destination',
-        subtitle: "Choose the destination you'd travel to with your red thread and enter the draw for a Christmas getaway.",
+        subtitle: "Legend has it that an invisible red thread connects those who are destined to meet, wherever they are. This festive season we want to help you follow yours and set off towards that encounter.",
+        lead: "Enter and win a trip to go and see whoever you want!",
+        prize1: "A Record go car rental for up to 5 days", prize2: "A €200 gift card for flights.",
+        howTitle: "How to enter", step1: "Follow @recordgo on Instagram.",
+        step2: "Comment on our giveaway post who your red thread takes you to.",
+        step3: "Tell us here where it's waiting for you and complete your entry.",
         emailLabel: 'Email', emailPh: 'name@email.com',
         emailError: 'Enter a valid email so we can let you know if you win.',
         igLabel: 'Instagram username', igPh: 'yourusername',
@@ -1036,7 +1166,12 @@
       de: {
         kicker: "Zu wem führt dich dein roter Faden?",
         titleA: 'Dein', titleB: 'roter Faden', titleC: 'hat ein Ziel',
-        subtitle: 'Wähle das Reiseziel, zu dem du mit deinem roten Faden reisen würdest, und nimm an der Verlosung eines Weihnachtsausflugs teil.',
+        subtitle: "Der Legende nach verbindet ein unsichtbarer roter Faden die Menschen, die füreinander bestimmt sind – wo auch immer sie sind. An diesen Feiertagen möchten wir dir helfen, deinem zu folgen und dich auf den Weg zu dieser Begegnung zu machen.",
+        lead: "Mach mit und gewinne eine Reise zu dem Menschen, den du sehen möchtest!",
+        prize1: "Ein Mietwagen von Record go für bis zu 5 Tage", prize2: "Ein Geschenkgutschein über 200 € für Flüge.",
+        howTitle: "So machst du mit", step1: "Folge @recordgo auf Instagram.",
+        step2: "Kommentiere unter unserem Gewinnspiel-Post, zu wem dich dein roter Faden führt.",
+        step3: "Verrate uns hier, wo er auf dich wartet, und schließe deine Teilnahme ab.",
         emailLabel: 'E-Mail', emailPh: 'name@email.de',
         emailError: 'Gib eine gültige E-Mail-Adresse ein, damit wir dich benachrichtigen können, falls du gewinnst.',
         igLabel: 'Instagram-Benutzername', igPh: 'deinname',
@@ -1058,7 +1193,12 @@
       fr: {
         kicker: "Vers qui te mène ton fil rouge ?",
         titleA: 'Ton', titleB: 'fil rouge', titleC: 'a une destination',
-        subtitle: "Choisis la destination où tu irais avec ton fil rouge et participe au tirage au sort d'une escapade de Noël.",
+        subtitle: "La légende raconte qu'un fil rouge invisible relie les personnes destinées à se rencontrer, où qu'elles soient. Pour ces fêtes, nous voulons t'aider à suivre le tien et à mettre le cap sur cette rencontre.",
+        lead: "Participe et gagne un voyage pour aller voir qui tu veux !",
+        prize1: "Une location de voiture Record go jusqu'à 5 jours", prize2: "Une carte cadeau de 200 € pour des vols.",
+        howTitle: "Comment participer", step1: "Suis @recordgo sur Instagram.",
+        step2: "Commente notre publication du concours en disant vers qui te mène ton fil rouge.",
+        step3: "Dis-nous ici où il t'attend et finalise ta participation.",
         emailLabel: 'E-mail', emailPh: 'nom@email.com',
         emailError: "Saisis un e-mail valide pour qu'on puisse te prévenir si tu gagnes.",
         igLabel: "Nom d'utilisateur Instagram", igPh: 'tonpseudo',
@@ -1080,7 +1220,12 @@
       ca: {
         kicker: "A qui et porta el teu fil vermell?",
         titleA: 'El teu', titleB: 'fil vermell', titleC: 'té una destinació',
-        subtitle: "Selecciona la destinació on aniries amb el teu fil vermell i participa en el sorteig d'una escapada nadalenca.",
+        subtitle: "La llegenda diu que un fil vermell invisible uneix les persones que estan destinades a trobar-se, siguin on siguin. Aquestes festes volem ajudar-te a seguir el teu i posar rumb a aquesta trobada.",
+        lead: "Participa i guanya un viatge per anar a veure qui tu vulguis!",
+        prize1: "Un lloguer de cotxe de Record go de fins a 5 dies", prize2: "Una targeta regal de 200 € per a vols.",
+        howTitle: "Com participar", step1: "Segueix @recordgo a Instagram.",
+        step2: "Comenta a la nostra publicació del sorteig a qui et porta el teu fil vermell.",
+        step3: "Explica'ns aquí on t'espera i completa la teva participació.",
         emailLabel: 'Correu electrònic', emailPh: 'nom@correu.com',
         emailError: 'Introdueix un correu vàlid perquè et puguem avisar si guanyes.',
         igLabel: "Usuari d'Instagram", igPh: 'elteuusuari',
@@ -1102,7 +1247,12 @@
       it: {
         kicker: "Da chi ti porta il tuo filo rosso?",
         titleA: 'Il tuo', titleB: 'filo rosso', titleC: 'ha una destinazione',
-        subtitle: "Scegli la destinazione in cui andresti con il tuo filo rosso e partecipa all'estrazione di una fuga natalizia.",
+        subtitle: "La leggenda narra che un filo rosso invisibile unisce le persone destinate a incontrarsi, ovunque si trovino. In queste feste vogliamo aiutarti a seguire il tuo e a metterti in viaggio verso quell'incontro.",
+        lead: "Partecipa e vinci un viaggio per andare a trovare chi vuoi tu!",
+        prize1: "Un noleggio auto Record go fino a 5 giorni", prize2: "Una gift card da 200 € per voli.",
+        howTitle: "Come partecipare", step1: "Segui @recordgo su Instagram.",
+        step2: "Commenta il nostro post del concorso dicendo da chi ti porta il tuo filo rosso.",
+        step3: "Raccontaci qui dove ti aspetta e completa la tua partecipazione.",
         emailLabel: 'Email', emailPh: 'nome@email.com',
         emailError: "Inserisci un'email valida per poterti avvisare se vinci.",
         igLabel: 'Nome utente Instagram', igPh: 'tuonome',
@@ -1124,7 +1274,12 @@
       pt: {
         kicker: "Até quem te leva o teu fio vermelho?",
         titleA: 'O teu', titleB: 'fio vermelho', titleC: 'tem um destino',
-        subtitle: 'Escolhe o destino para onde irias com o teu fio vermelho e participa no sorteio de uma escapadinha de Natal.',
+        subtitle: "Diz a lenda que um fio vermelho invisível une as pessoas que estão destinadas a encontrar-se, estejam onde estiverem. Nestas festas queremos ajudar-te a seguir o teu e a rumar a esse encontro.",
+        lead: "Participa e ganha uma viagem para ires ver quem tu quiseres!",
+        prize1: "Um aluguer de carro da Record go até 5 dias", prize2: "Um cartão-presente de 200 € para voos.",
+        howTitle: "Como participar", step1: "Segue a @recordgo no Instagram.",
+        step2: "Comenta na nossa publicação do passatempo até quem te leva o teu fio vermelho.",
+        step3: "Conta-nos aqui onde te espera e completa a tua participação.",
         emailLabel: 'Email', emailPh: 'nome@email.com',
         emailError: 'Introduz um email válido para te podermos avisar se ganhares.',
         igLabel: 'Utilizador do Instagram', igPh: 'oteuutilizador',
@@ -1146,7 +1301,12 @@
       el: {
         kicker: "Σε ποιον σε οδηγεί η κόκκινη κλωστή σου;",
         titleA: 'Η', titleB: 'κόκκινη κλωστή', titleC: 'σου έχει προορισμό',
-        subtitle: 'Επίλεξε τον προορισμό όπου θα πήγαινες με την κόκκινη κλωστή σου και πάρε μέρος στην κλήρωση για μια χριστουγεννιάτικη απόδραση.',
+        subtitle: "Ο θρύλος λέει ότι μια αόρατη κόκκινη κλωστή ενώνει τους ανθρώπους που είναι γραφτό να συναντηθούν, όπου κι αν βρίσκονται. Αυτές τις γιορτές θέλουμε να σε βοηθήσουμε να ακολουθήσεις τη δική σου και να ξεκινήσεις για αυτή τη συνάντηση.",
+        lead: "Πάρε μέρος και κέρδισε ένα ταξίδι για να δεις όποιον θέλεις!",
+        prize1: "Ενοικίαση αυτοκινήτου Record go έως 5 ημέρες", prize2: "Μια δωροκάρτα 200 € για πτήσεις.",
+        howTitle: "Πώς να συμμετάσχεις", step1: "Ακολούθησε το @recordgo στο Instagram.",
+        step2: "Σχολίασε στην ανάρτηση του διαγωνισμού σε ποιον σε οδηγεί η κόκκινη κλωστή σου.",
+        step3: "Πες μας εδώ πού σε περιμένει και ολοκλήρωσε τη συμμετοχή σου.",
         emailLabel: 'Email', emailPh: 'name@email.com',
         emailError: 'Γράψε ένα έγκυρο email για να σε ενημερώσουμε αν κερδίσεις.',
         igLabel: 'Όνομα χρήστη Instagram', igPh: 'username',
@@ -1271,6 +1431,15 @@
         document.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
           el.placeholder = t[el.dataset.i18nPh];
         });
+        // Paso 1: @recordgo enlaza al perfil de Instagram
+        var step1 = document.getElementById('step1');
+        var igLink = step1.querySelector('a');
+        step1.textContent = '';
+        t.step1.split('@recordgo').forEach(function (part, i) {
+          if (i) step1.appendChild(igLink);
+          if (part) step1.appendChild(document.createTextNode(part));
+        });
+
         // Casilla con enlaces: el texto lleva {cg} (condiciones generales) y {pp} (política de datos)
         var termsText = document.getElementById('terms-text');
         var linkCg = termsText.querySelector('[data-link="cg"]');
