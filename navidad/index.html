@@ -272,6 +272,8 @@
       text-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
     }
 
+    .btn.btn-top { width: max-content; margin: 0 auto 28px; }
+
     /* Recuadro del premio: mismo estilo que el formulario */
     .prize-box {
       padding: 24px 32px;
@@ -335,6 +337,7 @@
 
     /* Bloque del formulario */
     .card {
+      scroll-margin-top: 24px;
       width: 100%;
       max-width: var(--page);
       background: var(--panel);
@@ -477,9 +480,12 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      width: 100%;
+      width: auto;
+      min-width: 280px;
       height: 52px;
-      margin-top: 28px;
+      margin: 28px auto 0;
+      padding: 0 40px;
+      text-decoration: none;
       font: inherit;
       font-weight: 600;
       color: #fff;
@@ -928,6 +934,8 @@
 
     <!-- Premios y cómo participar -->
     <section class="promo" aria-labelledby="promo-lead">
+      <a class="btn btn-top" href="#form" id="go-form" data-i18n="cta">Seguir mi hilo rojo</a>
+
       <div class="prize-box">
         <p class="promo-lead" id="promo-lead" data-i18n="lead">¡Gana un viaje para ver a quien tú quieras!</p>
         <p class="promo-sub" data-i18n="prizes">Incluye 200 € en vuelos + 5 días de alquiler de coche con Record go.</p>
@@ -2050,6 +2058,14 @@
         window.scrollTo(0, 0);
         history.pushState({ destino: data.destino }, '', location.search + '#' + data.destino);
       }
+
+      // Botón de arriba: baja al formulario y pone el cursor en el email
+      document.getElementById('go-form').addEventListener('click', function (e) {
+        e.preventDefault();
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        form.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        setTimeout(function () { email.focus({ preventScroll: true }); }, reduce ? 0 : 500);
+      });
 
       // "Condiciones generales" baja hasta las bases legales y abre el primer apartado
       document.querySelector('[data-link="cg"]').addEventListener('click', function (e) {
