@@ -1676,30 +1676,375 @@
           '1185,700 1325,690 1325,735 1260,742 1190,758',
           '1318,672 1405,668 1405,700 1350,712 1320,722'
         ],
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 240, y: 180, place: 'below-right', cta: 'readMore',   // los montes de la izquierda
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-por-pueblos-de-interior-de-malaga-parte-i/',
+              en: 'https://www.recordrentacar.com/blog/en/route-through-the-inland-villages-of-malaga-part-i/',
+              de: 'https://www.recordrentacar.com/blog/it/itinerario-tra-i-borghi-dellentroterra-di-malaga-parte-i/',
+              fr: 'https://www.recordrentacar.com/blog/fr/circuit-a-travers-les-villages-de-larriere-pays-de-malaga-partie-i/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-tra-i-borghi-dellentroterra-di-malaga-parte-i/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roteiro-pelas-aldeias-do-interior-de-malaga-parte-i/',
+              el: 'https://www.recordrentacar.com/blog/el/διαδρομή-στα-χωριά-της-ενδοχώρας-της-μ/'
+            },
+            title: {
+              es: "Ruta por pueblos de interior de Málaga (parte I)",
+              en: "Route through the inland villages of Málaga (part I)",
+              de: "Route durch die Dörfer im Landesinneren von Málaga (Teil I)",
+              fr: "Circuit à travers les villages de l’arrière-pays de Málaga (partie I)",
+              ca: "Ruta pels pobles d’interior de Màlaga (part I)",
+              it: "Itinerario tra i borghi dell’entroterra di Malaga (parte I)",
+              pt: "Roteiro pelas aldeias do interior de Málaga (parte I)",
+              el: "Διαδρομή στα χωριά της ενδοχώρας της Μάλαγα (μέρος I)"
+            }
+          },
+          {
+            x: 1760, y: 220, place: 'below-left', cta: 'readMore',   // los montes de la derecha
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-por-pueblos-de-interior-de-malaga-parte-ii/',
+              en: 'https://www.recordrentacar.com/blog/en/route-through-the-inland-villages-of-malaga-part-ii/',
+              de: 'https://www.recordrentacar.com/blog/de/route-durch-die-doerfer-im-landesinneren-von-malaga-teil-ii/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-a-travers-les-villages-de-linterieur-de-malaga-partie-ii/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-tra-i-borghi-dellentroterra-di-malaga-parte-ii/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-pelas-aldeias-do-interior-de-malaga-parte-ii/',
+              el: 'https://www.recordrentacar.com/blog/el/diadromi-sta-choria-tis-endochoras-tis-m-2'
+            },
+            title: {
+              es: "Ruta por pueblos de interior de Málaga (parte II)",
+              en: "Route through the inland villages of Málaga (part II)",
+              de: "Route durch die Dörfer im Landesinneren von Málaga (Teil II)",
+              fr: "Itinéraire à travers les villages de l’intérieur de Málaga (partie II)",
+              ca: "Ruta pels pobles d’interior de Màlaga (part II)",
+              it: "Itinerario tra i borghi dell’entroterra di Malaga (parte II)",
+              pt: "Rota pelas aldeias do interior de Málaga (parte II)",
+              el: "Διαδρομή στα χωριά της ενδοχώρας της Μάλαγα (μέρος II)"
+            }
+          },
+          {
+            x: 880, y: 400, place: 'below-right', cta: 'readMore',   // la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/que-ver-en-malaga-los-lugares-imprescindibles/',
+              en: 'https://www.recordrentacar.com/blog/en/things-to-see-in-malaga-the-must-visit-attractions/',
+              de: 'https://www.recordrentacar.com/blog/de/sehenswuerdigkeiten-in-malaga-die-highlights-die-man-nicht-verpassen-sollte/',
+              fr: 'https://www.recordrentacar.com/blog/fr/que-voir-a-malaga-les-incontournables/',
+              it: 'https://www.recordrentacar.com/blog/it/cose-da-vedere-a-malaga/',
+              pt: 'https://www.recordrentacar.com/blog/pt/o-que-visitar-em-malaga-as-atracoes-imperdiveis/',
+              el: 'https://www.recordrentacar.com/blog/el/τι-να-δείτε-στη-μάλαγα-τα-αξιοθέατα-που/'
+            },
+            title: {
+              es: "Lugares imprescindibles en Málaga",
+              en: "Must-see places in Málaga",
+              de: "Sehenswürdigkeiten in Málaga, die man nicht verpassen sollte",
+              fr: "Les incontournables de Málaga",
+              ca: "Llocs imprescindibles a Màlaga",
+              it: "Cose da vedere a Malaga",
+              pt: "Atrações imperdíveis em Málaga",
+              el: "Τα αξιοθέατα που πρέπει να δεις στη Μάλαγα"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       palma: {
         img: 'img/destinos/palma.jpg',
         // Carretera de curvas al pie de la ciudad
         road: 'M 21 876 C 41 880 101 889 143 898 C 185 907 235 918 271 930 C 307 942 325 959 357 969 C 389 979 428 986 464 991 C 500 996 535 996 571 998 C 607 1000 643 1003 679 1005 C 715 1007 756 1008 786 1009 C 816 1010 848 1012 860 1012',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 300, y: 450, place: 'above-right', cta: 'readMore',   // el castillo de Bellver
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-de-3-dias-en-coche-de-alquiler-por-palma-de-mallorca/',
+              en: 'https://www.recordrentacar.com/blog/ruta-de-3-dias-en-coche-de-alquiler-por-palma-de-mallorca/',
+              de: 'https://www.recordrentacar.com/blog/de/3-tage-mietwagen-route-rund-um-palma-de-mallorca/',
+              fr: 'https://www.recordrentacar.com/blog/fr/circuit-de-3-jours-a-palma-de-majorque-en-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/23557/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roteiro-de-3-dias-por-palma-de-maiorca-com-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/3ήμερη-διαδρομή-με-ενοικιαζόμενο-αυτο/'
+            },
+            title: {
+              es: "Ruta de 3 días en coche por Palma de Mallorca",
+              en: "3-day road trip through Palma de Mallorca",
+              de: "3-tägige Mietwagenroute rund um Palma de Mallorca",
+              fr: "Circuit de 3 jours à Palma de Majorque en voiture de location",
+              ca: "Ruta de 3 dies amb cotxe per Palma",
+              it: "Itinerario di 3 giorni in auto a Palma di Maiorca",
+              pt: "Roteiro de 3 dias de carro por Palma de Maiorca",
+              el: "Διαδρομή 3 ημερών με αυτοκίνητο στην Πάλμα της Μαγιόρκα"
+            }
+          },
+          {
+            x: 1280, y: 440, place: 'above-right', cta: 'readMore',   // la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/la-catedral-de-palma-de-mallorca/',
+              en: 'https://www.recordrentacar.com/blog/en/cathedral-palma-mallorca/',
+              de: 'https://www.recordrentacar.com/blog/de/die-kathedrale-von-palma-mallorca/',
+              fr: 'https://www.recordrentacar.com/blog/fr/la-cathedrale-de-palma-de-majorque-la-cathedrale-de-la-lumiere/',
+              it: 'https://www.recordrentacar.com/blog/it/la-cattedrale-di-palma-di-maiorca-la-cattedrale-della-luce/',
+              pt: 'https://www.recordrentacar.com/blog/pt/a-catedral-de-palma-de-maiorca-a-catedral-da-luz-2/',
+              el: 'https://www.recordrentacar.com/blog/el/ο-καθεδρικός-ναός-της-πάλμα-ντε-μαγιόρ/'
+            },
+            title: {
+              es: "La Catedral de Palma de Mallorca: la Catedral de la luz",
+              en: "Palma Cathedral: the Cathedral of light",
+              de: "Die Kathedrale von Palma: die Kathedrale des Lichts",
+              fr: "La cathédrale de Palma de Majorque : la cathédrale de la lumière",
+              ca: "La Seu de Palma: la catedral de la llum",
+              it: "La Cattedrale di Palma di Maiorca: la cattedrale della luce",
+              pt: "A Catedral de Palma de Maiorca: a catedral da luz",
+              el: "Ο καθεδρικός ναός της Πάλμα: ο ναός του φωτός"
+            }
+          },
+          {
+            x: 920, y: 580, place: 'below-right', cta: 'readMore',   // el mercado navideño
+            url: {
+              es: 'https://www.recordrentacar.com/blog/8-cosas-comer-mallorca/',
+              en: 'https://www.recordrentacar.com/blog/en/8-things-you-have-to-eat-in-mallorca-that-will-blow-your-mind/',
+              de: 'https://www.recordrentacar.com/blog/de/8-dinge-die-sie-in-mallorca-essen-mussen-und-sicherlich-noch-nie-gegessen-haben/',
+              fr: 'https://www.recordrentacar.com/blog/fr/8-specialites-a-deguster-a-majorque-que-vous-navez-probablement-pas-encore-goutees/',
+              it: 'https://www.recordrentacar.com/blog/it/8-cose-da-mangiare-a-maiorca-che-probabilmente-non-hai-ancora-assaggiato/',
+              pt: 'https://www.recordrentacar.com/blog/pt/8-coisas-para-comer-em-maiorca-que-provavelmente-ainda-nao-experimentou/',
+              el: 'https://www.recordrentacar.com/blog/el/8-φαγητά-που-πρέπει-να-δοκιμάσετε-στη-μα/'
+            },
+            title: {
+              es: "8 cosas que comer en Mallorca",
+              en: "8 things you have to eat in Mallorca",
+              de: "8 Dinge, die du auf Mallorca essen musst",
+              fr: "8 spécialités à déguster à Majorque",
+              ca: "8 coses que menjar a Mallorca",
+              it: "8 cose da mangiare a Maiorca",
+              pt: "8 coisas para comer em Maiorca",
+              el: "8 φαγητά που πρέπει να δοκιμάσεις στη Μαγιόρκα"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       milan: {
         img: 'img/destinos/milan.jpg',
         // Carretera junto al canal
         road: 'M 164 868 C 180 868 230 865 260 868 C 290 871 321 874 346 884 C 371 894 380 914 411 927 C 442 940 483 949 529 959 C 575 969 636 978 689 986 C 742 994 796 1001 850 1007 C 904 1013 958 1018 1011 1024 C 1064 1030 1118 1035 1171 1040 C 1224 1045 1284 1051 1332 1056 C 1380 1061 1439 1066 1460 1068',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 1120, y: 440, place: 'above-right', cta: 'readMore',   // el Duomo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/milan-en-un-fin-de-semana/',
+              en: 'https://www.recordrentacar.com/blog/en/milan-in-a-weekend/',
+              de: 'https://www.recordrentacar.com/blog/de/mailand-an-einem-wochenend/',
+              fr: 'https://www.recordrentacar.com/blog/fr/milan-en-un-week-end/',
+              it: 'https://www.recordrentacar.com/blog/it/milano-in-un-weekend/',
+              pt: 'https://www.recordrentacar.com/blog/pt/milao-num-fim-de-semana/',
+              el: 'https://www.recordrentacar.com/blog/el/to-milano-se-ena-savvatokyriako-schedi/'
+            },
+            title: {
+              es: "Milán en un fin de semana",
+              en: "Milan in a weekend",
+              de: "Mailand an einem Wochenende",
+              fr: "Milan en un week-end",
+              ca: "Milà en un cap de setmana",
+              it: "Milano in un weekend",
+              pt: "Milão num fim de semana",
+              el: "Το Μιλάνο σε ένα Σαββατοκύριακο"
+            }
+          },
+          {
+            x: 320, y: 540, place: 'above-right', cta: 'readMore',   // el Castillo Sforzesco
+            url: {
+              es: 'https://www.recordrentacar.com/blog/que-hacer-en-milan-si-hace-frio/',
+              en: 'https://www.recordrentacar.com/blog/en/what-to-do-in-milan-when-its-cold/',
+              de: 'https://www.recordrentacar.com/blog/de/was-man-in-mailand-bei-kaltem-wetter-unternehmen-kann/',
+              fr: 'https://www.recordrentacar.com/blog/fr/que-faire-a-milan-quand-il-fait-froid/',
+              it: 'https://www.recordrentacar.com/blog/it/cosa-fare-a-milano-se-fa-freddo/',
+              pt: 'https://www.recordrentacar.com/blog/pt/o-que-fazer-em-milao-quando-esta-frio/',
+              el: 'https://www.recordrentacar.com/blog/el/ti-na-kanete-sto-milano-otan-kanei-kryo/'
+            },
+            title: {
+              es: "Qué hacer en Milán si hace frío: ruta por los mejores museos y galerías",
+              en: "What to do in Milan when it’s cold: the best museums and galleries",
+              de: "Was man in Mailand bei Kälte unternehmen kann: die besten Museen und Galerien",
+              fr: "Que faire à Milan quand il fait froid : les meilleurs musées et galeries",
+              ca: "Què fer a Milà si fa fred: ruta pels millors museus i galeries",
+              it: "Cosa fare a Milano se fa freddo: i migliori musei e gallerie",
+              pt: "O que fazer em Milão quando está frio: os melhores museus e galerias",
+              el: "Τι να κάνεις στο Μιλάνο όταν κάνει κρύο: τα καλύτερα μουσεία"
+            }
+          },
+          {
+            x: 880, y: 640, place: 'below-left', cta: 'readMore',   // la plaza del árbol de Navidad
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-carnaval-ambrosiano-milan-record-go/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-the-ambrosian-carnival-in-milan-a-unique-experience-with-record-go/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-den-ambrosianischen-karneval-in-mailand/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-le-carnaval-ambrosien-de-milan/',
+              it: 'https://www.recordrentacar.com/blog/it/scoprire-il-carnevale-ambrosiano/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-o-carnaval-ambrosiano-de-milao/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-to-karnavali-tou-amvrosio/'
+            },
+            title: {
+              es: "Descubre el Carnaval Ambrosiano de Milán",
+              en: "Discover Milan’s Ambrosian Carnival",
+              de: "Entdecke den Ambrosianischen Karneval in Mailand",
+              fr: "Découvre le Carnaval ambrosien de Milan",
+              ca: "Descobreix el Carnaval Ambrosià de Milà",
+              it: "Scopri il Carnevale Ambrosiano di Milano",
+              pt: "Descobre o Carnaval Ambrosiano de Milão",
+              el: "Ανακάλυψε το Αμβροσιανό Καρναβάλι του Μιλάνου"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       olbia: {
         img: 'img/destinos/olbia.jpg',
         // Carretera del puerto
         road: 'M 520 1039 C 537 1031 581 1010 622 991 C 663 972 718 945 764 927 C 810 909 854 893 901 883 C 948 873 998 871 1049 868 C 1100 865 1169 867 1204 864 C 1239 861 1251 852 1260 850',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 1260, y: 640, place: 'below-right', cta: 'readMore',   // el árbol de Navidad del puerto
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-olbia-con-tu-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-olbia-with-your-hire-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecke-olbia-in-3-tagen-mit-deinem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-olbia-en-3-jours-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-olbia-in-con-il-tuo-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-olbia-em-3-dias-com-o-seu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-tin-olmpia-se-3-imeres-me-to/'
+            },
+            title: {
+              es: "Descubre Olbia en 3 días con tu coche de alquiler",
+              en: "Discover Olbia in 3 days with your hire car",
+              de: "Entdecke Olbia in 3 Tagen mit deinem Mietwagen",
+              fr: "Découvre Olbia en 3 jours avec ta voiture de location",
+              ca: "Descobreix Olbia en 3 dies amb el teu cotxe de lloguer",
+              it: "Scopri Olbia in 3 giorni con la tua auto a noleggio",
+              pt: "Descobre Olbia em 3 dias com o teu carro de aluguer",
+              el: "Ανακάλυψε την Όλμπια σε 3 ημέρες με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          },
+          {
+            x: 900, y: 320, place: 'below-left', cta: 'readMore',   // la iglesia de San Simplicio
+            url: {
+              es: 'https://www.recordrentacar.com/blog/lugares-que-ver-en-olbia/',
+              en: 'https://www.recordrentacar.com/blog/en/places-you-must-visit-if-youre-travelling-to-sardinia-part-i-olbia/',
+              de: 'https://www.recordrentacar.com/blog/de/orte-die-du-unbedingt-besuchen-solltest-wenn-du-nach-sardinien-reist-teil-i-olbia/',
+              fr: 'https://www.recordrentacar.com/blog/fr/les-lieux-a-ne-pas-manquer-si-vous-voyagez-en-sardaigne-partie-i-olbia/',
+              it: 'https://www.recordrentacar.com/blog/it/luoghi-da-non-perdere-se-vai-in-sardegna-parte-i-olbia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/locais-que-nao-pode-deixar-de-visitar-se-viajar-para-a-sardenha-parte-i-olbia/',
+              el: 'https://www.recordrentacar.com/blog/el/meri-pou-prepei-na-episkeftis-an-taxi/'
+            },
+            title: {
+              es: "Lugares que tienes que visitar si viajas a Cerdeña. Parte I: Olbia",
+              en: "Places you must visit in Sardinia. Part I: Olbia",
+              de: "Orte, die du in Sardinien besuchen solltest. Teil I: Olbia",
+              fr: "Les lieux à ne pas manquer en Sardaigne. Partie I : Olbia",
+              ca: "Llocs que has de visitar a Sardenya. Part I: Olbia",
+              it: "Luoghi da non perdere in Sardegna. Parte I: Olbia",
+              pt: "Locais a visitar na Sardenha. Parte I: Olbia",
+              el: "Μέρη που πρέπει να επισκεφθείς στη Σαρδηνία. Μέρος I: Όλμπια"
+            }
+          },
+          {
+            x: 1420, y: 250, place: 'below-right', cta: 'readMore',   // la playa
+            url: {
+              es: 'https://www.recordrentacar.com/blog/mejores-playas-cerdena-paraiso-instagrammable/',
+              en: 'https://www.recordrentacar.com/blog/en/the-best-beaches-in-sardinia-the-mediterraneans-most-instagrammable-paradise/',
+              de: 'https://www.recordrentacar.com/blog/de/die-schoensten-straende-sardiniens-das-instagram-paradies-im-mittelmeer/',
+              fr: 'https://www.recordrentacar.com/blog/fr/les-meilleures-plages-de-sardaigne-le-paradis-le-plus-instagrammable-de-mediterranee/',
+              it: 'https://www.recordrentacar.com/blog/it/migliori-spiagge-sardegna-guida-instagram/',
+              pt: 'https://www.recordrentacar.com/blog/pt/29201-2/',
+              el: 'https://www.recordrentacar.com/blog/el/oi-kalyteres-paralies-tis-sardinias-o/'
+            },
+            title: {
+              es: "Las mejores playas de Cerdeña",
+              en: "The best beaches in Sardinia",
+              de: "Die schönsten Strände Sardiniens",
+              fr: "Les meilleures plages de Sardaigne",
+              ca: "Les millors platges de Sardenya",
+              it: "Le migliori spiagge della Sardegna",
+              pt: "As melhores praias da Sardenha",
+              el: "Οι καλύτερες παραλίες της Σαρδηνίας"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       oporto: {
         img: 'img/destinos/oporto.jpg',
         // Carretera de la orilla del Duero
         road: 'M 532 1043 C 560 1038 639 1020 700 1011 C 761 1002 832 991 899 991 C 966 991 1057 1007 1099 1013 C 1141 1019 1129 1022 1151 1027 C 1173 1032 1202 1035 1229 1040 C 1256 1045 1280 1052 1312 1058 C 1344 1064 1402 1071 1420 1074',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 1440, y: 360, place: 'below-left', cta: 'readMore',   // los viñedos del Duero
+            url: {
+              es: 'https://www.recordrentacar.com/blog/10-pueblos-con-encanto-cerca-de-oporto/',
+              en: 'https://www.recordrentacar.com/blog/en/10-charming-villages-near-porto/',
+              de: 'https://www.recordrentacar.com/blog/de/10-bezaubernde-doerfer-in-der-naehe-von-porto-die-du-dir-nicht-entgehen-lassen-solltest/',
+              fr: 'https://www.recordrentacar.com/blog/fr/10-villages-de-charme-a-ne-pas-manquer-pres-de-porto/',
+              it: 'https://www.recordrentacar.com/blog/it/10-incantevoli-paesini-da-non-perdere-nei-dintorni-di-porto/',
+              pt: 'https://www.recordrentacar.com/blog/pt/10-vilas-perto-do-porto/',
+              el: 'https://www.recordrentacar.com/blog/el/10-goiteftika-choria-konta-sto-porto-pou/'
+            },
+            title: {
+              es: "10 pueblos con encanto que no te puedes perder cerca de Oporto",
+              en: "10 charming villages near Porto",
+              de: "10 bezaubernde Dörfer in der Nähe von Porto",
+              fr: "10 villages de charme à ne pas manquer près de Porto",
+              ca: "10 pobles amb encant a prop de Porto",
+              it: "10 incantevoli paesini nei dintorni di Porto",
+              pt: "10 vilas encantadoras perto do Porto",
+              el: "10 γοητευτικά χωριά κοντά στο Πόρτο"
+            }
+          },
+          {
+            x: 1720, y: 760, place: 'below-left', cta: 'readMore',   // las bodegas junto al río
+            url: {
+              es: 'https://www.recordrentacar.com/blog/mejores-bodegas-de-vino-en-oporto/',
+              en: 'https://www.recordrentacar.com/blog/en/6-port-wine-cellars-to-visit-in-oporto/',
+              de: 'https://www.recordrentacar.com/blog/de/6-weinkeller-in-porto-die-einen-besuch-wert-sind/',
+              fr: 'https://www.recordrentacar.com/blog/fr/6-caves-a-vin-a-visiter-a-porto/',
+              it: 'https://www.recordrentacar.com/blog/it/6-cantine-da-visitare-a-porto/',
+              pt: 'https://www.recordrentacar.com/blog/pt/6-caves-de-vinho-no-porto-para-visitar/',
+              el: 'https://www.recordrentacar.com/blog/el/6-oinopoieia-sto-porto-pou-axizei-na-epi/'
+            },
+            title: {
+              es: "6 bodegas de vino en Oporto para visitar",
+              en: "6 port wine cellars to visit in Porto",
+              de: "6 Weinkeller in Porto, die einen Besuch wert sind",
+              fr: "6 caves à vin à visiter à Porto",
+              ca: "6 cellers de vi per visitar a Porto",
+              it: "6 cantine da visitare a Porto",
+              pt: "6 caves de vinho no Porto para visitar",
+              el: "6 οινοποιεία στο Πόρτο που αξίζει να επισκεφθείς"
+            }
+          },
+          {
+            x: 780, y: 230, place: 'below-left', cta: 'readMore',   // la Torre de los Clérigos
+            url: {
+              es: 'https://www.recordrentacar.com/blog/festas-sao-joao-oporto/',
+              en: 'https://www.recordrentacar.com/blog/en/feast-of-sao-joao-the-most-important-festival-in-porto/',
+              de: 'https://www.recordrentacar.com/blog/de/das-sao-joao-fest-das-wichtigste-fest-in-porto/',
+              fr: 'https://www.recordrentacar.com/blog/fr/la-fete-de-sao-joao-la-fete-la-plus-importante-de-porto/',
+              it: 'https://www.recordrentacar.com/blog/it/la-festa-di-sao-joao-la-festa-piu-importante-di-porto/',
+              pt: 'https://www.recordrentacar.com/blog/pt/festa-de-sao-joao-porto/',
+              el: 'https://www.recordrentacar.com/blog/el/giorti-tou-sao-zoao-i-simantikoteri-gi/'
+            },
+            title: {
+              es: "Fiesta de São João, la fiesta más importante de Oporto",
+              en: "São João, the most important festival in Porto",
+              de: "Das São-João-Fest, das wichtigste Fest in Porto",
+              fr: "La fête de São João, la plus importante de Porto",
+              ca: "La festa de São João, la més important de Porto",
+              it: "La festa di São João, la più importante di Porto",
+              pt: "Festa de São João, a festa mais importante do Porto",
+              el: "Η γιορτή του Σάο Ζοάο, η σημαντικότερη του Πόρτο"
+            }
+          }
+        ],
         carScale: 1.0, thread: 12, wave: 6
       },
       'gran-canaria': {
