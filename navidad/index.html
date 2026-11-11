@@ -1611,6 +1611,36 @@
        Cada destino tiene su foto y el trazado de su carretera (path SVG en
        píxeles de la foto). Si falta la foto, se dibuja un plano provisional. */
     var DESTINOS = {
+      palermo: {
+        img: 'img/destinos/palermo.jpg',
+        // Carretera que rodea el centro histórico junto al mar
+        road: 'M 292 587 C 283 597 254 624 238 647 C 222 670 200 700 198 723 C 196 746 203 767 228 788 C 253 809 300 828 347 847 C 394 866 450 885 509 903 C 568 921 635 943 700 954 C 765 965 834 970 900 971 C 966 972 1030 961 1099 960 C 1168 959 1252 978 1314 965 C 1376 952 1425 917 1470 884 C 1515 851 1551 800 1586 765 C 1621 730 1656 702 1681 677 C 1706 652 1726 623 1735 612',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      rodas: {
+        img: 'img/destinos/rodas.jpg',
+        // Carretera al pie de la muralla hasta el puerto
+        road: 'M 36 572 C 38 584 32 615 50 642 C 68 669 104 710 141 735 C 178 760 219 773 270 790 C 321 807 390 823 449 837 C 508 851 568 868 621 873 C 674 878 719 878 764 867 C 809 856 848 827 890 808 C 932 789 980 775 1018 755 C 1056 735 1081 707 1120 690 C 1159 673 1217 668 1252 655 C 1287 642 1315 617 1328 609',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      roma: {
+        img: 'img/destinos/roma.jpg',
+        // Carretera de la orilla del Tíber
+        road: 'M 532 1043 C 560 1040 638 1031 699 1024 C 760 1017 832 1003 899 1003 C 966 1003 1036 1015 1103 1022 C 1170 1029 1232 1036 1298 1045 C 1364 1054 1465 1068 1498 1073',
+        carScale: 1.0, thread: 12, wave: 6
+      },
+      salonica: {
+        img: 'img/destinos/salonica.jpg',
+        // Carretera del paseo marítimo hasta la Torre Blanca
+        road: 'M 40 573 C 41 588 31 628 47 660 C 63 692 98 734 137 767 C 176 800 229 829 282 856 C 335 883 392 914 453 931 C 514 948 583 958 649 959 C 715 960 782 951 848 936 C 914 921 982 892 1048 868 C 1114 844 1178 811 1245 792 C 1312 773 1387 765 1451 756 C 1515 747 1570 748 1631 740 C 1692 732 1788 711 1820 705',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      sevilla: {
+        img: 'img/destinos/sevilla.jpg',
+        // Carretera junto al Guadalquivir
+        road: 'M 570 712 C 608 724 728 762 800 785 C 872 808 933 828 1000 848 C 1067 868 1133 886 1200 905 C 1267 924 1333 946 1400 965 C 1467 984 1550 1008 1600 1022 C 1650 1036 1683 1047 1700 1052',
+        carScale: 0.85, thread: 10, wave: 6
+      },
       malaga: {
         img: 'img/destinos/malaga.jpg',
         // Carretera del puerto, del centro hasta el Cubo del Pompidou
