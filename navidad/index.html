@@ -1611,6 +1611,36 @@
        Cada destino tiene su foto y el trazado de su carretera (path SVG en
        píxeles de la foto). Si falta la foto, se dibuja un plano provisional. */
     var DESTINOS = {
+      cagliari: {
+        img: 'img/destinos/cagliari.jpg',
+        // Carretera que rodea el casco antiguo y sigue por el puerto
+        road: 'M 90 660 C 88 677 75 730 78 760 C 81 790 90 819 110 840 C 130 861 152 871 200 885 C 248 899 333 914 400 925 C 467 936 533 943 600 950 C 667 957 740 965 800 968 C 860 971 907 974 960 968 C 1013 962 1063 955 1120 935 C 1177 915 1237 882 1300 850 C 1363 818 1440 777 1500 745 C 1560 713 1618 688 1660 660 C 1702 632 1730 605 1750 580 C 1770 555 1775 522 1780 510',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      castellon: {
+        img: 'img/destinos/castellon.jpg',
+        // Paseo junto al puerto y el faro
+        road: 'M 680 1080 C 717 1067 827 1030 900 1000 C 973 970 1037 933 1120 900 C 1203 867 1333 826 1400 800 C 1467 774 1487 761 1520 745 C 1553 729 1573 718 1600 705 C 1627 692 1653 688 1680 670 C 1707 652 1740 627 1760 600 C 1780 573 1793 525 1800 510',
+        carScale: 0.8, thread: 9, wave: 6
+      },
+      catania: {
+        img: 'img/destinos/catania.jpg',
+        // Carretera junto al mar
+        road: 'M 480 1050 C 533 1032 693 965 800 940 C 907 915 1020 908 1120 900 C 1220 892 1327 900 1400 890 C 1473 880 1520 862 1560 840 C 1600 818 1613 790 1640 760 C 1667 730 1687 683 1720 660 C 1753 637 1797 630 1840 620 C 1883 610 1957 603 1980 600',
+        carScale: 1.1, thread: 13, wave: 6
+      },
+      faro: {
+        img: 'img/destinos/faro.jpg',
+        // Carretera que rodea la muralla de la ciudad vieja
+        road: 'M 40 600 C 47 633 50 753 80 800 C 110 847 167 857 220 880 C 273 903 337 920 400 940 C 463 960 533 980 600 1000 C 667 1020 740 1042 800 1060 C 860 1078 933 1102 960 1110',
+        carScale: 1.2, thread: 14, wave: 6
+      },
+      fuerteventura: {
+        img: 'img/destinos/fuerteventura.jpg',
+        // Carretera entre el pueblo, las dunas y la costa
+        road: 'M 220 1050 C 267 1038 403 1007 500 980 C 597 953 727 920 800 890 C 873 860 900 832 940 800 C 980 768 997 727 1040 700 C 1083 673 1157 660 1200 640 C 1243 620 1287 603 1300 580 C 1313 557 1293 520 1280 500 C 1267 480 1220 477 1220 460 C 1220 443 1260 420 1280 400 C 1300 380 1330 350 1340 340',
+        carScale: 0.6, thread: 7, wave: 6
+      },
       alicante: {
         img: 'img/destinos/alicante.jpg',
         // Paseo junto a la Explanada y el puerto
