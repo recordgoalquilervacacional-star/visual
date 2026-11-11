@@ -1765,18 +1765,225 @@
         img: 'img/destinos/catania.jpg',
         // Carretera junto al mar
         road: 'M 393 1075 C 421 1064 511 1030 562 1012 C 613 994 650 981 699 965 C 748 949 810 930 859 918 C 908 906 948 899 996 894 C 1044 889 1100 890 1150 890 C 1200 890 1251 896 1299 895 C 1347 894 1398 891 1437 885 C 1476 879 1508 874 1536 861 C 1564 848 1584 827 1605 805 C 1626 783 1645 750 1662 731 C 1679 712 1679 704 1706 693 C 1733 682 1786 679 1824 666 C 1862 653 1917 624 1936 615',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 360, y: 560, place: 'below-right', cta: 'readMore',   // el castillo Ursino
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-catania-con-tu-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-catania-with-your-hire-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecke-catania-in-3-tagen-mit-deinem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-catane-en-3-jours-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-catania-con-il-tuo-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-catania-em-3-dias-com-o-seu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-tin-katania-se-3-imeres-me-to/'
+            },
+            title: {
+              es: "Descubre Catania en 3 días con tu coche de alquiler",
+              en: "Discover Catania in 3 days with your hire car",
+              de: "Entdecke Catania in 3 Tagen mit deinem Mietwagen",
+              fr: "Découvre Catane en 3 jours avec ta voiture de location",
+              ca: "Descobreix Catània en 3 dies amb el teu cotxe de lloguer",
+              it: "Scopri Catania in 3 giorni con la tua auto a noleggio",
+              pt: "Descobre Catânia em 3 dias com o teu carro de aluguer",
+              el: "Ανακάλυψε την Κατάνια σε 3 ημέρες με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          },
+          {
+            x: 560, y: 170, place: 'below-right', cta: 'readMore',   // el Etna
+            url: {
+              es: 'https://www.recordrentacar.com/blog/10-lugares-con-encanto-sicilia/',
+              en: 'https://www.recordrentacar.com/blog/en/10-charming-places-sicily/',
+              de: 'https://www.recordrentacar.com/blog/de/10-bezaubernde-orte-die-du-bei-einem-besuch-in-sizilien-auf-keinen-fall-verpassen-solltest/',
+              fr: 'https://www.recordrentacar.com/blog/fr/10-lieux-de-charme-a-ne-pas-manquer-si-vous-visitez-la-sicile/',
+              it: 'https://www.recordrentacar.com/blog/it/10-luoghi-incantevoli-sicilia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/10-locais-encantadores-que-nao-pode-deixar-de-visitar-se-for-a-sicilia/',
+              el: 'https://www.recordrentacar.com/blog/el/10-goiteftika-meri-pou-den-prepei-na-chas/'
+            },
+            title: {
+              es: "10 lugares con encanto que no te puedes perder si visitas Sicilia",
+              en: "10 charming places you can't miss in Sicily",
+              de: "10 bezaubernde Orte, die du in Sizilien nicht verpassen solltest",
+              fr: "10 lieux de charme à ne pas manquer en Sicile",
+              ca: "10 llocs amb encant que no et pots perdre si visites Sicília",
+              it: "10 luoghi incantevoli da non perdere in Sicilia",
+              pt: "10 locais encantadores a não perder na Sicília",
+              el: "10 γοητευτικά μέρη που δεν πρέπει να χάσεις στη Σικελία"
+            }
+          },
+          {
+            x: 1560, y: 370, place: 'below-left', cta: 'readMore',   // la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/pueblos-con-encanto-de-sicilia/',
+              en: 'https://www.recordrentacar.com/blog/en/the-most-charming-villages-in-sicily/',
+              de: 'https://www.recordrentacar.com/blog/de/die-reizvollsten-doerfer-siziliens/',
+              fr: 'https://www.recordrentacar.com/blog/fr/les-villages-les-plus-charmants-de-sicile/',
+              it: 'https://www.recordrentacar.com/blog/it/i-paesi-piu-affascinanti-della-sicilia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/as-vilas-mais-encantadoras-da-sicilia/',
+              el: 'https://www.recordrentacar.com/blog/el/ta-pio-goiteftika-choria-tis-sikelias/'
+            },
+            title: {
+              es: "Los pueblos con más encanto de Sicilia",
+              en: "The most charming villages in Sicily",
+              de: "Die reizvollsten Dörfer Siziliens",
+              fr: "Les villages les plus charmants de Sicile",
+              ca: "Els pobles amb més encant de Sicília",
+              it: "I paesi più affascinanti della Sicilia",
+              pt: "As vilas mais encantadoras da Sicília",
+              el: "Τα πιο γοητευτικά χωριά της Σικελίας"
+            }
+          }
+        ],
         carScale: 1.1, thread: 13, wave: 6
       },
       faro: {
         img: 'img/destinos/faro.jpg',
         // Carretera que rodea la muralla, empezando desde abajo
         road: 'M 1069 1100 C 1051 1093 994 1074 959 1059 C 924 1044 892 1024 859 1009 C 826 994 793 982 760 971 C 727 960 692 952 659 941 C 626 930 594 916 559 904 C 524 892 485 886 452 870 C 419 854 393 825 360 810 C 327 795 288 792 253 780 C 218 768 166 747 149 740',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 1620, y: 370, place: 'below-left', cta: 'readMore',   // la playa y el puente
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-por-el-algarve/',
+              en: 'https://www.recordrentacar.com/blog/en/route-through-the-algarve/',
+              de: 'https://www.recordrentacar.com/blog/de/route-durch-die-algarve/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-dans-lalgarve-decouvrez-les-villages-les-plus-charmants-du-sud-du-portugal/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-nellalgarve-alla-scoperta-dei-borghi-piu-affascinanti-del-sud-del-portogallo/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-pelo-algarve/',
+              el: 'https://www.recordrentacar.com/blog/el/diadromi-sto-algkarve-anakalypsete/'
+            },
+            title: {
+              es: "Ruta por el Algarve",
+              en: "Route through the Algarve",
+              de: "Route durch die Algarve",
+              fr: "Itinéraire dans l'Algarve",
+              ca: "Ruta per l'Algarve",
+              it: "Itinerario nell'Algarve",
+              pt: "Rota pelo Algarve",
+              el: "Διαδρομή στο Αλγκάρβε"
+            }
+          },
+          {
+            x: 860, y: 1009, place: 'above-right', cta: 'readMore',   // la carretera junto a la muralla
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-en-coche-de-tres-dias-por-faro-y-el-algarve/',
+              en: 'https://www.recordrentacar.com/blog/en/3-day-road-trip-through-faro-and-the-algarve/',
+              de: 'https://www.recordrentacar.com/blog/de/3-taegige-autotour-durch-faro-und-die-algarve/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-en-voiture-de-3-jours-a-faro-et-dans-lalgarve/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-in-auto-di-3-giorni-a-faro-e-nellalgarve/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roteiro-de-3-dias-de-carro-por-faro-e-o-algarve/',
+              el: 'https://www.recordrentacar.com/blog/el/3imeri-diadromi-me-aftokinito-sto-faro/'
+            },
+            title: {
+              es: "Ruta en coche de 3 días por Faro y el Algarve",
+              en: "3-day road trip through Faro and the Algarve",
+              de: "3-tägige Autotour durch Faro und die Algarve",
+              fr: "Itinéraire en voiture de 3 jours à Faro et dans l'Algarve",
+              ca: "Ruta amb cotxe de 3 dies per Faro i l'Algarve",
+              it: "Itinerario in auto di 3 giorni a Faro e nell'Algarve",
+              pt: "Roteiro de 3 dias de carro por Faro e o Algarve",
+              el: "Διαδρομή 3 ημερών με αυτοκίνητο στο Φάρο και το Αλγκάρβε"
+            }
+          },
+          {
+            x: 530, y: 290, place: 'below-left', cta: 'readMore',   // la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-de-cultura-y-naturaleza-por-faro/',
+              en: 'https://www.recordrentacar.com/blog/en/a-culture-and-nature-road-trip-through-faro/',
+              de: 'https://www.recordrentacar.com/blog/de/kultur-und-naturroute-durch-faro/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-culturel-et-naturel-a-faro/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-culturale-e-naturalistico-a-faro/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-cultural-e-natural-em-faro/',
+              el: 'https://www.recordrentacar.com/blog/el/diadromi-politismou-kai-fysis-sto-far/'
+            },
+            title: {
+              es: "Ruta de cultura y naturaleza por Faro",
+              en: "A culture and nature road trip through Faro",
+              de: "Kultur- und Naturroute durch Faro",
+              fr: "Itinéraire culturel et naturel à Faro",
+              ca: "Ruta de cultura i natura per Faro",
+              it: "Itinerario culturale e naturalistico a Faro",
+              pt: "Rota cultural e natural em Faro",
+              el: "Διαδρομή πολιτισμού και φύσης στο Φάρο"
+            }
+          }
+        ],
         carScale: 1.2, thread: 14, wave: 6
       },
       fuerteventura: {
         img: 'img/destinos/fuerteventura.jpg',
         // Carretera entre el pueblo, las dunas y la costa
         road: 'M 237 1052 C 252 1048 299 1038 330 1030 C 361 1022 393 1015 425 1007 C 457 999 489 991 520 982 C 551 973 584 964 612 955 C 640 946 665 937 690 928 C 715 919 737 911 762 902 C 787 893 815 885 840 876 C 865 867 894 858 912 850 C 930 842 938 834 948 825 C 958 816 962 810 972 797 C 982 784 996 761 1010 745 C 1024 729 1040 712 1055 700 C 1070 688 1086 682 1100 676 C 1114 670 1131 664 1137 662',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 900, y: 240, place: 'below-right', cta: 'readMore',   // las montañas volcánicas
+            url: {
+              es: 'https://www.recordrentacar.com/blog/que-ver-en-fuerteventura/',
+              en: 'https://www.recordrentacar.com/blog/en/what-to-see-in-fuerteventura/',
+              de: 'https://www.recordrentacar.com/blog/de/fuerteventura-die-wildeste-seite-der-kanaren/',
+              fr: 'https://www.recordrentacar.com/blog/fr/fuerteventura-le-visage-le-plus-sauvage-des-iles-canaries/',
+              it: 'https://www.recordrentacar.com/blog/it/fuerteventura-il-lato-piu-selvaggio-delle-canarie/',
+              pt: 'https://www.recordrentacar.com/blog/pt/fuerteventura-o-lado-mais-selvagem-das-canarias/',
+              el: 'https://www.recordrentacar.com/blog/el/fuerteventura-i-pio-agria-plevra-ton-kanarion-nison/'
+            },
+            title: {
+              es: "Fuerteventura, el lado más salvaje de las Canarias",
+              en: "Fuerteventura, the wildest side of the Canary Islands",
+              de: "Fuerteventura, die wildeste Seite der Kanaren",
+              fr: "Fuerteventura, le visage le plus sauvage des Canaries",
+              ca: "Fuerteventura, la cara més salvatge de les Canàries",
+              it: "Fuerteventura, il lato più selvaggio delle Canarie",
+              pt: "Fuerteventura, o lado mais selvagem das Canárias",
+              el: "Φουερτεβεντούρα, η πιο άγρια πλευρά των Καναρίων"
+            }
+          },
+          {
+            x: 1690, y: 870, place: 'above-left', cta: 'readMore',   // los windsurfistas en el mar
+            url: {
+              es: 'https://www.recordrentacar.com/blog/fuerteventura-septiembre-octubre/',
+              en: 'https://www.recordrentacar.com/blog/en/fuerteventura-september-october/',
+              de: 'https://www.recordrentacar.com/blog/de/fuerteventura-zwischen-september-und-oktober-ein-paradies-aus-wind-wellen-und-freiheit/',
+              fr: 'https://www.recordrentacar.com/blog/fr/fuerteventura-septembre-octobre/',
+              it: 'https://www.recordrentacar.com/blog/it/fuerteventura-settembre-ottobre/',
+              pt: 'https://www.recordrentacar.com/blog/pt/fuerteventura-entre-setembro-e-outubro-o-paraiso-do-vento-das-ondas-e-da-liberdade/',
+              el: 'https://www.recordrentacar.com/blog/el/fuerteventura-metaxy-septemvriou-kai-oktovriou-o-paradeisos-tou-anemou-ton-kymaton-kai-tis-eleftherias/'
+            },
+            title: {
+              es: "Fuerteventura entre septiembre y octubre",
+              en: "Fuerteventura between September and October",
+              de: "Fuerteventura zwischen September und Oktober",
+              fr: "Fuerteventura entre septembre et octobre",
+              ca: "Fuerteventura entre setembre i octubre",
+              it: "Fuerteventura tra settembre e ottobre",
+              pt: "Fuerteventura entre setembro e outubro",
+              el: "Η Φουερτεβεντούρα τον Σεπτέμβριο και τον Οκτώβριο"
+            }
+          },
+          {
+            x: 400, y: 560, place: 'below-right', cta: 'readMore',   // la iglesia del pueblo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/tu-escapada-perfecta-a-fuerteventura/',
+              en: 'https://www.recordrentacar.com/blog/en/your-perfect-getaway-to-fuerteventura/',
+              de: 'https://www.recordrentacar.com/blog/de/dein-perfekter-kurzurlaub-auf-fuerteventura/',
+              fr: 'https://www.recordrentacar.com/blog/fr/votre-escapade-ideale-a-fuerteventura/',
+              it: 'https://www.recordrentacar.com/blog/it/la-tua-vacanza-perfetta-a-fuerteventura/',
+              pt: 'https://www.recordrentacar.com/blog/pt/a-tua-escapadela-perfeita-a-fuerteventura/',
+              el: 'https://www.recordrentacar.com/blog/el/i-teleia-apodrasi-sou-sti-fouerteventura/'
+            },
+            title: {
+              es: "Escapada perfecta a Fuerteventura",
+              en: "Your perfect getaway to Fuerteventura",
+              de: "Dein perfekter Kurzurlaub auf Fuerteventura",
+              fr: "Ton escapade idéale à Fuerteventura",
+              ca: "Escapada perfecta a Fuerteventura",
+              it: "La tua vacanza perfetta a Fuerteventura",
+              pt: "A tua escapadinha perfeita a Fuerteventura",
+              el: "Η τέλεια απόδρασή σου στη Φουερτεβεντούρα"
+            }
+          }
+        ],
         carScale: 0.6, thread: 7, wave: 6
       },
       alicante: {
