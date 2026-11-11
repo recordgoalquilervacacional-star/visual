@@ -1611,6 +1611,36 @@
        Cada destino tiene su foto y el trazado de su carretera (path SVG en
        píxeles de la foto). Si falta la foto, se dibuja un plano provisional. */
     var DESTINOS = {
+      malaga: {
+        img: 'img/destinos/malaga.jpg',
+        // Carretera del puerto, del centro hasta el Cubo del Pompidou
+        road: 'M 20 804 C 41 808 103 818 148 825 C 193 832 239 837 288 849 C 337 861 389 889 441 898 C 493 907 553 905 600 905 C 647 905 678 894 725 900 C 772 906 842 937 881 938 C 920 939 935 920 956 908 C 977 896 992 882 1009 868 C 1026 854 1039 841 1059 824 C 1079 807 1098 777 1130 766 C 1162 755 1213 767 1250 760 C 1287 753 1319 732 1350 725 C 1381 718 1422 717 1436 715',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      palma: {
+        img: 'img/destinos/palma.jpg',
+        // Carretera de curvas al pie de la ciudad
+        road: 'M 20 865 C 41 870 104 882 147 892 C 190 902 240 909 278 923 C 316 937 339 965 376 976 C 413 987 454 987 500 991 C 546 995 601 995 651 999 C 701 1003 760 1010 802 1017 C 844 1024 878 1029 901 1043 C 924 1057 934 1090 941 1100',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      milan: {
+        img: 'img/destinos/milan.jpg',
+        // Carretera junto al canal
+        road: 'M 153 869 C 169 868 218 861 249 864 C 280 867 308 876 337 888 C 366 900 387 924 424 939 C 461 954 512 966 561 975 C 610 984 664 986 717 991 C 770 996 826 1004 880 1004 C 934 1004 986 988 1040 989 C 1094 990 1149 1006 1201 1009 C 1253 1012 1304 1003 1351 1008 C 1398 1013 1460 1036 1482 1041',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      olbia: {
+        img: 'img/destinos/olbia.jpg',
+        // Carretera del puerto
+        road: 'M 520 1039 C 537 1031 581 1010 622 991 C 663 972 718 945 764 927 C 810 909 854 893 901 883 C 948 873 998 871 1049 868 C 1100 865 1155 871 1204 864 C 1253 857 1302 840 1342 827 C 1382 814 1398 806 1441 788 C 1484 770 1562 742 1600 721 C 1638 700 1650 682 1670 660 C 1690 638 1710 617 1720 590 C 1730 563 1728 515 1730 500',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      oporto: {
+        img: 'img/destinos/oporto.jpg',
+        // Carretera de la orilla del Duero
+        road: 'M 532 1043 C 560 1038 639 1020 700 1011 C 761 1002 832 991 899 991 C 966 991 1033 1004 1099 1013 C 1165 1022 1230 1032 1297 1042 C 1364 1052 1430 1068 1498 1071 C 1566 1074 1668 1060 1702 1058',
+        carScale: 1.0, thread: 12, wave: 6
+      },
       'gran-canaria': {
         img: 'img/destinos/gran-canaria.jpg',
         // Carretera que baja entre las rocas y sigue junto a las dunas hasta la catedral
