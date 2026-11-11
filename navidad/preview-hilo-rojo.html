@@ -769,31 +769,33 @@
     .icon-btn[aria-pressed="true"] .i-play { display: block; }
     .icon-btn[aria-pressed="true"] .i-pause { display: none; }
 
+    /* Confirmación bajo el nombre del destino */
     .registered {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 32px;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      margin-top: 20px;
+      padding: 18px 22px;
       text-align: left;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
     }
 
-    .registered-icon { width: 28px; height: 28px; flex: none; }
+    .registered-icon { width: 28px; height: 28px; flex: none; margin-top: 1px; }
 
-    .destino .registered p {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      text-align: left;
-    }
+    .destino .registered p { margin: 0; text-align: left; }
+    .destino .registered .registered-title { font-size: 17px; font-weight: 700; color: var(--text); }
+    .destino .registered .registered-text { margin-top: 4px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.85); }
+    .registered-text a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
     .btn-web {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-height: 52px;
-      margin-top: 20px;
+      margin-top: 28px;
       padding: 0 32px;
       font-weight: 600;
       color: #fff;
@@ -1063,6 +1065,14 @@
       <p class="eyebrow" data-i18n="leadsTo">Tu hilo rojo te lleva a</p>
       <h2><em id="destino-nombre"></em></h2>
 
+      <div class="registered" role="status">
+        <svg class="registered-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#CF2D30"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <p class="registered-title" data-i18n="registeredTitle">¡Ya tenemos tu destino!</p>
+          <p class="registered-text" id="registered-text">Tu participación está registrada. Para que sea válida, recuerda que también tienes que seguir a <a href="https://www.instagram.com/recordgo/" target="_blank" rel="noopener">@recordgo</a> en Instagram y haber comentado en el post del sorteo.</p>
+        </div>
+      </div>
+
       <div class="map-frame">
         <div class="map-stage">
         <svg class="map" id="map" viewBox="0 0 1600 1000" role="img" aria-labelledby="map-title">
@@ -1162,10 +1172,6 @@
         </div>
       </div>
 
-      <div class="registered" role="status">
-        <svg class="registered-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#CF2D30"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <p data-i18n="registered">Tu participación ha sido registrada. ¡Suerte!</p>
-      </div>
       <a class="btn-web" href="https://www.recordrentacar.com/es/" target="_blank" rel="noopener" data-i18n="visitWeb">Visitar web Record go</a>
     </div>
   </section>
@@ -1211,7 +1217,7 @@
         bases: ["Compañía organizadora", "Duración", "Participantes y requisitos de participación", "Mecánica del sorteo", "Condiciones del sorteo y premios", "Exoneración de responsabilidad", "Protección de datos personales", "Legislación aplicable y jurisdicción", "Aceptación de las bases legales"],
         countries: { es: 'España', pt: 'Portugal', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Tu hilo rojo te lleva a', langLabel: 'Idioma',
-        registered: 'Tu participación ha sido registrada. ¡Suerte!', visitWeb: 'Visitar web Record go',
+        registeredTitle: "¡Ya tenemos tu destino!", registered: "Tu participación está registrada. Para que sea válida, recuerda que también tienes que seguir a @recordgo en Instagram y haber comentado en el post del sorteo.", visitWeb: 'Visitar web Record go',
         readMore: "Ver más", readStory: "Ver más", pause: 'Pausar animación', play: 'Reanudar animación', mapOf: 'Plano de'
       },
       en: {
@@ -1241,7 +1247,7 @@
         bases: ["Organising company", "Duration", "Participants and entry requirements", "How the draw works", "Draw conditions and prizes", "Disclaimer of liability", "Personal data protection", "Applicable law and jurisdiction", "Acceptance of the official rules"],
         countries: { es: 'Spain', pt: 'Portugal', gr: 'Greece', it: 'Italy' },
         leadsTo: 'Your red thread takes you to', langLabel: 'Language',
-        registered: 'Your entry has been registered. Good luck!', visitWeb: 'Visit the Record go website',
+        registeredTitle: "We’ve got your destination!", registered: "Your entry has been registered. For it to be valid, remember you also need to follow @recordgo on Instagram and have commented on the giveaway post.", visitWeb: 'Visit the Record go website',
         readMore: "See more", readStory: "See more", pause: 'Pause animation', play: 'Play animation', mapOf: 'Map of'
       },
       de: {
@@ -1271,7 +1277,7 @@
         bases: ["Veranstaltendes Unternehmen", "Dauer", "Teilnehmende und Teilnahmevoraussetzungen", "Ablauf der Verlosung", "Bedingungen der Verlosung und Preise", "Haftungsausschluss", "Schutz personenbezogener Daten", "Anwendbares Recht und Gerichtsstand", "Annahme der Teilnahmebedingungen"],
         countries: { es: 'Spanien', pt: 'Portugal', gr: 'Griechenland', it: 'Italien' },
         leadsTo: 'Dein roter Faden führt dich nach', langLabel: 'Sprache',
-        registered: 'Deine Teilnahme wurde registriert. Viel Glück!', visitWeb: 'Website von Record go besuchen',
+        registeredTitle: "Wir haben dein Reiseziel!", registered: "Deine Teilnahme ist registriert. Damit sie gültig ist, denk daran, dass du außerdem @recordgo auf Instagram folgen und den Gewinnspiel-Post kommentiert haben musst.", visitWeb: 'Website von Record go besuchen',
         readMore: "Mehr sehen", readStory: "Mehr sehen", pause: 'Animation pausieren', play: 'Animation abspielen', mapOf: 'Karte von'
       },
       fr: {
@@ -1301,7 +1307,7 @@
         bases: ["Société organisatrice", "Durée", "Participants et conditions de participation", "Déroulement du tirage au sort", "Conditions du tirage au sort et lots", "Exonération de responsabilité", "Protection des données personnelles", "Législation applicable et juridiction", "Acceptation du règlement"],
         countries: { es: 'Espagne', pt: 'Portugal', gr: 'Grèce', it: 'Italie' },
         leadsTo: "Ton fil rouge t'emmène à", langLabel: 'Langue',
-        registered: 'Ta participation a bien été enregistrée. Bonne chance !', visitWeb: 'Visiter le site de Record go',
+        registeredTitle: "Nous avons ta destination !", registered: "Ta participation est enregistrée. Pour qu’elle soit valable, n’oublie pas que tu dois aussi suivre @recordgo sur Instagram et avoir commenté la publication du jeu-concours.", visitWeb: 'Visiter le site de Record go',
         readMore: "Voir plus", readStory: "Voir plus", pause: 'Mettre l\'animation en pause', play: 'Relancer l\'animation', mapOf: 'Plan de'
       },
       ca: {
@@ -1331,7 +1337,7 @@
         bases: ["Companyia organitzadora", "Durada", "Participants i requisits de participació", "Mecànica del sorteig", "Condicions del sorteig i premis", "Exoneració de responsabilitat", "Protecció de dades personals", "Legislació aplicable i jurisdicció", "Acceptació de les bases legals"],
         countries: { es: 'Espanya', pt: 'Portugal', gr: 'Grècia', it: 'Itàlia' },
         leadsTo: 'El teu fil vermell et porta a', langLabel: 'Idioma',
-        registered: 'La teva participació ha quedat registrada. Molta sort!', visitWeb: 'Visitar el web de Record go',
+        registeredTitle: "Ja tenim la teva destinació!", registered: "La teva participació està registrada. Perquè sigui vàlida, recorda que també has de seguir @recordgo a Instagram i haver comentat la publicació del sorteig.", visitWeb: 'Visitar el web de Record go',
         readMore: "Veure més", readStory: "Veure més", pause: 'Pausar l\'animació', play: 'Reprendre l\'animació', mapOf: 'Plànol de'
       },
       it: {
@@ -1361,7 +1367,7 @@
         bases: ["Società organizzatrice", "Durata", "Partecipanti e requisiti di partecipazione", "Meccanica dell'estrazione", "Condizioni dell'estrazione e premi", "Esonero di responsabilità", "Protezione dei dati personali", "Legge applicabile e foro competente", "Accettazione del regolamento"],
         countries: { es: 'Spagna', pt: 'Portogallo', gr: 'Grecia', it: 'Italia' },
         leadsTo: 'Il tuo filo rosso ti porta a', langLabel: 'Lingua',
-        registered: 'La tua partecipazione è stata registrata. In bocca al lupo!', visitWeb: 'Visita il sito di Record go',
+        registeredTitle: "Abbiamo la tua destinazione!", registered: "La tua partecipazione è registrata. Perché sia valida, ricorda che devi anche seguire @recordgo su Instagram e aver commentato il post del concorso.", visitWeb: 'Visita il sito di Record go',
         readMore: "Vedi di più", readStory: "Vedi di più", pause: 'Metti in pausa l\'animazione', play: 'Riprendi l\'animazione', mapOf: 'Mappa di'
       },
       pt: {
@@ -1391,7 +1397,7 @@
         bases: ["Empresa organizadora", "Duração", "Participantes e requisitos de participação", "Mecânica do sorteio", "Condições do sorteio e prémios", "Exoneração de responsabilidade", "Proteção de dados pessoais", "Legislação aplicável e jurisdição", "Aceitação do regulamento"],
         countries: { es: 'Espanha', pt: 'Portugal', gr: 'Grécia', it: 'Itália' },
         leadsTo: 'O teu fio vermelho leva-te a', langLabel: 'Idioma',
-        registered: 'A tua participação foi registada. Boa sorte!', visitWeb: 'Visitar o site da Record go',
+        registeredTitle: "Já temos o teu destino!", registered: "A tua participação está registada. Para que seja válida, lembra-te de que também tens de seguir a @recordgo no Instagram e ter comentado a publicação do passatempo.", visitWeb: 'Visitar o site da Record go',
         readMore: "Ver mais", readStory: "Ver mais", pause: 'Pausar animação', play: 'Retomar animação', mapOf: 'Mapa de'
       },
       el: {
@@ -1421,7 +1427,7 @@
         bases: ["Διοργανώτρια εταιρεία", "Διάρκεια", "Συμμετέχοντες και προϋποθέσεις συμμετοχής", "Διαδικασία της κλήρωσης", "Όροι της κλήρωσης και δώρα", "Απαλλαγή ευθύνης", "Προστασία προσωπικών δεδομένων", "Εφαρμοστέο δίκαιο και δικαιοδοσία", "Αποδοχή των όρων"],
         countries: { es: 'Ισπανία', pt: 'Πορτογαλία', gr: 'Ελλάδα', it: 'Ιταλία' },
         leadsTo: 'Η κόκκινη κλωστή σου σε οδηγεί', langLabel: 'Γλώσσα',
-        registered: 'Η συμμετοχή σου καταχωρήθηκε. Καλή τύχη!', visitWeb: 'Επισκέψου το site της Record go',
+        registeredTitle: "Έχουμε τον προορισμό σου!", registered: "Η συμμετοχή σου καταχωρήθηκε. Για να είναι έγκυρη, θυμήσου ότι πρέπει επίσης να ακολουθείς το @recordgo στο Instagram και να έχεις σχολιάσει την ανάρτηση του διαγωνισμού.", visitWeb: 'Επισκέψου το site της Record go',
         readMore: "Δες περισσότερα", readStory: "Δες περισσότερα", pause: 'Παύση κίνησης', play: 'Συνέχιση κίνησης', mapOf: 'Χάρτης:'
       }
     };
@@ -1565,6 +1571,15 @@
           el.placeholder = t[el.dataset.i18nPh];
         });
         destTexts();
+
+        // Confirmación de participación: @recordgo enlaza a Instagram
+        var regText = document.getElementById('registered-text');
+        var regLink = regText.querySelector('a');
+        regText.textContent = '';
+        t.registered.split('@recordgo').forEach(function (part, i) {
+          if (i) regText.appendChild(regLink);
+          if (part) regText.appendChild(document.createTextNode(part));
+        });
 
         // Paso 1: @recordgo enlaza al perfil de Instagram
         var step1 = document.getElementById('step1');
