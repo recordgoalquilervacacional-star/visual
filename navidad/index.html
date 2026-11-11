@@ -1615,12 +1615,150 @@
         img: 'img/destinos/tenerife.jpg',
         // Carretera de curvas entre los acantilados, hasta la altura del drago milenario
         road: 'M 846 985 C 860 978 910 954 933 941 C 956 928 968 920 984 910 C 1000 900 1019 892 1028 883 C 1037 874 1043 866 1039 857 C 1035 848 1012 839 1004 830 C 996 821 989 811 988 803 C 987 795 992 788 999 781 C 1006 774 1016 765 1028 759 C 1040 753 1054 748 1068 744 C 1082 740 1097 737 1112 733 C 1127 729 1141 724 1156 719 C 1171 714 1194 708 1201 706',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 900, y: 160, place: 'below-right', cta: 'readMore',   // el Teide
+            url: {
+              es: 'https://www.recordrentacar.com/blog/guia-practica-por-tenerife/',
+              en: 'https://www.recordrentacar.com/blog/en/practical-guide-to-tenerife/',
+              de: 'https://www.recordrentacar.com/blog/de/ein-praktischer-reisefuehrer-fuer-teneriffa-die-insel-auf-der-der-sommer-nie-endet/',
+              fr: 'https://www.recordrentacar.com/blog/fr/guide-pratique-de-tenerife/',
+              it: 'https://www.recordrentacar.com/blog/it/guida-pratica-per-tenerife/',
+              pt: 'https://www.recordrentacar.com/blog/pt/guia-pratico-de-tenerife-a-ilha-onde-o-verao-nunca-acaba/',
+              el: 'https://www.recordrentacar.com/blog/el/praktikos-odigos-gia-tin-tenerifi-to-n/'
+            },
+            title: {
+              es: "Guía práctica por Tenerife",
+              en: "Practical guide to Tenerife",
+              de: "Praktischer Reiseführer für Teneriffa",
+              fr: "Guide pratique de Tenerife",
+              ca: "Guia pràctica de Tenerife",
+              it: "Guida pratica per Tenerife",
+              pt: "Guia prático de Tenerife",
+              el: "Πρακτικός οδηγός για την Τενερίφη"
+            }
+          },
+          {
+            x: 200, y: 400, place: 'below-right', cta: 'readMore',   // los acantilados
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-norte-de-tenerife/',
+              en: 'https://www.recordrentacar.com/blog/en/northern-tenerife-road-trip/',
+              de: 'https://www.recordrentacar.com/blog/de/steilkuesten-vulkane-und-charmante-doerfer-die-grosse-roadtrip-route-durch-den-norden-teneriffas/',
+              fr: 'https://www.recordrentacar.com/blog/fr/road-trip-dans-le-nord-de-tenerife/',
+              it: 'https://www.recordrentacar.com/blog/it/ruote-nel-nord-di-tenerife/',
+              pt: 'https://www.recordrentacar.com/blog/pt/falesias-vulcoes-e-aldeias-encantadoras-a-grande-rota-de-carro-pelo-norte-de-tenerife/',
+              el: 'https://www.recordrentacar.com/blog/el/apokrimnoi-vrachoi-ifaisteia-kai-goit/'
+            },
+            title: {
+              es: "Acantilados, volcanes y pueblos con encanto",
+              en: "Cliffs, volcanoes and charming villages",
+              de: "Steilküsten, Vulkane und charmante Dörfer",
+              fr: "Falaises, volcans et villages de charme",
+              ca: "Penya-segats, volcans i pobles amb encant",
+              it: "Scogliere, vulcani e paesini incantevoli",
+              pt: "Falésias, vulcões e aldeias encantadoras",
+              el: "Γκρεμοί, ηφαίστεια και γοητευτικά χωριά"
+            }
+          },
+          {
+            x: 1450, y: 450, place: 'above-right', cta: 'readMore',   // las casas de colores de la ciudad
+            url: {
+              es: 'https://www.recordrentacar.com/blog/carnaval-tenerife/',
+              en: 'https://www.recordrentacar.com/blog/en/tenerife-carnival/',
+              de: 'https://www.recordrentacar.com/blog/de/karneval-auf-teneriffa/',
+              fr: 'https://www.recordrentacar.com/blog/fr/carnaval-de-tenerife/',
+              it: 'https://www.recordrentacar.com/blog/it/carnevale-di-tenerife-tutto-quello-che-non-puoi-perderti-della-grande-festa-di-tenerife/',
+              pt: 'https://www.recordrentacar.com/blog/pt/carnaval-da-tenerife-tudo-o-que-nao-podes-perder-nesta-grande-festa-da-tenerife/',
+              el: 'https://www.recordrentacar.com/blog/el/karnavali-tis-tenerifis-ola-osa-den-pr/'
+            },
+            title: {
+              es: "Carnaval de Tenerife",
+              en: "Tenerife Carnival",
+              de: "Karneval auf Teneriffa",
+              fr: "Carnaval de Tenerife",
+              ca: "Carnaval de Tenerife",
+              it: "Carnevale di Tenerife",
+              pt: "Carnaval de Tenerife",
+              el: "Καρναβάλι της Τενερίφης"
+            }
+          }
+        ],
         carScale: 0.6, thread: 7, wave: 6
       },
       valencia: {
         img: 'img/destinos/valencia.jpg',
         // Carretera de abajo, junto al mar
         road: 'M 303 1060 C 350 1059 486 1054 586 1052 C 686 1050 798 1048 900 1046 C 1002 1044 1124 1042 1200 1040 C 1276 1038 1312 1040 1357 1037 C 1402 1034 1438 1028 1470 1022 C 1502 1016 1525 1009 1550 999 C 1575 989 1599 973 1620 960 C 1641 947 1660 934 1678 921 C 1696 908 1721 891 1730 885',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 330, y: 850, place: 'above-right', cta: 'readMore',   // la playa
+            url: {
+              es: 'https://www.recordrentacar.com/blog/escapada-a-valencia-y-la-costa-del-azahar-playas-la-albufera-y-arrozales-en-coche/',
+              en: 'https://www.recordrentacar.com/blog/en/valencia-and-the-costa-del-azahar-getaway-beaches-la-albufera-and-rice-fields-by-car/',
+              de: 'https://www.recordrentacar.com/blog/de/ausflug-nach-valencia-und-an-die-costa-del-azahar-straende-die-albufera-und-reisfelder-mit-dem-auto-erkunden/',
+              fr: 'https://www.recordrentacar.com/blog/fr/echappee-a-valence-et-sur-la-costa-del-azahar-plages-la-albufera-et-rizieres-en-voiture/',
+              it: 'https://www.recordrentacar.com/blog/it/fuga-a-valencia-e-nella-costa-del-azahar-spiagge-lalbufera-e-risaie-in-auto/',
+              pt: 'https://www.recordrentacar.com/blog/pt/escapadinha-a-valencia-e-a-costa-del-azahar-praias-albufera-e-arrozais-de-carro/',
+              el: 'https://www.recordrentacar.com/blog/el/απόδραση-στη-βαλένθια-και-την-costa-del-azahar-παρα/'
+            },
+            title: {
+              es: "Escapada a Valencia y la Costa del Azahar",
+              en: "Getaway to Valencia and the Costa del Azahar",
+              de: "Ausflug nach Valencia und an die Costa del Azahar",
+              fr: "Échappée à Valence et sur la Costa del Azahar",
+              ca: "Escapada a València i la Costa dels Tarongers",
+              it: "Fuga a Valencia e nella Costa del Azahar",
+              pt: "Escapadinha a Valência e à Costa del Azahar",
+              el: "Απόδραση στη Βαλένθια και την Costa del Azahar"
+            }
+          },
+          {
+            x: 1050, y: 330, place: 'below-right', cta: 'readMore',   // el Miguelete y la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-valencia-con-tu-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-valencia-with-your-hire-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-valencia-mit-ihrem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-valence-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-valencia-con-il-tuo-noleggio-di-auto/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descobre-valencia-em-3-dias-com-o-teu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-ti-valenthia-se-3-imeres-me-to/'
+            },
+            title: {
+              es: "Descubre Valencia en 3 días con tu coche de alquiler",
+              en: "Discover Valencia in 3 days with your hire car",
+              de: "Entdecke Valencia in 3 Tagen mit deinem Mietwagen",
+              fr: "Découvre Valence en 3 jours avec ta voiture de location",
+              ca: "Descobreix València en 3 dies amb el teu cotxe de lloguer",
+              it: "Scopri Valencia in 3 giorni con la tua auto a noleggio",
+              pt: "Descobre Valência em 3 dias com o teu carro de aluguer",
+              el: "Ανακάλυψε τη Βαλένθια σε 3 ημέρες με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          },
+          {
+            x: 300, y: 230, place: 'below-right', cta: 'readMore',   // la Albufera
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-la-albufera-de-valencia-con-tu-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-the-albufera-of-valencia-with-your-rental-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-die-albufera-von-valencia-mit-ihrem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-lalbufera-de-valence-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-lalbufera-di-valencia-con-la-tua-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-a-albufera-de-valencia-com-o-seu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-tin-almpoufera-tis-valenth/'
+            },
+            title: {
+              es: "Descubre la Albufera de Valencia con tu coche de alquiler",
+              en: "Discover the Albufera of Valencia with your rental car",
+              de: "Entdecke die Albufera von Valencia mit deinem Mietwagen",
+              fr: "Découvre l’Albufera de Valence avec ta voiture de location",
+              ca: "Descobreix l’Albufera de València amb el teu cotxe de lloguer",
+              it: "Scopri l’Albufera di Valencia con la tua auto a noleggio",
+              pt: "Descobre a Albufera de Valência com o teu carro de aluguer",
+              el: "Ανακάλυψε την Αλμπουφέρα της Βαλένθια με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       venecia: {
@@ -1628,42 +1766,525 @@
         // Coche aparcado en el muelle de madera (Venecia no tiene carreteras)
         parked: 0.5,
         road: 'M 440 985 C 473 984 573 982 640 980 C 707 978 773 977 840 975 C 907 973 985 970 1040 968 C 1095 966 1148 963 1170 962',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 980, y: 600, place: 'above-left', cta: 'readMore',   // el puente de Rialto
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-invernal-por-venecia/',
+              en: 'https://www.recordrentacar.com/blog/en/winter-road-trip-through-venice/',
+              de: 'https://www.recordrentacar.com/blog/de/winterreise-durch-venedig/',
+              fr: 'https://www.recordrentacar.com/blog/fr/road-trip-hivernal-a-venise/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-invernale-a-venezia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-de-inverno-por-veneza/',
+              el: 'https://www.recordrentacar.com/blog/el/cheimerini-diadromi-sti-venetia/'
+            },
+            title: {
+              es: "Ruta invernal por Venecia",
+              en: "Winter route through Venice",
+              de: "Winterreise durch Venedig",
+              fr: "Road trip hivernal à Venise",
+              ca: "Ruta hivernal per Venècia",
+              it: "Itinerario invernale a Venezia",
+              pt: "Rota de inverno por Veneza",
+              el: "Χειμερινή διαδρομή στη Βενετία"
+            }
+          },
+          {
+            x: 1200, y: 230, place: 'below-right', cta: 'readMore',   // la isla de San Giorgio
+            url: {
+              es: 'https://www.recordrentacar.com/blog/que-ver-en-venecia-y-alrededores/',
+              en: 'https://www.recordrentacar.com/blog/en/what-to-see-in-venice-and-its-surroundings/',
+              de: 'https://www.recordrentacar.com/blog/de/sehenswuerdigkeiten-in-venedig-und-umgebung/',
+              fr: 'https://www.recordrentacar.com/blog/fr/que-faire-a-venise-et-ses-alentours/',
+              it: 'https://www.recordrentacar.com/blog/it/cosa-vedere-a-venezia-e-dintorni/',
+              pt: 'https://www.recordrentacar.com/blog/pt/o-que-ver-em-veneza-e-arredores/',
+              el: 'https://www.recordrentacar.com/blog/el/ti-na-deite-sti-venetia-kai-ta-perichora/'
+            },
+            title: {
+              es: "Qué ver en Venecia y alrededores",
+              en: "What to see in Venice and its surroundings",
+              de: "Sehenswürdigkeiten in Venedig und Umgebung",
+              fr: "Que faire à Venise et ses alentours",
+              ca: "Què veure a Venècia i els voltants",
+              it: "Cosa vedere a Venezia e dintorni",
+              pt: "O que ver em Veneza e arredores",
+              el: "Τι να δεις στη Βενετία και τα περίχωρα"
+            }
+          },
+          {
+            x: 1440, y: 720, place: 'below-left', cta: 'readMore',   // la plaza de San Marcos
+            url: {
+              es: 'https://www.recordrentacar.com/blog/carnaval-de-venecia/',
+              en: 'https://www.recordrentacar.com/blog/en/venice-carnival-all-you-cant-miss-at-venices-biggest-party/',
+              de: 'https://www.recordrentacar.com/blog/de/karneval-in-venedig/',
+              fr: 'https://www.recordrentacar.com/blog/fr/carnaval-de-venise/',
+              it: 'https://www.recordrentacar.com/blog/it/carnevale-di-venezia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/carnaval-de-veneza/',
+              el: 'https://www.recordrentacar.com/blog/el/karnavali-tis-venetias/'
+            },
+            title: {
+              es: "Carnaval de Venecia",
+              en: "Venice Carnival",
+              de: "Karneval in Venedig",
+              fr: "Carnaval de Venise",
+              ca: "Carnaval de Venècia",
+              it: "Carnevale di Venezia",
+              pt: "Carnaval de Veneza",
+              el: "Καρναβάλι της Βενετίας"
+            }
+          }
+        ],
         carScale: 0.85, thread: 10, wave: 6
       },
       zakynthos: {
         img: 'img/destinos/zakynthos.jpg',
         // Carretera del paseo marítimo
         road: 'M 22 713 C 44 724 110 756 155 778 C 200 800 246 823 290 844 C 334 865 372 890 419 905 C 466 920 522 926 571 935 C 620 944 654 958 713 956 C 772 954 855 941 925 923 C 995 905 1060 872 1132 846 C 1204 820 1306 779 1359 765 C 1412 751 1418 763 1450 762 C 1482 761 1522 761 1550 760 C 1578 759 1608 758 1620 758',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 330, y: 560, place: 'above-right', cta: 'readMore',   // el barco de Navagio
+            url: {
+              es: 'https://www.recordrentacar.com/blog/7-cosas-que-ver-y-hacer-en-zakynthos/',
+              en: 'https://www.recordrentacar.com/blog/en/7-things-to-see-and-do-in-zakynthos/',
+              de: 'https://www.recordrentacar.com/blog/de/7-sehenswuerdigkeiten-und-aktivitaeten-auf-zakynthos/',
+              fr: 'https://www.recordrentacar.com/blog/fr/7-choses-a-voir-et-a-faire-a-zante/',
+              it: 'https://www.recordrentacar.com/blog/it/7-cose-da-vedere-e-da-fare-a-zante/',
+              pt: 'https://www.recordrentacar.com/blog/pt/7-coisas-para-ver-e-fazer-em-zakynthos/',
+              el: 'https://www.recordrentacar.com/blog/el/7-pragmata-pou-prepei-na-deite-kai-na-ka/'
+            },
+            title: {
+              es: "7 cosas que ver y hacer en Zakynthos",
+              en: "7 things to see and do in Zakynthos",
+              de: "7 Sehenswürdigkeiten und Aktivitäten auf Zakynthos",
+              fr: "7 choses à voir et à faire à Zante",
+              ca: "7 coses per veure i fer a Zakynthos",
+              it: "7 cose da vedere e da fare a Zante",
+              pt: "7 coisas para ver e fazer em Zakynthos",
+              el: "7 πράγματα να δεις και να κάνεις στη Ζάκυνθο"
+            }
+          },
+          {
+            x: 1300, y: 280, place: 'below-left', cta: 'readMore',   // el castillo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/pueblos-con-encanto-de-zakynthos/',
+              en: 'https://www.recordrentacar.com/blog/en/a-tour-of-zakynthoss-most-charming-villages/',
+              de: 'https://www.recordrentacar.com/blog/de/rundreise-durch-die-reizvollsten-doerfer-von-zakynthos/',
+              fr: 'https://www.recordrentacar.com/blog/en/a-tour-of-zakynthoss-most-charming-villages/',
+              it: 'https://www.recordrentacar.com/blog/it/incantevoli-villaggi-di-zante/',
+              pt: 'https://www.recordrentacar.com/blog/pt/percurso-pelas-aldeias-mais-encantadoras-de-zakynthos/',
+              el: 'https://www.recordrentacar.com/blog/el/ta-pio-goiteftika-choria-tis-zakynthou/'
+            },
+            title: {
+              es: "Ruta por los pueblos con más encanto de Zakynthos",
+              en: "A tour of Zakynthos’s most charming villages",
+              de: "Rundreise durch die reizvollsten Dörfer von Zakynthos",
+              fr: "Circuit des villages les plus charmants de Zante",
+              ca: "Ruta pels pobles amb més encant de Zakynthos",
+              it: "Itinerario tra i villaggi più incantevoli di Zante",
+              pt: "Percurso pelas aldeias mais encantadoras de Zakynthos",
+              el: "Τα πιο γοητευτικά χωριά της Ζακύνθου"
+            }
+          },
+          {
+            x: 1800, y: 450, place: 'below-left', cta: 'readMore',   // el campanario
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-de-3-dias-con-un-alquiler-de-coche-por-zakynthos/',
+              en: 'https://www.recordrentacar.com/blog/en/3-day-route-with-a-rental-car-rental-around-zakynthos/',
+              de: 'https://www.recordrentacar.com/blog/de/3-taegige-rundreise-mit-einem-mietwagen-auf-zakynthos/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-de-3-jours-avec-une-voiture-de-location-a-zakynthos/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-di-3-giorni-con-auto-a-noleggio-a-zante/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-de-3-dias-com-aluguer-de-carro-em-zakynthos/',
+              el: 'https://www.recordrentacar.com/blog/pt/rota-de-3-dias-com-aluguer-de-carro-em-zakynthos/'
+            },
+            title: {
+              es: "Ruta de 3 días con un alquiler de coche por Zakynthos",
+              en: "3-day route with a rental car around Zakynthos",
+              de: "3-tägige Rundreise mit dem Mietwagen auf Zakynthos",
+              fr: "Itinéraire de 3 jours en voiture de location à Zante",
+              ca: "Ruta de 3 dies amb cotxe de lloguer per Zakynthos",
+              it: "Itinerario di 3 giorni con auto a noleggio a Zante",
+              pt: "Rota de 3 dias com carro de aluguer em Zakynthos",
+              el: "Διαδρομή 3 ημερών με ενοικιαζόμενο αυτοκίνητο στη Ζάκυνθο"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       palermo: {
         img: 'img/destinos/palermo.jpg',
         // Carretera que rodea el centro histórico junto al mar
         road: 'M 292 587 C 283 597 254 624 238 647 C 222 670 200 700 198 723 C 196 746 203 767 228 788 C 253 809 300 828 347 847 C 394 866 450 885 509 903 C 568 921 635 943 700 954 C 765 965 834 970 900 971 C 966 972 1042 965 1099 960 C 1156 955 1202 952 1240 942 C 1278 932 1300 915 1327 902 C 1354 889 1379 876 1402 864 C 1425 852 1444 842 1465 830 C 1486 818 1510 804 1529 792 C 1548 780 1565 768 1581 755 C 1597 742 1614 726 1627 712 C 1640 698 1654 683 1662 671 C 1670 659 1675 645 1678 640',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 790, y: 280, place: 'below-left', cta: 'readMore',   // el Teatro Massimo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/ruta-de-3-dias-en-coche-por-palermo/',
+              en: 'https://www.recordrentacar.com/blog/en/3-day-road-trip-in-a-car-to-palermo/',
+              de: 'https://www.recordrentacar.com/blog/de/3-taegige-autotour-durch-palermo/',
+              fr: 'https://www.recordrentacar.com/blog/fr/itineraire-de-3-jours-en-voiture-a-palerme/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-di-3-giorni-in-auto-per-palermo/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rota-de-3-dias-de-carro-em-palermo/',
+              el: 'https://www.recordrentacar.com/blog/el/3imeri-diadromi-me-aftokinito-sto-palermo/'
+            },
+            title: {
+              es: "Ruta de 3 días en coche por Palermo",
+              en: "3-day road trip through Palermo",
+              de: "3-tägige Autotour durch Palermo",
+              fr: "Itinéraire de 3 jours en voiture à Palerme",
+              ca: "Ruta de 3 dies amb cotxe per Palerm",
+              it: "Itinerario di 3 giorni in auto a Palermo",
+              pt: "Rota de 3 dias de carro em Palermo",
+              el: "Διαδρομή 3 ημερών με αυτοκίνητο στο Παλέρμο"
+            }
+          },
+          {
+            x: 1400, y: 430, place: 'above-right', cta: 'readMore',   // la catedral
+            url: {
+              es: 'https://www.recordrentacar.com/blog/fiesta-santa-rosalia-palermo/',
+              en: 'https://www.recordrentacar.com/blog/en/santa-rosalia-festival-in-palermo/',
+              de: 'https://www.recordrentacar.com/blog/de/fest-der-santa-rosalia-in-palermo/',
+              fr: 'https://www.recordrentacar.com/blog/fr/fete-de-sainte-rosalie-a-palerme/',
+              it: 'https://www.recordrentacar.com/blog/it/festa-di-santa-rosalia-a-palermo/',
+              pt: 'https://www.recordrentacar.com/blog/pt/festa-de-santa-rosalia-em-palermo/',
+              el: 'https://www.recordrentacar.com/blog/el/ola-osa-den-prepei-na-chaseis-apo-ti-giorti/'
+            },
+            title: {
+              es: "Todo lo que no te puedes perder de la Fiesta de Santa Rosalía en Palermo",
+              en: "Everything not to miss at the Santa Rosalia Festival in Palermo",
+              de: "Alles, was du beim Fest der Santa Rosalia in Palermo nicht verpassen darfst",
+              fr: "Tout ce qu’il ne faut pas manquer de la fête de Sainte-Rosalie à Palerme",
+              ca: "Tot el que no et pots perdre de la festa de Santa Rosalia a Palerm",
+              it: "Tutto quello che non puoi perderti della Festa di Santa Rosalia a Palermo",
+              pt: "Tudo o que não podes perder da Festa de Santa Rosália em Palermo",
+              el: "Όσα δεν πρέπει να χάσεις στη γιορτή της Αγίας Ροζαλίας στο Παλέρμο"
+            }
+          },
+          {
+            x: 1240, y: 620, place: 'below-left', cta: 'readMore',   // el árbol de Navidad
+            url: {
+              es: 'https://www.recordrentacar.com/blog/pasar-la-navidad-en-sicilia',
+              en: 'https://www.recordrentacar.com/blog/en/spending-christmas-in-sicily/',
+              de: 'https://www.recordrentacar.com/blog/de/weihnachten-auf-sizilien/',
+              fr: 'https://www.recordrentacar.com/blog/fr/passer-noel-en-sicile/',
+              it: 'https://www.recordrentacar.com/blog/trascorrere-il-natale-in-sicilia',
+              pt: 'https://www.recordrentacar.com/blog/pt/passar-o-natal-na-sicilia/',
+              el: 'https://www.recordrentacar.com/blog/el/christougenna-sti-sikelia/'
+            },
+            title: {
+              es: "Pasar la Navidad en Sicilia",
+              en: "Spending Christmas in Sicily",
+              de: "Weihnachten auf Sizilien",
+              fr: "Passer Noël en Sicile",
+              ca: "Passar el Nadal a Sicília",
+              it: "Trascorrere il Natale in Sicilia",
+              pt: "Passar o Natal na Sicília",
+              el: "Χριστούγεννα στη Σικελία"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       rodas: {
         img: 'img/destinos/rodas.jpg',
         // Carretera al pie de la muralla, siguiendo recto junto al mar
         road: 'M 36 572 C 38 584 39 621 50 642 C 61 663 82 683 100 700 C 118 717 130 729 160 745 C 190 761 239 782 279 797 C 319 812 360 825 400 838 C 440 851 478 862 520 875 C 562 888 613 905 650 918 C 687 931 712 942 740 955 C 768 968 807 988 820 995',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 480, y: 260, place: 'below-right', cta: 'readMore',   // el palacio del Gran Maestre
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-rodas-con-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-rhodes-in-3-days-hire-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-rhodos-in-3-tagen-mit-ihrem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-rhodes-en-3-jours-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-rodo-in-3-giorni-con-il-tuo-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-rodes-em-3-dias-com-o-seu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakypste-rodos-enoikiasi-aftokinitou/'
+            },
+            title: {
+              es: "Descubre Rodas en 3 días con tu coche de alquiler",
+              en: "Discover Rhodes in 3 days with your hire car",
+              de: "Entdecke Rhodos in 3 Tagen mit deinem Mietwagen",
+              fr: "Découvre Rhodes en 3 jours avec ta voiture de location",
+              ca: "Descobreix Rodes en 3 dies amb el teu cotxe de lloguer",
+              it: "Scopri Rodi in 3 giorni con la tua auto a noleggio",
+              pt: "Descobre Rodes em 3 dias com o teu carro de aluguer",
+              el: "Ανακάλυψε τη Ρόδο σε 3 ημέρες με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          },
+          {
+            x: 1700, y: 380, place: 'below-left', cta: 'readMore',   // la playa
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-las-mejoras-playas-y-calas-de-rodas/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-the-best-beaches-and-coves-on-rhodes/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-die-schoensten-straende-und-buchten-von-rhodos/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-les-plus-belles-plages-et-criques-de-rhodes/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-le-migliori-spiagge-e-calette-di-rodi/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-as-melhores-praias-e-enseadas-de-rodes/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-tis-kalyteres-paralies-ka/'
+            },
+            title: {
+              es: "Descubre las mejores playas y calas de Rodas",
+              en: "Discover the best beaches and coves on Rhodes",
+              de: "Entdecke die schönsten Strände und Buchten von Rhodos",
+              fr: "Découvre les plus belles plages et criques de Rhodes",
+              ca: "Descobreix les millors platges i cales de Rodes",
+              it: "Scopri le migliori spiagge e calette di Rodi",
+              pt: "Descobre as melhores praias e enseadas de Rodes",
+              el: "Ανακάλυψε τις καλύτερες παραλίες και τους κολπίσκους της Ρόδου"
+            }
+          },
+          {
+            x: 1660, y: 720, place: 'below-left', cta: 'readMore',   // los molinos del puerto
+            url: {
+              es: 'https://www.recordrentacar.com/blog/rodas-mas-alla-de-sus-playas-3-excursiones-imprescindibles/',
+              en: 'https://www.recordrentacar.com/blog/en/rodas-beyond-its-beaches-3-unmissable-excursions/',
+              de: 'https://www.recordrentacar.com/blog/de/rhodos-jenseits-der-straende-3-ausfluege-die-man-nicht-verpassen-sollte/',
+              fr: 'https://www.recordrentacar.com/blog/fr/rhodes-au-dela-de-ses-plages-3-excursions-incontournables/',
+              it: 'https://www.recordrentacar.com/blog/el/i-rodos-pera-apo-tis-paralies-tis-3-ekdr/',
+              pt: 'https://www.recordrentacar.com/blog/pt/rodas-para-alem-das-suas-praias-3-excursoes-imperdiveis/',
+              el: 'https://www.recordrentacar.com/blog/el/i-rodos-pera-apo-tis-paralies-tis-3-ekdr/'
+            },
+            title: {
+              es: "Rodas más allá de sus playas: 3 excursiones imprescindibles",
+              en: "Rhodes beyond its beaches: 3 unmissable excursions",
+              de: "Rhodos jenseits der Strände: 3 Ausflüge, die du nicht verpassen solltest",
+              fr: "Rhodes au-delà de ses plages : 3 excursions incontournables",
+              ca: "Rodes més enllà de les platges: 3 excursions imprescindibles",
+              it: "Rodi oltre le spiagge: 3 escursioni imperdibili",
+              pt: "Rodes para além das praias: 3 excursões imperdíveis",
+              el: "Η Ρόδος πέρα από τις παραλίες της: 3 εκδρομές που δεν πρέπει να χάσεις"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       roma: {
         img: 'img/destinos/roma.jpg',
         // Carretera de la orilla del Tíber
         road: 'M 532 1043 C 560 1040 638 1031 699 1024 C 760 1017 832 1003 899 1003 C 966 1003 1036 1015 1103 1022 C 1170 1029 1232 1036 1298 1045 C 1364 1054 1465 1068 1498 1073',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 730, y: 600, place: 'below-left', cta: 'readMore',   // el Coliseo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/guia-para-conocer-roma-en-3-o-5-dias/',
+              en: 'https://www.recordrentacar.com/blog/en/guide-to-getting-to-know-rome-in-3-or-5-days-must-see-and-alternative-plans/',
+              de: 'https://www.recordrentacar.com/blog/de/reisefuehrer-fuer-einen-3-oder-5-taegigen-aufenthalt-in-rom-sehenswuerdigkeiten-die-man-nicht-verpassen-sollte-und-alternative-ausflugsmoeglichkeiten/',
+              fr: 'https://www.recordrentacar.com/blog/fr/guide-pour-decouvrir-rome-en-3-ou-5-jours-les-incontournables-et-des-idees-dactivites-alternatives/',
+              it: 'https://www.recordrentacar.com/blog/it/guida-per-conoscere-roma-in-3-o-5-giorni-tappe-obbligate-e-programmi-alternativi/',
+              pt: 'https://www.recordrentacar.com/blog/pt/guia-para-conhecer-roma-em-3-ou-5-dias-locais-imperdiveis-e-alternativas/',
+              el: 'https://www.recordrentacar.com/blog/el/odigos-gia-na-gnorisete-ti-romi-se-3-i-5-im/'
+            },
+            title: {
+              es: "Guía para conocer Roma en 3 o 5 días",
+              en: "Guide to getting to know Rome in 3 or 5 days",
+              de: "Reiseführer für 3 oder 5 Tage in Rom",
+              fr: "Guide pour découvrir Rome en 3 ou 5 jours",
+              ca: "Guia per conèixer Roma en 3 o 5 dies",
+              it: "Guida per conoscere Roma in 3 o 5 giorni",
+              pt: "Guia para conhecer Roma em 3 ou 5 dias",
+              el: "Οδηγός για να γνωρίσεις τη Ρώμη σε 3 ή 5 ημέρες"
+            }
+          },
+          {
+            x: 1470, y: 650, place: 'below-right', cta: 'readMore',   // el árbol de Navidad
+            url: {
+              es: 'https://www.recordrentacar.com/blog/roma-en-navidad/',
+              en: 'https://www.recordrentacar.com/blog/en/rome-at-christmas-a-travel-guide-to-enjoy-with-friends-or-family/',
+              de: 'https://www.recordrentacar.com/blog/de/rom-zu-weihnachten-reisefuehrer-fuer-einen-schoenen-aufenthalt-mit-freunden-oder-der-familie/',
+              fr: 'https://www.recordrentacar.com/blog/fr/rome-a-noel-guide-de-voyage-pour-profiter-de-la-ville-entre-amis-ou-en-famille/',
+              it: 'https://www.recordrentacar.com/blog/it/roma-a-natale-una-guida-di-viaggio-da-vivere-con-gli-amici-o-la-famiglia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roma-no-natal-guia-de-viagem-para-desfrutar-com-amigos-ou-em-familia/',
+              el: 'https://www.recordrentacar.com/blog/el/i-romi-ta-christougenna-taxidiotikos-o/'
+            },
+            title: {
+              es: "Roma en Navidad",
+              en: "Rome at Christmas",
+              de: "Rom zu Weihnachten",
+              fr: "Rome à Noël",
+              ca: "Roma per Nadal",
+              it: "Roma a Natale",
+              pt: "Roma no Natal",
+              el: "Η Ρώμη τα Χριστούγεννα"
+            }
+          },
+          {
+            x: 480, y: 250, place: 'below-right', cta: 'readMore',   // San Pedro del Vaticano
+            url: {
+              es: 'https://www.recordrentacar.com/blog/roma-en-otono/',
+              en: 'https://www.recordrentacar.com/blog/en/rome-in-autumn/',
+              de: 'https://www.recordrentacar.com/blog/de/rom-im-herbst/',
+              fr: 'https://www.recordrentacar.com/blog/fr/rome-en-automne/',
+              it: 'https://www.recordrentacar.com/blog/it/roma-in-autunno/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roma-no-outono/',
+              el: 'https://www.recordrentacar.com/blog/el/romi-to-fthinoporo/'
+            },
+            title: {
+              es: "Roma en otoño",
+              en: "Rome in autumn",
+              de: "Rom im Herbst",
+              fr: "Rome en automne",
+              ca: "Roma a la tardor",
+              it: "Roma in autunno",
+              pt: "Roma no outono",
+              el: "Η Ρώμη το φθινόπωρο"
+            }
+          }
+        ],
         carScale: 1.0, thread: 12, wave: 6
       },
       salonica: {
         img: 'img/destinos/salonica.jpg',
         // Carretera del paseo marítimo; da media vuelta antes de la rotonda
         road: 'M 60 700 C 67 708 87 734 100 745 C 113 756 107 748 137 767 C 167 786 229 829 282 856 C 335 883 392 914 453 931 C 514 948 583 958 649 959 C 715 960 782 951 848 936 C 914 921 973 892 1048 868 C 1123 844 1233 805 1300 790 C 1367 775 1400 781 1450 778 C 1500 775 1555 774 1600 772 C 1645 770 1688 770 1720 768 C 1752 766 1782 763 1795 762',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 560, y: 270, place: 'below-left', cta: 'readMore',   // el castillo
+            url: {
+              es: 'https://www.recordrentacar.com/blog/descubre-salonica-y-alrededores-con-coche-de-alquiler/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-thessaloniki-and-its-surroundings-with-your-hire-car/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-thessaloniki-in-3-tagen-mit-ihrem-mitwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-thessalonique-et-ses-environs-en-3-jours-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-salonicco-e-i-suoi-dintorni-in-3-giorni-con-il-tuo-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-salonica-e-os-seus-arredores-em-3-dias-com-o-seu-carro-alugado/',
+              el: 'https://www.recordrentacar.com/blog/el/anakalypste-thessaloniki-to-enoikiazomeno-aftokinitosas/'
+            },
+            title: {
+              es: "Descubre Salónica y sus alrededores en 3 días con tu coche de alquiler",
+              en: "Discover Thessaloniki and its surroundings in 3 days with your hire car",
+              de: "Entdecke Thessaloniki und Umgebung in 3 Tagen mit deinem Mietwagen",
+              fr: "Découvre Thessalonique et ses environs en 3 jours avec ta voiture de location",
+              ca: "Descobreix Tessalònica i els voltants en 3 dies amb el teu cotxe de lloguer",
+              it: "Scopri Salonicco e dintorni in 3 giorni con la tua auto a noleggio",
+              pt: "Descobre Salónica e arredores em 3 dias com o teu carro de aluguer",
+              el: "Ανακάλυψε τη Θεσσαλονίκη και τα περίχωρά της σε 3 ημέρες με το ενοικιαζόμενο αυτοκίνητό σου"
+            }
+          },
+          {
+            x: 1130, y: 690, place: 'below-right', cta: 'readMore',   // el mercadillo navideño
+            url: {
+              es: 'https://www.recordrentacar.com/blog/salonica-a-bocados/',
+              en: 'https://www.recordrentacar.com/blog/en/thessaloniki-in-bites/',
+              de: 'https://www.recordrentacar.com/blog/de/thessaloniki-in-kleinen-haeppchen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/thessalonique-a-petites-bouchees/',
+              it: 'https://www.recordrentacar.com/blog/it/salonicco-da-assaporare/',
+              pt: 'https://www.recordrentacar.com/blog/pt/salonica-em-pequenas-doses/',
+              el: 'https://www.recordrentacar.com/blog/el/i-thessaloniki-se-boukies-anakalypste/'
+            },
+            title: {
+              es: "Salónica a bocados",
+              en: "Thessaloniki in bites",
+              de: "Thessaloniki in kleinen Häppchen",
+              fr: "Thessalonique à petites bouchées",
+              ca: "Tessalònica a mossegades",
+              it: "Salonicco da assaporare",
+              pt: "Salónica em pequenas doses",
+              el: "Η Θεσσαλονίκη σε μπουκιές"
+            }
+          },
+          {
+            x: 1650, y: 480, place: 'above-left', cta: 'readMore',   // la Torre Blanca
+            url: {
+              es: 'https://www.recordrentacar.com/blog/excursiones-de-un-dia-desde-salonica/',
+              en: 'https://www.recordrentacar.com/blog/en/day-trips-from-thessaloniki/',
+              de: 'https://www.recordrentacar.com/blog/de/tagesausfluege-ab-thessaloniki/',
+              fr: 'https://www.recordrentacar.com/blog/fr/excursions-dune-journee-au-depart-de-thessalonique/',
+              it: 'https://www.recordrentacar.com/blog/it/escursioni-di-un-giorno-da-salonicco/',
+              pt: 'https://www.recordrentacar.com/blog/pt/excursoes-de-um-dia-a-partir-de-salonica/',
+              el: 'https://www.recordrentacar.com/blog/el/monoimeres-ekdromes-apo-ti-thessaloni/'
+            },
+            title: {
+              es: "Excursiones de un día desde Salónica",
+              en: "Day trips from Thessaloniki",
+              de: "Tagesausflüge ab Thessaloniki",
+              fr: "Excursions d’une journée au départ de Thessalonique",
+              ca: "Excursions d’un dia des de Tessalònica",
+              it: "Escursioni di un giorno da Salonicco",
+              pt: "Excursões de um dia a partir de Salónica",
+              el: "Μονοήμερες εκδρομές από τη Θεσσαλονίκη"
+            }
+          }
+        ],
         carScale: 0.9, thread: 11, wave: 6
       },
       sevilla: {
         img: 'img/destinos/sevilla.jpg',
         // Carretera junto al Guadalquivir
         road: 'M 570 712 C 608 724 728 762 800 785 C 872 808 933 828 1000 848 C 1067 868 1133 886 1200 905 C 1267 924 1333 946 1400 965 C 1467 984 1550 1008 1600 1022 C 1650 1036 1683 1047 1700 1052',
+        // Puntos de interés con enlace al blog (el catalán usa el enlace en español)
+        hotspots: [
+          {
+            x: 300, y: 200, place: 'below-right', cta: 'readMore',   // los campos de olivos
+            url: {
+              es: 'https://www.recordrentacar.com/blog/pueblos-con-encanto-sevilla/',
+              en: 'https://www.recordrentacar.com/blog/en/discover-the-most-charming-villages-in-seville/',
+              de: 'https://www.recordrentacar.com/blog/de/entdecken-sie-die-schoensten-und-charmantesten-doerfer-sevillas/',
+              fr: 'https://www.recordrentacar.com/blog/fr/decouvrez-les-villages-les-plus-charmants-de-seville/',
+              it: 'https://www.recordrentacar.com/blog/it/scopri-i-borghi-piu-affascinanti-di-siviglia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/descubra-as-aldeias-mais-encantadoras-de-sevilha/',
+              el: 'https://www.recordrentacar.com/blog/el/ανακαλύψτε-τα-πιο-γραφικά-χωριά-της-σε/'
+            },
+            title: {
+              es: "Descubre los pueblos con más encanto de Sevilla",
+              en: "Discover the most charming villages in Seville",
+              de: "Entdecke die charmantesten Dörfer Sevillas",
+              fr: "Découvre les villages les plus charmants de Séville",
+              ca: "Descobreix els pobles amb més encant de Sevilla",
+              it: "Scopri i borghi più affascinanti di Siviglia",
+              pt: "Descobre as aldeias mais encantadoras de Sevilha",
+              el: "Ανακάλυψε τα πιο γραφικά χωριά της Σεβίλλης"
+            }
+          },
+          {
+            x: 1150, y: 300, place: 'below-left', cta: 'readMore',   // la Giralda
+            url: {
+              es: 'https://www.recordrentacar.com/blog/viaje-expres-sevilla-en-3-dias/',
+              en: 'https://www.recordrentacar.com/blog/en/express-getaway-seville-in-3-days/',
+              de: 'https://www.recordrentacar.com/blog/de/kurztrip-sevilla-in-3-tagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/escapade-express-seville-en-3-jours/',
+              it: 'https://www.recordrentacar.com/blog/it/viaggio-express-siviglia-in-3-giorni/',
+              pt: 'https://www.recordrentacar.com/blog/pt/viagem-express-sevilha-em-3-dias/',
+              el: 'https://www.recordrentacar.com/blog/el/ταξίδι-εξπρές-η-σεβίλλη-σε-3-ημέρες/'
+            },
+            title: {
+              es: "Viaje exprés: ¡Sevilla en 3 días!",
+              en: "Express getaway: Seville in 3 days!",
+              de: "Kurztrip: Sevilla in 3 Tagen!",
+              fr: "Escapade express : Séville en 3 jours !",
+              ca: "Viatge exprés: Sevilla en 3 dies!",
+              it: "Viaggio express: Siviglia in 3 giorni!",
+              pt: "Viagem express: Sevilha em 3 dias!",
+              el: "Ταξίδι εξπρές: η Σεβίλλη σε 3 ημέρες!"
+            }
+          },
+          {
+            x: 1650, y: 560, place: 'above-left', cta: 'readMore',   // la Plaza de España
+            url: {
+              es: 'https://www.recordrentacar.com/blog/feria-de-abril-de-sevilla/',
+              en: 'https://www.recordrentacar.com/blog/en/april-fair-of-seville/',
+              de: 'https://www.recordrentacar.com/blog/de/aprilfest-von-sevilla/',
+              fr: 'https://www.recordrentacar.com/blog/fr/la-feria-de-abril-de-seville-une-experience-unique-a-vivre-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/fiera-aprile-a-siviglia/',
+              pt: 'https://www.recordrentacar.com/blog/pt/feira-de-abril-de-sevilha-uma-experiencia-unica-para-viver-com-o-seu-carro-de-aluguer/',
+              el: 'https://www.recordrentacar.com/blog/el/η-feria-de-abril-της-σεβίλλης-μια-μοναδική-εμπειρ/'
+            },
+            title: {
+              es: "Feria de Abril de Sevilla",
+              en: "Seville April Fair",
+              de: "Aprilfest von Sevilla",
+              fr: "La Feria de Abril de Séville",
+              ca: "Fira d’Abril de Sevilla",
+              it: "Fiera di aprile a Siviglia",
+              pt: "Feira de Abril de Sevilha",
+              el: "Η Feria de Abril της Σεβίλλης"
+            }
+          }
+        ],
         carScale: 0.85, thread: 10, wave: 6
       },
       malaga: {
