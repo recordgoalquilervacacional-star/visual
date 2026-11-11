@@ -771,24 +771,33 @@
 
     /* Confirmación bajo el nombre del destino */
     .registered {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
       width: 100%;
       margin-top: 20px;
       padding: 18px 22px;
-      text-align: left;
+      text-align: center;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 16px;
     }
 
-    .registered-icon { width: 28px; height: 28px; flex: none; margin-top: 1px; }
+    .registered-head { display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .registered-icon { width: 26px; height: 26px; flex: none; }
 
-    .destino .registered p { margin: 0; text-align: left; }
+    .destino .registered p { margin: 0; text-align: center; }
     .destino .registered .registered-title { font-size: 17px; font-weight: 700; color: var(--text); }
-    .destino .registered .registered-text { margin-top: 4px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.85); }
+    .destino .registered .registered-text { margin: 8px auto 0; max-width: 620px; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.85); }
     .registered-text a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* Lema bajo el plano */
+    .destino .slogan {
+      margin: 36px 0 0;
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+    }
 
     .btn-web {
       display: inline-flex;
@@ -1066,9 +1075,11 @@
       <h2><em id="destino-nombre"></em></h2>
 
       <div class="registered" role="status">
-        <svg class="registered-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#CF2D30"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div>
+        <div class="registered-head">
+          <svg class="registered-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#CF2D30"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <p class="registered-title" data-i18n="registeredTitle">¡Ya tenemos tu destino!</p>
+        </div>
+        <div>
           <p class="registered-text" id="registered-text">Tu participación está registrada. Para que sea válida, recuerda que también tienes que seguir a <a href="https://www.instagram.com/recordgo/" target="_blank" rel="noopener">@recordgo</a> en Instagram y haber comentado en el post del sorteo.</p>
         </div>
       </div>
@@ -1172,6 +1183,7 @@
         </div>
       </div>
 
+      <p class="slogan">Easy drive, easy go</p>
       <a class="btn-web" href="https://www.recordrentacar.com/es/" target="_blank" rel="noopener" data-i18n="visitWeb">Visitar web Record go</a>
     </div>
   </section>
