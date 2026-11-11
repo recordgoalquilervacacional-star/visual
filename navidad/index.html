@@ -1611,6 +1611,36 @@
        Cada destino tiene su foto y el trazado de su carretera (path SVG en
        píxeles de la foto). Si falta la foto, se dibuja un plano provisional. */
     var DESTINOS = {
+      alicante: {
+        img: 'img/destinos/alicante.jpg',
+        // Paseo junto a la Explanada y el puerto
+        road: 'M 10 722 C 42 731 135 762 200 775 C 265 788 333 793 400 800 C 467 807 533 811 600 815 C 667 819 733 820 800 822 C 867 824 933 825 1000 830 C 1067 835 1127 841 1200 850 C 1273 859 1373 893 1440 885 C 1507 877 1550 829 1600 800 C 1650 771 1693 737 1740 710 C 1787 683 1840 662 1880 640 C 1920 618 1963 586 1980 575',
+        carScale: 0.9, thread: 11, wave: 6
+      },
+      atenas: {
+        img: 'img/destinos/atenas.jpg',
+        // Carretera que sube hacia la Acrópolis
+        road: 'M 190 530 C 178 542 137 575 120 600 C 103 625 90 657 90 680 C 90 703 98 722 120 740 C 142 758 173 775 220 790 C 267 805 337 818 400 830 C 463 842 533 853 600 864 C 667 875 750 887 800 894 C 850 901 883 902 900 904',
+        carScale: 1.0, thread: 12, wave: 6
+      },
+      bari: {
+        img: 'img/destinos/bari.jpg',
+        // Paseo marítimo junto al castillo
+        road: 'M 1980 480 C 1950 493 1857 537 1800 560 C 1743 583 1687 603 1640 620 C 1593 637 1547 643 1520 660 C 1493 677 1493 697 1480 720 C 1467 743 1460 777 1440 800 C 1420 823 1400 840 1360 860 C 1320 880 1260 897 1200 920 C 1140 943 1060 973 1000 1000 C 940 1027 880 1061 840 1080 C 800 1099 773 1110 760 1116',
+        carScale: 1.25, thread: 15, wave: 6
+      },
+      bilbao: {
+        img: 'img/destinos/bilbao.jpg',
+        // Carretera junto a la ría
+        road: 'M 0 740 C 33 745 140 760 200 770 C 260 780 300 792 360 800 C 420 808 493 812 560 816 C 627 820 707 825 760 824 C 813 823 860 812 880 810',
+        carScale: 0.8, thread: 9, wave: 6
+      },
+      bolonia: {
+        img: 'img/destinos/bolonia.jpg',
+        // Avenida que rodea el centro histórico
+        road: 'M 0 760 C 33 770 133 798 200 820 C 267 842 333 874 400 895 C 467 916 533 930 600 945 C 667 960 733 973 800 985 C 867 997 933 1010 1000 1015 C 1067 1020 1133 1018 1200 1015 C 1267 1012 1340 1007 1400 995 C 1460 983 1510 968 1560 945 C 1610 922 1660 888 1700 860 C 1740 832 1767 807 1800 780 C 1833 753 1870 723 1900 700 C 1930 677 1967 650 1980 640',
+        carScale: 1.3, thread: 15, wave: 6
+      },
       barcelona: {
         img: 'img/destinos/barcelona.jpg',
         // Carretera del paseo marítimo, de Montjuïc al Hotel W (píxeles de la foto 2000 x 1116)
@@ -1894,7 +1924,11 @@
         var a = at(s - 2), b = at(s + 2);
         var deg = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
         var bump = (!paused && !dragging) ? Math.sin(phase * 7) * 0.5 * carK : 0;
-        car.setAttribute('transform', 'translate(' + p.x + ' ' + (p.y + bump).toFixed(2) + ') rotate(' + deg.toFixed(2) + ') scale(' + (dir > 0 ? carK : -carK) + ' ' + carK + ')');
+        // El coche mira hacia donde avanza y nunca queda boca abajo
+        var travel = dir > 0 ? deg : deg + 180;
+        var flip = Math.cos(travel * Math.PI / 180) < 0;
+        var rot = flip ? travel - 180 : travel;
+        car.setAttribute('transform', 'translate(' + p.x + ' ' + (p.y + bump).toFixed(2) + ') rotate(' + rot.toFixed(2) + ') scale(' + (flip ? -carK : carK) + ' ' + carK + ')');
         var lastP = trail[trail.length - 1];
         if (!lastP || Math.hypot(p.x - lastP.x, p.y - lastP.y) > 4 * k) {
           if (lastP) odo += Math.hypot(p.x - lastP.x, p.y - lastP.y);
