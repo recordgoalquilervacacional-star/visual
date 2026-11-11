@@ -683,8 +683,8 @@
       position: absolute;
       right: 22px;
       bottom: 4px;
-      width: 160px;
-      padding: 12px 12px 12px;
+      width: 140px;
+      padding: 10px 10px 11px;
       text-align: center;
       color: #1d1a1b;
       background: #fff;
@@ -707,16 +707,16 @@
     .hotspot.right .hs-card { right: auto; left: 22px; transform-origin: 0 100%; }
     .hotspot.below.right .hs-card { transform-origin: 0 0; }
 
-    .hs-card h3 { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3; }
+    .hs-card h3 { margin: 0; font-size: 11.5px; font-weight: 600; line-height: 1.35; }
 
     .hs-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 30px;
-      margin-top: 9px;
-      padding: 0 16px;
-      font-size: 12.5px;
+      min-height: 26px;
+      margin-top: 8px;
+      padding: 0 13px;
+      font-size: 11px;
       font-weight: 600;
       color: #fff;
       text-decoration: none;
@@ -824,9 +824,9 @@
       .accordion summary { padding: 13px 16px; }
       .accordion .panel { padding: 0 16px 14px; }
       .map-frame { margin-top: 24px; padding: 8px; border-radius: 14px; }
-      .hs-card { width: 140px; padding: 10px; border-radius: 10px; right: 18px; }
-      .hs-card h3 { font-size: 12px; }
-      .hs-link { min-height: 28px; margin-top: 7px; padding: 0 12px; font-size: 12px; }
+      .hs-card { width: 128px; padding: 9px; border-radius: 10px; right: 18px; }
+      .hs-card h3 { font-size: 11px; }
+      .hs-link { min-height: 25px; margin-top: 7px; padding: 0 11px; font-size: 11px; }
       .hs-dot { left: -10px; top: -10px; width: 20px; height: 20px; }
       .map { border-radius: 6px; }
       .map-controls { right: 16px; bottom: 16px; }
@@ -1622,7 +1622,16 @@
         hotspots: [
           {
             x: 1150, y: 360, place: 'above-left',
-            url: 'https://www.recordrentacar.com/blog/historia-sagrada-familia-de-barcelona/',
+            // Enlace al post en cada idioma (el catalán usa el de español)
+            url: {
+              es: 'https://www.recordrentacar.com/blog/historia-sagrada-familia-de-barcelona/',
+              en: 'https://www.recordrentacar.com/blog/en/history-sagrada-familia-barcelona/',
+              de: 'https://www.recordrentacar.com/blog/de/geschichte-sagrada-familia-von-barcelona/',
+              fr: 'https://www.recordrentacar.com/blog/fr/histoire-sagrada-familia-barcelone/',
+              it: 'https://www.recordrentacar.com/blog/it/storia-della-sagrada-familia-barcellona/',
+              pt: 'https://www.recordrentacar.com/blog/pt/historia-da-sagrada-familia-barcelona/',
+              el: 'https://www.recordrentacar.com/blog/el/i-sagrada-familia-tis-varkelonis-ena-m/'
+            },
             title: {
               es: 'Historia de la Sagrada Familia', en: 'History of the Sagrada Família',
               de: 'Geschichte der Sagrada Família', fr: 'Histoire de la Sagrada Família',
@@ -1632,7 +1641,16 @@
           },
           {
             x: 1870, y: 912, place: 'above-left',   // final de la carretera del coche, junto al Hotel W
-            url: 'https://www.recordrentacar.com/blog/conoce-barcelona-en-3-dias-con-coche-de-alquiler',
+            // Enlace al post en cada idioma (el catalán usa el de español)
+            url: {
+              es: 'https://www.recordrentacar.com/blog/conoce-barcelona-en-3-dias-con-coche-de-alquiler',
+              en: 'https://www.recordrentacar.com/blog/en/get-to-know-barcelona-in-3-days-with-car-rental',
+              de: 'https://www.recordrentacar.com/blog/de/3-taegige-route-durch-barcelona-mit-ihrem-mietwagen/',
+              fr: 'https://www.recordrentacar.com/blog/fr/circuit-de-3-jours-a-barcelone-avec-votre-voiture-de-location/',
+              it: 'https://www.recordrentacar.com/blog/it/itinerario-di-3-giorni-a-barcellona-con-la-tua-auto-a-noleggio/',
+              pt: 'https://www.recordrentacar.com/blog/pt/roteiro-de-3-dias-em-barcelona-com-o-seu-carro-de-aluguer/',
+              el: 'https://www.recordrentacar.com/blog/el/3imeri-diadromi-sti-varkeloni-me-to-eno'
+            },
             title: {
               es: 'Ruta de 3 días en Barcelona con tu coche de alquiler', en: '3-day Barcelona road trip with your rental car',
               de: '3-Tage-Route durch Barcelona mit deinem Mietwagen', fr: 'Itinéraire de 3 jours à Barcelone avec ta voiture de location',
@@ -1642,7 +1660,16 @@
           },
           {
             x: 200, y: 320, place: 'below-right',   // montañas y campo
-            url: 'https://www.recordrentacar.com/blog/pueblos-bonitos-barcelona',
+            // Enlace al post en cada idioma (el catalán usa el de español)
+            url: {
+              es: 'https://www.recordrentacar.com/blog/pueblos-bonitos-barcelona',
+              en: 'https://www.recordrentacar.com/blog/en/7-beautiful-and-charming-villages-in-barcelona/',
+              de: 'https://www.recordrentacar.com/blog/de/7-schoene-und-charmante-doerfer-in-barcelona-2/',
+              fr: 'https://www.recordrentacar.com/blog/fr/7-villages-magnifiques-et-pleins-de-charme-de-barcelone/',
+              it: 'https://www.recordrentacar.com/blog/it/7-borghi-belli-e-affascinanti-di-barcellona',
+              pt: 'https://www.recordrentacar.com/blog/pt/7-aldeias-bonitas-e-encantadoras-de-barcelona/',
+              el: 'https://www.recordrentacar.com/blog/el/7-omorfa-kai-grafika-choria-tis-varkelon/'
+            },
             title: {
               es: '7 pueblos bonitos y con encanto de Barcelona', en: '7 charming villages near Barcelona',
               de: '7 schöne und charmante Dörfer rund um Barcelona', fr: '7 beaux villages pleins de charme autour de Barcelone',
@@ -1710,6 +1737,7 @@
         spots.forEach(function (sp) {
           sp.h3.textContent = sp.cfg.title[lang] || sp.cfg.title.es;
           sp.link.textContent = t().readStory;
+          sp.link.href = sp.cfg.url[lang] || sp.cfg.url.es;
           sp.dot.setAttribute('aria-label', sp.h3.textContent);
         });
       }
@@ -1791,7 +1819,6 @@
             '<a class="hs-link" target="_blank" rel="noopener"></a></div>' +
             '<button class="hs-dot" type="button" aria-expanded="' + startOpen + '" aria-controls="' + id + '"></button>';
           var sp = { cfg: h, el: el, h3: el.querySelector('h3'), link: el.querySelector('a'), dot: el.querySelector('button') };
-          sp.link.href = h.url;
           sp.dot.addEventListener('click', function () {
             var open = !el.classList.contains('is-open');
             if (open && mobile.matches) {
