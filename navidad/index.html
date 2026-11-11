@@ -1613,26 +1613,27 @@
     var DESTINOS = {
       tenerife: {
         img: 'img/destinos/tenerife.jpg',
-        // Carretera de curvas que sube entre los acantilados hacia la ciudad
-        road: 'M 822 997 C 834 989 871 965 894 951 C 917 937 939 924 959 912 C 979 900 997 891 1012 880 C 1027 869 1045 857 1050 845 C 1055 833 1048 818 1040 808 C 1032 798 1014 792 1005 785 C 996 778 985 771 985 765 C 985 759 993 754 1005 748 C 1017 742 1036 736 1057 729 C 1078 722 1106 714 1129 709 C 1152 704 1175 701 1195 696 C 1215 691 1232 684 1247 677 C 1262 670 1277 663 1286 655 C 1295 647 1301 638 1303 630 C 1305 622 1295 613 1296 606 C 1297 599 1298 594 1310 588 C 1322 582 1350 576 1371 572 C 1392 568 1426 564 1437 562',
+        // Carretera de curvas entre los acantilados, hasta la altura del drago milenario
+        road: 'M 846 985 C 860 978 910 954 933 941 C 956 928 968 920 984 910 C 1000 900 1019 892 1028 883 C 1037 874 1043 866 1039 857 C 1035 848 1012 839 1004 830 C 996 821 989 811 988 803 C 987 795 992 788 999 781 C 1006 774 1016 765 1028 759 C 1040 753 1054 748 1068 744 C 1082 740 1097 737 1112 733 C 1127 729 1141 724 1156 719 C 1171 714 1194 708 1201 706',
         carScale: 0.6, thread: 7, wave: 6
       },
       valencia: {
         img: 'img/destinos/valencia.jpg',
         // Carretera de abajo, junto al mar
-        road: 'M 300 1059 C 322 1055 362 1038 431 1033 C 500 1028 616 1032 711 1026 C 806 1020 926 1003 1000 995 C 1074 987 1104 978 1155 976 C 1206 974 1262 986 1307 980 C 1352 974 1382 960 1428 942 C 1474 924 1536 886 1585 871 C 1634 856 1679 869 1722 854 C 1765 839 1823 792 1843 779',
+        road: 'M 303 1060 C 350 1059 486 1054 586 1052 C 686 1050 798 1048 900 1046 C 1002 1044 1124 1042 1200 1040 C 1276 1038 1312 1040 1357 1037 C 1402 1034 1438 1028 1470 1022 C 1502 1016 1525 1009 1550 999 C 1575 989 1599 973 1620 960 C 1641 947 1660 934 1678 921 C 1696 908 1721 891 1730 885',
         carScale: 0.9, thread: 11, wave: 6
       },
       venecia: {
         img: 'img/destinos/venecia.jpg',
-        // Muelle de madera del Gran Canal (Venecia no tiene carreteras)
+        // Coche aparcado en el muelle de madera (Venecia no tiene carreteras)
+        parked: 0.5,
         road: 'M 440 985 C 473 984 573 982 640 980 C 707 978 773 977 840 975 C 907 973 985 970 1040 968 C 1095 966 1148 963 1170 962',
         carScale: 0.85, thread: 10, wave: 6
       },
       zakynthos: {
         img: 'img/destinos/zakynthos.jpg',
         // Carretera del paseo marítimo
-        road: 'M 22 713 C 44 724 110 756 155 778 C 200 800 246 823 290 844 C 334 865 372 890 419 905 C 466 920 522 926 571 935 C 620 944 654 958 713 956 C 772 954 855 941 925 923 C 995 905 1060 872 1132 846 C 1204 820 1287 780 1359 765 C 1431 750 1500 758 1566 754 C 1632 750 1725 745 1757 743',
+        road: 'M 22 713 C 44 724 110 756 155 778 C 200 800 246 823 290 844 C 334 865 372 890 419 905 C 466 920 522 926 571 935 C 620 944 654 958 713 956 C 772 954 855 941 925 923 C 995 905 1060 872 1132 846 C 1204 820 1306 779 1359 765 C 1412 751 1418 763 1450 762 C 1482 761 1522 761 1550 760 C 1578 759 1608 758 1620 758',
         carScale: 0.9, thread: 11, wave: 6
       },
       palermo: {
@@ -2612,7 +2613,7 @@
       var L = 0, lut = [];                   // longitud de la carretera y puntos precalculados
       var s = 0, dir = 1, speed = 0;         // posición del coche sobre la carretera
       var trail = [], trailMax = 0;          // recorrido reciente que sigue el hilo
-      var paused = false, dragging = false;
+      var paused = false, dragging = false, parked = false;
       var phase = 0, last = 0, raf = null, flakes = [];
       var destName = '';
       var carK = 1, tw = 6, wave = 9, odo = 0;
@@ -2674,7 +2675,10 @@
         wave = cfg.wave || 9 * k;
         styleThread();
         s = 0; dir = 1; trail = []; odo = 0; cam = null;
-        if (reduce) {
+        // Coche aparcado: se coloca en su sitio con el hilo detrás y no se mueve
+        parked = cfg.parked != null;
+        if (parked) { for (s = 0; s < L * cfg.parked; s += 4 * k) placeCar(); }
+        if (reduce && !parked) {
           // Sin animación: coche a mitad de camino con el hilo ya desplegado
           for (s = 0; s < L * 0.5; s += 4 * k) placeCar();
         }
@@ -2792,7 +2796,7 @@
         var p = at(s);
         var a = at(s - 2), b = at(s + 2);
         var deg = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-        var bump = (!paused && !dragging) ? Math.sin(phase * 7) * 0.5 * carK : 0;
+        var bump = (!paused && !dragging && !parked) ? Math.sin(phase * 7) * 0.5 * carK : 0;
         // El coche mira hacia donde avanza y nunca queda boca abajo
         var travel = dir > 0 ? deg : deg + 180;
         var flip = Math.cos(travel * Math.PI / 180) < 0;
@@ -2858,7 +2862,7 @@
         var dt = Math.min((now - (last || now)) / 1000, 0.05);
         last = now;
         if (L) {
-          if (!paused && !dragging) {
+          if (!paused && !dragging && !parked) {
             s += dir * speed * dt;
             if (s >= L) { s = L; dir = -1; }
             if (s <= 0) { s = 0; dir = 1; }
@@ -2910,7 +2914,7 @@
         e.preventDefault();
       });
       svg.addEventListener('pointermove', function (e) {
-        if (!dragging) return;
+        if (!dragging || parked) return;
         var ns = nearest(toSvg(e));
         if (Math.abs(ns - s) > 1) dir = ns > s ? 1 : -1;
         s = ns;
